@@ -1,4 +1,4 @@
-<h1>Κανονισμός Σπουδών</h1>
+<h1>Σύνδεση με Share Pilot</h1>
         <p class="peisodos">
             Συνδεθείτε με τα συνθηματικά σας
         </p>
@@ -41,7 +41,7 @@
             
          }
       };
-      xhttp.open("POST", "/myframework/login/authentication?format=raw", true);
+      xhttp.open("POST", "login/authentication?format=raw", true);
       xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
       xhttp.send(JSON.stringify({
          "email": document.getElementById("email").value,

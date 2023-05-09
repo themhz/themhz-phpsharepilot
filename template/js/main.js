@@ -98,11 +98,12 @@ class TableHandler{
 
             if (this.readyState == 4 && this.status == 200) {                                
                 var response = eval('(' + this.responseText + ')'); //Στάνταρ λειτουργία για να μετασχηματίσουμε το αποτέλεσμα που παίρνουμε από τον server σε JSON
-
+                //alert(response);
                 if(response.relations!= null){
                     self.pupulatedropdowns(response.relations); // Λειτουργία για να ενημερώσουμε τα dropdown του popup μια φορά
-                }                
-                self.addrows(response.data, self.rows);     // Εισαγωγή των γραμμών - αποτελεσμάτων στον πίνακα           
+                }
+
+                self.addrows(response, self.rows);     // Εισαγωγή των γραμμών - αποτελεσμάτων στον πίνακα
                 if(callbackfunc!=null){
                     eval(callbackfunc).call();
                 }
@@ -114,7 +115,24 @@ class TableHandler{
 
         return xhttp
     }
-   
+
+    isJson(item) {
+        item = typeof item !== "string"
+            ? JSON.stringify(item)
+            : item;
+
+        try {
+            item = JSON.parse(item);
+        } catch (e) {
+            return false;
+        }
+
+        if (typeof item === "object" && item !== null) {
+            return true;
+        }
+
+        return false;
+    }
     //Μια απλή συναρτησούλα :P για να κάνει καταχώρηση των δεδομένων στον πίνακα. Τυπικά παίρνει παράμετρο ένα jason και το βάζει στον πίνακα
     //data και cols είναι json και τα 2
     addrows(data, cols) {
@@ -125,8 +143,15 @@ class TableHandler{
         
         var tr = document.createElement('tr');  //Δημιουργούμε μια γραμμή πάνω στον πίνακα
         for(var c=0;c<cols.length;c++){ //για κάθε κολόνα που έχουμε δηλώσει να εμφανίσουμε φτιάχνουμε ένα header στον πίνακα
+
             var th = document.createElement('th'); //Δημιουργούμε το header
-            th.innerHTML = cols[c]; //το βάζουμε στο header
+            if(!self.isJson(cols[c])){
+                th.innerHTML = cols[c]; //το βάζουμε στο header
+            }else{
+                    th.innerHTML = cols[c].name; //το βάζουμε στο header
+            }
+
+
             tr.appendChild(th); //και το κάνουμε append στο tr την γραμμή
         }
 
@@ -142,13 +167,47 @@ class TableHandler{
         for (var j = 0; j < data.length; j++) { //Για κάθε εγγραφή μέσα στα δεδομένα που φέραμε σε μορφή json
             var tabLinesRow = tabLines.insertRow(j + 1); //τοποθετούμε μια γραμμή μέσα στον πίνακα
             for (var i = 0; i < cols.length; i++) { //Για κάθε μια από τις κολόνες μέσα στην λίστα μας
-                for (var k = 0; k < Object.keys(data[j]).length; k++) { //Για κάθε κολόνα μέσα στην γραμμή            
+                for (var k = 0; k < Object.keys(data[j]).length; k++) { //Για κάθε κολόνα μέσα στην γραμμή (τα data από την βάση)
 
-                    if (Object.keys(data[j])[k] == cols[i]) { //Ελέγχουμε αν είναι ίδια η κολόνα της λίστας που θέλουμε με την κολόνα που φέραμε από την βάση αν ναι την τοποθετούμε
-                        var col1 = tabLinesRow.insertCell(cel); //Ε η φάση της τοοποθέτησης
-                        cel++; //Αυξάνουμε τον μετριτή κολόνας
-                        col1.innerHTML = Object.values(data[j])[k]; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                    //Ελέγχουμε αν είναι object καταρχήν
+                    if(!self.isJson(cols[i])){
+                        if (Object.keys(data[j])[k] == cols[i]) { //Ελέγχουμε αν είναι ίδια η κολόνα της λίστας που θέλουμε με την κολόνα που φέραμε από την βάση αν ναι την τοποθετούμε
+                            var col1 = tabLinesRow.insertCell(cel); //Φάση της τοοποθέτησης
+                            cel++; //Αυξάνουμε τον μετριτή κολόνας
+
+                            col1.innerHTML = Object.values(data[j])[k]; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                        }
+                    }else{
+                        if ((Object.keys(data[j])[k] == cols[i].name) || Array.isArray(cols[i].name)) { //Ελέγχουμε αν είναι ίδια η κολόνα της λίστας που θέλουμε με την κολόνα που φέραμε από την βάση αν ναι την τοποθετούμε
+                            var col1 = tabLinesRow.insertCell(cel); //Φάση της τοοποθέτησης
+                            cel++; //Αυξάνουμε τον μετριτή κολόνας
+
+                            switch (cols[i].type) {
+                                case "image":
+                                    col1.innerHTML = "<img src='"+Object.values(data[j])[k]+"' style='width:"+cols[i].width+"'>"; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                                    break;
+                                case "url":
+                                    col1.innerHTML = "<a href='"+Object.values(data[j])[k]+"' alt='"+cols[i].alt+"' target='_blank'>"+cols[i].alt+"</a>"; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                                    break;
+                                case "multititle":
+                                        // for(var l=0;l<cols[i].name.length;l++){
+                                        //     for(var m=0;m<Object.keys(data[j])[k].length;m++) {
+                                        //         if(cols[i].name[l]==Object.keys(data[j])[k]){
+                                        //             col1.innerHTML+= Object.values(data[j])[k]; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                                        //         }
+                                        //     }
+                                        //
+                                        // }
+
+
+                                    break;
+
+                                default:
+                                    col1.innerHTML = Object.values(data[j])[k]; //Τοποθετούμε το περιεχόμενο της κολόνας μέσα της
+                            }
+                        }
                     }
+
                 }
             }
 

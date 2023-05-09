@@ -5,7 +5,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+namespace SharePilotV2\Libs;
 /* Convert string to seo url*/
 function seoUrl($string) {
     //Lower case everything

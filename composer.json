@@ -1,0 +1,13 @@
+{
+    "require": {
+        "google/apiclient": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SharePilotV2\\Components\\": "components/",
+            "SharePilotV2\\Libs\\": "libs/",
+            "SharePilotV2\\Models\\": "models/"
+        }
+    }
+
+}

@@ -220,7 +220,7 @@ nav ul li:hover {
 .footerl {
     grid-area: footerl;
     text-align: center;
-    background-color: grey !important;
+    background-color: #182234 !important;
     justify-content: left;
     display: flex;
     font-size: 1.6em !important;
@@ -243,7 +243,7 @@ nav ul li:hover {
 .footerr {    
     grid-area: footerr;
     text-align: center;
-    background-color: grey !important;
+    background-color: #182234 !important;
     font-size: 1em !important;
     justify-content: flex-end;
     display: flex;

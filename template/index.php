@@ -21,14 +21,11 @@
             <div class="header-container">
                 <div class="headl">
                     <!--Εκόνα με Link στν αρική-->
-                    <a href="home"><img src="template/images/eap.png" alt="eap" /></a>
+                    <a href="home"><img src="template/images/sharepilot.png" alt="sharepilot" /></a>
                 </div>
                 <!--Οι κεφαλιδες στην κεντρική-->
                 <div class="headm">
-                    <h1>ΗΛΕΚΤΡΟΝΙΚΗ ΓΡΑΜΜΑΤΕΙΑ</h1>
-                    <h2>ΜΕΤΑΠΤΥΧΙΑΚΟΥ ΠΡΟΓΡΑΜΜΑΤΟΣ ΣΠΟΥΔΩΝ ΠΛΗΡΟΦΟΡΙΚΗΣ</h2>
-                    <h2>ΤΜΗΜΑ ΕΦΑΡΜΟΓΩΝ ΤΗΛΕΜΑΤΙΚΗΣ</h2>
-                    <h2>ΠΑΝΕΠΙΣΤΗΜΙΟ ΠΑΤΡΩΝ</h2>
+                    <h1>Share Pilot</h1>
                 </div>
                 <!--το Λινκ της εισόδου-->
                 <div class="headr">
@@ -50,7 +47,7 @@
         <nav id="nav2" class="nav2">
             <ul>
             <?php if ($_SESSION["user"][0]->role == 1){ ?>
-                <li id="listusers"><a href="users">Διαχείριση Χρηστών</a></li>
+                <li id="listyoutube"><a href="youtube">Εύρεση Video από YouTube</a></li>
                 <li id="listcourses"><a href="courses">Διαχείριση Μαθημάτων</a></li>
                 <li id="liststudentprogress"><a href="studentprogress">Πρόοδος Φοιτητών</a></li>
             <?php } ?>
@@ -70,7 +67,7 @@
         <div class="body">
 
             <?php
-            include $pageloader->load();
+                include $page->load();
             ?>
 
         </div>
@@ -78,19 +75,19 @@
         <!-- εδώ έχουμε την λίστα με το επικοινωνήστε το τηλέφωνο και το email-->
         <div class="footerl">
             <ul>
-                <li class="lititle">Επικοινωνήστε μαζί μας</li>
-                <li class="phone">Τηλέφωνο:2107798659</li>
-                <li class="mail">E-mail:themhz@gmail.com</li>
+                <li class="lititle"></li>
+                <li class="phone"></li>
+                <li class="mail"></li>
             </ul>
         </div>
         <!--και εδώ οι όροι χρήσης -->
         <div class="footerr">
             <ul>
                 <li>
-                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank">Όροι χρήσης |</a>
+                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank"> |</a>
                 </li>
                 <li>
-                    <a href="https://www.eap.gr/data-protection-team/" target="_blank">Πολιτική απορρήτου</a>
+                    <a href="https://www.eap.gr/data-protection-team/" target="_blank"></a>
                 </li>
             </ul>
         </div>
