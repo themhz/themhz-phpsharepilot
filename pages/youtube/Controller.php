@@ -1,14 +1,11 @@
 <?php
 use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\Config;
+use SharePilotV2\Models\Urls;
+use SharePilotV2\Components\ResponseHandler;
 
  class Controller{
     public function get(){
-
-
-
-
-
     }
 
     public function getvideo(){
@@ -28,13 +25,26 @@ use SharePilotV2\Config;
         $maxResults = 50;
         $videos = $youtubeService->getVideosBySearchQuery($searchQuery, $maxResults, 0, $videoCategoryId);
 
-        //print_r($videos);
         $json = json_encode($videos, JSON_PRETTY_PRINT);
 
         echo $json;
-        //die();
-        //return $json;
     }
+
+    public function addvideo(){
+        $video_id = $_POST['video_id'];
+        $title = $_POST['title'];
+        $video_url = $_POST['video_url'];
+        $thumbnail_url = $_POST['thumbnail_url'];
+        $published_at = $_POST['published_at'];
+
+        $urls =  new Urls();
+        $result = $urls->add($video_id, $title, $video_url, $thumbnail_url, $published_at);
+
+        ResponseHandler::respond($result);
+
+    }
+
+
  }
 
  

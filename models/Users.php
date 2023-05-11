@@ -11,7 +11,7 @@ class Users
 
     public function insert($obj)
     {
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $sql = "insert users (";
         
         $sql .= "name, " ;
@@ -76,7 +76,7 @@ class Users
 
         $requesthandler =  new requesthandler();
 
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $sql = "select a.*, b.name rolename from users a                    
                     ";                                        
         
@@ -115,7 +115,7 @@ class Users
     {
 
         $error = "";
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $sql = "delete from users where id = $id";
         $sth = $db->dbh->prepare($sql);
         try{
@@ -138,7 +138,7 @@ class Users
 
     public function update($obj)
     {
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $sql = "update users "
             . " set name=:name, lastname=:lastname, email=:email, role=:role, mobilephone=:mobilephone, address=:address, am=:am ";
         
@@ -240,7 +240,7 @@ class Users
 
     public function getRelations(){
         
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $dbname = Config::read('db.basename');
         $sql = "SELECT *  FROM information_schema.key_column_usage where constraint_schema = '$dbname' and table_name='users' and REFERENCED_TABLE_NAME is not null";
                         
@@ -269,7 +269,7 @@ class Users
     }
 
     public function updateProfile($obj){
-        $db = dbhandler::getInstance();
+        $db = Dbhandler::getInstance();
         $sql = "update users "
             . " set mobilephone=:mobilephone, address=:address";
         

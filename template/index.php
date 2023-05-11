@@ -3,12 +3,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="stylesheet" href="template/css/style.css">
     <!--Δήλωση του javascript για την λειτουργία του Menu-->
-    <script src="template/js/main.js"></script>
+    <script src="template/js/main.js?v="<?php echo time(); ?>"></script>
     <meta charset="utf-8">
     <title>WebSite</title>
+
+
 </head>
 
 <body>
@@ -48,8 +53,8 @@
             <ul>
             <?php if ($_SESSION["user"][0]->role == 1){ ?>
                 <li id="listyoutube"><a href="youtube">Εύρεση Video από YouTube</a></li>
-                <li id="listcourses"><a href="courses">Διαχείριση Μαθημάτων</a></li>
-                <li id="liststudentprogress"><a href="studentprogress">Πρόοδος Φοιτητών</a></li>
+                <li id="listdatabase"><a href="database">Διαχείριση Link από την βάση</a></li>
+                <li id="listschedule"><a href="schedule">Πρόγραμμα</a></li>
             <?php } ?>
             <?php if ($_SESSION["user"][0]->role == 2){ ?>
                 <li id="listprofile"><a href="profile">Διαχείριση Profile</a></li>
@@ -84,10 +89,10 @@
         <div class="footerr">
             <ul>
                 <li>
-                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank"> |</a>
+<!--                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank"> |</a>-->
                 </li>
                 <li>
-                    <a href="https://www.eap.gr/data-protection-team/" target="_blank"></a>
+<!--                    <a href="https://www.eap.gr/data-protection-team/" target="_blank"></a>-->
                 </li>
             </ul>
         </div>

@@ -13,25 +13,22 @@ function hidemenu(){
 //3.
 class TableHandler{
     //Ο Constructor της κάσης tablehandler για να αρχικοποιήσει την βασικές μεταβλητές
-   
-    constructor(tableid, getallUrl, rows, getItemUrl=null, deleteUrl=null, updateUrl=null, insertUrl=null, deleteconfirmmsg=null, popupwindow=null, newbutton=null, closepopupbutton=null, clicksaveForPopup=null, onOpenPopup=null){
-        
-        this.tableid = tableid; //Το id του πίνακα που θα τοποθετηθούν τα δεδομένα
-        this.getallUrl = getallUrl; //Το url που θα χρησιμοποιηθεί για να φορτοθούν τα δεδομένα από το endpoint της php
-        this.rows = rows; //Τα δεδομένα
-        this.getItemUrl = getItemUrl; //Όταν γίνει κλικ σε ένα δεδομένο πάνω στον πίνακα τότε καλείτε αλλη μια φορά ένα url για να φορτώσει τα δεδομένα για το συγκεκριμένο 
-        //item. Στο μέλλον μπορεί να αντικατασταθεί αυτό με ένα μονομιάς φόρτομα. Δηλαδή να προφορτόνονται όλα τα πιθανά δεδομένα σε μια μνήμη cache. 
-        this.deleteUrl = deleteUrl; //To url της διαγραφής
-        this.updateUrl = updateUrl; //Το url της ενημέρωσης
-        this.insertUrl = insertUrl; //To url της εισαγωγής
-        this.deleteconfirmmsg = deleteconfirmmsg; //Το μήνυμα της προϊδοποίησης της διαγραφής
+
+    constructor(){
+
+        // this.tableid = tableid; //Το id του πίνακα που θα τοποθετηθούν τα δεδομένα
+        // this.getAllUrl = getAllUrl; //Το url που θα χρησιμοποιηθεί για να φορτοθούν τα δεδομένα από το endpoint της php
+        // this.rows = rows; //Τα δεδομένα
+        //this.getItemUrl = getItemUrl; //Όταν γίνει κλικ σε ένα δεδομένο πάνω στον πίνακα τότε καλείτε αλλη μια φορά ένα url για να φορτώσει τα δεδομένα για το συγκεκριμένο
+        //item. Στο μέλλον μπορεί να αντικατασταθεί αυτό με ένα μονομιάς φόρτομα. Δηλαδή να προφορτόνονται όλα τα πιθανά δεδομένα σε μια μνήμη cache.
         this.editrows = {}; //Μια μνήμη που χρησιμοποιήτε για να παίρνει τα δεδομένα προς επεξεργασία στην φόρμα
-        this.popupwindow = popupwindow;//το id του popup
-        this.newbutton = newbutton;//το id του new κουμπιού        
-        this.closepopupbutton = closepopupbutton;
-        this.clicksaveForPopup = clicksaveForPopup;
-        this.onOpenPopup = onOpenPopup;
         this.selectedrows = null;
+
+    }
+
+    //Η συνάρτηση ajax call για να γίνει η κλήση στο endpoint και να φορτωθούν τα δεδομένα στον πίνακα
+    loadtable(callbackfunc) {
+
         // Get the modal
         var modal = document.getElementById(this.popupwindow);
 
@@ -39,28 +36,28 @@ class TableHandler{
             // Get the button that opens the modal
             this.btn = document.getElementById(this.newbutton);
 
-            // When the user clicks the button, open the modal 
+            // When the user clicks the button, open the modal
             this.btn.onclick = function() {
                 tablehandler.clearForm();
                 modal.style.display = "block";
-                actionType = "insert";                
+                actionType = "insert";
             }
         }
-        
+
 
         if(this.closepopupbutton != null){
-            // Get the <span> element that closes the modal        
+            // Get the <span> element that closes the modal
             this.span = document.getElementById(this.closepopupbutton);
-                    
+
             // When the user clicks on <span> (x), close the modal
             this.span.onclick = function() {
-            tablehandler.clearForm();
+                tablehandler.clearForm();
                 modal.style.display = "none";
             }
         }
 
         //για να πιάνει το escape event
-        document.onkeydown = function(evt) {            
+        document.onkeydown = function(evt) {
             evt = evt || window.event;
             var isEscape = false;
             if ("key" in evt) {
@@ -68,16 +65,11 @@ class TableHandler{
             } else {
                 isEscape = (evt.keyCode === 27);
             }
-            if (isEscape) {                
+            if (isEscape) {
                 modal.style.display = "none";
                 tablehandler.clearForm();
             }
         };
-
-    }
-
-    //Η συνάρτηση ajax call για να γίνει η κλήση στο endpoint και να φορτωθούν τα δεδομένα στον πίνακα
-    loadtable(callbackfunc) {
 
         this.cleanTable(); //Καθαρίζει τον πίνακα
         var xhttp = new XMLHttpRequest(); // Δημιουργεί ένα object XMLHttpRequest 
@@ -110,7 +102,7 @@ class TableHandler{
             }
         };
         
-        xhttp.open("get", this.getallUrl, true); //Προετιμασία της αποστολής δηλώνοντας την μέθοδο το url και τρίτη παράμετρος ότι είναι ασύγχρονη αποστολή.
+        xhttp.open("get", this.getAllUrl, true); //Προετιμασία της αποστολής δηλώνοντας την μέθοδο το url και τρίτη παράμετρος ότι είναι ασύγχρονη αποστολή.
         xhttp.send(); //Τελική αποστολή των δεδομένων στο endpoint. μετά από εδώ ο κώδικας θα μεταφερθεί στην γραμμή 51 που είναι το promise. Δηλαδή μόλις ολοκληρωθεί
 
         return xhttp
@@ -145,17 +137,18 @@ class TableHandler{
         for(var c=0;c<cols.length;c++){ //για κάθε κολόνα που έχουμε δηλώσει να εμφανίσουμε φτιάχνουμε ένα header στον πίνακα
 
             var th = document.createElement('th'); //Δημιουργούμε το header
+
             if(!self.isJson(cols[c])){
                 th.innerHTML = cols[c]; //το βάζουμε στο header
             }else{
-                    th.innerHTML = cols[c].name; //το βάζουμε στο header
+                th.innerHTML = cols[c].name; //το βάζουμε στο header
             }
 
 
             tr.appendChild(th); //και το κάνουμε append στο tr την γραμμή
         }
 
-        if(this.deleteUrl!=null){
+        if(this.deleteUrl!=null || this.insertUrl!=null || this.updateUrl!=null){
             var th = document.createElement('th');
                 th.innerHTML = "Ενέργημα";
                 tr.appendChild(th);
@@ -210,7 +203,7 @@ class TableHandler{
 
                 }
             }
-
+            var col1 = null;
             if(this.deleteUrl!=null){
                 var col1 = tabLinesRow.insertCell(cel); //Φτιάχνω ένα κελί για να βάλω το κουμπί
                 var button = document.createElement('button'); //Βάζω το κουμπί
@@ -221,29 +214,71 @@ class TableHandler{
                     var id = this.parentElement.parentElement.cells[0].innerHTML; //παίρνω το κωδικό του user
                     //if (window.confirm("Είστε σίγουρος ότι θέλετε να διαγράψετε τον μαθητή?")) { // Τον προϊδοποιώ για την διαγραφή
                     if (window.confirm(self.deleteconfirmmsg)) { // Τον προϊδοποιώ για την διαγραφή                
-                        self.remove(id); //Και διαγράφω τον user στέλνοντας request στον Server.
+                        //self.remove(id); //Και διαγράφω τον user στέλνοντας request στον Server.
                     }
                 };
 
                 col1.appendChild(button);
-            }            
+            }
+
+            if(this.updateUrl!=null){
+                //var col1 = tabLinesRow.insertCell(cel); //Φτιάχνω ένα κελί για να βάλω το κουμπί
+                var button2 = document.createElement('button'); //Βάζω το κουμπί
+                button2.innerHTML = 'Ενημέρωση'; //Φτιάχνω και το όνομα του
+
+                button2.onclick = function(event){ //Δηλώνω το event του πατήματος
+                    event.stopPropagation(); //Επειδή έχει και το tr even να ανοίγει το popup όταν πατηθεί και το κουμπί θα εκτελεστεί και το event του τr το onclick. Οπότε σταματάω την μετάδωση του click στο tr με την εντολή αυτή
+                    var id = this.parentElement.parentElement.cells[0].innerHTML; //παίρνω το κωδικό του user
+                    //if (window.confirm("Είστε σίγουρος ότι θέλετε να διαγράψετε τον μαθητή?")) { // Τον προϊδοποιώ για την διαγραφή
+                    if (window.confirm(self.updateconfirmmsg)) { // Τον προϊδοποιώ για την διαγραφή
+                        //self.update(id); //Και διαγράφω τον user στέλνοντας request στον Server.
+                    }
+                };
+
+                col1.appendChild(document.createElement("br"));
+                col1.appendChild(button2);
+            }
+
+            if(this.insertUrl!=null){
+                //var col1 = tabLinesRow.insertCell(cel); //Φτιάχνω ένα κελί για να βάλω το κουμπί
+                var button3 = document.createElement('button'); //Βάζω το κουμπί
+                button3.innerHTML = 'Εισαγωγή'; //Φτιάχνω και το όνομα του
+
+                button3.onclick = function(event){ //Δηλώνω το event του πατήματος
+                    event.stopPropagation(); //Επειδή έχει και το tr even να ανοίγει το popup όταν πατηθεί και το κουμπί θα εκτελεστεί και το event του τr το onclick. Οπότε σταματάω την μετάδωση του click στο tr με την εντολή αυτή
+                    //if (window.confirm("Είστε σίγουρος ότι θέλετε να διαγράψετε τον μαθητή?")) { // Τον προϊδοποιώ για την διαγραφή
+                    if (window.confirm(self.insertconfirmmsg)) { // Τον προϊδοποιώ για την διαγραφή
+                        //self.insert(); //Και διαγράφω τον user στέλνοντας request στον Server.
+                    }
+                };
+
+                col1.appendChild(document.createElement("br"));
+                col1.appendChild(button3);
+            }
 
 
-            tabLinesRow.addEventListener("click", function(event) { //Για κάθε γραμμή στον πίνακα βάζω ένα event onclick ώστε όταν γίνεται click να ανοίγει ένα popup παράθυρο 
-                var modal = document.getElementById(self.popupwindow); // Παίρνω το όνομα του popup
-                modal.style.display = "block"; //Του αλλάζω στιλ για να το εμφανίσω
-                                
-                if(self.getItemUrl!=null){
-                    self.getItem(this.cells[0].innerHTML); //Παίρνω τον κωδικό της γραμμής ή του στοιχείου που βρίσκεται στην πρώτη στήλη.:ΠΡΟΣΟΧΗ αν δεν είναισ την πρώτη θέση δεν θα παίξει
-                    actionType = "update"; //Δηλώνω το acton type. Επειδή χρησιμοποιώ την ίδια φόρμα για το update και το insert για να ξέρω πότε θα γίνει το ένα και πότε το άλλο.
+
+
+            tabLinesRow.addEventListener("click", function(event) { //Για κάθε γραμμή στον πίνακα βάζω ένα event onclick ώστε όταν γίνεται click να ανοίγει ένα popup παράθυρο
+
+                const targetElement = event.target;
+                if (targetElement.tagName.toLowerCase() !== 'a' && targetElement.tagName.toLowerCase() !== 'button') {
+                    var modal = document.getElementById(self.popupwindow); // Παίρνω το όνομα του popup
+                    modal.style.display = "block"; //Του αλλάζω στιλ για να το εμφανίσω
+
+                    if(self.getItemUrl!=null){
+                        self.getItem(this.cells[0].innerHTML); //Παίρνω τον κωδικό της γραμμής ή του στοιχείου που βρίσκεται στην πρώτη στήλη.:ΠΡΟΣΟΧΗ αν δεν είναισ την πρώτη θέση δεν θα παίξει
+                        actionType = "update"; //Δηλώνω το acton type. Επειδή χρησιμοποιώ την ίδια φόρμα για το update και το insert για να ξέρω πότε θα γίνει το ένα και πότε το άλλο.
+                    }
+
+                    self.selectedrows = this.cells;
+                    if(self.onOpenPopup!=null){
+                        self.onOpenPopup(self.selectedrows[0].innerHTML, self);
+                    }
                 }
-
-                self.selectedrows = this.cells;
-                if(self.onOpenPopup!=null){
-                    self.onOpenPopup(self.selectedrows[0].innerHTML, self);
-                }  
             });
-                cel = 0; //Και μηδενίζουμε την κολόνα για την επόμενη γραμμή
+
+            cel = 0; //Και μηδενίζουμε την κολόνα για την επόμενη γραμμή
         }
 
     }
@@ -317,7 +352,7 @@ class TableHandler{
     }
 
     //Εκτελέι το update των δεδομένων καλόντας φυσικά το αντίστοιχο method στην php
-    update() {
+    update(id) {
 
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {

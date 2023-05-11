@@ -1,4 +1,21 @@
 <h1>Videos from youtube</h1>
+<form>
+    <label for="url" class="url-label">Url:</label><input class="url-text" type="text" value="" name="url" id="url">
+    <input type="button" value="Add" class="url-button">
+</form>
+
+<div id="modal" style="display:none; border:1px solid black;position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:white; padding:20px;width: 60%; height: 70%; overflow: auto;">
+    <h2 id="modalTitle"></h2>
+    <p id="modalDescription"></p>
+    <img id="modalImage" alt="Image" width="50%"/>
+    <p id="modalPostTime"></p>
+    <button id="closeModal" onclick="closeModal()">Close</button>
+    <button id="closeModal" onclick="saveLink()">Save</button>
+</div>
+
+
+
+
 <table id="table">
     <tbody id="tbody"></tbody>
 </table>
@@ -46,7 +63,7 @@
     </div>
 
 </div>
-<button id="btnNewCourse">Νέος Χρήστης</button>
+<button id="btnNewCourse">Νέος Link</button>
 <script>
 
 
@@ -104,13 +121,14 @@
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete"){
             var tableid = "table";
-            var getAllUrl = "youtube/getvideo?format=raw"; //OK
-            var rows = ["id", {name:"thumbnailUrl", type:"image", width:"150px"},"title", {name:"videoUrl", type:"url", alt:"url"},"publishedAt"];
+            var getAllUrl = "database/getvideo?format=raw"; //OK
+            var rows = ["id", {name:"thumbnailUrl", type:"image", width:"150px"},"title", {name:"url", type:"url", alt:"url"},"dateInserted","datePosted"];
             var getItemUrl= null; //OK
-            var deleteUrl = "youtube/addvideo?format=raw"; //OK
+            var deleteUrl = null; //OK
             var updateUrl = null; //OK
-            var insertUrl = "youtube/addvideo?format=raw"; //OK
-            var deleteconfirmmsg = "Είστε σίγουρος ότι θέλετε να διαγράψετε το video?";
+            var insertUrl = null; //OK
+            var insertUrl = null; //OK
+            var deleteconfirmmsg = "Είστε σίγουρος ότι θέλετε να διαγράψετε το Link από την βάση?"; //OK
             var insertconfirmmsg = "Είστε σίγουρος ότι θέλετε να εισάγετε το video?";
             var updateconfirmmsg = "Είστε σίγουρος ότι θέλετε να ενημερώσετε το video?";
             var popupwindow = "myModal"; //OK
@@ -129,8 +147,7 @@
 
                 return formValidator.validate();
             };
-
-
+            // tablehandler = new TableHandler(tableid, getAllUrl, rows, getItemUrl, deleteUrl, updateUrl, insertUrl, deleteconfirmmsg, popupwindow, newbutton, closepopupbutton, clickrowForPopup);
             tablehandler = new TableHandler();
             tablehandler.tableid=tableid; //Το id του πίνακα που θα τοποθετηθούν τα δεδομένα
             tablehandler.getAllUrl=getAllUrl; //Το url που θα χρησιμοποιηθεί για να φορτοθούν τα δεδομένα από το endpoint της php
@@ -147,9 +164,59 @@
             tablehandler.closepopupbutton = closepopupbutton;
             tablehandler.clicksaveForPopup = null;
             tablehandler.onOpenPopup = clickrowForPopup;
-
             tablehandler.loadtable();
 
         }
     }, false);
 </script>
+
+
+<script>
+    document.querySelector('.url-button').addEventListener('click', () => {
+        const url = document.querySelector('.url-text').value;
+
+        if(!validateUrl(url)) {
+            alert("Invalid URL");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('url', url);
+
+        fetch('database/fetchurl?format=raw', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('#modalTitle').innerText = data.title;
+                document.querySelector('#modalDescription').innerText = data.description;
+                document.querySelector('#modalImage').src = data.image;
+                document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
+                document.querySelector('#modal').style.display = "block";
+            });
+    });
+
+    function closeModal() {
+        document.querySelector('#modal').style.display = "none";
+    }
+
+
+    function validateUrl(value) {
+        var url;
+        try {
+            url = new URL(value);
+        } catch (_) {
+            return false;
+        }
+        return url.protocol === "http:" || url.protocol === "https:";
+    }
+
+    function saveLink(){
+        alert("Saving link needs to be done");
+    }
+
+
+</script>
+
+
