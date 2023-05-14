@@ -17,9 +17,6 @@
 </head>
 
 <body>
-    <!-- <input type="button" value="ajax test" onclick="ajaxtest()"/>
-    <textarea id="demo" style="width:700px;height:120px"></textarea> -->
-    <!--Επειδή χρησιμοποιώ το css-grid ως τεχνική, δηλώνω ένα container για να τα βάλω όλα μέσα  -->
     <div class="grid-container">
         <!--Εδώ είναι η κεφαλίδα της σελίδας όπου θα τοποθετηθεί η εικονα ο τίτλος η είσοδος-->
         <div class="head">

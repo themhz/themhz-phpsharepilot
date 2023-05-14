@@ -18,32 +18,32 @@
  */
 namespace SharePilotV2\Libs;
 use SharePilotV2\Config;
+use \PDO;
+use \DateTime;
 
-class Dbhandler
+class Database
 {
-    public $dbh; // handle of the db connexion
+    public $dbh;
     private static $instance;
 
     private function __construct()
-    {        
-        $user = Config::read('db.user');    
-        $password = Config::read('db.password');
-        $dbhost = Config::read('db.host');
-        $basename = Config::read('db.basename');
-        $this->dbh = new \PDO("mysql:host=$dbhost;dbname=$basename", $user, $password,
-            array(\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",\PDO::ATTR_PERSISTENT => true)
-            );
+    {
+        $user = Config::$config['db']['user'];
+        $password = Config::$config['db']['password'];
+        $dbhost = Config::$config['db']['host'];
+        $basename = Config::$config['db']['basename'];
+        $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 
-        $now = new \DateTime();
-        $mins = $now->getOffset() / 60;
-        $sgn = ($mins < 0 ? -1 : 1);
-        $mins = abs($mins);
-        $hrs = floor($mins / 60);
-        $mins -= $hrs * 60;
-        $offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
-        $this->dbh->exec("SET time_zone='$offset';");
-  
-        $this->dbh->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        // $now = new DateTime();
+        // $mins = $now->getOffset() / 60;
+        // $sgn = ($mins < 0 ? -1 : 1);
+        // $mins = abs($mins);
+        // $hrs = floor($mins / 60);
+        // $mins -= $hrs * 60;
+        // $offset = sprintf('%+d:%02d', $hrs*$sgn, $mins);
+        // $this->dbh->exec("SET time_zone='$offset';");
+
+        $this->dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     public static function getInstance()
@@ -53,9 +53,7 @@ class Dbhandler
             $object = __CLASS__;
             self::$instance = new $object;
         }
-        return self::$instance;
+        return self::$instance->dbh;
     }
-
-    // others global functions
 }
 

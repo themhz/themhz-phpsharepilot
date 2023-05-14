@@ -1,9 +1,13 @@
-<h1>Videos from youtube</h1>
+<h1>Links in database</h1>
 <form>
     <label for="url" class="url-label">Url:</label><input class="url-text" type="text" value="" name="url" id="url">
-    <input type="button" value="Add" class="url-button">
+    <input type="button" value="Check" class="url-button">
 </form>
+<table id="table">
+    <tbody id="tbody"></tbody>
+</table>
 
+<!--Modals Start-->
 <div id="modal" style="display:none; border:1px solid black;position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:9999; background:white; padding:20px;width: 60%; height: 70%; overflow: auto;">
     <h2 id="modalTitle"></h2>
     <p id="modalDescription"></p>
@@ -12,14 +16,6 @@
     <button id="closeModal" onclick="closeModal()">Close</button>
     <button id="closeModal" onclick="saveLink()">Save</button>
 </div>
-
-
-
-
-<table id="table">
-    <tbody id="tbody"></tbody>
-</table>
-
 <div id="myModal" class="modal">
     <!-- Modal content -->
     <div class="modal-content">
@@ -65,6 +61,8 @@
 </div>
 <button id="btnNewCourse">Νέος Link</button>
 <script>
+<!--Modals Start End-->
+
 
 
     <!-- Add this to your existing <script> tag in your index.php file -->
@@ -119,7 +117,13 @@
     var tablehandler;
 
     document.addEventListener('readystatechange', function(evt) {
-        if(evt.target.readyState == "complete"){
+        if(evt.target.readyState == "complete")
+        {
+            loadTable();
+        }
+    }, false);
+
+    function loadTable(){
             var tableid = "table";
             var getAllUrl = "database/getvideo?format=raw"; //OK
             var rows = ["id", {name:"thumbnailUrl", type:"image", width:"150px"},"title", {name:"url", type:"url", alt:"url"},"dateInserted","datePosted"];
@@ -165,13 +169,12 @@
             tablehandler.clicksaveForPopup = null;
             tablehandler.onOpenPopup = clickrowForPopup;
             tablehandler.loadtable();
-
-        }
-    }, false);
+    }
 </script>
 
 
 <script>
+    var urlData = null;
     document.querySelector('.url-button').addEventListener('click', () => {
         const url = document.querySelector('.url-text').value;
 
@@ -194,6 +197,8 @@
                 document.querySelector('#modalImage').src = data.image;
                 document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
                 document.querySelector('#modal').style.display = "block";
+                data.url =  document.querySelector('.url-text').value;
+                urlData = data;
             });
     });
 
@@ -213,7 +218,34 @@
     }
 
     function saveLink(){
-        alert("Saving link needs to be done");
+
+        fetch("database/addurl?format=raw", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(urlData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data && data.message) {
+                    alert(data.message);
+                    loadTable();
+                    closeModal();
+                } else {
+                    console.error("Unexpected response data:", data);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+
     }
 
 

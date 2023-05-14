@@ -1,6 +1,6 @@
 <?php
 namespace SharePilotV2\Models;
-use SharePilotV2\Libs\Dbhandler;
+use SharePilotV2\Libs\Database;
 use SharePilotV2\Components\RequestHandler;
 
 class Users
@@ -11,7 +11,7 @@ class Users
 
     public function insert($obj)
     {
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "insert users (";
         
         $sql .= "name, " ;
@@ -49,7 +49,7 @@ class Users
 
         $sql .="); ";
 
-        $sth = $db->dbh->prepare($sql);        
+        $sth = $db->prepare($sql);
 
         $values[":name"] = $obj->name;
         $values[":lastname"] = $obj->lastname;
@@ -76,7 +76,7 @@ class Users
 
         $requesthandler =  new requesthandler();
 
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "select a.*, b.name rolename from users a                    
                     ";                                        
         
@@ -86,7 +86,7 @@ class Users
              $sql .= " where a.id=". $id;
          }
 
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(PDO::FETCH_OBJ);
         
@@ -115,9 +115,9 @@ class Users
     {
 
         $error = "";
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "delete from users where id = $id";
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         try{
 
             $sth->execute();
@@ -138,7 +138,7 @@ class Users
 
     public function update($obj)
     {
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "update users "
             . " set name=:name, lastname=:lastname, email=:email, role=:role, mobilephone=:mobilephone, address=:address, am=:am ";
         
@@ -175,7 +175,7 @@ class Users
         $values[":id"] = $obj->id;
         
 
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         $sth->execute($values);
 
         $rowsupdates = $sth->rowCount();
@@ -189,10 +189,10 @@ class Users
     public function check()
     {
 
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "select a.* 
                     from users a                                
-                    ";                                        
+                    ";
         
         $username = null;
         if(isset(RequestHandler::get()->email)){
@@ -207,7 +207,7 @@ class Users
         $sql .= " where a.email = '".$username."' and a.password='".$password."'";
         
         
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);
             
@@ -240,12 +240,12 @@ class Users
 
     public function getRelations(){
         
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $dbname = Config::read('db.basename');
         $sql = "SELECT *  FROM information_schema.key_column_usage where constraint_schema = '$dbname' and table_name='users' and REFERENCED_TABLE_NAME is not null";
                         
             
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(PDO::FETCH_OBJ);
                 
@@ -254,7 +254,7 @@ class Users
             if($row->REFERENCED_TABLE_NAME=="users"){
                 $sql .=" where role = 2 ";
             }
-            $sth = $db->dbh->prepare($sql);
+            $sth = $db->prepare($sql);
             $sth->execute();
             $results = $sth->fetchAll(PDO::FETCH_ASSOC);
             $data[$row->REFERENCED_TABLE_NAME][] = $results;
@@ -269,7 +269,7 @@ class Users
     }
 
     public function updateProfile($obj){
-        $db = Dbhandler::getInstance();
+        $db = Database::getInstance();
         $sql = "update users "
             . " set mobilephone=:mobilephone, address=:address";
         
@@ -300,7 +300,7 @@ class Users
         $values[":id"] = $obj->id;
         
 
-        $sth = $db->dbh->prepare($sql);
+        $sth = $db->prepare($sql);
         $sth->execute($values);
 
         $rowsupdates = $sth->rowCount();

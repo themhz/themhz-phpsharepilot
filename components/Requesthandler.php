@@ -4,28 +4,30 @@
 namespace SharePilotV2\Components;
 class RequestHandler
 {
+    public static function get($var = null)
+    {
+        if ($var != null) {
+            if (isset($_POST[$var])) {
+                return $_POST[$var];
+            } elseif (isset($_GET[$var])) {
+                return $_GET[$var];
+            } else {
+                // Check in JSON data.
+                $jsonData = json_decode(file_get_contents('php://input'), true);
+                if (isset($jsonData[$var])) {
+                    return $jsonData[$var];
+                }
+            }
+        } else {
+            // If no specific variable is requested, return all input data.
+            $jsonData = json_decode(file_get_contents('php://input'), true);
+            if (!empty($jsonData)) {
+                return $jsonData;
+            }
+            return array_merge($_POST, $_GET);
+        }
 
-  public static function get($var = null)
-  {
-    
-    //Get the requested variable even if it is posted as post or as get method
-    $val = null;
-    $value = null;    
-    if ($var != null) {
-      if (isset($_POST[$var])) {
-
-        $val = $_POST[$var];
-      } elseif (isset($_GET[$var])) {
-
-        $val = $_GET[$var];
-      } 
-      $value = $val;
-
-    } else {
-      $value = json_decode(file_get_contents('php://input'));
-      
+        // If the requested key is not found, return null.
+        return null;
     }
-
-    return $value;
-  }
 }

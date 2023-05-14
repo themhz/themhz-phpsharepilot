@@ -3,6 +3,7 @@ use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\Config;
 use SharePilotV2\Models\Urls;
 use SharePilotV2\Components\ResponseHandler;
+use SharePilotV2\Components\RequestHandler;
 
  class Controller{
     public function get(){
@@ -13,7 +14,7 @@ use SharePilotV2\Components\ResponseHandler;
     public function getvideo()
     {
         $u = new Urls();
-        $videos = $u->select();;
+        $videos = $u->select([],["id"=>"desc"]);;
         ResponseHandler::respond($videos);
     }
 
@@ -114,7 +115,22 @@ use SharePilotV2\Components\ResponseHandler;
             ResponseHandler::respond($page_info);
         }
 
-     }
+    }
+
+
+    public function addurl(){
+        $u = new Urls();
+
+        $u->url = RequestHandler::get("url");
+        $u->title = RequestHandler::get("title");
+        $u->source = 1;
+        $u->type = 1;
+        $u->thumbnailUrl = RequestHandler::get("image");
+
+        $id = $u->insert();
+        ResponseHandler::respond(["message"=>"Url Was inserted with id:{$id}"]);
+
+    }
  }
 
 
