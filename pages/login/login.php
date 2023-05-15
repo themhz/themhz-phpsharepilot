@@ -31,12 +31,13 @@
       xhttp.onreadystatechange = function() {
          if (this.readyState == 4 && this.status == 200) {
             var response = eval('(' + this.responseText + ')');
-            if(response=="nouser"){
-               alert("Λάθος username ή password")   
-            }else{               
-               window.location.replace("default");
-
+            if(response=="nouser") {
+                alert("Λάθος username ή password")
             }
+            // }else{
+            //    window.location.replace("default");
+            //
+            // }
             
             
          }

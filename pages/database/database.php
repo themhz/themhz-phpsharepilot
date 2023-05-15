@@ -225,14 +225,16 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(urlData),
-        })
+            })
             .then(response => {
+                alert(1);
                 if (!response.ok) {
                     throw new Error("HTTP error " + response.status);
                 }
                 return response.json();
             })
             .then(data => {
+                alert(2);
                 if (data && data.message) {
                     alert(data.message);
                     loadTable();

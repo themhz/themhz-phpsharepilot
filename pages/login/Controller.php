@@ -1,6 +1,7 @@
 <?php
 use SharePilotV2\Models\Users;
 use SharePilotV2\Components\ResponseHandler;
+use SharePilotV2\Components\RequestHandler;
 
 class Controller
 {
@@ -11,9 +12,10 @@ class Controller
     public function authentication()
     {
         $users = new Users();
-        $data = $users->check();
+        $data = $users->select(["email ="=>RequestHandler::get("email"),
+            "and password ="=>RequestHandler::get("password")],[],false);
 
-        if($data!=""){
+        if($data!=[]){
             ResponseHandler::respond($data);
         }else{
             ResponseHandler::respond("nouser");
