@@ -34,12 +34,12 @@
             if(response=="nouser") {
                 alert("Λάθος username ή password")
             }
-            // }else{
-            //    window.location.replace("default");
-            //
-            // }
+            else{
+               window.location.replace("default");
+
+            }
             
-            
+            //console.log(this.responseText);
          }
       };
       xhttp.open("POST", "login/authentication?format=raw", true);

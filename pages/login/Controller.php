@@ -15,7 +15,9 @@ class Controller
         $data = $users->select(["email ="=>RequestHandler::get("email"),
             "and password ="=>RequestHandler::get("password")],[],false);
 
+
         if($data!=[]){
+            $_SESSION["user"] = $data;
             ResponseHandler::respond($data);
         }else{
             ResponseHandler::respond("nouser");

@@ -5,6 +5,7 @@ class MasterController{
     public function Start(){
         $page='';
         $directory='';
+
         if(isset($_REQUEST["page"])){
             $page = $_REQUEST['page'];
             $directory = getcwd()."/pages/$page";
@@ -13,6 +14,7 @@ class MasterController{
         //Check If the directory exists
         if(is_dir($directory)){
             //Load the directory
+
             include $directory.'/Controller.php';
         }else{
             //Load the default directory
@@ -27,7 +29,7 @@ class MasterController{
             call_user_func_array(array($obj, $method),array());
 
         }else{
-
+            //die($_SERVER['REQUEST_METHOD']);
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $obj= new \Controller;
             call_user_func_array(array($obj, $method),array());
