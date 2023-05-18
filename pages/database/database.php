@@ -3,6 +3,7 @@
     <div class="w3-container w3-teal">
         <h1>Links in database</h1>
     </div>
+    <br>
     <div class="w3-container">
         <div class="w3-container w3-card-4" action="/action_page.php">
             <h2 class="w3-text-teal">Add Url Form</h2>
