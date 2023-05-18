@@ -1,109 +1,96 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-
-    <link rel="shortcut icon" href="favicon.ico" />
-    <link rel="stylesheet" href="template/css/style.css">
-    <!--Δήλωση του javascript για την λειτουργία του Menu-->
-    <script src="template/js/main.js?v="<?php echo time(); ?>"></script>
-    <meta charset="utf-8">
-    <title>WebSite</title>
-
-
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="template/css/login.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="template/js/main.js?v="<?php echo time(); ?>"></script>
+<style>
+html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
+.w3-sidebar {
+    z-index: 3;
+  width: 250px;
+  top: 43px;
+  bottom: 0;
+  height: inherit;
+}
+</style>
 </head>
-
 <body>
-    <div class="grid-container">
-        <!--Εδώ είναι η κεφαλίδα της σελίδας όπου θα τοποθετηθεί η εικονα ο τίτλος η είσοδος-->
-        <div class="head">
-            <div class="header-container">
-                <div class="headl">
-                    <!--Εκόνα με Link στν αρική-->
-                    <a href="home"><img src="template/images/sharepilot.png" alt="sharepilot" /></a>
-                </div>
-                <!--Οι κεφαλιδες στην κεντρική-->
-                <div class="headm">
-                    <h1>Share Pilot</h1>
-                </div>
-                <!--το Λινκ της εισόδου-->
-                <div class="headr">
-                <?php if (isset($_SESSION["user"])){ ?>
-                    <a id="logout" href="login?method=logout&format=raw">Έξοδος</a>                
-                <?php } ?>
-                    
-                    
-                </form>
-                </div>                
-            </div>
-        </div>
-        <!--Εδώ έχουμε οριζόντιο placeholder για το menu-->
-        <div class="nav">
-            &nbsp;
-        </div>
-        <!--Εδώ έχουμε κάθετο placeholder για το menu-->
-        <?php if (isset($_SESSION["user"])) {?>
-        <nav id="nav2" class="nav2">
-            <ul>
-            <?php if ($_SESSION["user"][0]->role == 1){ ?>
-                <li id="listyoutube"><a href="youtube">Εύρεση Video από YouTube</a></li>
-                <li id="listdatabase"><a href="database">Διαχείριση Link από την βάση</a></li>
-                <li id="listschedule"><a href="schedule">Πρόγραμμα</a></li>
-            <?php } ?>
-            <?php if ($_SESSION["user"][0]->role == 2){ ?>
-                <li id="listprofile"><a href="profile">Διαχείριση Profile</a></li>
-                <li id="listprofessorprofilelessons"><a href="professorprofilelessons">Διαχείριση Μαθημάτων</a></li>
-            <?php } ?>
-            <?php if ($_SESSION["user"][0]->role == 3){ ?>
-                <li id="listprofile"><a href="profile">Διαχείριση Profile</a></li>
-                <li id="liststudentprofilelessons"><a href="studentprofilelessons">Διαχείριση Μαθημάτων</a></li>
-            <?php } ?>
-            </ul>
-        </nav>
-        <?php }?>
-        <!--Εδώ έχουμε το κυρίως σώμα της σελίδας με τις ανακοινώσεις αριστερά και δεξιά
-            επίσης κάθε ανακοίνωση ανα μια αλλάζει η κλάση της ώστε να πετύχουμε την διαφοροποίηση αριστερά δεξιά-->
-        <div class="body">
 
-            <?php
-                include $page->load();
-            ?>
+<?php if (isset($_SESSION["user"])){ ?>
 
-        </div>
-        <!--Εδώ έχουμε το footer. To χώρισα σε 2 κομμάτια, το αριστερό και το δεξιό.-->
-        <!-- εδώ έχουμε την λίστα με το επικοινωνήστε το τηλέφωνο και το email-->
-        <div class="footerl">
-            <ul>
-                <li class="lititle"></li>
-                <li class="phone"></li>
-                <li class="mail"></li>
-            </ul>
-        </div>
-        <!--και εδώ οι όροι χρήσης -->
-        <div class="footerr">
-            <ul>
-                <li>
-<!--                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank"> |</a>-->
-                </li>
-                <li>
-<!--                    <a href="https://www.eap.gr/data-protection-team/" target="_blank"></a>-->
-                </li>
-            </ul>
-        </div>
-    </div>
 
-    <script>
-        document.addEventListener('readystatechange', function(evt) {
-            if (evt.target.readyState == "complete") {
-                <?php if(isset($_GET["page"]) && $_GET["page"]!="login") {?>
-                    document.getElementById("list<?php echo $_GET["page"] ?>").className = "selected";
-                <?php }?>
-            }
-        }, false);
-    </script>
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+        <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
+        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
+        <a href="login?method=logout&format=raw" class="w3-bar-item w3-button w3-right w3-hover-white">Exit</a>
+        <span class="w3-bar-item w3-right w3-padding">Καλώς Όρισες <?php echo $_SESSION["user"][0]->name. " " . $_SESSION["user"][0]->lastname; ?></span>
+  </div>
+</div>
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+    <i class="fa fa-remove"></i>
+  </a>
+  <h4 class="w3-bar-item"><b>Menu</b></h4>
+  <a class="w3-bar-item w3-button w3-hover-black" href="database">Links in database</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
+</nav>
+
+<?php } ?>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+<div class="w3-main" style="margin-left:250px">
+<?php
+include $page->load();
+?>
+    <!-- END MAIN -->
+</div>
+
+<script>
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+        if (mySidebar.style.display === 'block') {
+            mySidebar.style.display = 'none';
+            overlayBg.style.display = "none";
+        } else {
+            mySidebar.style.display = 'block';
+            overlayBg.style.display = "block";
+        }
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {
+        mySidebar.style.display = "none";
+        overlayBg.style.display = "none";
+    }
+</script>
 </body>
-
 </html>

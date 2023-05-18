@@ -33,7 +33,7 @@ class Website{
         if($raw != 'raw'){
             $page =  new Pages();
             //Load template
-            include __DIR__.'/../template/index.php';
+            include __DIR__ . '/../template/index.php';
         }
     }
 }

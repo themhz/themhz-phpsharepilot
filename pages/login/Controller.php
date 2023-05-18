@@ -16,12 +16,12 @@ class Controller
             "and password ="=>RequestHandler::get("password")],[],false);
 
 
-        if($data!=[]){
+        if($data!=[]) {
             $_SESSION["user"] = $data;
-            ResponseHandler::respond($data);
-        }else{
-            ResponseHandler::respond("nouser");
         }
+
+            header("Location:".$_SERVER["SCRIPT_NAME"]);
+//          ResponseHandler::respond($data);
     }
 
     public function logout(){

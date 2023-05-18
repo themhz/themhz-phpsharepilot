@@ -1,52 +1,17 @@
-<h1>Σύνδεση με Share Pilot</h1>
-        <p class="peisodos">
-            Συνδεθείτε με τα συνθηματικά σας
-        </p>
-                   
-         <table class="login">
-               <tr>
-                  <td>User name</td><td><input type="text" id="email"  value=""></td>
-               </tr>
-               <tr>
-                  <td>Password</td><td><input type="password" id="password" value=""></td>
-               </tr>            
-               <tr><td rowpan="2"><button id="btnlogin" onclick="login()">Υποβολή</button></td></tr>
-         </table>        
-      
+<div class="w3-container w3-teal">
+    <h1>SharePilot</h1>
+</div>
+<div class="login-container">
+    <form action="login/authentication" method="post">
+        <label for="username">Username:</label><br>
+        <input type="text" id="email" name="email"><br>
 
-<script>
+        <label for="password">Password:</label><br>
+        <input type="password" id="password" name="password"><br>
 
-   document.addEventListener('readystatechange', function(evt) {
-         if(evt.target.readyState == "complete"){            
-            document.getElementById("nav2").style.display="none";
-            document.getElementById("login").style.display="none";            
-         }
-         
-   });
+        <input type="checkbox" id="remember" name="remember">
+        <label for="remember">Remember me</label><br>
 
-
-   function login() {
-      //document.getElementById("btnlogin").disabled = true;
-      var xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-         if (this.readyState == 4 && this.status == 200) {
-            var response = eval('(' + this.responseText + ')');
-            if(response=="nouser") {
-                alert("Λάθος username ή password")
-            }
-            else{
-               window.location.replace("default");
-
-            }
-            
-            //console.log(this.responseText);
-         }
-      };
-      xhttp.open("POST", "login/authentication?format=raw", true);
-      xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-      xhttp.send(JSON.stringify({
-         "email": document.getElementById("email").value,
-         "password": document.getElementById("password").value
-      }));
-   }
-</script>
+        <input type="submit" value="Login">
+    </form>
+</div>
