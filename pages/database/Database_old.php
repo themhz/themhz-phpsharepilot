@@ -59,7 +59,7 @@
     </div>
 
 </div>
-<button id="btnNewCourse">Νέος Link</button>
+<button id="btnNewCourse">Νέο Link</button>
 
 
 <script>

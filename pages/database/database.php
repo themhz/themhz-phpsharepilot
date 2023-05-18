@@ -4,9 +4,15 @@
         <h1>Links in database</h1>
     </div>
     <div class="w3-container">
-        <h1 class="w3-text-teal">Heading1</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <div class="w3-container w3-card-4" action="/action_page.php">
+            <h2 class="w3-text-teal">Add Url Form</h2>
+            <p>Add a new url using this form</p>
+            <p>
+                <label for="txtUrl" class="w3-text-teal"><b>Url</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtUrl" id="txtUrl">
+                <input class="w3-btn w3-teal" value="Check" type="button" id="checkUrl" name="checkUrl">
+        </div>
+
     </div>
 </div>
 
@@ -43,6 +49,30 @@
 </div>
 
 <!--popup-->
+
+<!--new url popup-->
+<!-- W3.CSS Modal -->
+<div id="modal" class="w3-modal">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
+        <header class="w3-container w3-teal">
+            <span onclick="document.getElementById('modal').style.display='none'"
+                  class="w3-button w3-display-topright">&times;</span>
+            <h2 id="modalTitle"></h2>
+        </header>
+        <div class="w3-container">
+            <br>
+            <img id="modalImage" class="w3-image" alt="Image" style="width:50%;"/>
+            <p id="modalDescription"></p>
+            <p id="modalPostTime"></p>
+        </div>
+        <footer class="w3-container w3-teal w3-padding">
+            <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>
+            <button id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()">Save</button>
+        </footer>
+    </div>
+</div>
+
+<!--new url popup-->
 
 <script>
     document.addEventListener('readystatechange', function(evt) {
@@ -101,5 +131,86 @@
 
         alert(1);
     }
+
+</script>
+
+
+<script>
+    var urlData = null;
+    document.querySelector('#checkUrl').addEventListener('click', () => {
+        const url = document.querySelector('#txtUrl').value;
+
+        if(!validateUrl(url)) {
+            alert("Invalid URL");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('url', url);
+
+        fetch('database/fetchurl?format=raw', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('#modalTitle').innerText = data.title;
+                document.querySelector('#modalDescription').innerText = data.description;
+                document.querySelector('#modalImage').src = data.image;
+                document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
+                document.querySelector('#modal').style.display = "block";
+                data.url =  document.querySelector('.url-text').value;
+                urlData = data;
+            });
+    });
+
+    function closeModal() {
+        document.querySelector('#modal').style.display = "none";
+    }
+
+
+    function validateUrl(value) {
+        var url;
+        try {
+            url = new URL(value);
+        } catch (_) {
+            return false;
+        }
+        return url.protocol === "http:" || url.protocol === "https:";
+    }
+
+    function saveLink(){
+
+        fetch("database/addurl?format=raw", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(urlData),
+        })
+            .then(response => {
+                alert(1);
+                if (!response.ok) {
+                    throw new Error("HTTP error " + response.status);
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert(2);
+                if (data && data.message) {
+                    alert(data.message);
+                    loadTable();
+                    closeModal();
+                } else {
+                    console.error("Unexpected response data:", data);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
+
+    }
+
 
 </script>
