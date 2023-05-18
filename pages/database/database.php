@@ -68,7 +68,7 @@
         </div>
         <footer class="w3-container w3-teal w3-padding">
             <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>
-            <button id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()">Save</button>
+            <input id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()" value="Save">
         </footer>
     </div>
 </div>
@@ -88,6 +88,7 @@
             .then(response => response.json())
             .then(data => {
                 const ul = document.querySelector(".w3-ul");
+                ul.innerHTML = '';
                 ul.classList = "w3-ul w3-hoverable";
                 data.forEach(item => {
                     const li = document.createElement('li');
@@ -96,13 +97,13 @@
 
 
                     li.innerHTML = `
-          <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-          <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
-          <div class="w3-bar-item">
-              <span class="w3-large">${item.title.substring(0, 80)}</span><br>
-              <span>${item.regdate}</span>
-          </div>
-        `;
+                      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                      <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
+                      <div class="w3-bar-item">
+                          <span class="w3-large">${item.title.substring(0, 80)}</span><br>
+                          <span>${item.regdate}</span>
+                      </div>
+                    `;
                     li.addEventListener('click', function() {
                         document.getElementById('editTitle').value = item.title;
                         document.getElementById('editURL').value = item.url;
@@ -137,7 +138,7 @@
 
 
 <script>
-    var urlData = null;
+    let urlData = null;
     document.querySelector('#checkUrl').addEventListener('click', () => {
         const url = document.querySelector('#txtUrl').value;
 
@@ -160,7 +161,7 @@
                 document.querySelector('#modalImage').src = data.image;
                 document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
                 document.querySelector('#modal').style.display = "block";
-                data.url =  document.querySelector('.url-text').value;
+                data.url =  url;
                 urlData = data;
             });
     });
@@ -190,17 +191,15 @@
             body: JSON.stringify(urlData),
         })
             .then(response => {
-                alert(1);
                 if (!response.ok) {
                     throw new Error("HTTP error " + response.status);
                 }
                 return response.json();
             })
             .then(data => {
-                alert(2);
                 if (data && data.message) {
                     alert(data.message);
-                    loadTable();
+                    loadList();
                     closeModal();
                 } else {
                     console.error("Unexpected response data:", data);
