@@ -18,6 +18,22 @@ use SharePilotV2\Components\RequestHandler;
         ResponseHandler::respond($videos);
     }
 
+    public function delete(){
+        $u = new Urls();
+
+        $data = $u->delete(["id="=>$_POST["id"]],false);;
+        ResponseHandler::respond($data);
+    }
+
+    public function autoscheduleposts(){
+        $u = new urls();
+        $start_datetime = RequestHandler::get("start_datetime");
+        $hourInterval = RequestHandler::get("hourInterval");
+
+
+        ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval));
+    }
+
     public function fetchurl() {
 
         if(isset($_POST["url"])){

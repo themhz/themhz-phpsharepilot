@@ -78,18 +78,51 @@ class Model
 
         return $results;
     }
-    public function customselect($sql, $params = []): array
+    public function callStoredProcedure($procedure, $parameters = []): array
     {
+
+
         $db = Database::getInstance();
+        $stmt = $db->prepare($procedure);
 
-        $sth = $db->prepare($sql);
+        if (!$stmt) {
+            return ["message" => "Failed to prepare the statement for the stored procedure."];
+        }
 
-        $sth->execute($params);
+        $this->bindParams($stmt, $parameters);
 
-        $results = $sth->fetchAll(\PDO::FETCH_OBJ);
+        if (!$stmt->execute()) {
+            return ["message" => "Failed to execute the stored procedure."];
+        }else{
+            return ["message" => "Posts scheduled successfully."];
+        }
 
-        return $results;
     }
+
+
+    public function bindParams($stmt, $parameters) {
+        foreach ($parameters as $key => $value) {
+            $stmt->bindValue($key + 1, $value);
+        }
+    }
+
+    public function placeholders($count){
+        return implode(',', array_fill(0, $count, '?'));
+    }
+
+    public function customselect($sql, $params = []): array
+        {
+
+            $db = Database::getInstance();
+
+            $sth = $db->prepare($sql);
+
+            $sth->execute($params);
+
+            $results = $sth->fetchAll(\PDO::FETCH_OBJ);
+
+            return $results;
+        }
     public function update($debug=false, $dontupdate = []): array
     {
         $db = Database::getInstance();
@@ -316,7 +349,7 @@ class Model
 
         $sth = $db->prepare($sql);
 
-        $sth->execute($params);
+        $sth->execute();
 
         $count = $sth->rowCount();
 

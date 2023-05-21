@@ -25,13 +25,22 @@
         </ul>
     </div>
     <div class="w3-third w3-container">
-        <p class="w3-border w3-padding-large w3-padding-32 w3-center">AD</p>
-        <p class="w3-border w3-padding-large w3-padding-64 w3-center">AD</p>
+        <div class="w3-border w3-padding-large w3-padding-64 w3-center">
+            <div class="w3-container w3-card-4" >
+                <h2 class="w3-text-teal">Schedule Posts</h2>
+                    <input class="w3-input w3-border w3-margin-bottom" type="date" name="initial_schedule_post_date" id="initial_schedule_post_date" value="">
+                    <input class="w3-input w3-border w3-margin-bottom" type="time" name="initial_schedule_post_time" id="initial_schedule_post_time" value="">
+                <h3 class="w3-text-teal">Interval</h3>
+                    <input class="w3-input w3-border w3-margin-bottom"  type="text" name="hourInterval" id="hourInterval" value="">
+                    <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Schedule Posts</button>
+            </div>
+        </div>
+        <div class="w3-border w3-padding-large w3-padding-32 w3-center">AD</div>
     </div>
 </div>
 <!--Lists-->
 
-<!--popup-->
+<!--row click popup-->
 <div id="myModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
@@ -52,7 +61,7 @@
 <!--popup-->
 
 <!--new url popup-->
-<!-- W3.CSS Modal -->
+<!-- check url Modal -->
 <div id="modal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
@@ -94,16 +103,19 @@
                     const li = document.createElement('li');
                     li.className = "w3-bar w3-hover-blue";
                     li.style.cursor = "pointer";
+                    li.id = item.id;
 
-
-                    li.innerHTML = `
-                      <span onclick="this.parentElement.style.display='none'" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                      <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
-                      <div class="w3-bar-item">
-                          <span class="w3-large">${item.title.substring(0, 80)}</span><br>
-                          <span>${item.regdate}</span>
-                      </div>
-                    `;
+                    li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                                    <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
+                                    <div class="w3-bar-item" id=${item.id}>
+                                      <span class="w3-large">${item.title.substring(0, 80)}</span><br>
+                                      <span>${item.regdate}</span>
+                                      <!-- New elements: datetime text box and delete button -->
+                                      <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()">
+                                       <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()">
+                                      <button onclick="deleteItem(${item.id})" class="w3-button w3-red">Delete</button>
+                                    </div>
+                                    `;
                     li.addEventListener('click', function() {
                         document.getElementById('editTitle').value = item.title;
                         document.getElementById('editURL').value = item.url;
@@ -132,6 +144,31 @@
         document.getElementById('myModal').style.display = 'none';
 
         alert(1);
+    }
+
+    function deleteItem(id){
+        event.stopPropagation();
+        const scheduled_id = id;
+        $.ajax({
+            type: "POST",
+            url: "database/delete?format=raw",
+            data: {
+                id: scheduled_id,
+            },
+            success: (response) => {
+                if(response.result == true){
+                    alert("deleted successfully");
+                }else{
+                    alert("problem with deletion");
+                }
+
+                loadList();
+            },
+            error: () => {
+                alert("An error occurred while scheduling the video.");
+            },
+        });
+
     }
 
 </script>
@@ -211,6 +248,32 @@
 
 
     }
+
+
+    document.getElementById("scheduleButton").addEventListener("click", async () => {
+        let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
+        let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
+        let hourInterval = document.getElementById(`hourInterval`).value;
+        try {
+            const response = await fetch("database/autoscheduleposts?format=raw", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                alert(data.message);
+            } else {
+                alert(`Error: ${data.error}`);
+            }
+        } catch (error) {
+            alert(`Error: ${error}`);
+        }
+    });
 
 
 </script>
