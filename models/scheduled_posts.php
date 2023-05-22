@@ -7,7 +7,7 @@ class Scheduled_posts extends Model{
 
     public function __construct()
     {
-        parent::__construct('urls');
+        parent::__construct('scheduled_posts');
     }
 
     public int $id;

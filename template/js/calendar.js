@@ -4,7 +4,7 @@ fetch("schedule/fetchtasks?format=raw")
     .then(response => response.json())
     .then(data => {
         tasks = data;
-        console.log(tasks);
+        //console.log(tasks);
         generateCalendar(); // Ensure the calendar is generated after tasks are fetched
     })
     .catch(error => console.error("Error fetching tasks:", error));
@@ -31,6 +31,10 @@ const generateCalendar = () => {
 
         // Count the number of tasks for the current day
         const taskCount = tasks.filter(task => task.date === formattedDate).length;
+        console.log("tasks:");
+        console.log(formattedDate);
+        console.log(tasks);
+
         const hasTasks = taskCount > 0;
 
         if (i === 1) {
@@ -57,6 +61,26 @@ const generateCalendar = () => {
     calendarContainer.innerHTML = calendarHTML;
 };
 
+const tasksList = document.getElementById("tasks-list");
+const maxTasks = 24;
+
+tasks.slice(0, maxTasks).forEach(task => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${task.time} - ${task.task}`; // Update this line
+    tasksList.appendChild(listItem);
+});
+
+
+document.getElementById("calendar-container").addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (target.tagName.toLowerCase() === "td" && target.hasAttribute("data-date")) {
+        const selectedDate = target.getAttribute("data-date");
+        displayTasks(selectedDate);
+    }
+
+
+});
 
 const displayTasks = (selectedDate) => {
     const filteredTasks = tasks.filter(task => task.date === selectedDate);
@@ -83,27 +107,3 @@ const displayTasks = (selectedDate) => {
         tasksList.appendChild(listItem);
     });
 };
-
-
-
-
-
-const tasksList = document.getElementById("tasks-list");
-const maxTasks = 24;
-
-tasks.slice(0, maxTasks).forEach(task => {
-    const listItem = document.createElement("li");
-    listItem.textContent = `${task.time} - ${task.task}`; // Update this line
-    tasksList.appendChild(listItem);
-});
-
-
-document.getElementById("calendar-container").addEventListener("click", (event) => {
-    const target = event.target;
-
-    if (target.tagName.toLowerCase() === "td" && target.hasAttribute("data-date")) {
-        const selectedDate = target.getAttribute("data-date");
-        displayTasks(selectedDate);
-    }
-});
-

@@ -13,7 +13,9 @@ use SharePilotV2\Components\ResponseHandler;
     public function fetchTasks()
     {
         $u = new Scheduled_posts();
-        $videos = $u->select();;
+        //$videos = $u->select();
+        $videos = $u->customselect("SELECT a.title as task, DATE(b.post_time) AS date, TIME(b.post_time) AS time, b.is_posted as posted FROM urls a INNER JOIN scheduled_posts b ON a.id = b.url_id", []);
+
         ResponseHandler::respond($videos);
 //        foreach ($videos as $video) {
 //
