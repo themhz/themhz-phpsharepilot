@@ -25,16 +25,7 @@
         </ul>
     </div>
     <div class="w3-third w3-container">
-        <div class="w3-border w3-padding-large w3-padding-64 w3-center">
-            <div class="w3-container w3-card-4" >
-                <h2 class="w3-text-teal">Schedule Posts</h2>
-                    <input class="w3-input w3-border w3-margin-bottom" type="date" name="initial_schedule_post_date" id="initial_schedule_post_date" value="">
-                    <input class="w3-input w3-border w3-margin-bottom" type="time" name="initial_schedule_post_time" id="initial_schedule_post_time" value="">
-                <h3 class="w3-text-teal">Interval</h3>
-                    <input class="w3-input w3-border w3-margin-bottom"  type="text" name="hourInterval" id="hourInterval" value="">
-                    <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Schedule Posts</button>
-            </div>
-        </div>
+        <div class="w3-border w3-padding-large w3-padding-64 w3-center">AD</div>
         <div class="w3-border w3-padding-large w3-padding-32 w3-center">AD</div>
     </div>
 </div>
@@ -110,8 +101,7 @@
                                     <div class="w3-bar-item" id=${item.id}>
                                       <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                       <span>${item.regdate}</span>
-                                      <!-- New elements: datetime text box and delete button -->
-                                        <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()" value="${item.post_time}">
+                                        <br>
                                         <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                                         <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
                                     </div>

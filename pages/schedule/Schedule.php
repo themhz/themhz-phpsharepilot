@@ -1,18 +1,10 @@
 <!--Lists-->
 <div class="w3-row w3-padding-64">
     <div class="w3-container w3-teal">
-        <h1>Links in database</h1>
+        <h1>Scheduled Links</h1>
     </div>
     <br>
     <div class="w3-container">
-        <div class="w3-container w3-card-4" action="/action_page.php">
-            <h2 class="w3-text-teal">Add Url Form</h2>
-            <p>Add a new url using this form</p>
-            <p>
-                <label for="txtUrl" class="w3-text-teal"><b>Url</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtUrl" id="txtUrl">
-                <input class="w3-btn w3-teal" value="Check" type="button" id="checkUrl" name="checkUrl">
-        </div>
 
     </div>
 </div>
@@ -121,6 +113,7 @@
                                       <span>${item.regdate}</span>
                                       <!-- New elements: datetime text box and delete button -->
                                         <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()" value="${item.post_time}">
+
                                         <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                                         <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
                                     </div>

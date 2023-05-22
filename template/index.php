@@ -33,12 +33,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
         <a href="#" class="w3-bar-item w3-button w3-theme-l1">Logo</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Values</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">News</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Contact</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Clients</a>
-        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hide-medium w3-hover-white">Partners</a>
+<!--        <a href="#" class="w3-bar-item w3-button w3-hide-small w3-hover-white">About</a>       -->
         <a href="login?method=logout&format=raw" class="w3-bar-item w3-button w3-right w3-hover-white">Exit</a>
         <span class="w3-bar-item w3-right w3-padding">Καλώς Όρισες <?php echo $_SESSION["user"][0]->name. " " . $_SESSION["user"][0]->lastname; ?></span>
   </div>
@@ -50,19 +45,25 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-  <a class="w3-bar-item w3-button w3-hover-black" href="database">Links in database</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="database" >Links in database</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="schedule">Scheduled Links</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
-  <a class="w3-bar-item w3-button w3-hover-black" href="#">Link</a>
 </nav>
-
-<?php } ?>
 
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
 
 <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
 <div class="w3-main" style="margin-left:250px">
+<?php } else { ?>
+
+    <!-- Overlay effect when opening sidebar on small screens -->
+    <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+    <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
+    <div class="w3-main">
+    <?php }?>
+
+
 <?php
 include $page->load();
 ?>
@@ -92,6 +93,21 @@ include $page->load();
         mySidebar.style.display = "none";
         overlayBg.style.display = "none";
     }
+
+
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // Get all link elements
+        var navLinks = document.querySelectorAll('.w3-bar-item.w3-button');
+
+        // Loop over the link elements
+        navLinks.forEach((link) => {
+            // Check if the href of the link matches the current URL
+            if (window.location.href.indexOf(link.href) > -1) {
+                // If the link's href matches the current URL, add the active class to it
+                link.classList.add('w3-teal');
+            }
+        });
+    });
 </script>
 </body>
 </html>
