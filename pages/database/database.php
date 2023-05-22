@@ -95,7 +95,6 @@
                     li.className = "w3-bar w3-hover-teal";
                     li.style.cursor = "pointer";
                     li.id = item.id;
-
                     li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                                     <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
                                     <div class="w3-bar-item" id=${item.id}>

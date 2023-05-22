@@ -15,8 +15,8 @@ use SharePilotV2\Components\RequestHandler;
     public function getvideo()
     {
         $u = new Urls();
-        //$videos = $u->select([],["id"=>"desc"]);;
-        $videos = $u->customselect("SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted FROM urls u LEFT JOIN scheduled_posts sp ON u.id = sp.url_id order by id desc",[]);
+        $videos = $u->select([],["id"=>"desc"]);;
+        //$videos = $u->customselect("SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted FROM urls u LEFT JOIN scheduled_posts sp ON u.id = sp.url_id order by id desc",[]);
 
         ResponseHandler::respond($videos);
     }

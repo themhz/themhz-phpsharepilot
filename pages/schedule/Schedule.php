@@ -94,7 +94,7 @@
     }, false);
 
     function loadList(){
-        fetch('database/getvideo?format=raw')
+        fetch('schedule/getvideo?format=raw')
             .then(response => response.json())
             .then(data => {
                 const ul = document.querySelector(".w3-ul");
