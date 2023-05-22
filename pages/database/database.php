@@ -99,7 +99,33 @@
                 const ul = document.querySelector(".w3-ul");
                 ul.innerHTML = '';
                 ul.classList = "w3-ul w3-hoverable";
-                data.forEach(item => );
+                data.forEach(item => {
+                    const li = document.createElement('li');
+                    li.className = "w3-bar w3-hover-teal";
+                    li.style.cursor = "pointer";
+                    li.id = item.id;
+
+                    li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                                    <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
+                                    <div class="w3-bar-item" id=${item.id}>
+                                      <span class="w3-large">${item.title.substring(0, 80)}</span><br>
+                                      <span>${item.regdate}</span>
+                                      <!-- New elements: datetime text box and delete button -->
+                                        <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()" value="${item.post_time}">
+                                        <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
+                                        <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
+                                    </div>
+                                    `;
+                    li.addEventListener('click', function() {
+                        document.getElementById('editTitle').value = item.title;
+                        document.getElementById('editURL').value = item.url;
+                        document.getElementById('editThumbURL').value = item.thumbnailUrl;
+                        document.getElementById('myModal').style.display = 'block';
+                    });
+
+
+                    ul.appendChild(li);
+                });
             })
             .catch((error) => {
                 console.error('Error:', error);
