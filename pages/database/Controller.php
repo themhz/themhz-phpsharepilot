@@ -2,6 +2,7 @@
 use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\Config;
 use SharePilotV2\Models\Urls;
+use SharePilotV2\Models\Scheduled_posts;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
 
@@ -14,7 +15,9 @@ use SharePilotV2\Components\RequestHandler;
     public function getvideo()
     {
         $u = new Urls();
-        $videos = $u->select([],["id"=>"desc"]);;
+        //$videos = $u->select([],["id"=>"desc"]);;
+        $videos = $u->customselect("SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted FROM urls u LEFT JOIN scheduled_posts sp ON u.id = sp.url_id order by id desc",[]);
+
         ResponseHandler::respond($videos);
     }
 
@@ -23,6 +26,19 @@ use SharePilotV2\Components\RequestHandler;
 
         $data = $u->delete(["id="=>$_POST["id"]],false);;
         ResponseHandler::respond($data);
+    }
+
+    public function schedulepost(){
+        $u = new Urls();
+        $sp = new scheduled_posts();
+        $id = RequestHandler::get("id");
+        $result = $u->select(["id="=>$id],[]);
+
+        $sp->url_id = $result[0]->id;
+        //$sp->insert()
+        print_r($result);
+
+        //$sp->
     }
 
     public function autoscheduleposts(){

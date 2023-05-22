@@ -89,7 +89,9 @@ class Model
             return ["message" => "Failed to prepare the statement for the stored procedure."];
         }
 
-        $this->bindParams($stmt, $parameters);
+        foreach ($parameters as $key => $value) {
+            $stmt->bindValue($key + 1, $value);
+        }
 
         if (!$stmt->execute()) {
             return ["message" => "Failed to execute the stored procedure."];
@@ -98,18 +100,9 @@ class Model
         }
 
     }
-
-
-    public function bindParams($stmt, $parameters) {
-        foreach ($parameters as $key => $value) {
-            $stmt->bindValue($key + 1, $value);
-        }
-    }
-
     public function placeholders($count){
         return implode(',', array_fill(0, $count, '?'));
     }
-
     public function customselect($sql, $params = []): array
         {
 

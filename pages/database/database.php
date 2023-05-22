@@ -99,33 +99,7 @@
                 const ul = document.querySelector(".w3-ul");
                 ul.innerHTML = '';
                 ul.classList = "w3-ul w3-hoverable";
-                data.forEach(item => {
-                    const li = document.createElement('li');
-                    li.className = "w3-bar w3-hover-blue";
-                    li.style.cursor = "pointer";
-                    li.id = item.id;
-
-                    li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                                    <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
-                                    <div class="w3-bar-item" id=${item.id}>
-                                      <span class="w3-large">${item.title.substring(0, 80)}</span><br>
-                                      <span>${item.regdate}</span>
-                                      <!-- New elements: datetime text box and delete button -->
-                                      <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()">
-                                       <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()">
-                                      <button onclick="deleteItem(${item.id})" class="w3-button w3-red">Delete</button>
-                                    </div>
-                                    `;
-                    li.addEventListener('click', function() {
-                        document.getElementById('editTitle').value = item.title;
-                        document.getElementById('editURL').value = item.url;
-                        document.getElementById('editThumbURL').value = item.thumbnailUrl;
-                        document.getElementById('myModal').style.display = 'block';
-                    });
-
-
-                    ul.appendChild(li);
-                });
+                data.forEach(item => );
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -146,7 +120,7 @@
         alert(1);
     }
 
-    function deleteItem(id){
+    function deletePost(id){
         event.stopPropagation();
         const scheduled_id = id;
         $.ajax({
@@ -169,6 +143,30 @@
             },
         });
 
+    }
+
+    function schedulePost(id){
+        event.stopPropagation();
+        const scheduled_id = id;
+        $.ajax({
+            type: "POST",
+            url: "database/schedulepost?format=raw",
+            data: {
+                id: scheduled_id,
+            },
+            success: (response) => {
+                if(response.result == true){
+                    alert("deleted successfully");
+                }else{
+                    alert("problem with deletion");
+                }
+
+                loadList();
+            },
+            error: () => {
+                alert("An error occurred while scheduling the video.");
+            },
+        });
     }
 
 </script>
@@ -249,30 +247,42 @@
 
     }
 
-
     document.getElementById("scheduleButton").addEventListener("click", async () => {
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
         let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
         let hourInterval = document.getElementById(`hourInterval`).value;
-        try {
-            const response = await fetch("database/autoscheduleposts?format=raw", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
-            });
+        if (initial_schedule_post_date.trim().length > 0 &&
+            initial_schedule_post_time.trim().length > 0 &&
+            hourInterval.trim().length > 0) {
+            try {
 
-            const data = await response.json();
 
-            if (response.ok) {
-                alert(data.message);
-            } else {
-                alert(`Error: ${data.error}`);
+                const response = await fetch("database/autoscheduleposts?format=raw", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error}`);
             }
-        } catch (error) {
-            alert(`Error: ${error}`);
+        } else {
+            // Variables do not have a non-empty value
+            //console.log("One or more variables do not have a non-empty value.");
+            alert("please fill the date time and the interval");
         }
+
+
+
     });
 
 
