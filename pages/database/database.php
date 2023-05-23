@@ -134,17 +134,7 @@
     }
 
     function submitChanges() {
-        // Access the input values using:
-        // document.getElementById('editTitle').value
-        // document.getElementById('editURL').value
-        // document.getElementById('editThumbURL').value
-
-        // Update the item in your data and on the page
-
-        // Hide the modal
         document.getElementById('myModal').style.display = 'none';
-
-        alert(1);
     }
 
     function deletePost(id){
@@ -184,9 +174,9 @@
             },
             success: (response) => {
                 if(response.result == true){
-                    alert("inserted successfully");
+                    alert("link added to scheduler successfully");
                 }else{
-                    alert("problem with insertion");
+                    alert("problem with added link to scheduler");
                 }
 
                 loadList();
@@ -197,10 +187,7 @@
         });
     }
 
-</script>
 
-
-<script>
     let urlData = null;
     document.querySelector('#checkUrl').addEventListener('click', () => {
         const url = document.querySelector('#txtUrl').value;
@@ -232,11 +219,8 @@
     document.querySelector('#txtsearch').addEventListener('keydown', function(event) {
         // The keyCode for the Enter key is 13
         if (event.keyCode === 13) {
-            // Prevent the default action to stop it from submitting a form if it's inside one
             event.preventDefault();
             search();
-
-
         }
     });
 
