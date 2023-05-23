@@ -95,7 +95,7 @@
                     li.className = "w3-bar w3-hover-teal";
                     li.style.cursor = "pointer";
                     li.id = item.id;
-                    li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                    li.innerHTML = `<span onclick="deletePost(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                                     <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
                                     <div class="w3-bar-item" id=${item.id}>
                                       <span class="w3-large">${item.title.substring(0, 80)}</span><br>
@@ -137,27 +137,28 @@
 
     function deletePost(id){
         event.stopPropagation();
-        const scheduled_id = id;
-        $.ajax({
-            type: "POST",
-            url: "database/delete?format=raw",
-            data: {
-                id: scheduled_id,
-            },
-            success: (response) => {
-                if(response.result == true){
-                    alert("deleted successfully");
-                }else{
-                    alert("problem with deletion");
-                }
+        if(confirm("are you sure you want to delete this post?")){
+            const scheduled_id = id;
+            $.ajax({
+                type: "POST",
+                url: "database/delete?format=raw",
+                data: {
+                    id: scheduled_id,
+                },
+                success: (response) => {
+                    if(response.result == true){
+                        alert("deleted successfully");
+                    }else{
+                        alert("problem with deletion");
+                    }
 
-                loadList();
-            },
-            error: () => {
-                alert("An error occurred while scheduling the video.");
-            },
-        });
-
+                    loadList();
+                },
+                error: () => {
+                    alert("An error occurred while scheduling the video.");
+                },
+            });
+        }
     }
 
     function schedulePost(id){
