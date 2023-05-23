@@ -3,8 +3,7 @@
     <div class="w3-container w3-teal">
         <h1>Links in database</h1>
     </div>
-    <br>
-    <div class="w3-container">
+    <div class="w3-container  w3-margin-top">
         <div class="w3-container w3-card-4" >
             <h2 class="w3-text-teal">Search links</h2>
             <p>Search links from database</p>
@@ -12,8 +11,11 @@
                 <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
                 <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
                 <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
+            </p>
         </div>
     </div>
+
+
 </div>
 
 <div class="w3-row">
@@ -335,6 +337,12 @@
 
 
     });
+
+
+
+
+
+
 
 
 </script>

@@ -116,6 +116,8 @@ class Model
 
             return $results;
         }
+
+
     public function update($debug=false, $dontupdate = []): array
     {
         $db = Database::getInstance();
@@ -124,9 +126,13 @@ class Model
         $params = array();
         $first = true;
 
+
         foreach ($this as $key => $value) {
             if ($key != 'id' && $key != '__tablename' && $key != 'rules' && !in_array($key, $dontupdate)) {
-                $params += [$key => $value];
+                if ($value instanceof \DateTime) {
+                    $value = $value->format('Y-m-d\TH:i');
+                }
+                $params[$key] = $value;
 
                 if ($first == true) {
                     $sql .= "$key = :$key ";
@@ -143,10 +149,19 @@ class Model
 
         $params['id'] = $this->id;
         $sql .= "where id = :id ";
+
         if($debug == true){
             echo $sql;
             die();
         }
+
+        // Convert any DateTime objects in $params to strings
+        foreach ($params as $key => $value) {
+            if ($value instanceof DateTime) {
+                $params[$key] = $value->format('Y-m-d\TH:i');
+            }
+        }
+
         $sth = $db->prepare($sql);
         $sth->execute($params);
 
@@ -158,6 +173,8 @@ class Model
             return ['result' => true];
         }
     }
+
+
     public function insert($debug=false): int
     {
         $db = Database::getInstance();

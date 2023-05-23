@@ -12,8 +12,8 @@ class Scheduled_posts extends Model{
 
     public int $id;
     public int $url_id;
-    public DateTime $post_time;
-    public DateTime $posted_time;
+    public \DateTime $post_time;
+    public \DateTime $posted_time;
     public int $is_posted;
 
 

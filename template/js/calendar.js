@@ -1,15 +1,18 @@
 let tasks =[];
-// Fetch tasks from the API endpoint
-fetch("schedule/fetchtasks?format=raw")
-    .then(response => response.json())
-    .then(data => {
-        tasks = data;
-        //console.log(tasks);
-        generateCalendar(); // Ensure the calendar is generated after tasks are fetched
-    })
-    .catch(error => console.error("Error fetching tasks:", error));
 
 
+function loadCalendar(){
+    // Fetch tasks from the API endpoint
+    fetch("schedule/fetchtasks?format=raw")
+        .then(response => response.json())
+        .then(data => {
+            tasks = data;
+            //console.log(tasks);
+            generateCalendar(); // Ensure the calendar is generated after tasks are fetched
+        })
+        .catch(error => console.error("Error fetching tasks:", error));
+}
+//loadCalendar();
 // Generate calendar
 const generateCalendar = () => {
     const calendarContainer = document.getElementById("calendar-container");

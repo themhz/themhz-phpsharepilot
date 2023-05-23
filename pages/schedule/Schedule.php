@@ -6,6 +6,14 @@
     <br>
     <div class="w3-container">
 
+        <div class="w3-border w3-padding-large w3-padding-64 w3-center">
+            <div class="w3-container w3-card-4" >
+                <h2 class="w3-text-teal">Schedule Controls</h2>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="deleteautoscheduleposts">Delete all Schedule Posts</button>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="clearautoscheduleposts">Clear All Schedule Posts</button>
+            </div>
+        </div>
+
     </div>
 </div>
 
@@ -27,7 +35,7 @@
                 <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Schedule Posts</button>
             </div>
         </div>
-        <div class="w3-border w3-padding-large w3-padding-32 w3-center">
+        <div class="w3-container w3-margin w3-margin w3-right">
 
             <div id="calendar-container">
                 <!-- Calendar will be generated here -->
@@ -94,7 +102,7 @@
     }, false);
 
     function loadList(){
-        fetch('schedule/getvideo?format=raw')
+        fetch('schedule/getscheduledlinks?format=raw')
             .then(response => response.json())
             .then(data => {
                 const ul = document.querySelector(".w3-ul");
@@ -106,16 +114,16 @@
                     li.style.cursor = "pointer";
                     li.id = item.id;
 
-                    li.innerHTML = `<span onclick="deleteItem(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                    li.innerHTML = `<span onclick="deletePost(${item.scheduled_id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                                     <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
-                                    <div class="w3-bar-item" id=${item.id}>
+                                    <div class="w3-bar-item" id=${item.scheduled_id}>
                                       <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                       <span>${item.regdate}</span>
                                       <!-- New elements: datetime text box and delete button -->
-                                        <input type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()" value="${item.post_time}">
+                                        <input id="post_time_${item.scheduled_id}" type="datetime-local" placeholder="Select date and time" class="w3-input w3-border" onclick="event.stopPropagation()" value="${item.post_time}">
 
-                                        <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
-                                        <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
+                                        <button onclick="deletePost(${item.scheduled_id})" class="w3-button w3-red w3-margin-top">Delete</button>
+                                        <button onclick="updateSchedulePost(${item.scheduled_id})" class="w3-button w3-blue w3-margin-top">Update Schedule</button>
                                     </div>
                                     `;
                     li.addEventListener('click', function() {
@@ -132,6 +140,8 @@
             .catch((error) => {
                 console.error('Error:', error);
             });
+
+        loadCalendar();
     }
 
     function submitChanges() {
@@ -150,43 +160,48 @@
 
     function deletePost(id){
         event.stopPropagation();
-        const scheduled_id = id;
-        $.ajax({
-            type: "POST",
-            url: "database/delete?format=raw",
-            data: {
-                id: scheduled_id,
-            },
-            success: (response) => {
-                if(response.result == true){
-                    alert("deleted successfully");
-                }else{
-                    alert("problem with deletion");
-                }
 
-                loadList();
-            },
-            error: () => {
-                alert("An error occurred while scheduling the video.");
-            },
-        });
+        if(confirm("are you sure you want to delete this item?")){
+            const scheduled_id = id;
+            $.ajax({
+                type: "POST",
+                url: "schedule/delete?format=raw",
+                data: {
+                    id: scheduled_id,
+                },
+                success: (response) => {
+                    if(response.result == true){
+                        alert("deleted successfully");
+                    }else{
+                        alert("problem with deletion");
+                    }
+
+                    loadList();
+                },
+                error: () => {
+                    alert("An error occurred while scheduling the video.");
+                },
+            });
+        }
+
 
     }
 
-    function schedulePost(id){
+    function updateSchedulePost(id){
         event.stopPropagation();
-        const scheduled_id = id;
+        var post_time = document.getElementById('post_time_'+id).value;
         $.ajax({
             type: "POST",
-            url: "database/schedulepost?format=raw",
+            url: "schedule/updateschedulepost?format=raw",
             data: {
-                id: scheduled_id,
+                id: id,
+                post_time: post_time,
             },
             success: (response) => {
                 if(response.result == true){
-                    alert("deleted successfully");
+                    alert("updated successfully");
                 }else{
-                    alert("problem with deletion");
+                    alert("problem with update");
                 }
 
                 loadList();
@@ -201,33 +216,6 @@
 
 
 <script>
-    let urlData = null;
-    document.querySelector('#checkUrl').addEventListener('click', () => {
-        const url = document.querySelector('#txtUrl').value;
-
-        if(!validateUrl(url)) {
-            alert("Invalid URL");
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append('url', url);
-
-        fetch('database/fetchurl?format=raw', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector('#modalTitle').innerText = data.title;
-                document.querySelector('#modalDescription').innerText = data.description;
-                document.querySelector('#modalImage').src = data.image;
-                document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
-                document.querySelector('#modal').style.display = "block";
-                data.url =  url;
-                urlData = data;
-            });
-    });
 
     function closeModal() {
         document.querySelector('#modal').style.display = "none";
@@ -244,36 +232,7 @@
         return url.protocol === "http:" || url.protocol === "https:";
     }
 
-    function saveLink(){
 
-        fetch("database/addurl?format=raw", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(urlData),
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("HTTP error " + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.message) {
-                    alert(data.message);
-                    loadList();
-                    closeModal();
-                } else {
-                    console.error("Unexpected response data:", data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
-
-    }
 
     document.getElementById("scheduleButton").addEventListener("click", async () => {
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
@@ -285,7 +244,7 @@
             try {
 
 
-                const response = await fetch("database/autoscheduleposts?format=raw", {
+                const response = await fetch("schedule/autoscheduleposts?format=raw", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -296,6 +255,7 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    loadList();
                     alert(data.message);
                 } else {
                     alert(`Error: ${data.error}`);
@@ -312,6 +272,64 @@
 
 
     });
+
+
+    document.getElementById("deleteautoscheduleposts").addEventListener("click", async () => {
+        if(confirm("Are you sure you want to clear all schedules?")){
+            try {
+                const response = await fetch("schedule/deleteautoscheduleposts?format=raw", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    loadList();
+                    alert(data.message);
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error}`);
+            }
+        }
+
+    });
+
+
+    document.getElementById("clearautoscheduleposts").addEventListener("click", async () => {
+        if(confirm("Are you sure you want to clear all schedules?")){
+            try {
+                const response = await fetch("schedule/clearautoscheduleposts?format=raw", {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    loadList();
+                    alert(data.message);
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error}`);
+            }
+        }
+
+    });
+
+
+
+
+
+
 
 
 </script>

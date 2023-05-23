@@ -51,14 +51,7 @@ use SharePilotV2\Components\RequestHandler;
         }
     }
 
-    public function autoscheduleposts(){
-        $u = new urls();
-        $start_datetime = RequestHandler::get("start_datetime");
-        $hourInterval = RequestHandler::get("hourInterval");
 
-
-        ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval));
-    }
 
     public function fetchurl() {
 
@@ -172,6 +165,8 @@ use SharePilotV2\Components\RequestHandler;
         ResponseHandler::respond(["message"=>"Url Was inserted with id:{$id}"]);
 
     }
+
+
  }
 
 
