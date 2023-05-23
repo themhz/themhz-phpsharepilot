@@ -96,7 +96,7 @@ class Model
         if (!$stmt->execute()) {
             return ["message" => "Failed to execute the stored procedure."];
         }else{
-            return ["message" => "Posts scheduled successfully."];
+            return ["message" => "Procedure executed successfully."];
         }
 
     }

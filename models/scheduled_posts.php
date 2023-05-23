@@ -16,18 +16,19 @@ class Scheduled_posts extends Model{
     public \DateTime $posted_time;
     public int $is_posted;
 
+    public function autoscheduleposts(...$parameters){
 
-//    public function select($id = null)
-//    {
-//
-//        $db = Database::getInstance();
-//        $sql = "SELECT a.title as task, DATE(b.post_time) AS date, TIME(b.post_time) AS time, b.is_posted as posted FROM urls a INNER JOIN scheduled_posts b ON a.id = b.url_id";
-//        if(!empty($id)){
-//             $sql .= " and id=". $id;
-//        }
-//        $sth = $db->prepare($sql);
-//        $sth->execute();
-//
-//        return $sth->fetchAll(\PDO::FETCH_OBJ);
-//    }
+        if (!empty($parameters)) {
+
+            return parent::callStoredProcedure("CALL schedule_posts(" . $this->placeholders(count($parameters)) . ")", $parameters);
+        }
+    }
+
+    public function restateschedule(...$parameters){
+
+        if (!empty($parameters)) {
+
+            return parent::callStoredProcedure("CALL restateschedule_posts(" . $this->placeholders(count($parameters)) . ")", $parameters);
+        }
+    }
 }

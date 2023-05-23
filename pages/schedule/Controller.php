@@ -63,7 +63,7 @@ use SharePilotV2\Components\RequestHandler;
     }
 
      public function autoscheduleposts(){
-         $u = new urls();
+         $u = new Scheduled_posts();
          $start_datetime = RequestHandler::get("start_datetime");
          $hourInterval = RequestHandler::get("hourInterval");
 
@@ -78,6 +78,13 @@ use SharePilotV2\Components\RequestHandler;
      public function clearautoscheduleposts(){
          $u = new Scheduled_posts();
          ResponseHandler::respond($u->customselect("UPDATE scheduled_posts SET post_time = NULL;"));
+     }
+     public function restateschedule(){
+         $u = new Scheduled_posts();
+         $start_datetime = RequestHandler::get("start_datetime");
+         $hourInterval = RequestHandler::get("hourInterval");
+
+         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval));
      }
  }
 

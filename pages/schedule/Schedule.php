@@ -32,7 +32,8 @@
                 <input class="w3-input w3-border w3-margin-bottom" type="time" name="initial_schedule_post_time" id="initial_schedule_post_time" value="">
                 <h3 class="w3-text-teal">Interval</h3>
                 <input class="w3-input w3-border w3-margin-bottom"  type="text" name="hourInterval" id="hourInterval" value="">
-                <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Schedule Posts</button>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Pull schedule posts</button>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="restatescheduleButton">Reset dates for schedule posts</button>
             </div>
         </div>
         <div class="w3-container w3-margin w3-margin w3-right">
@@ -324,6 +325,45 @@
         }
 
     });
+
+    document.getElementById("restatescheduleButton").addEventListener("click", async () => {
+
+        let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
+        let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
+        let hourInterval = document.getElementById(`hourInterval`).value;
+        if (initial_schedule_post_date.trim().length > 0 &&
+            initial_schedule_post_time.trim().length > 0 &&
+            hourInterval.trim().length > 0) {
+            try {
+
+
+                const response = await fetch("schedule/restateschedule?format=raw", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    loadList();
+                    alert(data.message);
+                } else {
+                    alert(`Error: ${data.error}`);
+                }
+            } catch (error) {
+                alert(`Error: ${error}`);
+            }
+        } else {
+            // Variables do not have a non-empty value
+            //console.log("One or more variables do not have a non-empty value.");
+            alert("please fill the date time and the interval");
+        }
+
+    });
+
 
 
 

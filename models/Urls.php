@@ -18,12 +18,6 @@ class Urls extends Model
     public int $type;
     public string $thumbnailUrl;
 
-    public function autoscheduleposts(...$parameters){
 
-            if (!empty($parameters)) {
-
-                return parent::callStoredProcedure("CALL schedule_posts(" . $this->placeholders(count($parameters)) . ")", $parameters);
-            }
-    }
 
 }
