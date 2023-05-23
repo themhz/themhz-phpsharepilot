@@ -5,15 +5,14 @@
     </div>
     <br>
     <div class="w3-container">
-        <div class="w3-container w3-card-4" action="/action_page.php">
-            <h2 class="w3-text-teal">Add Url Form</h2>
-            <p>Add a new url using this form</p>
+        <div class="w3-container w3-card-4" >
+            <h2 class="w3-text-teal">Search links</h2>
+            <p>Search links from database</p>
             <p>
-                <label for="txtUrl" class="w3-text-teal"><b>Url</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtUrl" id="txtUrl">
-                <input class="w3-btn w3-teal" value="Check" type="button" id="checkUrl" name="checkUrl">
+                <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
+                <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
         </div>
-
     </div>
 </div>
 
@@ -25,8 +24,17 @@
         </ul>
     </div>
     <div class="w3-third w3-container">
-        <div class="w3-border w3-padding-large w3-padding-64 w3-center">AD</div>
-        <div class="w3-border w3-padding-large w3-padding-32 w3-center">AD</div>
+        <div class="w3-border w3-padding-large w3-padding-64 w3-center">
+            <div class="w3-container w3-card-4" action="/action_page.php">
+                <h2 class="w3-text-teal">Add Url Form</h2>
+                <p>Add a new url using this form</p>
+                <p>
+                    <label for="txtUrl" class="w3-text-teal"><b>Url</b></label>
+                    <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtUrl" id="txtUrl">
+                    <input class="w3-btn w3-teal" value="Check" type="button" id="checkUrl" name="checkUrl">
+            </div>
+        </div>
+<!--        <div class="w3-border w3-padding-large w3-padding-32 w3-center">AD</div>-->
     </div>
 </div>
 <!--Lists-->
@@ -87,15 +95,23 @@
         fetch('database/getvideo?format=raw')
             .then(response => response.json())
             .then(data => {
-                const ul = document.querySelector(".w3-ul");
-                ul.innerHTML = '';
-                ul.classList = "w3-ul w3-hoverable";
-                data.forEach(item => {
-                    const li = document.createElement('li');
-                    li.className = "w3-bar w3-hover-teal";
-                    li.style.cursor = "pointer";
-                    li.id = item.id;
-                    li.innerHTML = `<span onclick="deletePost(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+                createlist(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    function createlist(data){
+        const ul = document.querySelector(".w3-ul");
+        ul.innerHTML = '';
+        ul.classList = "w3-ul w3-hoverable";
+        data.forEach(item => {
+            const li = document.createElement('li');
+            li.className = "w3-bar w3-hover-teal";
+            li.style.cursor = "pointer";
+            li.id = item.id;
+            li.innerHTML = `<span onclick="deletePost(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                                     <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
                                     <div class="w3-bar-item" id=${item.id}>
                                       <span class="w3-large">${item.title.substring(0, 80)}</span><br>
@@ -105,20 +121,16 @@
                                         <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
                                     </div>
                                     `;
-                    li.addEventListener('click', function() {
-                        document.getElementById('editTitle').value = item.title;
-                        document.getElementById('editURL').value = item.url;
-                        document.getElementById('editThumbURL').value = item.thumbnailUrl;
-                        document.getElementById('myModal').style.display = 'block';
-                    });
-
-
-                    ul.appendChild(li);
-                });
-            })
-            .catch((error) => {
-                console.error('Error:', error);
+            li.addEventListener('click', function() {
+                document.getElementById('editTitle').value = item.title;
+                document.getElementById('editURL').value = item.url;
+                document.getElementById('editThumbURL').value = item.thumbnailUrl;
+                document.getElementById('myModal').style.display = 'block';
             });
+
+
+            ul.appendChild(li);
+        });
     }
 
     function submitChanges() {
@@ -216,6 +228,45 @@
                 urlData = data;
             });
     });
+
+    document.querySelector('#txtsearch').addEventListener('keydown', function(event) {
+        // The keyCode for the Enter key is 13
+        if (event.keyCode === 13) {
+            // Prevent the default action to stop it from submitting a form if it's inside one
+            event.preventDefault();
+            search();
+
+
+        }
+    });
+
+
+    document.querySelector('#btnsearch').addEventListener('click', () => {
+        search();
+    });
+
+    function search(){
+        const search = document.querySelector('#txtsearch').value;
+
+        if(search.trim()=="") {
+            loadList();
+            return;
+        }
+
+
+        fetch('database/search?format=raw', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ search: search})
+        })
+            .then(response => response.json())
+            .then(data => {
+                createlist(data);
+            });
+    }
+
 
     function closeModal() {
         document.querySelector('#modal').style.display = "none";

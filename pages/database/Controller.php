@@ -12,6 +12,13 @@ use SharePilotV2\Components\RequestHandler;
 
     }
 
+    public function search(){
+        $u = new Urls();
+        $search = RequestHandler::get("search");
+        $result = $u->select(["title like "=>"%".$search."%"],[]);
+        ResponseHandler::respond($result);
+    }
+
     public function getvideo()
     {
         $u = new Urls();
