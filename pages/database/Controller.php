@@ -35,10 +35,13 @@ use SharePilotV2\Components\RequestHandler;
         $result = $u->select(["id="=>$id],[]);
 
         $sp->url_id = $result[0]->id;
-        //$sp->insert()
-        print_r($result);
+        $result = $sp->insert();
 
-        //$sp->
+        if ($result > 0) {
+            ResponseHandler::respond(["result"=>true, "message"=>"Insertion was successful!"]);;
+        } else {
+            ResponseHandler::respond(["result"=>false, "message"=>"Insertion failed!!"]);;
+        }
     }
 
     public function autoscheduleposts(){
@@ -65,7 +68,7 @@ use SharePilotV2\Components\RequestHandler;
                 $doc = new DOMDocument();
 
                 // Use error suppression to ignore warnings generated from improperly formed HTML
-                @$doc->loadHTML($html);
+                @$doc->loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'.$html);
 
                 // Get the title
                 $page_info['title'] = $doc->getElementsByTagName('title')->item(0)->nodeValue;
@@ -101,7 +104,6 @@ use SharePilotV2\Components\RequestHandler;
 
                 // Close cURL resource, and free up system resources
                 $html = curl_exec($ch);
-
                 // Create a DOM parser
                 $doc = new DOMDocument();
                 @$doc->loadHTML('<meta http-equiv="Content-Type" content="text/html; charset=utf-8">'.$html);

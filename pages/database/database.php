@@ -171,9 +171,9 @@
             },
             success: (response) => {
                 if(response.result == true){
-                    alert("deleted successfully");
+                    alert("inserted successfully");
                 }else{
-                    alert("problem with deletion");
+                    alert("problem with insertion");
                 }
 
                 loadList();

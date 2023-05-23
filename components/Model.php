@@ -351,9 +351,8 @@ class Model
         } else {
             return ['result' => true];
         }
-
-
     }
+
     public function validate() : array{
 
         $errors = [];
