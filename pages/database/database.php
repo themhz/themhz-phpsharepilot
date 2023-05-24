@@ -19,12 +19,22 @@
 </div>
 
 <div class="w3-row">
-    <div class="w3-twothird w3-container">
-        <h1 class="w3-text-teal">Links</h1>
-        <ul class="w3-ul w3-card-4">
 
-        </ul>
+    <div class="w3-twothird" style="padding: 0;">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
+            <h1 class="w3-text-teal">Links</h1>
+            <button id="sortButton" onclick="sortList()" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
+        </div>
+        <div class="w3-container">
+            <ul class="w3-ul w3-card-4" id="linklist">
+                <!-- List items will be appended here -->
+            </ul>
+        </div>
     </div>
+
+
+
+
     <div class="w3-third w3-container">
         <div class="w3-border w3-padding-large w3-padding-64 w3-center">
             <div class="w3-container w3-card-4" action="/action_page.php">
@@ -99,9 +109,6 @@
             .then(data => {
                 createlist(data);
             })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
     }
 
     function createlist(data){
@@ -114,14 +121,13 @@
             li.style.cursor = "pointer";
             li.id = item.id;
             li.innerHTML = `<span onclick="deletePost(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
-                                    <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
-                                    <div class="w3-bar-item" id=${item.id}>
-                                      <span class="w3-large">${item.title.substring(0, 80)}</span><br>
-                                      <span>${item.regdate}</span>
-                                        <br>
-                                        <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
-                                        <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
-                                    </div>
+                            <img src="${item.thumbnailUrl}" class="w3-bar-item w3-hide-small" style="width:150px">
+                            <div class="w3-bar-item" id=${item.id}>
+                                <span class="w3-large">${item.title.substring(0, 80)}</span><br>
+                                <span>${item.regdate}</span><br>
+                                <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
+                                <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
+                            </div>
                                     `;
             li.addEventListener('click', function() {
                 document.getElementById('editTitle').value = item.title;
@@ -133,6 +139,8 @@
 
             ul.appendChild(li);
         });
+
+
     }
 
     function submitChanges() {
@@ -231,6 +239,7 @@
         search();
     });
 
+
     function search(){
         const search = document.querySelector('#txtsearch').value;
 
@@ -278,69 +287,73 @@
             },
             body: JSON.stringify(urlData),
         })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("HTTP error " + response.status);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data && data.message) {
-                    alert(data.message);
-                    loadList();
-                    closeModal();
-                } else {
-                    console.error("Unexpected response data:", data);
-                }
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
-
-
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("HTTP error " + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.message) {
+                alert(data.message);
+                loadList();
+                closeModal();
+            } else {
+                console.error("Unexpected response data:", data);
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
     }
 
-    document.getElementById("scheduleButton").addEventListener("click", async () => {
-        let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
-        let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
-        let hourInterval = document.getElementById(`hourInterval`).value;
-        if (initial_schedule_post_date.trim().length > 0 &&
-            initial_schedule_post_time.trim().length > 0 &&
-            hourInterval.trim().length > 0) {
-            try {
 
 
-                const response = await fetch("database/autoscheduleposts?format=raw", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
-                });
 
-                const data = await response.json();
 
-                if (response.ok) {
-                    alert(data.message);
+
+
+
+
+    // Define your sort state outside the sort function
+    let isAscending = true;
+
+    function sortList() {
+        var list, i, switching, b, shouldSwitch;
+        list = document.getElementById("linklist");
+        switching = true;
+        while (switching) {
+            switching = false;
+            b = list.getElementsByClassName("w3-bar");
+            for (i = 0; i < (b.length - 1); i++) {
+                shouldSwitch = false;
+                if (isAscending) {
+                    if (b[i].innerText.toLowerCase() > b[i + 1].innerText.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 } else {
-                    alert(`Error: ${data.error}`);
+                    if (b[i].innerText.toLowerCase() < b[i + 1].innerText.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
-            } catch (error) {
-                alert(`Error: ${error}`);
             }
-        } else {
-            // Variables do not have a non-empty value
-            //console.log("One or more variables do not have a non-empty value.");
-            alert("please fill the date time and the interval");
+            if (shouldSwitch) {
+                b[i].parentNode.insertBefore(b[i + 1], b[i]);
+                switching = true;
+            }
         }
-
-
-
-    });
-
-
-
-
+        // Toggle the sort state after sorting
+        isAscending = !isAscending;
+        // Change the sort icon after sorting
+        let sortButton = document.getElementById("sortButton");
+        if (isAscending) {
+            sortButton.innerHTML = '<i class="fas fa-sort-up"></i> Sort';
+        } else {
+            sortButton.innerHTML = '<i class="fas fa-sort-down"></i> Sort';
+        }
+    }
 
 
 
