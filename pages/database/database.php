@@ -3,7 +3,24 @@
     <div class="w3-container w3-teal">
         <h1>Links in database</h1>
     </div>
-    <div class="w3-container  w3-margin-top">
+    <div class="w3-container">
+        <h2>W3.CSS Dropdown</h2>
+        <p>Hover over the "Select Campaign" button to open the dropdown menu. Click on "New Campaign" to do something.</p>
+
+        <div class="w3-bar w3-teal">
+            <div class="w3-dropdown-hover">
+                <button class="w3-button">Select Campaign</button>
+                <div class="w3-dropdown-content w3-bar-block w3-border w3-teal">
+                    <a href="#" class="w3-bar-item w3-button">Campaign 1</a>
+                    <a href="#" class="w3-bar-item w3-button">Campaign 2</a>
+                    <a href="#" class="w3-bar-item w3-button">Campaign 3</a>
+                </div>
+            </div>
+            <button class="w3-button" onclick="document.getElementById('newCampaignModal').style.display='block'">New Campaign</button>
+
+        </div>
+    </div>
+    <div class="w3-container w3-margin-top">
         <div class="w3-container w3-card-4" >
             <h2 class="w3-text-teal">Search links</h2>
             <p>Search links from database</p>
@@ -13,10 +30,10 @@
                 <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
             </p>
         </div>
+
     </div>
-
-
 </div>
+
 
 <div class="w3-row">
 
@@ -95,6 +112,26 @@
 
 <!--new url popup-->
 
+<!--new campain window-->
+<div id="newCampaignModal" class="w3-modal">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-teal">
+        <span onclick="document.getElementById('newCampaignModal').style.display='none'"
+              class="w3-button w3-display-topright">&times;</span>
+            <h2>New Campaign</h2>
+        </header>
+        <div class="w3-container w3-margin-bottom w3-margin-top">
+            <label for="campaignName">Campaign Name:</label>
+            <input type="text" id="campaignName" name="campaignName" class="w3-input w3-border">
+        </div>
+        <footer class="w3-container w3-teal w3-padding">
+            <button class="w3-button w3-red" onclick="document.getElementById('newCampaignModal').style.display='none'">Cancel</button>
+            <button class="w3-button w3-green">Create Campaign</button>
+        </footer>
+    </div>
+</div>
+<!--new campain window-->
+
 <script>
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
@@ -126,7 +163,7 @@
                                 <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                 <span>${item.regdate}</span><br>
                                 <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
-                                <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Schedule</button>
+                                <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Add to Schedule</button>
                             </div>
                                     `;
             li.addEventListener('click', function() {
@@ -354,8 +391,5 @@
             sortButton.innerHTML = '<i class="fas fa-sort-down"></i> Sort';
         }
     }
-
-
-
 
 </script>
