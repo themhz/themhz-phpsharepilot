@@ -50,6 +50,7 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   <h4 class="w3-bar-item"><b>Menu</b></h4>
   <a class="w3-bar-item w3-button w3-hover-black" href="database" >Links in database</a>
   <a class="w3-bar-item w3-button w3-hover-black" href="schedule">Scheduled Links</a>
+  <a class="w3-bar-item w3-button w3-hover-black" href="channels">Channels</a>
 </nav>
 
 <!-- Overlay effect when opening sidebar on small screens -->

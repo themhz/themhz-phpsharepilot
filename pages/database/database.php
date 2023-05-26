@@ -4,19 +4,15 @@
         <h1>Links in database</h1>
     </div>
     <div class="w3-container">
-        <h2>W3.CSS Dropdown</h2>
-        <p>Hover over the "Select Campaign" button to open the dropdown menu. Click on "New Campaign" to do something.</p>
+        <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
 
         <div class="w3-bar w3-teal">
             <div class="w3-dropdown-hover">
-                <button class="w3-button">Select Campaign</button>
-                <div class="w3-dropdown-content w3-bar-block w3-border w3-teal">
-                    <a href="#" class="w3-bar-item w3-button">Campaign 1</a>
-                    <a href="#" class="w3-bar-item w3-button">Campaign 2</a>
-                    <a href="#" class="w3-bar-item w3-button">Campaign 3</a>
+                <button class="w3-button">Select Channel</button>
+                <div class="w3-dropdown-content w3-bar-block w3-border w3-teal" id="channels">
                 </div>
             </div>
-            <button class="w3-button" onclick="document.getElementById('newCampaignModal').style.display='block'">New Campaign</button>
+            <button class="w3-button" onclick="document.getElementById('newChannelModal').style.display='block'">New Channel</button>
 
         </div>
     </div>
@@ -112,31 +108,33 @@
 
 <!--new url popup-->
 
-<!--new campain window-->
-<div id="newCampaignModal" class="w3-modal">
+<!--new Channel window-->
+<div id="newChannelModal" class="w3-modal">
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
-        <span onclick="document.getElementById('newCampaignModal').style.display='none'"
+        <span onclick="document.getElementById('newChannelModal').style.display='none'"
               class="w3-button w3-display-topright">&times;</span>
-            <h2>New Campaign</h2>
+            <h2>New Channel</h2>
         </header>
-        <div class="w3-container w3-margin-bottom w3-margin-top">
-            <label for="campaignName">Campaign Name:</label>
-            <input type="text" id="campaignName" name="campaignName" class="w3-input w3-border">
+        <div class="w3-container w3-margin">
+            <label for="channelName">Channel Name:</label>
+            <input type="text" id="channelName" name="channelName" class="w3-input w3-border">
+            <p id="error-message" style="color: red; display: none;">Please enter a channel name!</p>
         </div>
         <footer class="w3-container w3-teal w3-padding">
-            <button class="w3-button w3-red" onclick="document.getElementById('newCampaignModal').style.display='none'">Cancel</button>
-            <button class="w3-button w3-green">Create Campaign</button>
+            <button class="w3-button w3-red" onclick="document.getElementById('newChannelModal').style.display='none'">Cancel</button>
+            <button class="w3-button w3-green" id="create-channel">Create Channel</button>
         </footer>
     </div>
 </div>
-<!--new campain window-->
+<!--new channel window-->
 
 <script>
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
             loadList();
+            loadChannels();
         }
     }, false);
 
@@ -145,6 +143,14 @@
             .then(response => response.json())
             .then(data => {
                 createlist(data);
+            })
+    }
+
+    function loadChannels(){
+        fetch('database/loadchannels?format=raw')
+            .then(response => response.json())
+            .then(data => {
+                createChannellist(data);
             })
     }
 
@@ -178,6 +184,16 @@
         });
 
 
+    }
+
+    function createChannellist(data){
+        document.getElementById("channels").innerHTML ="";
+        data.forEach(item => {
+            document.getElementById("channels").innerHTML += `<a href="#" class="w3-bar-item w3-button" c-value="${item.id}">${item.name}</a>`;
+        });
+
+
+        console.log(data);
     }
 
     function submitChanges() {
@@ -344,14 +360,6 @@
         });
     }
 
-
-
-
-
-
-
-
-
     // Define your sort state outside the sort function
     let isAscending = true;
 
@@ -391,5 +399,38 @@
             sortButton.innerHTML = '<i class="fas fa-sort-down"></i> Sort';
         }
     }
+
+
+
+    document.getElementById('create-channel').addEventListener('click', function(){
+        document.getElementById('channelName').value = document.getElementById('channelName').value.trim();
+        var channelName = document.getElementById('channelName').value;
+        if(channelName === ""){
+            document.getElementById('error-message').style.display = 'block';
+        } else {
+            document.getElementById('error-message').style.display = 'none';
+
+            fetch('database/addchannel?format=raw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    channelName: channelName
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //console.log(data);
+                    alert(data.message);
+                    // Hide modal after successful operation
+                    document.getElementById('newChannelModal').style.display='none';
+                    loadChannels();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        }
+    });
 
 </script>

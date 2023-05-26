@@ -26,14 +26,14 @@ class Website{
 
         $raw = isset($_REQUEST['format']) ? $_REQUEST['format'] : '';
 
-        $controller = new MasterController();
-
-        $controller->start();
 
         if($raw != 'raw'){
             $page =  new Pages();
             //Load template
             include __DIR__ . '/../template/index.php';
+        }else{
+            $controller = new MasterController();
+            $controller->start();
         }
     }
 }

@@ -3,6 +3,7 @@ use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\Config;
 use SharePilotV2\Models\Urls;
 use SharePilotV2\Models\Scheduled_posts;
+use SharePilotV2\Models\Channels;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
 
@@ -23,9 +24,15 @@ use SharePilotV2\Components\RequestHandler;
     {
         $u = new Urls();
         $videos = $u->select([],["id"=>"desc"]);;
-        //$videos = $u->customselect("SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted FROM urls u LEFT JOIN scheduled_posts sp ON u.id = sp.url_id order by id desc",[]);
 
         ResponseHandler::respond($videos);
+    }
+
+    public function loadchannels(){
+        $c = new Channels();
+        $channels = $c->select([],["id"=>"desc"]);;
+
+        ResponseHandler::respond($channels);
     }
 
     public function delete(){
@@ -165,6 +172,24 @@ use SharePilotV2\Components\RequestHandler;
         ResponseHandler::respond(["message"=>"Url Was inserted with id:{$id}"]);
 
     }
+
+    public function addchannel(){
+        $channels = new Channels();
+        $channels->name = RequestHandler::get("channelName");
+
+        if(empty($channels->select(["name = "=>trim($channels->name)]))){
+            if($channels->insert()>0){
+                ResponseHandler::respond(["result"=>true, "message"=>"Channel has been successfully inserted"]);
+            }else{
+                ResponseHandler::respond(["result"=>false, "message"=>"there was an error trying to insert the channel"]);
+            }
+        }else{
+            ResponseHandler::respond(["result"=>false, "message"=>"channel name already exists"]);
+        }
+
+    }
+
+
 
 
  }
