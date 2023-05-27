@@ -23,6 +23,14 @@ use SharePilotV2\Components\RequestHandler;
          ResponseHandler::respond($data);
 
      }
+
+     public function put(){
+         $c = new Channels();
+         $c->id = RequestHandler::get("id");
+         $c->name = RequestHandler::get("name");
+         $data = $c->update();
+         ResponseHandler::respond($data);
+     }
  }
 
 

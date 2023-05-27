@@ -308,7 +308,7 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({ search: search})
-        })
+             })
             .then(response => response.json())
             .then(data => {
                 createlist(data);

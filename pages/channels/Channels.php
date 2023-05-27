@@ -36,21 +36,22 @@
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
             <span onclick="document.getElementById('myModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
-            <h2>New Channel A</h2>
+            <h2>Channel</h2>
         </header>
         <div class="w3-container">
-            <p>Channel Name: <input id="selectedChannelName" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <p>Channel Name: <input id="txtChannelName" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <input type="text" id="txtChannelId" name="txtChannelId" value="" style="display: none">
         </div>
         <footer class="w3-container w3-teal w3-padding">
-            <button onclick="submitChanges()" class="w3-button w3-white w3-border w3-round">Submit</button>
+            <button onclick="update()" class="w3-button w3-white w3-border w3-round">Update</button>
         </footer>
     </div>
 </div>
 
 <!--popup-->
 
-<!--new url popup-->
-<!-- check url Modal -->
+<!--new channel popup-->
+<!-- check channel Modal -->
 <div id="modal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
@@ -71,7 +72,7 @@
     </div>
 </div>
 
-<!--new url popup-->
+<!--new channel popup-->
 
 <!--new Channel window-->
 <div id="newChannelModal" class="w3-modal">
@@ -130,7 +131,8 @@
                             </div>
                                     `;
             li.addEventListener('click', function() {
-                document.getElementById('editTitle').value = item.name;
+                document.getElementById('txtChannelName').value = item.name;
+                document.getElementById('txtChannelId').value = item.id;
                 document.getElementById('myModal').style.display = 'block';
             });
 
@@ -142,7 +144,22 @@
     }
 
 
-    function submitChanges() {
+    function update() {
+        fetch('channels?format=raw', {
+            method: 'put',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                    id:document.getElementById("txtChannelId").value,
+                    name: document.getElementById("txtChannelName").value,
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loadChannels();
+                //createlist(data);
+            })
         document.getElementById('myModal').style.display = 'none';
     }
 

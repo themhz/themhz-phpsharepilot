@@ -17,6 +17,7 @@
  */
 namespace SharePilotV2\Components;
 
+
 class Website{
     public function start(){
         session_start();
@@ -24,7 +25,8 @@ class Website{
 
         date_default_timezone_set('UTC');
 
-        $raw = isset($_REQUEST['format']) ? $_REQUEST['format'] : '';
+
+        $raw = RequestHandler::get("format");
 
 
         if($raw != 'raw'){
