@@ -1,38 +1,13 @@
 <?php
 require_once '../config.php';
+require_once 'Facebook.php';
+require_once 'Instagram.php';
+require_once 'TikTok.php';
+require_once 'Twitch.php';
+require_once 'Twitter.php';
 
 interface ISocialMediaService{
     public function post();
-}
-
-class Facebook implements ISocialMediaService{
-    public function post(){
-        return "posting Facebook implementation";
-    }
-}
-
-class Instagram implements ISocialMediaService{
-    public function post(){
-        return "posting Instagram implementation";
-    }
-}
-
-class Twitter implements ISocialMediaService{
-    public function post(){
-        return "posting Twitter implementation";
-    }
-}
-
-class Twitch implements ISocialMediaService{
-    public function post(){
-        return "posting Twitch implementation";
-    }
-}
-
-class TikTok implements ISocialMediaService{
-    public function post(){
-        return "posting TikTok implementation";
-    }
 }
 
 class PostingService{
@@ -46,7 +21,6 @@ class PostingService{
         for($i=0;$i<count($this->sm);$i++){
             echo $this->sm[$i]->post()."\n\r";
         }
-
     }
 }
 
