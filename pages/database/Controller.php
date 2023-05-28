@@ -26,9 +26,14 @@ use SharePilotV2\Components\RequestHandler;
 
         $u = new Urls();
         if($channelid==null){
-            $videos = $u->select([],["id"=>"desc"]);;
+            //$videos = $u->select([],["id"=>"desc"]);
+            $videos = $u->customselect("select urls.*,channels.name as channel_name from urls left join channels on urls.channel_id = channels.id order by urls.id desc");
         }else{
-            $videos = $u->select(["channel_id = " => $channelid],["id"=>"desc"]);;
+            //$videos = $u->select(["channel_id = " => $channelid],["id"=>"desc"]);
+            $videos = $u->customselect("select urls.*,channels.name as channel_name from urls 
+                inner join channels on urls.channel_id = channels.id
+                where urls.channel_id = $channelid
+                order by urls.id desc");
         }
 
 

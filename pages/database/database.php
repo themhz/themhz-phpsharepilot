@@ -188,6 +188,7 @@
                             <div class="w3-bar-item" id=${item.id}>
                                 <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                 <span>${item.regdate}</span><br>
+                                <span style="color:blue">${item.channel_name == null ? "no channel" : item.channel_name }</span><br>
                                 <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                                 <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Add to Schedule</button>
                             </div>
