@@ -22,8 +22,15 @@ use SharePilotV2\Components\RequestHandler;
 
     public function getvideo()
     {
+        $channelid = RequestHandler::get("channelid");
+
         $u = new Urls();
-        $videos = $u->select([],["id"=>"desc"]);;
+        if($channelid==null){
+            $videos = $u->select([],["id"=>"desc"]);;
+        }else{
+            $videos = $u->select(["channel_id = " => $channelid],["id"=>"desc"]);;
+        }
+
 
         ResponseHandler::respond($videos);
     }
@@ -57,8 +64,6 @@ use SharePilotV2\Components\RequestHandler;
             ResponseHandler::respond(["result"=>false, "message"=>"Insertion failed!!"]);;
         }
     }
-
-
 
     public function fetchurl() {
 
@@ -158,7 +163,6 @@ use SharePilotV2\Components\RequestHandler;
 
     }
 
-
     public function addurl(){
         $u = new Urls();
 
@@ -187,6 +191,18 @@ use SharePilotV2\Components\RequestHandler;
             ResponseHandler::respond(["result"=>false, "message"=>"channel name already exists"]);
         }
 
+    }
+
+    public function update(){
+        $u = new Urls();
+        $u->id = RequestHandler::get("id");
+        $u->title = RequestHandler::get("title");
+        $u->url = RequestHandler::get("url");
+        $u->thumbnailUrl = RequestHandler::get("thumbnailUrl");
+        $u->channel_id = RequestHandler::get("channel_id");
+
+        $result = $u->update();
+        ResponseHandler::respond($result);
     }
 
 

@@ -7,9 +7,9 @@
         <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
 
         <div class="w3-bar w3-teal">
-            <div class="w3-dropdown-hover">
-                <button class="w3-button">Select Channel</button>
-                <div class="w3-dropdown-content w3-bar-block w3-border w3-teal" id="channels">
+            <div class="w3-dropdown-hover w3-teal">
+                <div class="w3-container w3-teal">
+                    <select class="w3-select w3-teal w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
                 </div>
             </div>
             <button class="w3-button" onclick="document.getElementById('newChannelModal').style.display='block'">New Channel</button>
@@ -72,12 +72,17 @@
             <h2>Edit Item</h2>
         </header>
         <div class="w3-container">
+            <input type="text" id="editId" style="display: none">
             <p>Title: <input id="editTitle" class="w3-input w3-border w3-margin-top" type="text"></p>
             <p>URL: <input id="editURL" class="w3-input w3-border w3-margin-top" type="text"></p>
             <p>Thumbnail URL: <input id="editThumbURL" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <p>
+                Channel:
+                <select class="w3-select w3-dropdown-hover w3-white w3-border" name="option" id="editmodal_channels"></select>
+            </p>
         </div>
         <footer class="w3-container w3-teal w3-padding">
-            <button onclick="submitChanges()" class="w3-button w3-white w3-border w3-round">Submit</button>
+            <button onclick="submitChanges()" class="w3-button w3-white w3-border w3-round">Update</button>
         </footer>
     </div>
 </div>
@@ -138,13 +143,24 @@
         }
     }, false);
 
-    function loadList(){
-        fetch('database/getvideo?format=raw')
-            .then(response => response.json())
-            .then(data => {
-                createlist(data);
-            })
+    function loadList(channelId = null) {
+        let url = 'database/getvideo?format=raw';
+        if (channelId !== null) {
+            url += '&channelid=' + encodeURIComponent(channelId);
+        }
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        }).then(response => response.json())
+        .then(data => {
+            createlist(data);
+        });
     }
+
+
 
     function loadChannels(){
         fetch('database/loadchannels?format=raw')
@@ -152,6 +168,10 @@
             .then(data => {
                 createChannellist(data);
             })
+    }
+
+    function filterChannels(){
+        loadList(document.getElementById("channels").value);
     }
 
     function createlist(data){
@@ -173,10 +193,13 @@
                             </div>
                                     `;
             li.addEventListener('click', function() {
+                document.getElementById('editId').value = item.id;
                 document.getElementById('editTitle').value = item.title;
                 document.getElementById('editURL').value = item.url;
                 document.getElementById('editThumbURL').value = item.thumbnailUrl;
                 document.getElementById('myModal').style.display = 'block';
+                document.getElementById('editmodal_channels').value = item.channel_id;
+
             });
 
 
@@ -187,17 +210,41 @@
     }
 
     function createChannellist(data){
-        document.getElementById("channels").innerHTML ="";
+        document.getElementById("channels").innerHTML =`<option value="">All</option>`;
+        document.getElementById("editmodal_channels").innerHTML ="";
+
         data.forEach(item => {
-            document.getElementById("channels").innerHTML += `<a href="#" class="w3-bar-item w3-button" c-value="${item.id}">${item.name}</a>`;
+            //document.getElementById("channels").innerHTML += `<a href="#" class="w3-bar-item w3-button" c-value="${item.id}">${item.name}</a>`;
+            document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+            //document.getElementById("editmodal_channels").innerHTML += `<a href="#" class="w3-bar-item w3-button" c-value="${item.id}">${item.name}</a>`;
+            document.getElementById("editmodal_channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+
+
+        });
+    }
+
+    function submitChanges(id) {
+
+        fetch('database/update?format=raw', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id : document.getElementById('editId').value,
+                title: document.getElementById('editTitle').value,
+                url: document.getElementById('editURL').value,
+                thumbnailUrl: document.getElementById('editThumbURL').value,
+                channel_id: document.getElementById('editmodal_channels').value,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('myModal').style.display = 'none';
+            filterChannels();
         });
 
 
-        console.log(data);
-    }
-
-    function submitChanges() {
-        document.getElementById('myModal').style.display = 'none';
     }
 
     function deletePost(id){

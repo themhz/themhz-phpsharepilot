@@ -11,6 +11,7 @@ class Urls extends Model
     }
 
     public int $id;
+    public int $channel_id;
     public string $url;
     public string $title;
     public datetime $datePosted;
