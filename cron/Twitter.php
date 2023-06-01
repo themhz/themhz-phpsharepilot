@@ -4,6 +4,13 @@ require 'CronConfig.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
 use SharePilotV2\CronConfig;
 
+//Important urls
+//https://twittercommunity.com/new
+//https://developer.twitter.com/en/portal/dashboard
+//https://developer.twitter.com/en/portal/projects/1663182518089134082/apps/27221400/keys
+//https://www.postman.com/twitter/workspace/twitter-s-public-workspace/collection/9956214-784efcda-ed4c-4491-a4c0-a26470a67400?ctx=documentation
+//https://www.postman.com/explore
+
 class Twitter implements ISocialMediaService{
     public function post(){
 
