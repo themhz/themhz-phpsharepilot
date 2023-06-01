@@ -45,10 +45,10 @@ class Twitter implements ISocialMediaService{
     }
     public function tweet() {
         // You will get these keys from Twitter's developer portal after creating your application
-        $consumer_key = 'cpBXk3DhyCANvdQtjpvxmLB3C';
-        $consumer_secret = 'Ar57VS71PxMY6xwiEMdg5dpV7cyb6rX74LjckK8KVYHXgF4ZdY';
-        $access_token = '78294985-68h5YCG7HNs1L9tDwdq4Vv9dkpzU6vzTht02MjSgb';
-        $access_token_secret = 'lZ1o4ik0OuPmEw9GC1wUPZJXFZ8grw5UyIMoutKN5w4WL';
+        $consumer_key = '';
+        $consumer_secret = '';
+        $access_token = '';
+        $access_token_secret = '';
 
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
