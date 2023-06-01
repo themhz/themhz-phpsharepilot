@@ -1,6 +1,5 @@
 <?php
 
-require_once '../config.php';
 require_once 'Facebook.php';
 require_once 'Instagram.php';
 require_once 'TikTok.php';

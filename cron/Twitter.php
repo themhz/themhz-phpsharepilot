@@ -1,12 +1,14 @@
 <?php
 require 'vendor/autoload.php';
+require 'CronConfig.php';
 use Abraham\TwitterOAuth\TwitterOAuth;
+use SharePilotV2\CronConfig;
 
 class Twitter implements ISocialMediaService{
     public function post(){
 
         //$this->uploadtweet();
-        $this->tweet();
+        $this->tweet("Hello World");
         //return "posting Twitter implementation";
 
     }
@@ -43,18 +45,18 @@ class Twitter implements ISocialMediaService{
 //            echo "Error posting tweet";
 //        }
     }
-    public function tweet() {
+    public function tweet($message) {
         // You will get these keys from Twitter's developer portal after creating your application
-        $consumer_key = '';
-        $consumer_secret = '';
-        $access_token = '';
-        $access_token_secret = '';
+        $consumer_key = CronConfig::$config["consumer_key"];
+        $consumer_secret = CronConfig::$config["consumer_secret"];
+        $access_token = CronConfig::$config["access_token"];
+        $access_token_secret = CronConfig::$config["access_token_secret"];
 
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
         $status = 'Hello, Twitter!';
         $connection->setApiVersion('2');
-        $post_tweets = $connection->post("tweets", ["text" => "Check out this https://fcmsoft.com/template/fcmsoft/img/screenshots/fcms1.png and more is coming "], true);
+        $post_tweets = $connection->post("tweets", ["text" => $message], true);
 
 
         print_r($post_tweets);
