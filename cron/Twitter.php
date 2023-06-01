@@ -10,6 +10,8 @@ use SharePilotV2\CronConfig;
 //https://developer.twitter.com/en/portal/projects/1663182518089134082/apps/27221400/keys
 //https://www.postman.com/twitter/workspace/twitter-s-public-workspace/collection/9956214-784efcda-ed4c-4491-a4c0-a26470a67400?ctx=documentation
 //https://www.postman.com/explore
+//https://developer.twitter.com/en/docs/tutorials/postman-getting-started
+//https://twittercommunity.com/t/453-you-currently-have-access-to-twitter-api-v2-endpoints-and-limited-v1-1-endpoints-only/193292/10
 
 class Twitter implements ISocialMediaService{
     public function post(){
