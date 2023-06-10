@@ -1,8 +1,7 @@
 <?php
 require 'vendor/autoload.php';
-require 'CronConfig.php';
+
 use Abraham\TwitterOAuth\TwitterOAuth;
-use SharePilotV2\CronConfig;
 
 //Important urls
 //https://twittercommunity.com/new

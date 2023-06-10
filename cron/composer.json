@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "abraham/twitteroauth": "^5.0"
+        "abraham/twitteroauth": "^5.0",
+        "guzzlehttp/guzzle": "^7.7"
     }
 }
