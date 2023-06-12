@@ -1,10 +1,10 @@
 <?php
 require_once 'CronConfig.php';
 require_once 'Facebook.php';
-require_once 'Instagram.php';
 require_once 'Reddit.php';
-require_once 'Twitch.php';
 require_once 'Twitter.php';
+require_once 'LinkedIn.php';
+
 
 interface ISocialMediaService
 {
@@ -30,7 +30,7 @@ class PostingService
 
 $ps = new PostingService();
 //$ps->add(new Facebook()); ΟΚ
-//$ps->add(new Instagram());
 //$ps->add(new Twitter()); ΟΚ
-$ps->add(new Reddit());
+//$ps->add(new Reddit()); OK
+$ps->add(new LinkedIn());
 $ps->post();
