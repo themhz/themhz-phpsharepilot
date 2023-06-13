@@ -22,10 +22,20 @@ use SharePilotV2\Components\RequestHandler;
      public function getscheduledlinks()
      {
          $u = new Urls();
-         //$videos = $u->select([],["id"=>"desc"]);;
-         $videos = $u->customselect("SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted 
+         $sql = "SELECT u.*, sp.id as 'scheduled_id', sp.post_time, sp.is_posted 
                                          FROM urls u 
-                                         INNER JOIN scheduled_posts sp ON u.id = sp.url_id order by id desc",[]);
+                                         INNER JOIN scheduled_posts sp ON u.id = sp.url_id                                           
+         ";
+
+         $channel_id = RequestHandler::get("channelid");
+
+         if(isset($channel_id) && $channel_id!= ""){
+             $sql .=" where u.channel_id = $channel_id";
+         }
+
+         $sql .=" order by id desc ";
+
+         $videos = $u->customselect($sql,[]);
 
          ResponseHandler::respond($videos);
      }

@@ -11,6 +11,8 @@
                 <h2 class="w3-text-teal">Schedule Controls</h2>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="deleteautoscheduleposts">Delete all Schedule Posts</button>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="clearautoscheduleposts">Clear All Schedule Posts</button>
+                <select class="w3-btn w3-teal w3-margin-bottom  w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
+
             </div>
         </div>
 
@@ -99,11 +101,23 @@
         if(evt.target.readyState == "complete")
         {
             loadList();
+            loadChannels();
         }
     }, false);
 
-    function loadList(){
-        fetch('schedule/getscheduledlinks?format=raw')
+    function loadList(channelId = null){
+
+        let url = 'schedule/getscheduledlinks?format=raw';
+        if (channelId !== null) {
+            url += '&channelid=' + encodeURIComponent(channelId);
+        }
+
+        fetch(url, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+            })
             .then(response => response.json())
             .then(data => {
                 const ul = document.querySelector(".w3-ul");
@@ -213,15 +227,25 @@
         });
     }
 
-</script>
+    function loadChannels(){
+        fetch('database/loadchannels?format=raw')
+            .then(response => response.json())
+            .then(data => {
+                createChannellist(data);
+            })
+    }
 
+    function createChannellist(data){
+        document.getElementById("channels").innerHTML =`<option value="">All</option>`;
 
-<script>
+        data.forEach(item => {
+            document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+        });
+    }
 
     function closeModal() {
         document.querySelector('#modal').style.display = "none";
     }
-
 
     function validateUrl(value) {
         var url;
@@ -232,8 +256,6 @@
         }
         return url.protocol === "http:" || url.protocol === "https:";
     }
-
-
 
     document.getElementById("scheduleButton").addEventListener("click", async () => {
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
@@ -273,12 +295,18 @@
 
 
     });
-
-
     document.getElementById("deleteautoscheduleposts").addEventListener("click", async () => {
         if(confirm("Are you sure you want to clear all schedules?")){
             try {
-                const response = await fetch("schedule/deleteautoscheduleposts?format=raw", {
+                var channelId = document.getElementById("channels").value;
+
+                let url = 'schedule/deleteautoscheduleposts?format=raw';
+                if (channelId !== null) {
+                    url += '&channelid=' + encodeURIComponent(channelId);
+                }
+
+
+                const response = await fetch(url, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -299,8 +327,6 @@
         }
 
     });
-
-
     document.getElementById("clearautoscheduleposts").addEventListener("click", async () => {
         if(confirm("Are you sure you want to clear all schedules?")){
             try {
@@ -325,7 +351,6 @@
         }
 
     });
-
     document.getElementById("restatescheduleButton").addEventListener("click", async () => {
 
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
@@ -364,8 +389,10 @@
 
     });
 
+function filterChannels(){
 
-
+    loadList(document.getElementById("channels").value);
+}
 
 
 
