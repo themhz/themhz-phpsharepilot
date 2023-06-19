@@ -9,13 +9,11 @@
         <div class="w3-border w3-padding-large w3-padding-64 w3-center">
             <div class="w3-container w3-card-4" >
                 <h2 class="w3-text-teal">Schedule Controls</h2>
+                <select class="w3-btn w3-teal w3-margin-bottom  w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="deleteautoscheduleposts">Delete all Schedule Posts</button>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="clearautoscheduleposts">Clear All Schedule Posts</button>
-                <select class="w3-btn w3-teal w3-margin-bottom  w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
-
             </div>
         </div>
-
     </div>
 </div>
 
@@ -105,10 +103,11 @@
         }
     }, false);
 
-    function loadList(channelId = null){
+    function loadList(){
 
+        channelId = document.getElementById("channels").value;
         let url = 'schedule/getscheduledlinks?format=raw';
-        if (channelId !== null) {
+        if (channelId !== null && channelId !== "") {
             url += '&channelid=' + encodeURIComponent(channelId);
         }
 
@@ -266,13 +265,23 @@
             hourInterval.trim().length > 0) {
             try {
 
+                var channelId = document.getElementById("channels").value;
+                if(channelId == "") {
+                    channelId = null;
+                }
 
-                const response = await fetch("schedule/autoscheduleposts?format=raw", {
+                let url = 'schedule/autoscheduleposts?format=raw';
+                if (channelId !== null) {
+                    url += '&channelid=' + encodeURIComponent(channelId);
+                }
+
+
+                const response = await fetch(url, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
+                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, channelId:channelId })
                 });
 
                 const data = await response.json();
@@ -330,7 +339,13 @@
     document.getElementById("clearautoscheduleposts").addEventListener("click", async () => {
         if(confirm("Are you sure you want to clear all schedules?")){
             try {
-                const response = await fetch("schedule/clearautoscheduleposts?format=raw", {
+                var channelId = document.getElementById("channels").value;
+
+                let url = 'schedule/clearautoscheduleposts?format=raw';
+                if (channelId !== null) {
+                    url += '&channelid=' + encodeURIComponent(channelId);
+                }
+                const response = await fetch(url, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json"
@@ -341,7 +356,7 @@
 
                 if (response.ok) {
                     loadList();
-                    alert(data.message);
+                    alert("cleared");
                 } else {
                     alert(`Error: ${data.error}`);
                 }
@@ -391,7 +406,7 @@
 
 function filterChannels(){
 
-    loadList(document.getElementById("channels").value);
+    loadList();
 }
 
 

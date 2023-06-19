@@ -29,8 +29,8 @@ class PostingService
 }
 
 $ps = new PostingService();
-//$ps->add(new Facebook()); ΟΚ
+$ps->add(new Facebook());
 //$ps->add(new Twitter()); ΟΚ
 //$ps->add(new Reddit()); OK
-$ps->add(new LinkedIn());
+//$ps->add(new LinkedIn());
 $ps->post();

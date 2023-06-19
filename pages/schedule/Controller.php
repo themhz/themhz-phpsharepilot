@@ -76,25 +76,38 @@ use SharePilotV2\Components\RequestHandler;
          $u = new Scheduled_posts();
          $start_datetime = RequestHandler::get("start_datetime");
          $hourInterval = RequestHandler::get("hourInterval");
+         $channelId = RequestHandler::get("channelId");
 
-         ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval));
+         ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval, $channelId));
      }
 
      public function deleteautoscheduleposts(){
          $u = new Scheduled_posts();
-         ResponseHandler::respond($u->delete());
+         if(RequestHandler::get("channelid")!==null && RequestHandler::get("channelid")!=""){
+             ResponseHandler::respond($u->customdelete("delete from scheduled_posts where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");"));
+         }else{
+             ResponseHandler::respond($u->delete());
+         }
+
+
      }
 
      public function clearautoscheduleposts(){
          $u = new Scheduled_posts();
-         ResponseHandler::respond($u->customselect("UPDATE scheduled_posts SET post_time = NULL;"));
+         if(RequestHandler::get("channelid")!==null && RequestHandler::get("channelid")!=""){
+             ResponseHandler::respond($u->customdelete("UPDATE scheduled_posts SET post_time = NULL where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");"));
+         }else{
+             ResponseHandler::respond($u->customselect("UPDATE scheduled_posts SET post_time = NULL;"));
+         }
+
      }
      public function restateschedule(){
          $u = new Scheduled_posts();
          $start_datetime = RequestHandler::get("start_datetime");
          $hourInterval = RequestHandler::get("hourInterval");
+         $channelId = RequestHandler::get("channelId");
 
-         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval));
+         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval, $channelId));
      }
  }
 

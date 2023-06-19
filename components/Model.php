@@ -116,8 +116,6 @@ class Model
 
             return $results;
         }
-
-
     public function update($debug=false, $dontupdate = []): array
     {
         $db = Database::getInstance();
@@ -168,13 +166,11 @@ class Model
         $count = $sth->rowCount();
 
         if ($count == '0') {
-            return ['result' => false];
+            return ['result' => false, 'message' => 'Nothing to update'];
         } else {
-            return ['result' => true];
+            return ['result' => true, 'message' => 'Updated successfully'];
         }
     }
-
-
     public function insert($debug=false): int
     {
         $db = Database::getInstance();
@@ -364,12 +360,28 @@ class Model
         $count = $sth->rowCount();
 
         if ($count == '0') {
-            return ['result' => false];
+            return ['result' => false, 'message'=> "nothing to delete"];
         } else {
-            return ['result' => true];
+            return ['result' => true, 'message' =>"deleted successfully"];
         }
     }
+    public function customdelete($sql, $params = []): array
+    {
 
+        $db = Database::getInstance();
+
+        $sth = $db->prepare($sql);
+
+        $sth->execute($params);
+
+        $count = $sth->rowCount();
+
+        if ($count == '0') {
+            return ['result' => false, 'message'=> "nothing to delete"];
+        } else {
+            return ['result' => true, 'message' =>"deleted successfully"];
+        }
+    }
     public function validate() : array{
 
         $errors = [];

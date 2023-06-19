@@ -20,6 +20,7 @@ class Scheduled_posts extends Model{
 
         if (!empty($parameters)) {
 
+
             return parent::callStoredProcedure("CALL schedule_posts(" . $this->placeholders(count($parameters)) . ")", $parameters);
         }
     }

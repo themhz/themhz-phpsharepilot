@@ -42,6 +42,21 @@
             <p>Channel Name: <input id="txtChannelName" class="w3-input w3-border w3-margin-top" type="text"></p>
             <input type="text" id="txtChannelId" name="txtChannelId" value="" style="display: none">
         </div>
+        <div class="w3-container">
+            <div class="w3-bar">
+                <span class="w3-bar-item">Social:</span>
+                <select class="w3-select w3-bar-item w3-margin-bottom w3-dropdown-hover" type="text" id="selectedSocialId" name="selectedSocialId" value="" onchange="onChangeSelectedSocial()"></select>
+                <input class="w3-bar-item w3-button w3-white w3-border w3-round" type="button" value="Add Key" onclick="addKey()">
+            </div>
+
+        </div>
+        <div class="w3-container" id="keylist">
+
+        </div>
+
+
+
+
         <footer class="w3-container w3-teal w3-padding">
             <button onclick="update()" class="w3-button w3-white w3-border w3-round">Update</button>
         </footer>
@@ -100,6 +115,7 @@
         if(evt.target.readyState == "complete")
         {
             loadChannels();
+            loadSocials();
         }
     }, false);
 
@@ -112,6 +128,68 @@
             .then(data => {
                 createlist(data);
             })
+    }
+
+    function loadSocials(){
+        //txtSocialId
+
+        fetch('channels/getsocials?format=raw', {
+            method: 'get',
+        })
+            .then(response => response.json())
+            .then(data => {
+                //createlist(data);
+                createSosials(data);
+            })
+    }
+
+    function createSosials(data){
+        //console.log(data);
+
+        for(var i=0;i<data.length;i++){
+            document.getElementById("selectedSocialId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
+        }
+    }
+
+    function onChangeSelectedSocial(){
+
+        fetch('channels/loadkeys?format=raw',{
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                channelId:document.getElementById("txtChannelId").value,
+                socialId:document.getElementById("selectedSocialId").value,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            loadkeys(data);
+
+        });
+    }
+
+    function loadkeys(data){
+        let keylist = document.getElementById("keylist");
+        keylist.innerHTML ="";
+
+        for(let i=0;i<data.length;i++){
+            let element = `
+                <div id="${data[i].id}" class="w3-bar">
+                    <label class="w3-bar-item" for="textbox1">Name:</label>
+                    <input class="w3-bar-item w3-input w3-border" type="text" id="textbox1" name="textbox1" value="${data[i].name}">
+
+                    <label class="w3-bar-item" for="textbox2">Value:</label>
+                    <input class="w3-bar-item w3-input w3-border" type="text" id="textbox2" name="textbox2" value="${data[i].value}">
+
+                    <button class="w3-bar-item w3-button w3-white w3-border w3-round" onclick="deleteKey('${data[i].id}')">Delete</button>
+
+                </div>`;
+
+            keylist.insertAdjacentHTML('beforeend', element);
+        }
     }
 
     function createlist(data){
@@ -131,9 +209,7 @@
                             </div>
                                     `;
             li.addEventListener('click', function() {
-                document.getElementById('txtChannelName').value = item.name;
-                document.getElementById('txtChannelId').value = item.id;
-                document.getElementById('myModal').style.display = 'block';
+                editChannelKeys(item)
             });
 
 
@@ -143,6 +219,12 @@
 
     }
 
+    function editChannelKeys(item){
+        document.getElementById('txtChannelName').value = item.name;
+        document.getElementById('txtChannelId').value = item.id;
+        document.getElementById('myModal').style.display = 'block';
+        onChangeSelectedSocial();
+    }
 
     function update() {
         fetch('channels?format=raw', {
@@ -153,6 +235,8 @@
             body: JSON.stringify({
                     id:document.getElementById("txtChannelId").value,
                     name: document.getElementById("txtChannelName").value,
+                    social_id:document.getElementById("selectedSocialId").value,
+                    keylist : getKeyListFromPopUp()
                 })
             })
             .then(response => response.json())
@@ -261,5 +345,61 @@
                 });
         }
     });
+
+    let idCounter = 1;  // This will be used to give each pair a unique ID.
+
+    function addKey() {
+        let keylist = document.getElementById("keylist");
+        let id = "pair_" + idCounter;  // Create a unique ID for this pair.
+        idCounter++;  // Increment the counter for next time.
+
+        let element = `
+        <div id="${id}" class="w3-bar">
+            <label class="w3-bar-item" for="textbox1">Name:</label>
+            <input class="w3-bar-item w3-input w3-border" type="text" id="textbox1" name="textbox1">
+
+            <label class="w3-bar-item" for="textbox2">Value:</label>
+            <input class="w3-bar-item w3-input w3-border" type="text" id="textbox2" name="textbox2">
+
+            <button class="w3-bar-item w3-button w3-white w3-border w3-round" onclick="deleteKey('${id}')">Delete</button>
+
+        </div>`;
+
+        keylist.insertAdjacentHTML('beforeend', element);
+    }
+
+
+
+    function deleteKey(id) {
+        let element = document.getElementById(id);
+        element.parentNode.removeChild(element);
+    }
+
+    function getKeyListFromPopUp(){
+        let pairs = document.querySelectorAll('#keylist .w3-bar');
+
+        // This array will hold all of the pairs' data.
+        let data = [];
+
+        // Iterate over each pair and get the values of the inputs.
+        for (let i = 0; i < pairs.length; i++) {
+            let inputs = pairs[i].getElementsByTagName('input');
+
+            // Get the values of the inputs.
+            let name = inputs[0].value.trim();
+            let value = inputs[1].value.trim();
+
+            if(name!="" && value!=""){
+                data.push({ name: name, value: value });
+            }
+
+        }
+
+        return data;
+    }
+
+
+
+
 
 </script>
