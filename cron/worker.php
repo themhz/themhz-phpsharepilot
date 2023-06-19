@@ -29,29 +29,37 @@ class PostingService
     }
 }
 
-
+$ps = new PostingService();
 $db = Database::getInstance();
-$sql = "select distinct channel_id, social_id from channel_social_keys";
+$sql = "select distinct b.name channel, c.name social , channel_id, social_id
+from channel_social_keys a
+inner join channels b on a.channel_id = b.id
+inner join socials c on a.social_id = c.id
+;";
 $sth = $db->prepare($sql);
 $sth->execute();
 $results = $sth->fetchAll(\PDO::FETCH_OBJ);
 
 foreach ($results as $result){
-    //print_r($result);
+
     $channel_id=$result->channel_id;
     $social_id=$result->social_id;
+    echo $result->channel." | " .ucfirst(strtolower($result->social)) ."\n\r";
 
     $sql = "select name, value from channel_social_keys where channel_id=$channel_id and social_id=$social_id";
     $sth = $db->prepare($sql);
     $sth->execute();
     $keyvalue = $sth->fetchAll(\PDO::FETCH_OBJ);
-    print_r($keyvalue);
+    $assocArray = array();
+
+    foreach($keyvalue as $obj){
+        $assocArray[$obj->name] = $obj->value;
+    }
+
+    $class = ucfirst(strtolower($result->social));
+    $ps->add(new $class($assocArray));
+
+
 }
 
-
-//$ps = new PostingService();
-//$ps->add(new Facebook());
-//$ps->add(new Twitter()); ΟΚ
-//$ps->add(new Reddit()); OK
-//$ps->add(new LinkedIn());
-//$ps->post();
+$ps->post();

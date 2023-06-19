@@ -13,11 +13,22 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 //https://twittercommunity.com/t/453-you-currently-have-access-to-twitter-api-v2-endpoints-and-limited-v1-1-endpoints-only/193292/10
 
 class Twitter implements ISocialMediaService{
+
+    public $Keys;
+    public $Message;
+    public $Link;
+
+    public function __construct($keys, $message="", $link="")
+    {
+        $this->Keys = $keys;
+        $this->Message = $message;
+        $this->Link = $link;
+    }
+
     public function post(){
 
-        //$this->uploadtweet();
-        $this->tweet("Hello World");
-        //return "posting Twitter implementation";
+        $this->tweet($this->Message . ' '. $this->Link);
+        return "posting Twitter implementation ";
 
     }
 
@@ -55,24 +66,17 @@ class Twitter implements ISocialMediaService{
     }
     public function tweet($message) {
         // You will get these keys from Twitter's developer portal after creating your application
-        $consumer_key = CronConfig::$config["consumer_key"];
-        $consumer_secret = CronConfig::$config["consumer_secret"];
-        $access_token = CronConfig::$config["access_token"];
-        $access_token_secret = CronConfig::$config["access_token_secret"];
-
+        $consumer_key = $this->Keys["consumer_key"];
+        $consumer_secret = $this->Keys["consumer_secret"];
+        $access_token = $this->Keys["access_token"];
+        $access_token_secret = $this->Keys["access_token_secret"];
         $connection = new TwitterOAuth($consumer_key, $consumer_secret, $access_token, $access_token_secret);
 
-        $status = 'Hello, Twitter!';
         $connection->setApiVersion('2');
         $post_tweets = $connection->post("tweets", ["text" => $message], true);
 
 
-        print_r($post_tweets);
-//        if ($connection->getLastHttpCode() == 200) {
-//            echo "Tweet posted successfully";
-//        } else {
-//            //echo "Error posting tweet";
-//        }
+        return $post_tweets;
 
     }
 }

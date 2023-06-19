@@ -8,16 +8,22 @@
 
 class Facebook implements ISocialMediaService{
 
-    private function getSettings(){
+    public $Keys;
+    public $Message;
+    public $Link;
 
+    public function __construct($keys, $message="",$link="")
+    {
+        $this->Keys = $keys;
+        $this->Message = $message;
+        $this->Link = $link;
     }
+
+
     public function post(){
         try {
 
-            $message = 'Check this out';
-            $link = "https://www.youtube.com/watch?v=TbwtREGI6MI";
-
-            $this->postToFacebookPageAsync($message, $link);
+            $this->postToFacebookPageAsync($this->Message, $this->Link);
         } catch (Exception $e) {
             echo "Error connecting to database: " . $e->getMessage();
             die();
@@ -29,8 +35,8 @@ class Facebook implements ISocialMediaService{
 
     public function postToFacebookPageAsync($message, $link)
     {
-        $accessToken = "";
-        $pageId = '';
+        $accessToken = $this->Keys["accessToken"];
+        $pageId = $this->Keys["pageId"];
         try {
             $requestUrl = "https://graph.facebook.com/v16.0/{$pageId}/feed?access_token={$accessToken}";
 

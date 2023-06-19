@@ -4,15 +4,29 @@ use GuzzleHttp\Exception\RequestException;
 
 
 class Reddit implements ISocialMediaService{
+    public $Keys;
+    public $Message;
+    public $Link;
+
+    public function __construct($keys, $message="",$link="")
+    {
+        $this->Keys = $keys;
+        $this->Message = $message;
+        $this->Link = $link;
+    }
+
+
     public function post(){
 
 
+
         $client = new Client();
-        $clientId = CronConfig::$config["reddit_clientId"];;
-        $clientSecret = CronConfig::$config["reddit_clientSecret"];;
-        $userAgent = CronConfig::$config["reddit_userAgent"];;
-        $username = CronConfig::$config["reddit_username"];;
-        $password = CronConfig::$config["reddit_password"];;
+        $clientId = $this->Keys["reddit_clientId"];
+        $clientSecret = $this->Keys["reddit_clientSecret"];
+        $userAgent = $this->Keys["reddit_userAgent"];
+        $username = $this->Keys["reddit_username"];
+        $password = $this->Keys["reddit_password"];
+
 
         try {
             // Retrieve the access token
@@ -38,10 +52,10 @@ class Reddit implements ISocialMediaService{
                     'User-Agent' => $userAgent,
                 ],
                 'form_params' => [
-                    'sr' => 'theotokatosboxing',
+                    'sr' => $this->Keys["subreddit"],
                     'kind' => 'link' ,// or 'self', 'image', 'video', 'gallery'
-                    'title' => 'History of boxing',
-                    'url' => 'https://www.youtube.com/watch?v=uV-C054FUgc',
+                    'title' => $this->Message,
+                    'url' => $this->Link,
                 ],
             ]);
 
