@@ -1,73 +1,4 @@
 <?php
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-
-
-class Reddit implements ISocialMediaService{
-    public $Keys;
-    public $Message;
-    public $Link;
-
-    public function __construct($keys, $message="",$link="")
-    {
-        $this->Keys = $keys;
-    }
-
-
-    public function post($messages){
-        foreach ($messages as $message){
-            $this->reddit($message->title, $message->url);
-        }
-    }
-
-    public function reddit($message, $link){
-        $client = new Client();
-        $clientId = $this->Keys["reddit_clientId"];
-        $clientSecret = $this->Keys["reddit_clientSecret"];
-        $userAgent = $this->Keys["reddit_userAgent"];
-        $username = $this->Keys["reddit_username"];
-        $password = $this->Keys["reddit_password"];
-
-
-        try {
-            // Retrieve the access token
-            $response = $client->request('POST', 'https://www.reddit.com/api/v1/access_token', [
-                'auth' => [$clientId, $clientSecret],
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'username' => $username,
-                    'password' => $password,
-                ],
-                'headers' => [
-                    'User-Agent' => $userAgent,
-                ],
-            ]);
-
-            $data = json_decode($response->getBody(), true);
-            $accessToken = $data['access_token'];
-
-            // Use the access token to make an API request
-            $response = $client->request('POST', 'https://oauth.reddit.com/api/submit', [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $accessToken,
-                    'User-Agent' => $userAgent,
-                ],
-                'form_params' => [
-                    'sr' => $this->Keys["subreddit"],
-                    'kind' => 'link' ,// or 'self', 'image', 'video', 'gallery'
-                    'title' => $message,
-                    'url' => $link,
-                ],
-            ]);
-
-            return 'Post submitted successfully';
-
-        } catch (RequestException $e) {
-            return 'Request failed: ' . $e->getMessage();
-        }
-    }
-}
-
 /*
 
 Reddit does provide an API that allows for various forms of interaction, including posting messages. This is done through their JSON API, which is part of Reddit's overall OAuth2 platform. Please note that you need to follow Reddit's API terms of use when using the API. You can find the documentation for the API at: https://www.reddit.com/dev/api/.
@@ -172,3 +103,75 @@ After you've created your app, Reddit will provide you with a `client_id` and `c
 
 Remember to follow Reddit's API terms of service when using these credentials to interact with the API. Also, always check the most recent Reddit API documentation, as the process might have changed after my last update in September 2021.
 */
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
+
+class Reddit implements ISocialMediaService{
+    public $Keys;
+    public $Message;
+    public $Link;
+
+    public function __construct($keys, $message="",$link="")
+    {
+        $this->Keys = $keys;
+    }
+
+
+    public function post($messages){
+        foreach ($messages as $message){
+            $this->reddit($message->title, $message->url);
+        }
+
+        return "posted to Reddit";
+    }
+
+    public function reddit($message, $link){
+        $client = new Client();
+        $clientId = $this->Keys["reddit_clientId"];
+        $clientSecret = $this->Keys["reddit_clientSecret"];
+        $userAgent = $this->Keys["reddit_userAgent"];
+        $username = $this->Keys["reddit_username"];
+        $password = $this->Keys["reddit_password"];
+
+
+        try {
+            // Retrieve the access token
+            $response = $client->request('POST', 'https://www.reddit.com/api/v1/access_token', [
+                'auth' => [$clientId, $clientSecret],
+                'form_params' => [
+                    'grant_type' => 'password',
+                    'username' => $username,
+                    'password' => $password,
+                ],
+                'headers' => [
+                    'User-Agent' => $userAgent,
+                ],
+            ]);
+
+            $data = json_decode($response->getBody(), true);
+            $accessToken = $data['access_token'];
+
+            // Use the access token to make an API request
+            $response = $client->request('POST', 'https://oauth.reddit.com/api/submit', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'User-Agent' => $userAgent,
+                ],
+                'form_params' => [
+                    'sr' => $this->Keys["subreddit"],
+                    'kind' => 'link' ,// or 'self', 'image', 'video', 'gallery'
+                    'title' => $message,
+                    'url' => $link,
+                ],
+            ]);
+
+            return 'Post submitted successfully';
+
+        } catch (RequestException $e) {
+            return 'Request failed: ' . $e->getMessage();
+        }
+    }
+}
+
