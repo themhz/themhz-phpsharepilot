@@ -16,9 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace SharePilotV2\Cron;
-use SharePilotV2\CronConfig;
-use \PDO;
 
 class Database
 {
