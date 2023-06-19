@@ -11,15 +11,16 @@ class Reddit implements ISocialMediaService{
     public function __construct($keys, $message="",$link="")
     {
         $this->Keys = $keys;
-        $this->Message = $message;
-        $this->Link = $link;
     }
 
 
-    public function post(){
+    public function post($messages){
+        foreach ($messages as $message){
+            $this->reddit($message->title, $message->url);
+        }
+    }
 
-
-
+    public function reddit($message, $link){
         $client = new Client();
         $clientId = $this->Keys["reddit_clientId"];
         $clientSecret = $this->Keys["reddit_clientSecret"];
@@ -54,8 +55,8 @@ class Reddit implements ISocialMediaService{
                 'form_params' => [
                     'sr' => $this->Keys["subreddit"],
                     'kind' => 'link' ,// or 'self', 'image', 'video', 'gallery'
-                    'title' => $this->Message,
-                    'url' => $this->Link,
+                    'title' => $message,
+                    'url' => $link,
                 ],
             ]);
 
@@ -64,8 +65,6 @@ class Reddit implements ISocialMediaService{
         } catch (RequestException $e) {
             return 'Request failed: ' . $e->getMessage();
         }
-
-
     }
 }
 

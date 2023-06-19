@@ -7,7 +7,7 @@ class LinkedIn implements ISocialMediaService{
     private $clientSecret;
     private $redirectUri;
 
-    public function post(){
+    public function post($messages){
         $this->clientId = "77ohxfcgda8ov1";
         $this->clientSecret= "tuMTpvYAElZvS56f";
         $this->redirectUri= "https://fcmsoft.com";
@@ -24,7 +24,6 @@ class LinkedIn implements ISocialMediaService{
             $this->getAuthorizationCode();
         }
     }
-
     private function getAuthorizationCode() {
         $state = bin2hex(random_bytes(15));
         $_SESSION['state'] = $state;
@@ -40,7 +39,6 @@ class LinkedIn implements ISocialMediaService{
         header('Location: https://www.linkedin.com/oauth/v2/authorization?' . http_build_query($params));
         exit;
     }
-
     private function getAccessToken($authorizationCode) {
         if ($_GET['state'] !== $_SESSION['state']) {
             exit('Invalid state');
@@ -65,7 +63,6 @@ class LinkedIn implements ISocialMediaService{
         $data = json_decode($response, true);
         $_SESSION['access_token'] = $data['access_token'];
     }
-
     public function createPost($content) {
         $access_token = $_SESSION['access_token'];
 
@@ -108,7 +105,6 @@ class LinkedIn implements ISocialMediaService{
             echo "Your post was created successfully";
         }
     }
-
     public function getProfileUrn($access_token) {
         //$access_token = $_SESSION['access_token'];
 

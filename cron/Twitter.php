@@ -25,10 +25,13 @@ class Twitter implements ISocialMediaService{
         $this->Link = $link;
     }
 
-    public function post(){
+    public function post($messages){
 
-        $this->tweet($this->Message . ' '. $this->Link);
-        return "posting Twitter implementation ";
+        foreach ($messages as $message){
+            $this->tweet($message->title . ' '. $message->url);
+        }
+
+        return "posted to twitter ";
 
     }
 

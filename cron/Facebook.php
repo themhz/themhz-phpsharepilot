@@ -3,7 +3,7 @@
 //https://developers.facebook.com/tools/explorer/
 //Debug token
 //https://developers.facebook.com/tools/debug/accesstoken/
-
+require_once 'Database.php';
 
 
 class Facebook implements ISocialMediaService{
@@ -20,17 +20,22 @@ class Facebook implements ISocialMediaService{
     }
 
 
-    public function post(){
+    public function post($messages){
         try {
+            foreach ($messages as $message){
+//                echo "Posting $message->url $message->title ";
+                $this->postToFacebookPageAsync($message->title, $message->url);
+            }
 
-            $this->postToFacebookPageAsync($this->Message, $this->Link);
+
+
         } catch (Exception $e) {
             echo "Error connecting to database: " . $e->getMessage();
             die();
         }
 
 
-        return "posting Facebook implementation";
+        return "posted to Facebook";
     }
 
     public function postToFacebookPageAsync($message, $link)
