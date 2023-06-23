@@ -77,8 +77,9 @@ use SharePilotV2\Components\RequestHandler;
          $start_datetime = RequestHandler::get("start_datetime");
          $hourInterval = RequestHandler::get("hourInterval");
          $channelId = RequestHandler::get("channelId");
-
-         ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval, $channelId));
+         $avoid_start_hour  = RequestHandler::get("avoid_start_hour");
+         $avoid_end_hour = RequestHandler::get("avoid_end_hour");
+         ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour));
      }
 
      public function deleteautoscheduleposts(){
@@ -106,8 +107,10 @@ use SharePilotV2\Components\RequestHandler;
          $start_datetime = RequestHandler::get("start_datetime");
          $hourInterval = RequestHandler::get("hourInterval");
          $channelId = RequestHandler::get("channelId");
+         $avoid_start_hour  = RequestHandler::get("avoid_start_hour");
+         $avoid_end_hour = RequestHandler::get("avoid_end_hour");
 
-         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval, $channelId));
+         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour));
      }
  }
 

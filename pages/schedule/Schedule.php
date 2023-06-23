@@ -32,6 +32,10 @@
                 <input class="w3-input w3-border w3-margin-bottom" type="time" name="initial_schedule_post_time" id="initial_schedule_post_time" value="">
                 <h3 class="w3-text-teal">Interval</h3>
                 <input class="w3-input w3-border w3-margin-bottom"  type="text" name="hourInterval" id="hourInterval" value="">
+                <h3 class="w3-text-teal">Avoid start hour</h3>
+                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_start_hour" id="avoid_start_hour" value="0">
+                <h3 class="w3-text-teal">Avoid end hour</h3>
+                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_end_hour" id="avoid_end_hour" value="7">
                 <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Pull schedule posts</button>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="restatescheduleButton">Reset dates for schedule posts</button>
             </div>
@@ -260,9 +264,14 @@
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
         let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
         let hourInterval = document.getElementById(`hourInterval`).value;
+        let avoid_start_hour = document.getElementById(`avoid_start_hour`).value;
+        let avoid_end_hour = document.getElementById(`avoid_end_hour`).value;
         if (initial_schedule_post_date.trim().length > 0 &&
             initial_schedule_post_time.trim().length > 0 &&
-            hourInterval.trim().length > 0) {
+            hourInterval.trim().length > 0 &&
+            avoid_start_hour.trim().length>0 &&
+            avoid_end_hour.trim().length>0
+            ) {
             try {
 
                 var channelId = document.getElementById("channels").value;
@@ -281,7 +290,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, channelId:channelId })
+                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, channelId:channelId, avoid_start_hour:avoid_start_hour,avoid_end_hour:avoid_end_hour })
                 });
 
                 const data = await response.json();
@@ -371,9 +380,13 @@
         let initial_schedule_post_date = document.getElementById(`initial_schedule_post_date`).value;
         let initial_schedule_post_time = document.getElementById(`initial_schedule_post_time`).value;
         let hourInterval = document.getElementById(`hourInterval`).value;
+        let avoid_start_hour = document.getElementById(`avoid_start_hour`).value;
+        let avoid_end_hour = document.getElementById(`avoid_end_hour`).value;
         if (initial_schedule_post_date.trim().length > 0 &&
             initial_schedule_post_time.trim().length > 0 &&
-            hourInterval.trim().length > 0) {
+            hourInterval.trim().length > 0 &&
+            avoid_start_hour.trim().length>0 &&
+            avoid_end_hour.trim().length>0) {
             try {
 
 
@@ -382,7 +395,7 @@
                     headers: {
                         "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval})
+                    body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, avoid_start_hour:avoid_start_hour,avoid_end_hour:avoid_end_hour})
                 });
 
                 const data = await response.json();
