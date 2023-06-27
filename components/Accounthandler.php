@@ -17,7 +17,7 @@
  */
 namespace SharePilotV2\Components;
 
-class accountHandler {
+class AccountHandler {
     private $id;
     private $name;
     private $lastname;

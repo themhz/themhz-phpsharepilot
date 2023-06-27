@@ -17,6 +17,7 @@
  */
 namespace SharePilotV2\Components;
 use SharePilotV2\Config;
+use SharePilotV2\Components\RequestHandler;
 
 class Website{
     public function start(){
