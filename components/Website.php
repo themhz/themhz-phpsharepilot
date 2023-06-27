@@ -16,13 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 namespace SharePilotV2\Components;
-
+use SharePilotV2\Config;
 
 class Website{
     public function start(){
         session_start();
-        require_once __DIR__ . '/../config.php';
-
         date_default_timezone_set('UTC');
 
 

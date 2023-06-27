@@ -4,6 +4,6 @@ use SharePilotV2\Components\Website;
 use SharePilotV2\Libs\Functions;
 use SharePilotV2\Pages\Pages;
 use SharePilotV2\Components\MasterController;
-use SharePilotV2\Config;
+use SharePilotV2\config;
 $website = new Website();
 $website->start();

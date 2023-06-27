@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 namespace SharePilotV2\Libs;
-use SharePilotV2\Config;
+use SharePilotV2\config;
 use \PDO;
 use \DateTime;
 
@@ -28,10 +28,10 @@ class Database
 
     private function __construct()
     {
-        $user = Config::$config['db']['user'];
-        $password = Config::$config['db']['password'];
-        $dbhost = Config::$config['db']['host'];
-        $basename = Config::$config['db']['basename'];
+        $user = config::$config['db']['user'];
+        $password = config::$config['db']['password'];
+        $dbhost = config::$config['db']['host'];
+        $basename = config::$config['db']['basename'];
         $this->dbh = new PDO("mysql:host=$dbhost;dbname=$basename", $user, $password, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8;",PDO::ATTR_PERSISTENT => true));
 
         // $now = new DateTime();

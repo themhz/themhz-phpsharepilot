@@ -26,6 +26,7 @@ class ComposerStaticInit8f7700f21e64363d18089c001fc65dc4
             'SharePilotV2\\Models\\' => 20,
             'SharePilotV2\\Libs\\' => 18,
             'SharePilotV2\\Components\\' => 24,
+            'SharePilotV2\\' => 13,
         ),
         'P' => 
         array (
@@ -70,6 +71,10 @@ class ComposerStaticInit8f7700f21e64363d18089c001fc65dc4
         'SharePilotV2\\Components\\' => 
         array (
             0 => __DIR__ . '/../..' . '/components',
+        ),
+        'SharePilotV2\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/',
         ),
         'Psr\\Log\\' => 
         array (

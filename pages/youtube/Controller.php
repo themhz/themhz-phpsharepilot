@@ -1,6 +1,6 @@
 <?php
 use SharePilotV2\Libs\YoutubeService;
-use SharePilotV2\Config;
+use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
 use SharePilotV2\Components\ResponseHandler;
 
@@ -9,7 +9,7 @@ use SharePilotV2\Components\ResponseHandler;
     }
 
     public function getvideo(){
-        $youtubeapiKey= Config::read('youtubeapiKey');
+        $youtubeapiKey= config::read('youtubeapiKey');
         $youtubeService = new YoutubeService($youtubeapiKey);
         $searchQuery= "";
         $videoCategoryId = '10';
