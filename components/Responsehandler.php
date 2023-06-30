@@ -15,10 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-namespace SharePilotV2\Components;
-class ResponseHandler{
 
-    public static function respond($data){
+namespace SharePilotV2\Components;
+class ResponseHandler
+{
+
+    public static function respond($data)
+    {
         // headers for not caching the results
         header('Cache-Control: no-cache, must-revalidate');
         header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
