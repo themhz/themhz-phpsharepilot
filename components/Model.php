@@ -28,7 +28,9 @@ class Model
     {
         $first = true;
         $db = Database::getInstance();
+
         $sql = "select * from $this->__tablename ";
+
         foreach ($params as $key => $value) {
             if ($first == true) {
                 $first = false;
@@ -57,7 +59,7 @@ class Model
             echo $sql;
             die();
         }
-        $sth = $db->prepare($sql);
+        $sth = $db->prepare("select * from users");
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);
         return $results;

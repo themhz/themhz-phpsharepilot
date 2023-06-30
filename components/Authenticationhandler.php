@@ -21,38 +21,6 @@ class AuthenticationHandler{
 
     static function login(){
 
-        // $username = requesthandler::get('username')!=null? requesthandler::get('username') : "";
-        // $inputPass = requesthandler::get('password')!=null? requesthandler::get('password'): "";
-
-        // //echo requesthandler::get('username');
-        
-        // include __DIR__.'/../models/accounts.php';
-        // $accounts =  new accounts();
-        // $account = $accounts->select(1, 'id', 'ASC', 'username', "$username", 1);
-
-        // //print_r($account);
-        // //die();
-        // $hashedPass = "";
-        // $userName = "";
-        // $fullName = "";
-        // $userId = "";
-        
-        // if($account['total'][0]->count >0){
-        //     $hashedPass = $account['rows'][0]['row']['password'];
-        //     $userName = $account['rows'][0]['row']['username'];
-        //     $fullName = $account['rows'][0]['row']['fullname'];
-        //     $userId = $account['rows'][0]['row']['id'];
-        // }
-       
-        // if(crypt($inputPass, $hashedPass) == $hashedPass){
-            
-        //     return array('status'=>true,'token'=> self::generateToken($userId, $userName, $fullName));
-
-        // }else{
-            
-        //     return array('status'=>false,'data'=>"{'status' : 'fail','resp':{}}");
-        // }
-
         return array('status'=>true,'token'=> '');
         
     }

@@ -16,8 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 namespace SharePilotV2\Components;
-use SharePilotV2\Config;
-use SharePilotV2\Components\RequestHandler;
 
 class Website{
     public function start(){
@@ -26,7 +24,6 @@ class Website{
 
 
         $raw = RequestHandler::get("format");
-
 
         if($raw != 'raw'){
             $page =  new Pages();
