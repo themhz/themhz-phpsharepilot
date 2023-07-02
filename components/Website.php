@@ -16,22 +16,52 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 namespace SharePilotV2\Components;
+use Dotenv\Dotenv;
+use SharePilotV2\Libs\Functions;
 
 class Website{
+
+    private function loadErrorHandler(){
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+    }
+
+    private function loadEnvFile(){
+        $dotenv = Dotenv::createImmutable(dirname($_SERVER['SCRIPT_FILENAME']));
+        $dotenv->load();
+    }
+
+    private function loadPage(){
+        $page =  new Pages();
+        $page = $page->load();
+        include __DIR__ . '/../template/index.php';
+    }
+
     public function start(){
+        $this->loadErrorHandler();
+        $this->loadEnvFile();
         session_start();
         date_default_timezone_set('UTC');
+        $controller = new UserAuthController(Database::getInstance());
+        //echo $controller->handleRequest()["message"];
+        //die();
 
+        if($controller->handleRequest()){
 
-        $raw = RequestHandler::get("format");
+            $raw = RequestHandler::get("format");
+            if($raw != 'raw'){
+                $this->loadPage();
 
-        if($raw != 'raw'){
-            $page =  new Pages();
-            //Load template
-            include __DIR__ . '/../template/index.php';
+            }else{
+                $controller = new MasterController();
+                $controller->start();
+            }
         }else{
-            $controller = new MasterController();
-            $controller->start();
+            $this->loadPage();
         }
+
     }
+
+
 }
