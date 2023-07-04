@@ -2,6 +2,8 @@
 
 namespace SharePilotV2\Components;
 
+use http\Env\Request;
+
 class UserAuthController {
     private $auth;
 
@@ -12,13 +14,17 @@ class UserAuthController {
     public function handleRequest() {
         // checking if a token cookie is set
         if (isset($_COOKIE['token'])) {
+
             // if the user has a token, authenticate them
             $user = $this->auth->authenticate();
-            $_SESSION["user"] = $user;
+
+
             // if the token is invalid or expired, ask them to log in again
             if (!$user) {
                 return ["userAuth"=> false, "message" =>"Session expired. Please log in again."];
             } else {
+                $_SESSION["user"] = $user;
+
                 return ["userAuth"=> true, "message" =>"Welcome back, {$user['email']}."];
             }
         } else {
@@ -40,8 +46,8 @@ class UserAuthController {
 
             // handle login
             if (RequestHandler::get("page")=="login") {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+                $email = RequestHandler::get('email');
+                $password = RequestHandler::get('password');
 
                 if ($this->auth->login($email, $password)) {
                     return ["userAuth"=> true, "message" =>"Login successful."];

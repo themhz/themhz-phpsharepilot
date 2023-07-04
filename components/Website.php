@@ -21,6 +21,25 @@ use SharePilotV2\Libs\Functions;
 
 class Website{
 
+    public function start(){
+
+        $this->startSession();
+        $this->loadEnvFile();
+        $this->loadErrorHandler();
+        $this->setTimeZone();
+
+        $result = $this->userAuth();
+
+        $raw = RequestHandler::get("format");
+
+        if($raw == 'raw'){
+            $controller = new MasterController();
+            $controller->start();
+        }else{
+            $this->loadPage();
+        }
+    }
+
     private function loadErrorHandler(){
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
@@ -38,29 +57,17 @@ class Website{
         include __DIR__ . '/../template/index.php';
     }
 
-    public function start(){
-        $this->loadErrorHandler();
-        $this->loadEnvFile();
+    private function startSession(){
         session_start();
+    }
+
+    private function setTimeZone(){
         date_default_timezone_set('UTC');
-        $controller = new UserAuthController(Database::getInstance());
-        //echo $controller->handleRequest()["message"];
-        //die();
+    }
 
-        if($controller->handleRequest()){
-
-            $raw = RequestHandler::get("format");
-            if($raw != 'raw'){
-                $this->loadPage();
-
-            }else{
-                $controller = new MasterController();
-                $controller->start();
-            }
-        }else{
-            $this->loadPage();
-        }
-
+    private function userAuth(){
+        $userAuth = new UserAuthController(Database::getInstance());
+        return $userAuth->handleRequest();
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-use SharePilotV2\Components\Model;
+use SharePilotV2\Models;
 
 class Status extends Model
 {

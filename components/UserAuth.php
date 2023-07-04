@@ -25,7 +25,7 @@ class UserAuth {
         $stmt->bindValue(1, $email);
         $stmt->execute();
         $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-        $_SESSION["user"] = $user;
+
         if ($user && password_verify($password, $user['password'])) {
             // password is correct
             // generate a new session token
@@ -36,15 +36,17 @@ class UserAuth {
             $stmt->bindValue(1, $token);
             $stmt->bindValue(2, $user['id']);
             $stmt->execute();
-
+            $_SESSION["user"] = $user;
             // set the token cookie
-            setcookie('token', $token, time() + 3600); // 1 hour expiration
+            setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration
+           ;
             return true;
         }
         return false;
     }
 
     public function authenticate() {
+
         if (!isset($_COOKIE['token'])) {
             return null;
         }
@@ -52,6 +54,9 @@ class UserAuth {
         $stmt = $this->db->prepare("SELECT * FROM users WHERE token = ?");
         $stmt->bindValue(1, $_COOKIE['token']);
         $stmt->execute();
+
+
+
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 }
