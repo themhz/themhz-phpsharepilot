@@ -76,6 +76,48 @@ abstract class Model
         return new Query($this, 'delete');
     }
 
+    public function query($sql, $params = [])
+    {
+        try {
+            $stmt = self::$pdo->prepare($sql);
+
+            foreach ($params as $key => $value) {
+                $stmt->bindValue(":$key", $value);
+            }
+
+            $stmt->execute();
+
+            // Check if it's a SELECT statement, if so return results
+            if (stripos($sql, 'SELECT') === 0) {
+                return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            }
+
+            // Otherwise return the number of affected rows
+            return $stmt->rowCount();
+        } catch (\PDOException $e) {
+            echo "Query failed: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function callStoredProcedure($procedure, $params)
+    {
+        $placeholders = implode(',', array_fill(0, count($params), '?'));
+
+        try {
+            $stmt = self::$pdo->prepare("CALL $procedure($placeholders)");
+
+            $stmt->execute(array_values($params));
+
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
+            echo "Stored procedure call failed: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
+
     public function beginTransaction()
     {
         return self::$pdo->beginTransaction();

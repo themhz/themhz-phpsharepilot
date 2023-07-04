@@ -2,8 +2,6 @@
 
 namespace SharePilotV2\Components;
 
-use http\Env\Request;
-
 class UserAuthController {
     private $auth;
 
@@ -24,7 +22,6 @@ class UserAuthController {
                 return ["userAuth"=> false, "message" =>"Session expired. Please log in again."];
             } else {
                 $_SESSION["user"] = $user;
-
                 return ["userAuth"=> true, "message" =>"Welcome back, {$user['email']}."];
             }
         } else {
