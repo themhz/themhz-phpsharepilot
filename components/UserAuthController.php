@@ -30,8 +30,11 @@ class UserAuthController {
 
             // handle registration
             if (isset($_POST['register'])) {
-                $email = $_POST['email'];
-                $password = $_POST['password'];
+//                $email = $_POST['email'];
+//                $password = $_POST['password'];
+
+                $email = RequestHandler::get("register");
+                $password = RequestHandler::get("password");
 
                 if ($this->auth->register($email, $password)) {
                     return ["userAuth"=> false, "message" =>"Registration successful."];
