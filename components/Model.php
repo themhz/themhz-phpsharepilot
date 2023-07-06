@@ -31,6 +31,12 @@ abstract class Model
         $this->data[$name] = $value;
     }
 
+    public function __get($name){
+        if (array_key_exists($name, $this->data)) {
+            return $this->data[$name];
+        }
+    }
+
     public function insert()
     {
         $table = $this->getTable();

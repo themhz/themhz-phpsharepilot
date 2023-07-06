@@ -11,16 +11,10 @@ class UserAuth {
         $this->db = $db;
     }
 
-    public function register($email, $password) {
-
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        $users = new Users();
-        $users->email = $email;
-        $users->password = $hash;
-        $result = $users->insert();
-
+    public function register($user) {
+        $user->password = password_hash($user->password, PASSWORD_DEFAULT);
+        $result = $user->insert();
         return $result;
-
     }
 
     public function login($email, $password) {
