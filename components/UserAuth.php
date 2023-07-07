@@ -1,7 +1,6 @@
 <?php
 
 namespace SharePilotV2\Components;
-use Google\Service\Keep\User;
 use SharePilotV2\Models\Users;
 
 class UserAuth {

@@ -221,13 +221,6 @@
             });
     }
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            hideModal();
-        }
-    }
-
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             hideModal();
