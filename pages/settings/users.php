@@ -52,7 +52,7 @@
 
             <div class="w3-container">
                 <form id="userForm">
-                    <input name="id" id="id" style="display: ;">
+                    <input name="id" id="id" style="display:none ;">
                     <input class="w3-input w3-border" type="text" placeholder="name" required name="name" id="name">
                     <input class="w3-input w3-border" type="text" placeholder="lastname" required name="lastname" id="lastname">
                     <input class="w3-input w3-border" type="email" placeholder="email" required name="email" id="email">
@@ -77,6 +77,13 @@
     function showModal(isedit) {
         modal.style.display = "block";
         isEdit = isedit;
+
+        if(isedit==1){
+            document.getElementById('password').removeAttribute('required');
+        }else{
+            document.getElementById('password').setAttribute('required', '');
+
+        }
     }
 
     // Function to hide modal
@@ -135,7 +142,7 @@
             // Create a JSON object of the form data
             var jsonObject = {};
             for (const [key, value] of formData.entries()) {
-                jsonObject[key] = value;
+                jsonObject[key] = value.trim();
             }
 
             // AJAX call for create/update user
@@ -150,6 +157,17 @@
             })
                 .then(response => response.json())
                 .then(data => {
+                    if(data.result==false){
+                        alert("The user with that email, already exists, please select anotherone");
+                    }else{
+                        if(isEdit==0){
+                            alert("User was inserted successfully");
+                        }else{
+                            alert("User was updated successfully");
+                        }
+
+                    }
+
                     console.log('Success:', data);
                     hideModal(); // Hide the modal after successful operation
                     loadTableData();
@@ -197,6 +215,7 @@
                         form[key].value = data[key];
                     }
                 }
+                document.getElementById("password").value="";
                 // Show the modal
                 showModal(1);
             })
