@@ -146,7 +146,6 @@
             }
 
             // AJAX call for create/update user
-
             var method = isEdit==0? "registeruser" : "updateuser";
             fetch(`settings?method=${method}&format=raw`, {
                 method: 'POST',
@@ -165,9 +164,7 @@
                         }else{
                             alert("User was updated successfully");
                         }
-
                     }
-
                     console.log('Success:', data);
                     hideModal(); // Hide the modal after successful operation
                     loadTableData();
