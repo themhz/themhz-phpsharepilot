@@ -2,15 +2,10 @@
 namespace SharePilotV2\Components;
 
 $timezone = new TimeZone();
+$dbTimeZone = $timezone->GetTimeZoneFromDb();
+$timezone->SetCurrentTimeZone($dbTimeZone["timezone"]);
 
-
-if(isset($_REQUEST["timezone"])){
-    $timezone->SetCurrentTimeZone($_REQUEST["timezone"]);
-}else{
-    $timezone->SetCurrentTimeZone("UTC");
-}
-
-
+echo "<br>";
 echo '<select id="timezone-select" name="timezone">';
     foreach($timezone->GetTimezonesList() as $tz) {
         echo '<option value="' . $tz . '"' . ($tz === $timezone->GetCurrentTimeZone() ? ' selected' : '') . '>' . $tz . '</option>';
@@ -23,6 +18,8 @@ echo '<select id="timezone-select" name="timezone">';
 ?>
 
 <p id="clock"></p>
+<input type="button" value="save" onclick="saveTimeZone()">
+
 <script>
     let serverTimezone = defaultTimezone;
 
@@ -40,6 +37,27 @@ echo '<select id="timezone-select" name="timezone">';
         serverTimezone = this.value;
     });
 
+
+    function saveTimeZone(){
+            fetch(`settings?method=savetimezone&timezone=${serverTimezone}&format=raw`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"timezone":serverTimezone}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 </script>
+
+
+
+
 
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace SharePilotV2\Components;
+use SharePilotV2\Models;
 
 class TimeZone{
 
@@ -16,8 +17,15 @@ class TimeZone{
         return \DateTimeZone::listIdentifiers();
     }
 
-    public function getPhpIniTimeZone(){
+    public function GetPhpIniTimeZone(){
         return ini_get('date.timezone') ?: 'php ini is not set';
     }
+
+    public function GetTimeZoneFromDb(){
+        $settings = new Models\Settings();
+        return $settings->select()->fields("timezone")->execute()[0];
+    }
+
+
 
 }
