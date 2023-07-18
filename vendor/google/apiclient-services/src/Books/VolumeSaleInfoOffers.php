@@ -17,7 +17,7 @@
 
 namespace Google\Service\Books;
 
-class VolumeSaleInfoOffers extends \Google\Model
+class VolumeSaleInbarffers extends \Google\Model
 {
   /**
    * @var int
@@ -27,11 +27,11 @@ class VolumeSaleInfoOffers extends \Google\Model
    * @var bool
    */
   public $giftable;
-  protected $listPriceType = VolumeSaleInfoOffersListPrice::class;
+  protected $listPriceType = VolumeSaleInbarffersListPrice::class;
   protected $listPriceDataType = '';
-  protected $rentalDurationType = VolumeSaleInfoOffersRentalDuration::class;
+  protected $rentalDurationType = VolumeSaleInbarffersRentalDuration::class;
   protected $rentalDurationDataType = '';
-  protected $retailPriceType = VolumeSaleInfoOffersRetailPrice::class;
+  protected $retailPriceType = VolumeSaleInbarffersRetailPrice::class;
   protected $retailPriceDataType = '';
 
   /**
@@ -63,42 +63,42 @@ class VolumeSaleInfoOffers extends \Google\Model
     return $this->giftable;
   }
   /**
-   * @param VolumeSaleInfoOffersListPrice
+   * @param VolumeSaleInbarffersListPrice
    */
-  public function setListPrice(VolumeSaleInfoOffersListPrice $listPrice)
+  public function setListPrice(VolumeSaleInbarffersListPrice $listPrice)
   {
     $this->listPrice = $listPrice;
   }
   /**
-   * @return VolumeSaleInfoOffersListPrice
+   * @return VolumeSaleInbarffersListPrice
    */
   public function getListPrice()
   {
     return $this->listPrice;
   }
   /**
-   * @param VolumeSaleInfoOffersRentalDuration
+   * @param VolumeSaleInbarffersRentalDuration
    */
-  public function setRentalDuration(VolumeSaleInfoOffersRentalDuration $rentalDuration)
+  public function setRentalDuration(VolumeSaleInbarffersRentalDuration $rentalDuration)
   {
     $this->rentalDuration = $rentalDuration;
   }
   /**
-   * @return VolumeSaleInfoOffersRentalDuration
+   * @return VolumeSaleInbarffersRentalDuration
    */
   public function getRentalDuration()
   {
     return $this->rentalDuration;
   }
   /**
-   * @param VolumeSaleInfoOffersRetailPrice
+   * @param VolumeSaleInbarffersRetailPrice
    */
-  public function setRetailPrice(VolumeSaleInfoOffersRetailPrice $retailPrice)
+  public function setRetailPrice(VolumeSaleInbarffersRetailPrice $retailPrice)
   {
     $this->retailPrice = $retailPrice;
   }
   /**
-   * @return VolumeSaleInfoOffersRetailPrice
+   * @return VolumeSaleInbarffersRetailPrice
    */
   public function getRetailPrice()
   {
@@ -107,4 +107,4 @@ class VolumeSaleInfoOffers extends \Google\Model
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(VolumeSaleInfoOffers::class, 'Google_Service_Books_VolumeSaleInfoOffers');
+class_alias(VolumeSaleInbarffers::class, 'Google_Service_Books_VolumeSaleInbarffers');

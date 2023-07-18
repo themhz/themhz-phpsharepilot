@@ -12,9 +12,9 @@
             <p id="modalDescription"></p>
             <p id="modalPostTime"></p>
         </div>
-        <footer class="w3-container w3-teal w3-padding">
+        <barter class="w3-container w3-teal w3-padding">
             <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>
             <input id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()" value="Save">
-        </footer>
+        </barter>
     </div>
 </div>

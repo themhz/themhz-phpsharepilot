@@ -141,9 +141,9 @@ class ProjectsLocationsApisArtifacts extends \Google\Service\Resource
    * @opt_param string filter An expression that can be used to filter the list.
    * Filters use the Common Expression Language and can refer to all message
    * fields except contents.
-   * @opt_param string orderBy A comma-separated list of fields, e.g. "foo,bar"
+   * @opt_param string orderBy A comma-separated list of fields, e.g. "bar,bar"
    * Fields can be sorted in descending order using the "desc" identifier, e.g.
-   * "foo desc,bar"
+   * "bar desc,bar"
    * @opt_param int pageSize The maximum number of artifacts to return. The
    * service may return fewer than this value. If unspecified, at most 50 values
    * will be returned. The maximum is 1000; values above 1000 will be coerced to

@@ -14,9 +14,9 @@
                 <input id="txtlist" class="w3-input w3-border w3-margin-top" type="text">
             </p>
         </div>
-        <footer class="w3-container w3-teal w3-padding">
+        <barter class="w3-container w3-teal w3-padding">
             <button onclick="addNewList()" class="w3-button w3-white w3-border w3-round">Add</button>
-        </footer>
+        </barter>
     </div>
 </div>
 

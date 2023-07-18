@@ -70,9 +70,9 @@
             ?>
 
         </div>
-        <!--Εδώ έχουμε το footer. To χώρισα σε 2 κομμάτια, το αριστερό και το δεξιό.-->
+        <!--Εδώ έχουμε το barter. To χώρισα σε 2 κομμάτια, το αριστερό και το δεξιό.-->
         <!-- εδώ έχουμε την λίστα με το επικοινωνήστε το τηλέφωνο και το email-->
-        <div class="footerl">
+        <div class="barterl">
             <ul>
                 <li class="lititle"></li>
                 <li class="phone"></li>
@@ -80,7 +80,7 @@
             </ul>
         </div>
         <!--και εδώ οι όροι χρήσης -->
-        <div class="footerr">
+        <div class="barterr">
             <ul>
                 <li>
 <!--                    <a href="https://www.eap.gr/wp-content/uploads/2020/10/oroi-xr.pdf" target="_blank"> |</a>-->
