@@ -7,7 +7,13 @@
         <p>Create a new List.</p>
         <div class="w3-bar w3-teal">
             <button class="w3-button" onclick="openNewListPopup()">New List</button>
+            <div class="w3-dropdown-hover w3-teal">
+                <div class="w3-container w3-teal">
+                    <select class="w3-select w3-teal w3-dropdown-hover" name="channelsTopBar" id="channelsTopBar" onchange="filterChannels()"></select>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 <div class="w3-row">
@@ -60,8 +66,12 @@
         }
     }, false);
 
-    function loadLists(){
-        fetch('lists?format=raw', {
+    function loadLists(channel_id=null){
+        let url ='lists?format=raw';
+        if(channel_id!=null){
+            url+= "&channel_id="+channel_id;
+        }
+        fetch(url, {
             method: 'get',
             })
             .then(response => response.json())
@@ -91,8 +101,11 @@
         fetch('channels/loadchannels?format=raw')
             .then(response => response.json())
             .then(data => {
+                document.getElementById("channelsTopBar").innerHTML += `<option value="">All</option>`;
                 data.forEach(item => {
                     document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+                    document.getElementById("channelsTopBar").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+
                 });
             });
     }
@@ -226,6 +239,7 @@
                 closeModal();
             });
     }
+
     function CreateList(){
         //console.log("Creating new list");
 
@@ -257,5 +271,10 @@
             // Replace the console.log statement with the desired event or function call
         }
     });
+
+    function filterChannels(){
+        let channel_id = document.getElementById("channelsTopBar").value;
+        loadLists(channel_id);
+    }
 
 </script>
