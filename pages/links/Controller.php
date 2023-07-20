@@ -3,7 +3,6 @@ use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
 use SharePilotV2\Models\Scheduled_posts;
-use SharePilotV2\Models\Channels;
 use SharePilotV2\Models\Lists;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
@@ -40,12 +39,7 @@ use SharePilotV2\Components\RequestHandler;
         }
         ResponseHandler::respond($videos);
     }
-    public function loadchannels(){
-        $c = new Channels();
-        $channels = $c->select()->orderBy("id","desc")->execute();
 
-        ResponseHandler::respond($channels);
-    }
 
     public function loadlists(){
         $l = new Lists();
@@ -163,19 +157,7 @@ use SharePilotV2\Components\RequestHandler;
         $id = $u->insert();
         ResponseHandler::respond(["message"=>"Url Was inserted with id:{$id}"]);
     }
-    public function addchannel(){
-        $channels = new Channels();
-        $channels->name = RequestHandler::get("channelName");
-        if(empty($channels->select()->where("name", "=", trim($channels->name))->execute())){
-            if($channels->insert()>0){
-                ResponseHandler::respond(["result"=>true, "message"=>"Channel has been successfully inserted"]);
-            }else{
-                ResponseHandler::respond(["result"=>false, "message"=>"there was an error trying to insert the channel"]);
-            }
-        }else{
-            ResponseHandler::respond(["result"=>false, "message"=>"channel name already exists"]);
-        }
-    }
+
     public function update(){
         $u = new Urls();
 

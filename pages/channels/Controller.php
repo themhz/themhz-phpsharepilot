@@ -22,12 +22,7 @@ use SharePilotV2\Components\RequestHandler;
          ResponseHandler::respond(["result"=>$result]);
      }
      public function put(){
-//         $c = new Channels();
-//         $c->id = RequestHandler::get("id");
-//         $c->name = RequestHandler::get("name");
-//         $data = $c->update();
-//         ResponseHandler::respond($data);
-//        die();
+
          $keylist = RequestHandler::get("keylist");
          $keys = new Channel_social_keys();
          $social_id = RequestHandler::get("social_id");
@@ -57,6 +52,28 @@ use SharePilotV2\Components\RequestHandler;
          ResponseHandler::respond($csk->select()
              ->where("channel_id", "=", $channelId)
              ->where("social_id", "=", $socialId)->execute());
+     }
+
+     public function addchannel(){
+         $channels = new Channels();
+         $channels->name = RequestHandler::get("channelName");
+         $channels->regdate = date("Y-m-d H:i");
+         if(empty($channels->select()->where("name", "=", trim($channels->name))->execute())){
+             if($channels->insert()>0){
+                 ResponseHandler::respond(["result"=>true, "message"=>"Channel has been successfully inserted"]);
+             }else{
+                 ResponseHandler::respond(["result"=>false, "message"=>"there was an error trying to insert the channel"]);
+             }
+         }else{
+             ResponseHandler::respond(["result"=>false, "message"=>"channel name already exists"]);
+         }
+     }
+
+     public function loadchannels(){
+         $c = new Channels();
+         $channels = $c->select()->orderBy("id","desc")->execute();
+
+         ResponseHandler::respond($channels);
      }
  }
  

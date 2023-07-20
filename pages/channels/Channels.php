@@ -44,9 +44,9 @@
         </div>
         <div class="w3-container" id="keylist">
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button onclick="update()" class="w3-button w3-white w3-border w3-round">Update</button>
-        </barter>
+        </footer>
     </div>
 </div>
 <!--popup-->
@@ -76,19 +76,18 @@
 <div id="newChannelModal" class="w3-modal">
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
-        <span onclick="document.getElementById('newChannelModal').style.display='none'"
-              class="w3-button w3-display-topright">&times;</span>
-            <h2>New Channel B</h2>
+            <span onclick="document.getElementById('newChannelModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h2>New Channel</h2>
         </header>
         <div class="w3-container w3-margin">
             <label for="channelName">Channel Name:</label>
             <input type="text" id="channelName" name="channelName" class="w3-input w3-border" value="">
             <p id="error-message" style="color: red; display: none;">Please enter a channel name!</p>
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button class="w3-button w3-red" onclick="document.getElementById('newChannelModal').style.display='none'">Cancel</button>
             <button class="w3-button w3-green" id="create-channel">Create Channel</button>
-        </barter>
+        </footer>
     </div>
 </div>
 <!--new channel window-->
@@ -284,7 +283,7 @@
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('database/addchannel?format=raw', {
+            fetch('channels/addchannel?format=raw', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

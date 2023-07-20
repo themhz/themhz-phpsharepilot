@@ -30,8 +30,7 @@
 <div id="newListModal" class="w3-modal">
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
-        <span onclick="closeModal()"
-              class="w3-button w3-display-topright">&times;</span>
+        <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
             <h2>List Item</h2>
         </header>
         <div class="w3-container w3-margin">
@@ -45,10 +44,10 @@
                 <select class="w3-select w3-dropdown-hover w3-white w3-border" name="option" id="channels"></select>
             </p>
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button class="w3-button w3-red" onclick="closeModal()">Cancel</button>
             <button class="w3-button w3-green" id="action_for_list" ></button>
-        </barter>
+        </footer>
     </div>
 </div>
 <!--new List window-->
@@ -89,7 +88,7 @@
             })
     }
     function loadChannels(){
-        fetch('database/loadchannels?format=raw')
+        fetch('channels/loadchannels?format=raw')
             .then(response => response.json())
             .then(data => {
                 data.forEach(item => {

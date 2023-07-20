@@ -53,7 +53,7 @@ if (isset($_SESSION["user"])){ ?>
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-black" href="database">Links</a>
+    <a class="w3-bar-item w3-button w3-hover-black" href="links">Links</a>
     <a class="w3-bar-item w3-button w3-hover-black" href="channels">Channels</a>
     <a class="w3-bar-item w3-button w3-hover-black" href="lists">Lists</a>
     <a class="w3-bar-item w3-button w3-hover-black" href="schedule">Scheduled Links</a>

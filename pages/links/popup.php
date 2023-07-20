@@ -19,9 +19,9 @@
                 <select class="w3-select w3-dropdown-hover w3-white w3-border" name="option" id="editmodal_lists"></select>
             </p>
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button onclick="submitChanges()" class="w3-button w3-white w3-border w3-round">Update</button>
-        </barter>
+        </footer>
     </div>
 </div>
 <!--popup-->

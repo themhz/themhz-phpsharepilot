@@ -62,7 +62,10 @@ class Website{
     }
 
     private function setTimeZone(){
-        date_default_timezone_set('UTC');
+        $timezone2 = new TimeZone();
+        $dbTimeZone2 = $timezone2->GetTimeZoneFromDb();
+        $timezone2->SetCurrentTimeZone($dbTimeZone2["timezone"]);
+
     }
 
     private function userAuth(){

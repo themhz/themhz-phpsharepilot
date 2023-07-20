@@ -14,9 +14,9 @@
                 <input id="txtlist" class="w3-input w3-border w3-margin-top" type="text">
             </p>
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button onclick="addNewList()" class="w3-button w3-white w3-border w3-round">Add</button>
-        </barter>
+        </footer>
     </div>
 </div>
 
@@ -28,7 +28,7 @@
         let name = document.getElementById("txtlist").value;
 
         if(channel_id!=0){
-            fetch('database/addnewlist?format=raw', {
+            fetch('links/addnewlist?format=raw', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
