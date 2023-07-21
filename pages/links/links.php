@@ -49,7 +49,7 @@
         let channelId = document.getElementById("channels").value;
         let listId = document.getElementById("lists").value;
 
-        let url = 'links/getvideo?format=raw';
+        let url = 'links/getlinks?format=raw';
         if (channelId != "0" && channelId!="") {
             url += '&channelid=' + encodeURIComponent(channelId);
         }
@@ -114,6 +114,7 @@
                                 <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                 <span>${item.regdate}</span><br>
                                 <span style="color:blue">${item.channel_name == null ? "no channel" : item.channel_name }</span><br>
+                                <span style="color:blue">${item.list_name == null ? "no list" : item.list_name }</span><br>
                                 <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                                 <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Add to Schedule</button>
                             </div>
@@ -266,7 +267,7 @@
             loadUrls();
             return;
         }
-        fetch('database/search?format=raw', {
+        fetch('links/search?format=raw', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -275,7 +276,8 @@
              })
             .then(response => response.json())
             .then(data => {
-                createlist(data);
+                //console.log(data);
+                createUrls(data);
             });
     }
     function closeModal() {
@@ -291,7 +293,7 @@
         return url.protocol === "http:" || url.protocol === "https:";
     }
     function saveLink(){
-        fetch("database/addurl?format=raw", {
+        fetch("links/addurl?format=raw", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -308,7 +310,9 @@
             if (data && data.message) {
                 alert(data.message);
                 loadChannels();
+                loadUrls();
                 closeModal();
+                document.getElementById("txtUrl").value="";
             } else {
                 console.error("Unexpected response data:", data);
             }
@@ -371,7 +375,7 @@
         }
         const formData = new FormData();
         formData.append('url', url);
-        fetch('database/fetchurl?format=raw', {
+        fetch('links/fetchurl?format=raw', {
             method: 'POST',
             body: formData
         })

@@ -16,7 +16,7 @@ use SharePilotV2\Components\RequestHandler;
         $result = $u->select()->where("title","like","%".$search."%")->execute();
         ResponseHandler::respond($result);
     }
-    public function getvideo()
+    public function getlinks()
     {
         $channelid = RequestHandler::get("channelid");
         $listid = RequestHandler::get("listid");
@@ -24,9 +24,16 @@ use SharePilotV2\Components\RequestHandler;
         $u = new Urls();
         if($channelid==null){
             //$videos = $u->select([],["id"=>"desc"]);
-            $videos = $u->query("select urls.*,channels.name as channel_name from urls left join channels on urls.channel_id = channels.id order by urls.id desc");
-        }else{
-            $sql = "select urls.*,channels.name as channel_name from urls inner join channels on urls.channel_id = channels.id where urls.channel_id = $channelid ";
+            $videos = $u->query("select urls.*,channels.name as channel_name , lists.name as list_name
+                                    from urls 
+                                    left join channels on urls.channel_id = channels.id 
+                                    left join lists on urls.list_id = lists.id
+                                    order by urls.id desc;");
+            }else{
+                $sql = "select urls.*,channels.name as channel_name 
+                        from urls 
+                        inner join channels on urls.channel_id = channels.id 
+                        where urls.channel_id = $channelid ";
 
             if($listid!=null && $listid!="" && $listid!="0"){
                 $sql .= " and urls.list_id=$listid ";
@@ -43,7 +50,6 @@ use SharePilotV2\Components\RequestHandler;
 
     public function loadlists(){
         $l = new Lists();
-
         $channel_id = RequestHandler::get("channel_id");
         if($channel_id!="" and $channel_id!= null){
             $lists = $l->select()->where("channel_id", "=", $channel_id)->execute();
@@ -154,6 +160,7 @@ use SharePilotV2\Components\RequestHandler;
         $u->source = 1;
         $u->type = 1;
         $u->thumbnailUrl = RequestHandler::get("image");
+        $u->regdate = date("Y/m/d H:i:s");
         $id = $u->insert();
         ResponseHandler::respond(["message"=>"Url Was inserted with id:{$id}"]);
     }
