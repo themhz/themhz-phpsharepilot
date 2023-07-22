@@ -26,13 +26,16 @@ use SharePilotV2\Components\RequestHandler;
             //$videos = $u->select([],["id"=>"desc"]);
             $videos = $u->query("select urls.*,channels.name as channel_name , lists.name as list_name
                                     from urls 
-                                    left join channels on urls.channel_id = channels.id 
+                                      join channels on urls.channel_id = channels.id 
                                     left join lists on urls.list_id = lists.id
                                     order by urls.id desc;");
             }else{
-                $sql = "select urls.*,channels.name as channel_name 
+                $sql = "select urls.*,
+                                channels.name as channel_name, 
+                                lists.name as list_name
                         from urls 
-                        inner join channels on urls.channel_id = channels.id 
+                        left join channels on urls.channel_id = channels.id 
+                        left join lists on urls.list_id = lists.id
                         where urls.channel_id = $channelid ";
 
             if($listid!=null && $listid!="" && $listid!="0"){

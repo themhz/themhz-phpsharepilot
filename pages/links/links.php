@@ -1,7 +1,7 @@
 <!--Lists-->
 <div class="w3-row w3-padding-64">
     <div class="w3-container w3-teal">
-        <h1>Links in database</h1>
+        <h1>Links</h1>
     </div>
     <div class="w3-container">
         <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
@@ -16,7 +16,7 @@
                     <select class="w3-select w3-teal w3-dropdown-hover" name="lists" id="lists" onchange="filterLists()"></select>
                 </div>
             </div>
-            <button class="w3-button" onclick="newList()" >New List</button>
+<!--            <button class="w3-button" onclick="newList()" >New List</button>-->
         </div>
     </div>
     <div class="w3-container w3-margin-top">
@@ -113,8 +113,8 @@
                             <div class="w3-bar-item" id=${item.id}>
                                 <span class="w3-large">${item.title.substring(0, 80)}</span><br>
                                 <span>${item.regdate}</span><br>
-                                <span style="color:blue">${item.channel_name == null ? "no channel" : item.channel_name }</span><br>
-                                <span style="color:blue">${item.list_name == null ? "no list" : item.list_name }</span><br>
+                                <span style="color:blue">Channel: ${item.channel_name == null ? "no channel" : item.channel_name }</span><br>
+                                <span style="color:blue">List: ${item.list_name == null ? "no list" : item.list_name }</span><br>
                                 <button onclick="deletePost(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                                 <button onclick="schedulePost(${item.id})" class="w3-button w3-blue w3-margin-top">Add to Schedule</button>
                             </div>
