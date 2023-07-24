@@ -9,8 +9,8 @@
             <div class="w3-container w3-card-4" >
                 <h2 class="w3-text-teal">Schedule Controls</h2>
                 <select class="w3-btn w3-teal w3-margin-bottom  w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
-                <button class="w3-btn w3-teal w3-margin-bottom" id="deleteautoscheduleposts">Delete all Schedule Posts</button>
-                <button class="w3-btn w3-teal w3-margin-bottom" id="clearautoscheduleposts">Clear All Schedule Posts</button>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="deleteautoscheduleposts">Delete {word} Schedule Posts</button>
+                <button class="w3-btn w3-teal w3-margin-bottom" id="clearautoscheduleposts">Clear {word} Schedule Posts</button>
             </div>
         </div>
     </div>
@@ -27,12 +27,14 @@
                 <h2 class="w3-text-teal">Schedule Posts</h2>
                 <input class="w3-input w3-border w3-margin-bottom" type="date" name="initial_schedule_post_date" id="initial_schedule_post_date" value="">
                 <input class="w3-input w3-border w3-margin-bottom" type="time" name="initial_schedule_post_time" id="initial_schedule_post_time" value="">
-                <h3 class="w3-text-teal">Interval</h3>
+                <h3 class="w3-text-teal">Interval hours between url posts</h3>
                 <input class="w3-input w3-border w3-margin-bottom"  type="text" name="hourInterval" id="hourInterval" value="">
                 <h3 class="w3-text-teal">Avoid start hour</h3>
-                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_start_hour" id="avoid_start_hour" value="0">
+<!--                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_start_hour" id="avoid_start_hour" value="0">-->
+                <select class="w3-input w3-border w3-margin-bottom" id="avoid_start_hour"></select>
                 <h3 class="w3-text-teal">Avoid end hour</h3>
-                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_end_hour" id="avoid_end_hour" value="7">
+                <select class="w3-input w3-border w3-margin-bottom" id="avoid_end_hour"></select>
+<!--                <input class="w3-input w3-border w3-margin-bottom"  type="text" name="avoid_end_hour" id="avoid_end_hour" value="7">-->
                 <button class="w3-btn w3-teal w3-margin-bottom" id="scheduleButton">Pull schedule posts</button>
                 <button class="w3-btn w3-teal w3-margin-bottom" id="restatescheduleButton">Reset dates for schedule posts</button>
             </div>
@@ -60,9 +62,9 @@
             <p>URL: <input id="editURL" class="w3-input w3-border w3-margin-top" type="text"></p>
             <p>Thumbnail URL: <input id="editThumbURL" class="w3-input w3-border w3-margin-top" type="text"></p>
         </div>
-        <barter class="w3-container w3-teal w3-padding">
+        <footer class="w3-container w3-teal w3-padding">
             <button onclick="submitChanges()" class="w3-button w3-white w3-border w3-round">Submit</button>
-        </barter>
+        </footer>
     </div>
 </div>
 <!--popup-->
@@ -94,6 +96,7 @@
         {
             loadList();
             loadChannels();
+            loadAvoidStartHoursAndEndHours();
         }
     }, false);
     function loadList(){
@@ -116,6 +119,9 @@
                 data.forEach(item => {
                     const li = document.createElement('li');
                     li.className = "w3-bar w3-hover-teal";
+                    if(item.is_posted == 1){
+                        li.className +=" w3-teal";
+                    }
                     li.style.cursor = "pointer";
                     li.id = item.id;
                     li.innerHTML = `<span onclick="deletePost(${item.scheduled_id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
@@ -137,44 +143,57 @@
                     });
                     ul.appendChild(li);
                 });
+
             })
             .catch((error) => {
                 console.error('Error:', error);
             });
         loadCalendar();
     }
-    function submitChanges() {
-        // Access the input values using:
-        // document.getElementById('editTitle').value
-        // document.getElementById('editURL').value
-        // document.getElementById('editThumbURL').value
-        // Update the item in your data and on the page
-        // Hide the modal
-        document.getElementById('myModal').style.display = 'none';
-        alert(1);
-    }
+
     function deletePost(id){
         event.stopPropagation();
         if(confirm("are you sure you want to delete this item?")){
             const scheduled_id = id;
-            $.ajax({
-                type: "POST",
-                url: "schedule/delete?format=raw",
-                data: {
-                    id: scheduled_id,
+
+            fetch('schedule/delete?format=raw', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
                 },
-                success: (response) => {
+                body: JSON.stringify({
+                    id: scheduled_id
+                })
+            })
+                .then(response => response.json())
+                .then(response => {
                     if(response.result == true){
                         alert("deleted successfully");
                     }else{
                         alert("problem with deletion");
                     }
                     loadList();
-                },
-                error: () => {
-                    alert("An error occurred while scheduling the video.");
-                },
-            });
+                });
+
+
+            // $.ajax({
+            //     type: "POST",
+            //     url: "schedule/delete?format=raw",
+            //     data: {
+            //         id: scheduled_id,
+            //     },
+            //     success: (response) => {
+            //         if(response.result == true){
+            //             alert("deleted successfully");
+            //         }else{
+            //             alert("problem with deletion");
+            //         }
+            //         loadList();
+            //     },
+            //     error: () => {
+            //         alert("An error occurred while scheduling the video.");
+            //     },
+            // });
         }
     }
     function updateSchedulePost(id){
@@ -213,6 +232,8 @@
         data.forEach(item => {
             document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
+
+        fixTexts();
     }
     function closeModal() {
         document.querySelector('#modal').style.display = "none";
@@ -255,11 +276,11 @@
                     body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, channelId:channelId, avoid_start_hour:avoid_start_hour,avoid_end_hour:avoid_end_hour })
                 });
                 const data = await response.json();
-                if (response.ok) {
+                if (data.result == true) {
                     loadList();
-                    alert(data.message);
+                    alert("Urls has been scheduled successfully");
                 } else {
-                    alert(`Error: ${data.error}`);
+                    alert(`Error scheduling urls`);
                 }
             } catch (error) {
                 alert(`Error: ${error}`);
@@ -285,7 +306,7 @@
                     },
                 });
                 const data = await response.json();
-                console.log(data.result);
+                //console.log(data.result);
                  if (data.result==true) {
                      alert("deleted successfully");
                      loadList();
@@ -312,11 +333,9 @@
                     },
                 });
                 const data = await response.json();
-                if (response.ok) {
+                if (data.result) {
                     loadList();
                     alert("cleared");
-                } else {
-                    alert(`Error: ${data.error}`);
                 }
             } catch (error) {
                 alert(`Error: ${error}`);
@@ -343,11 +362,11 @@
                     body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, avoid_start_hour:avoid_start_hour,avoid_end_hour:avoid_end_hour})
                 });
                 const data = await response.json();
-                if (response.ok) {
+                if (data.result==true) {
                     loadList();
-                    alert(data.message);
+                    alert("Urls have been scheduled");
                 } else {
-                    alert(`Error: ${data.error}`);
+                    alert(`Error rescheduling urls`);
                 }
             } catch (error) {
                 alert(`Error: ${error}`);
@@ -360,6 +379,27 @@
     });
 function filterChannels(){
     loadList();
+    fixTexts();
+
+}
+function fixTexts(){
+
+    document.getElementById("clearautoscheduleposts").innerText = "Clear {word} Schedule Posts";
+    document.getElementById("deleteautoscheduleposts").innerText = "Delete {word} Schedule Posts";
+    let channelName = document.getElementById("channels").options[document.getElementById("channels").selectedIndex].innerText;
+    document.getElementById("clearautoscheduleposts").innerText = document.getElementById("clearautoscheduleposts").innerText.replace("{word}",channelName);
+    document.getElementById("deleteautoscheduleposts").innerText = document.getElementById("deleteautoscheduleposts").innerText.replace("{word}",channelName);
+}
+
+function loadAvoidStartHoursAndEndHours(){
+    for(let i=0;i<24;i++){
+        document.getElementById("avoid_start_hour").innerHTML += `<option value="${i}">${i}</option>`;
+        document.getElementById("avoid_end_hour").innerHTML += `<option value="${i}">${i}</option>`;
+    }
+
+    document.getElementById("avoid_start_hour").value = "0";
+    document.getElementById("avoid_end_hour").value = "7";
+
 }
 </script>
 <script src="template/js/calendar.js?v="<?php echo time(); ?>"></script>

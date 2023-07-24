@@ -108,19 +108,32 @@ abstract class Model
 
     public function callStoredProcedure($procedure, $params)
     {
-        $placeholders = implode(',', array_fill(0, count($params), '?'));
+        $inPlaceholders = implode(',', array_fill(0, count($params), '?'));
+
+        // Adding an OUT parameter
+        $outPlaceholder = "@outParam";
+
+        $placeholders = $inPlaceholders . ", " . $outPlaceholder;
 
         try {
+            // Calling the stored procedure
             $stmt = self::$pdo->prepare("CALL $procedure($placeholders)");
-
             $stmt->execute(array_values($params));
 
-            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            // Getting the OUT parameter value
+            $outStmt = self::$pdo->query("SELECT $outPlaceholder");
+            $procedureSuccess = $outStmt->fetchColumn();
+
+            // Return both the fetched rows and the OUT parameter value
+            return [
+                'result' => (bool)$procedureSuccess
+            ];
         } catch (\PDOException $e) {
             echo "Stored procedure call failed: " . $e->getMessage();
             return false;
         }
     }
+
 
     public function loadProperties($data) {
         foreach ($data as $key => $value) {

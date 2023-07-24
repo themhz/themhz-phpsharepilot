@@ -11,7 +11,7 @@ use SharePilotV2\Components\RequestHandler;
      public function delete(){
          $u = new Scheduled_posts();
          $data = $u->delete()->where("id","=",$_POST["id"]);
-         ResponseHandler::respond($data);
+         ResponseHandler::respond(["result"=>$data]);
      }
      public function getscheduledlinks()
      {
@@ -50,7 +50,8 @@ use SharePilotV2\Components\RequestHandler;
          $channelId = RequestHandler::get("channelId");
          $avoid_start_hour  = RequestHandler::get("avoid_start_hour");
          $avoid_end_hour = RequestHandler::get("avoid_end_hour");
-         ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour));
+         $result = $u->autoscheduleposts($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour);
+         ResponseHandler::respond(["result"=>$result]);
      }
      public function deleteautoscheduleposts(){
          $u = new Scheduled_posts();
@@ -66,10 +67,10 @@ use SharePilotV2\Components\RequestHandler;
          $u = new Scheduled_posts();
          if(RequestHandler::get("channelid")!==null && RequestHandler::get("channelid")!=""){
              $result = $u->query("UPDATE scheduled_posts SET post_time = NULL where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");");
-             ResponseHandler::respond($result);
+             ResponseHandler::respond(["result"=>$result]);
          }else{
              $result = $u->query("UPDATE scheduled_posts SET post_time = NULL;");
-             ResponseHandler::respond($result);
+             ResponseHandler::respond(["result"=>$result]);
          }
      }
      public function restateschedule(){
@@ -79,7 +80,8 @@ use SharePilotV2\Components\RequestHandler;
          $channelId = RequestHandler::get("channelId");
          $avoid_start_hour  = RequestHandler::get("avoid_start_hour");
          $avoid_end_hour = RequestHandler::get("avoid_end_hour");
-         ResponseHandler::respond($u->restateschedule($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour));
+         $result =$u->restateschedule($start_datetime, $hourInterval, $channelId, $avoid_start_hour, $avoid_end_hour);
+         ResponseHandler::respond(["result"=>$result]);
      }
  }
  
