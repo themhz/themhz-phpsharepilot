@@ -71,8 +71,25 @@ use SharePilotV2\Components\RequestHandler;
         $u = new Urls();
         $sp = new scheduled_posts();
         $id = RequestHandler::get("id");
-        $result = $u->select()->where("id","=",$id)->execute();
-        $sp->url_id = $result[0]->id;
+        $result = $u->select()
+            ->fields("urls.id",
+                "urls.list_id",
+                "urls.url",
+                "urls.title",
+                "urls.source",
+                "urls.type",
+                "urls.thumbnailurl","channels.name as channel_name",
+                "channels.id as channel_id"
+            )
+            ->join("inner","channels", "channels.id = urls.channel_id")
+            ->where("urls.id","=",$id)
+            ->execute();
+
+        $sp->url_id = $result[0]["id"];
+        $sp->list_id = $result[0]["list_id"];
+        $sp->channel_id = $result[0]["channel_id"];
+        $sp->regdate = date("Y/m/d H:i:s");
+
         $result = $sp->insert();
         if ($result > 0) {
             ResponseHandler::respond(["result"=>true, "message"=>"Insertion was successful!"]);

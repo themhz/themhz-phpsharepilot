@@ -180,28 +180,29 @@
     function updateSchedulePost(id){
         event.stopPropagation();
         var post_time = document.getElementById('post_time_'+id).value;
-        $.ajax({
-            type: "POST",
-            url: "schedule/updateschedulepost?format=raw",
-            data: {
-                id: id,
-                post_time: post_time,
+
+        fetch('schedule/updateschedulepost?format=raw', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            success: (response) => {
+            body: JSON.stringify({
+                id: id,
+                post_time: post_time
+            })
+        })
+            .then(response => response.json())
+            .then(response => {
                 if(response.result == true){
                     alert("updated successfully");
                 }else{
                     alert("problem with update");
                 }
                 loadList();
-            },
-            error: () => {
-                alert("An error occurred while scheduling the video.");
-            },
-        });
+            });
     }
     function loadChannels(){
-        fetch('database/loadchannels?format=raw')
+        fetch('channels/loadchannels?format=raw')
             .then(response => response.json())
             .then(data => {
                 createChannellist(data);
@@ -284,12 +285,13 @@
                     },
                 });
                 const data = await response.json();
-                if (response.ok) {
-                    loadList();
-                    alert(data.message);
-                } else {
-                    alert(`Error: ${data.error}`);
-                }
+                console.log(data.result);
+                 if (data.result==true) {
+                     alert("deleted successfully");
+                     loadList();
+                 } else {
+                     alert("nothing to delete");
+                 }
             } catch (error) {
                 alert(`Error: ${error}`);
             }

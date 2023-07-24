@@ -242,24 +242,25 @@
     function schedulePost(id){
         event.stopPropagation();
         let scheduled_id = id;
-        // $.ajax({
-        //     type: "POST",
-        //     url: "database/schedulepost?format=raw",
-        //     data: {
-        //         id: scheduled_id,
-        //     },
-        //     success: (response) => {
-        //         if(response.result == true){
-        //             alert("link added to scheduler successfully");
-        //         }else{
-        //             alert("problem with added link to scheduler");
-        //         }
-        //         loadUrls();
-        //     },
-        //     error: () => {
-        //         alert("An error occurred while scheduling the video.");
-        //     },
-        // });
+        fetch('links/schedulepost?format=raw', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                id: scheduled_id
+                })
+             })
+            .then(response => response.json())
+            .then(response => {
+                if(response.result == true){
+                    alert("link added to scheduler successfully");
+                }else{
+                    alert("problem with added link to scheduler");
+                }
+                loadUrls();
+            });
+
     }
     function search(){
         const search = document.querySelector('#txtsearch').value;

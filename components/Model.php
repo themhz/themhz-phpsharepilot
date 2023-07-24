@@ -122,6 +122,11 @@ abstract class Model
         }
     }
 
+    public function loadProperties($data) {
+        foreach ($data as $key => $value) {
+            $this->$key = $value;
+        }
+    }
 
 
     public function beginTransaction()

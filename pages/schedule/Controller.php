@@ -32,8 +32,10 @@ use SharePilotV2\Components\RequestHandler;
          $u = new Scheduled_posts();
          $post_time_string = RequestHandler::get("post_time");
          $u->post_time = new \DateTime($post_time_string);
-         $data = $u->update()->where("id","=",RequestHandler::get("id"))->execute();
-         ResponseHandler::respond($data);
+         $u->post_time = $u->post_time->format('Y-m-d H:i:s');
+
+         $result = $u->update()->where("id","=",RequestHandler::get("id"))->execute();
+         ResponseHandler::respond(["result"=>$result]);
      }
     public function fetchTasks()
     {
@@ -53,17 +55,21 @@ use SharePilotV2\Components\RequestHandler;
      public function deleteautoscheduleposts(){
          $u = new Scheduled_posts();
          if(RequestHandler::get("channelid")!==null && RequestHandler::get("channelid")!=""){
-             ResponseHandler::respond($u->query("delete from scheduled_posts where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");"));
+             $result = $u->query("delete from scheduled_posts where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");");
+             ResponseHandler::respond(["result"=>$result]);
          }else{
-             ResponseHandler::respond($u->delete()->execute());
+             $result = $u->delete()->execute();
+             ResponseHandler::respond(["result"=>$result]);
          }
      }
      public function clearautoscheduleposts(){
          $u = new Scheduled_posts();
          if(RequestHandler::get("channelid")!==null && RequestHandler::get("channelid")!=""){
-             ResponseHandler::respond($u->query("UPDATE scheduled_posts SET post_time = NULL where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");"));
+             $result = $u->query("UPDATE scheduled_posts SET post_time = NULL where url_id in (select id from urls where channel_id=".RequestHandler::get("channelid").");");
+             ResponseHandler::respond($result);
          }else{
-             ResponseHandler::respond($u->query("UPDATE scheduled_posts SET post_time = NULL;"));
+             $result = $u->query("UPDATE scheduled_posts SET post_time = NULL;");
+             ResponseHandler::respond($result);
          }
      }
      public function restateschedule(){
