@@ -362,6 +362,7 @@
                     body: JSON.stringify({ start_datetime: initial_schedule_post_date + ' ' +initial_schedule_post_time , hourInterval:hourInterval, avoid_start_hour:avoid_start_hour,avoid_end_hour:avoid_end_hour})
                 });
                 const data = await response.json();
+                console.log(data);
                 if (data.result==true) {
                     loadList();
                     alert("Urls have been scheduled");

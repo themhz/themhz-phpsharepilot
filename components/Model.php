@@ -125,9 +125,8 @@ abstract class Model
             $procedureSuccess = $outStmt->fetchColumn();
 
             // Return both the fetched rows and the OUT parameter value
-            return [
-                'result' => (bool)$procedureSuccess
-            ];
+            return  (bool)$procedureSuccess;
+
         } catch (\PDOException $e) {
             echo "Stored procedure call failed: " . $e->getMessage();
             return false;
