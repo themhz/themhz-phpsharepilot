@@ -1,5 +1,5 @@
 <!--Lists-->
-<div class="w3-row w3-padding-64">
+<div class="w3-row custom-padding-45">
     <div class="w3-container w3-teal">
         <h1>Scheduled Links</h1>
     </div>

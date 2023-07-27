@@ -1,5 +1,5 @@
 <!--Lists-->
-<div class="w3-row w3-padding-64">
+<div class="w3-row custom-padding-45">
     <div class="w3-container w3-teal">
         <h1>Links</h1>
     </div>
@@ -16,7 +16,6 @@
                     <select class="w3-select w3-teal w3-dropdown-hover" name="lists" id="lists" onchange="filterLists()"></select>
                 </div>
             </div>
-<!--            <button class="w3-button" onclick="newList()" >New List</button>-->
         </div>
     </div>
     <div class="w3-container w3-margin-top">
