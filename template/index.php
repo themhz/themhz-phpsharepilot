@@ -24,7 +24,7 @@ namespace SharePilotV2\Components;
 if (isset($_SESSION["user"])){ ?>
 <!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large ">
         <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
 
         <a href="login?method=logout&format=raw" class="w3-bar-item w3-button w3-right w3-hover-white custom-margin-top-45">Exit</a>
@@ -39,15 +39,15 @@ if (isset($_SESSION["user"])){ ?>
 </div>
 <!-- Sidebar -->
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-black w3-hide-large" title="Close Menu">
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-teal w3-hide-large" title="Close Menu">
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-black" href="links">Links</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="channels">Channels</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="lists">Lists</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="schedule">Scheduled Links</a>
-    <a class="w3-bar-item w3-button w3-hover-black" href="settings">Settings</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="links">Links</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="channels">Channels</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="lists">Lists</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="schedule">Scheduled Links</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
