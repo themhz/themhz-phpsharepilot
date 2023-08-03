@@ -64,6 +64,11 @@ class PostingService
     }
 }
 
+
+//I have saved the social media channels in the database. So I do a select to get them. the name social is associated with the filename in the current directory in order to execute the code
+//that will be used to post the message in the social media. Each channel has it unique keys. So If you need to add a new social media channel then add it customly but also define it in the database.
+//You define a new social from the admin
+
 $ps = new PostingService();
 $db = Database::getInstance();
 $sql = "select distinct b.name channel, c.name social , channel_id, social_id
@@ -75,6 +80,7 @@ $sth = $db->prepare($sql);
 $sth->execute();
 $results = $sth->fetchAll(\PDO::FETCH_OBJ);
 
+//So for each social media and channelI add it to the posting service
 foreach ($results as $result){
 
     $channel_id=$result->channel_id;
@@ -96,5 +102,5 @@ foreach ($results as $result){
 
 
 }
-
+//and finally I post them
 $ps->post();
