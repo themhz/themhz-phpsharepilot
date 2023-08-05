@@ -277,7 +277,6 @@
     }
     document.getElementById('create-channel').addEventListener('click', function(){
         document.getElementById('channelName').value = document.getElementById('channelName').value.trim();
-        alert(document.getElementById('channelName').value);
         var channelName = document.getElementById('channelName').value;
         if(channelName === ""){
             document.getElementById('error-message').style.display = 'block';

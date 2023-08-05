@@ -35,13 +35,6 @@
             <p>social Name: <input id="txtsocialName" class="w3-input w3-border w3-margin-top" type="text"></p>
             <input type="text" id="txtsocialId" name="txtsocialId" value="" style="display: none">
         </div>
-        <div class="w3-container">
-            <div class="w3-bar">
-                <span class="w3-bar-item">Social:</span>
-                <select class="w3-select w3-bar-item w3-margin-bottom w3-dropdown-hover" type="text" id="selectedSocialId" name="selectedSocialId" value="" onchange="onChangeSelectedSocial()"></select>
-                <input class="w3-bar-item w3-button w3-white w3-border w3-round" type="button" value="Add Key" onclick="addKey()">
-            </div>
-        </div>
         <div class="w3-container" id="keylist">
         </div>
         <footer class="w3-container w3-teal w3-padding">
@@ -119,12 +112,7 @@
                 createSosials(data);
             })
     }
-    function createSosials(data){
-        //console.log(data);
-        for(var i=0;i<data.length;i++){
-            document.getElementById("selectedSocialId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
-        }
-    }
+
     function onChangeSelectedSocial(){
         fetch('socials/loadkeys?format=raw',{
             method: 'post',
@@ -133,7 +121,6 @@
             },
             body: JSON.stringify({
                 socialId:document.getElementById("txtsocialId").value,
-                socialId:document.getElementById("selectedSocialId").value,
             })
         })
         .then(response => response.json())
@@ -193,8 +180,6 @@
             body: JSON.stringify({
                     id:document.getElementById("txtsocialId").value,
                     name: document.getElementById("txtsocialName").value,
-                    social_id:document.getElementById("selectedSocialId").value,
-                    keylist : getKeyListFromPopUp()
                 })
             })
             .then(response => response.json())
@@ -277,7 +262,7 @@
     }
     document.getElementById('create-social').addEventListener('click', function(){
         document.getElementById('socialName').value = document.getElementById('socialName').value.trim();
-        alert(document.getElementById('socialName').value);
+        //alert(document.getElementById('socialName').value);
         var socialName = document.getElementById('socialName').value;
         if(socialName === ""){
             document.getElementById('error-message').style.display = 'block';
