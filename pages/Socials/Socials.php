@@ -89,7 +89,7 @@
         if(evt.target.readyState == "complete")
         {
             loadsocials();
-            loadSocials();
+            //loadSocials();
         }
     }, false);
     function loadsocials(){
@@ -101,33 +101,7 @@
                 createlist(data);
             })
     }
-    function loadSocials(){
-        //txtSocialId
-        fetch('socials/getsocials?format=raw', {
-            method: 'get',
-        })
-            .then(response => response.json())
-            .then(data => {
-                //createlist(data);
-                createSosials(data);
-            })
-    }
 
-    function onChangeSelectedSocial(){
-        fetch('socials/loadkeys?format=raw',{
-            method: 'post',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                socialId:document.getElementById("txtsocialId").value,
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            loadkeys(data);
-        });
-    }
     function loadkeys(data){
         let keylist = document.getElementById("keylist");
         keylist.innerHTML ="";
@@ -169,7 +143,6 @@
         document.getElementById('txtsocialName').value = item.name;
         document.getElementById('txtsocialId').value = item.id;
         document.getElementById('myModal').style.display = 'block';
-        onChangeSelectedSocial();
     }
     function update() {
         fetch('socials?format=raw', {
@@ -185,7 +158,6 @@
             .then(response => response.json())
             .then(data => {
                 loadsocials();
-                //createlist(data);
             })
 
         document.getElementById('myModal').style.display = 'none';
