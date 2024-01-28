@@ -26,7 +26,7 @@ use SharePilotV2\Components\RequestHandler;
             //$videos = $u->select([],["id"=>"desc"]);
             $videos = $u->query("select urls.*,channels.name as channel_name , lists.name as list_name
                                     from urls 
-                                      join channels on urls.channel_id = channels.id 
+                                     left join channels on urls.channel_id = channels.id 
                                     left join lists on urls.list_id = lists.id
                                     order by urls.id desc;");
             }else{

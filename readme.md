@@ -25,6 +25,15 @@ You can add many users to work with campaigns. You can add more social media cha
 or extend the script as you please in order to solve your issues. The script uses a simple php framework with a very 
 simple ORM. It uses php 8+ and mysql. You can install it on your server and use it even if you have wordpress or joomla or any other framework. You seemply need to provide the links that are to be shared and posted in the social media.* 
 
+Features
+--
+1. Manage your posts (create delete and update) your posts
+2. Post them in multiple channels
+3. Schedule the posts in any number or any date
+4. Filter your schedule to post specific hours in the day
+5. Manage more the one channel on each social media site. For example you can use multiple pages and post different content in different pages
+6. Secure system to manage users entering the system.
+
 Installation
 ---
 
