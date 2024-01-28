@@ -18,12 +18,11 @@ Table of Contents
 
 Introduction
 ---
+*Share Pilot is a Social Media Post Management System (SMPMS). It enables you to share your posts across various channels on social media. With Share Pilot, you can schedule your posts for consistent and timely distribution across your social media platforms. Additionally, it allows you to maintain a history of your posts and manage their lifecycle effectively.*
 
-*You can create several channels in your social medias. For example if you have many 
-pages in facebook, you can create separate schedule posts for those channels. 
-You can add many users to work with campaigns. You can add more social media channels 
-or extend the script as you please in order to solve your issues. The script uses a simple php framework with a very 
-simple ORM. It uses php 8+ and mysql. You can install it on your server and use it even if you have wordpress or joomla or any other framework. You seemply need to provide the links that are to be shared and posted in the social media.* 
+*With Share Pilot, you can create multiple channels across your social media platforms. For instance, if you have several Facebook pages, Share Pilot allows you to set up separate schedules for posts on each channel. The system supports collaboration, enabling you to add multiple users to work on campaigns together.
+You have the flexibility to add more social media channels or customize the script to meet your specific needs. Share Pilot is built on a simple PHP framework and utilizes an easy-to-understand ORM. It's compatible with PHP 8+ and MySQL, ensuring a broad range of usability. The installation process is straightforward, allowing you to integrate it with your server, whether you're using WordPress, Joomla, or any other framework.
+To get started, all you need to do is provide the links that you wish to share and post on social media. Share Pilot takes care of the rest, streamlining your social media management.* 
 
 Features
 --
