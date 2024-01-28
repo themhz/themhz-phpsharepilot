@@ -38,15 +38,14 @@ Installation
 
 Step-by-step installation instructions
 
-1. Download the script and unzip it to your server.
-2. Type the domain that the script is hosted in your browser, like https://{my_domain_name}/sharepilot/install where {my_domain_name} is the domain name of your site and sharepilot is the name of the script. 
-3. Enter the database credentials like where the db is hosted, the username and password and the name of the database and enter the username and password for the admin.
-4. Click on the install button and if everything went ok, you will be redirected to the webpage of the successfull instalation. If not then see if there is a problem with the connection of the database. Feel free to contact me if you find any problem you cant solve alown.
-5. If everything when well then delete the install folder.
-6. Login to the script https://{my_domain_name}/sharepilot by providing the username and password you created.
-7. Log in to you Cpanel or your provider and create a cron job. You need to give the cron job the path of the script to the worker.php with in the cron folder.
-8. Make sure to set the cron job to run every minute. 
-9. Then create your socials in the social tab...
+1. Download and Unzip: Download the Share Pilot script and unzip it onto your server.
+2. Access the Installation URL: In your browser, navigate to https://{my_domain_name}/sharepilot/install. Replace {my_domain_name} with your site's domain name, where 'sharepilot' is the script's directory name.
+3. Database Configuration: Enter your database credentials, including the database host, username, password, and the database name. Also, set up the username and password for the Share Pilot admin account.
+4. Run the Installer: Click the 'Install' button. If the installation is successful, you will be redirected to a confirmation page. If the installation fails, particularly due to database connection issues, check your settings or contact support for assistance.
+5. Post-Installation Clean-up: After a successful installation, remove the 'install' folder from your server for security reasons.
+6. Admin Login: Access the Share Pilot login page at https://{my_domain_name}/sharepilot and log in with the admin credentials you created.
+7. Set Up a Cron Job: In your hosting control panel (such as cPanel), create a cron job. The cron job should point to the worker.php file within the 'cron' folder of Share Pilot. Configure the cron job to run every minute.
+8. Create Social Media Channels: Finally, use the 'Social' tab in Share Pilot to set up and manage your social media channels.
 ## Usage
 ---
 
