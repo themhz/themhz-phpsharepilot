@@ -18,11 +18,11 @@ Table of Contents
 
 Introduction
 ---
-*Share Pilot is a Social Media Post Management System (SMPMS). It enables you to share your posts across various channels on social media. With Share Pilot, you can schedule your posts for consistent and timely distribution across your social media platforms. Additionally, it allows you to maintain a history of your posts and manage their lifecycle effectively.*
+Share Pilot is a Social Media Post Management System (SMPMS). It enables you to share your posts across various channels on social media. With Share Pilot, you can schedule your posts for consistent and timely distribution across your social media platforms. Additionally, it allows you to maintain a history of your posts and manage their lifecycle effectively.
 
-*With Share Pilot, you can create multiple channels across your social media platforms. For instance, if you have several Facebook pages, Share Pilot allows you to set up separate schedules for posts on each channel. The system supports collaboration, enabling you to add multiple users to work on campaigns together.
+With Share Pilot, you can create multiple channels across your social media platforms. For instance, if you have several Facebook pages, Share Pilot allows you to set up separate schedules for posts on each channel. The system supports collaboration, enabling you to add multiple users to work on campaigns together.
 You have the flexibility to add more social media channels or customize the script to meet your specific needs. Share Pilot is built on a simple PHP framework and utilizes an easy-to-understand ORM. It's compatible with PHP 8+ and MySQL, ensuring a broad range of usability. The installation process is straightforward, allowing you to integrate it with your server, whether you're using WordPress, Joomla, or any other framework.
-To get started, all you need to do is provide the links that you wish to share and post on social media. Share Pilot takes care of the rest, streamlining your social media management.* 
+To get started, all you need to do is provide the links that you wish to share and post on social media. Share Pilot takes care of the rest, streamlining your social media management. 
 
 Features
 --
