@@ -7,9 +7,8 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql
 # Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Install cron
-RUN apt-get update && apt-get install -y cron
-
+# Install cron and nano
+RUN apt-get update && apt-get install -y cron nano
 
 # Copy your PHP application into the container
 COPY SharePilot /var/www/html/
@@ -20,7 +19,6 @@ COPY my-000-default.conf /etc/apache2/sites-available/000-default.conf
 # Remove the default index.html provided by Apache
 #RUN rm /var/www/html/index.html
 RUN if [ -f /var/www/html/index.html ]; then rm /var/www/html/index.html; fi
-
 
 # Set correct permissions for Apache
 RUN chown -R www-data:www-data /var/www/html
@@ -36,7 +34,7 @@ RUN echo "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin" >> 
 RUN echo "* * * * * root php /var/www/html/cron/worker.php >> /var/log/cron.log 2>&1" >> /etc/cron.d/sharepilot-cron
 RUN chmod 0644 /etc/cron.d/sharepilot-cron
 
-#Run the cron service
+# Run the cron service
 RUN service cron start
 
 # Expose port 80 for Apache
