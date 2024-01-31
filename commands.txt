@@ -1,0 +1,9 @@
+ docker run -d -p 80:80 -p 3306:3306 --name sharepilot -v C:\Users\themh\Documents\dockerfiles\SharePilot:/var/www/html sharepilot:v3
+
+docker build --no-cache -t sharepilot:v4 .
+
+docker exec -it your_container_name service mysql restart
+
+
+//To copy a local folder to container folder
+docker cp C:\Users\themh\code\php\SharePilotV2_test\install 4521f0e469666c96a7cfbb40d2cbff501eb39d58257a57fe64d50de03da60e97:/var/www/html/
