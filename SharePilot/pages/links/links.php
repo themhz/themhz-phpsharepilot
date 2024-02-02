@@ -8,6 +8,11 @@
         <div class="w3-bar w3-teal">
             <div class="w3-dropdown-hover w3-teal">
                 <div class="w3-container w3-teal">
+                    <button class="w3-button" onclick="openNewLinkPopup()">Add Link</button>
+                </div>
+            </div>
+            <div class="w3-dropdown-hover w3-teal">
+                <div class="w3-container w3-teal">
                     <select class="w3-select w3-teal w3-dropdown-hover" name="channels" id="channels" onchange="filterChannels()"></select>
                 </div>
             </div>
@@ -34,9 +39,9 @@
     <div class="w3-twothird" style="padding: 0;">
         <?php include "urls.php"?>
     </div>
-    <div class="w3-third w3-container">
-        <?php include "addurlform.php"?>
-    </div>
+    <!--div class="w3-third w3-container">
+        <?php //include "addurlform.php"?>
+    </div-->
 </div>
 <!--Lists-->
 <?php include "popup.php" ?>
@@ -409,6 +414,11 @@
             document.getElementById('newListModal').style.display = 'none';
         }
     });
+
+
+    function openNewLinkPopup(){
+        alert("ok");
+    }
 
 
 </script>
