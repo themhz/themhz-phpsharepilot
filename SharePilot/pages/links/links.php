@@ -286,7 +286,7 @@
             });
     }
     function closeModal() {
-        document.querySelector('#modal').style.display = "none";
+        document.querySelector('#checkUrlModal').style.display = "none";
     }
     function validateUrl(value) {
         var url;
@@ -390,7 +390,7 @@
                 document.querySelector('#modalDescription').innerText = data.description;
                 document.querySelector('#modalImage').src = data.image;
                 document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
-                document.querySelector('#modal').style.display = "block";
+                document.querySelector('#checkUrlModal').style.display = "block";
                 data.url =  url;
                 urlData = data;
             });

@@ -1,5 +1,5 @@
 <!-- check url Modal -->
-<div id="modal" class="w3-modal">
+<div id="checkUrlModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
             <span onclick="document.getElementById('modal').style.display='none'"
