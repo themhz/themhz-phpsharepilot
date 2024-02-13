@@ -8,7 +8,7 @@
         <div class="w3-bar w3-teal">
             <div class="w3-dropdown-hover w3-teal">
                 <div class="w3-container w3-teal">
-                    <button class="w3-button" onclick="openNewLinkPopup()">Add Link</button>
+                    <button class="w3-button" onclick="openNewLinkPopup()">Add Url</button>
                 </div>
             </div>
             <div class="w3-dropdown-hover w3-teal">
@@ -37,16 +37,13 @@
 </div>
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
-        <?php include "urls.php"?>
-    </div>
-    <!--div class="w3-third w3-container">
-        <?php //include "addurlform.php"?>
-    </div-->
+        <?php include "modals/addurlmodal.php"?>
+    </div>    
 </div>
 <!--Lists-->
-<?php include "popup.php" ?>
-<?php include "newlist.php" ?>
-<?php include "checkurl.php" ?>
+<?php include "modals/popup.php" ?>
+<?php include "modals/newlist.php" ?>
+<?php include "modals/checkurl.php" ?>
 <script>
     //Loads the urls on the main page
     function loadUrls() {
@@ -285,9 +282,7 @@
                 createUrls(data);
             });
     }
-    function closeModal() {
-        document.querySelector('#checkUrlModal').style.display = "none";
-    }
+    
     function validateUrl(value) {
         var url;
         try {
@@ -372,29 +367,7 @@
             loadUrls();
         }
     }, false);
-    document.querySelector('#checkUrl').addEventListener('click', () => {
-        const url = document.querySelector('#txtUrl').value;
-        if(!validateUrl(url)) {
-            alert("Invalid URL");
-            return;
-        }
-        const formData = new FormData();
-        formData.append('url', url);
-        fetch('links/fetchurl?format=raw', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.querySelector('#modalTitle').innerText = data.title;
-                document.querySelector('#modalDescription').innerText = data.description;
-                document.querySelector('#modalImage').src = data.image;
-                document.querySelector('#modalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
-                document.querySelector('#checkUrlModal').style.display = "block";
-                data.url =  url;
-                urlData = data;
-            });
-    });
+    
     document.querySelector('#txtsearch').addEventListener('keydown', function(event) {
         // The keyCode for the Enter key is 13
         if (event.keyCode === 13) {
@@ -417,7 +390,9 @@
 
 
     function openNewLinkPopup(){
-        alert("ok");
+        
+        document.getElementById('addUrlModal').style.display = 'block';
+        
     }
 
 
