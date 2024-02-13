@@ -36,13 +36,12 @@
     </div>
 </div>
 <div class="w3-row">
-    <div class="w3-twothird" style="padding: 0;">
-    <?php include "urls.php" ?>
+    <div class="w3-twothird" style="padding: 0;">    
+    <?php include "urls.php" //List of the urls?>
     </div>    
 </div>
-<!--Lists-->
-<?php include "modals/editurlmodal.php" ?>
-<?php include "modals/newlistmodal.php" ?>
+<?php include "modals/editurlmodal.php" //when you click on a url to edit it this will popup?>
+<?php include "modals/newlistmodal.php" //when you add a new list this will open?>
 <?php include "modals/checkurlmodal.php" ?>
 <?php include "modals/addurlmodal.php"?>
 <script>
