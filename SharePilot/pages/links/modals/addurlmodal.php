@@ -2,7 +2,7 @@
 <div id="addUrlModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
+            <span onclick="closeModal('#addUrlModal')" class="w3-button w3-display-topright">&times;</span>
             <h2 id="addUrlModalTitle">Add Url Form</h2>
             <p>Add a new url using this form</p>
         </header>
@@ -12,8 +12,7 @@
             <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtUrl" id="txtUrl">
         </div>
         <footer class="w3-container w3-teal w3-padding">
-            <button class="w3-button w3-white w3-border w3-round-large" type="button" id="checkUrl" name="checkUrl">Check </button>
-            <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>            
+            <button class="w3-button w3-white w3-border w3-round-large" type="button" id="checkUrl" name="checkUrl">Check </button>            
         </footer>
     </div>
 </div>
@@ -51,7 +50,5 @@
             });
     });
 
-    function closeModal() {
-        document.querySelector('#addUrlModal').style.display = "none";
-    }
+    
 </script>

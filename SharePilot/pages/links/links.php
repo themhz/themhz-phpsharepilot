@@ -37,13 +37,14 @@
 </div>
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
-        <?php include "modals/addurlmodal.php"?>
+    <?php include "urls.php" ?>
     </div>    
 </div>
 <!--Lists-->
 <?php include "modals/popup.php" ?>
 <?php include "modals/newlist.php" ?>
-<?php include "modals/checkurl.php" ?>
+<?php include "modals/checkurlmodal.php" ?>
+<?php include "modals/addurlmodal.php"?>
 <script>
     //Loads the urls on the main page
     function loadUrls() {
@@ -292,35 +293,7 @@
         }
         return url.protocol === "http:" || url.protocol === "https:";
     }
-    function saveLink(){
-        fetch("links/addurl?format=raw", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(urlData),
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data && data.message) {
-                alert(data.message);
-                loadChannels();
-                loadUrls();
-                closeModal();
-                document.getElementById("txtUrl").value="";
-            } else {
-                console.error("Unexpected response data:", data);
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
+    
     let isAscending = true;
     function sortUrls() {
         var list, i, switching, b, shouldSwitch;
@@ -389,10 +362,12 @@
     });
 
 
-    function openNewLinkPopup(){
-        
-        document.getElementById('addUrlModal').style.display = 'block';
-        
+    function openNewLinkPopup(){        
+        document.getElementById('addUrlModal').style.display = 'block';        
+    }
+
+    function closeModal(modalName) {
+        document.querySelector(modalName).style.display = "none";
     }
 
 

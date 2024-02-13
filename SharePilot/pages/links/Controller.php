@@ -42,8 +42,7 @@ use SharePilotV2\Components\RequestHandler;
                 $sql .= " and urls.list_id=$listid ";
             }
 
-            $sql .= " order by urls.id desc ";
-
+            $sql .= " order by urls.id desc ";            
 
             $videos = $u->query($sql);
         }
