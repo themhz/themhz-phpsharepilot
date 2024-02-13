@@ -42,7 +42,7 @@
 </div>
 <!--Lists-->
 <?php include "modals/editurlmodal.php" ?>
-<?php include "modals/newlist.php" ?>
+<?php include "modals/newlistmodal.php" ?>
 <?php include "modals/checkurlmodal.php" ?>
 <?php include "modals/addurlmodal.php"?>
 <script>
