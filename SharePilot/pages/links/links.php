@@ -41,7 +41,7 @@
     </div>    
 </div>
 <!--Lists-->
-<?php include "modals/popup.php" ?>
+<?php include "modals/editurlmodal.php" ?>
 <?php include "modals/newlist.php" ?>
 <?php include "modals/checkurlmodal.php" ?>
 <?php include "modals/addurlmodal.php"?>
@@ -126,7 +126,7 @@
                 document.getElementById('editTitle').value = item.title;
                 document.getElementById('editURL').value = item.url;
                 document.getElementById('editThumbURL').value = item.thumbnailUrl;
-                document.getElementById('myModal').style.display = 'block';
+                document.getElementById('editUrlModal').style.display = 'block';
                 document.getElementById('editmodal_channels').value = item.channel_id;
                 if(item.channel_id!=null){
                     loadListsModal(item);
@@ -151,17 +151,7 @@
         }
     }
 
-    function loadListsModalBySelectedChannel(){
-        let selectedChannel = document.getElementById('editmodal_channels').value;
-        if(selectedChannel!="0"){
-            fetch(`links/loadlists?format=raw&channel_id=${selectedChannel}`)
-                .then(response => response.json())
-                .then(data => {
-                    createListListsModal(data);
-                });
-        }
-
-    }
+    
 
     function createList(data){
         document.getElementById("lists").innerHTML =`<option value="0">All</option>`;
@@ -172,17 +162,7 @@
             document.getElementById("editmodal_lists").innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
     }
-    function createListListsModal(data){
-        let c=false;
-        document.getElementById("editmodal_lists").innerHTML = "";
-        data.forEach(item => {
-            if(c==false){
-                document.getElementById("editmodal_lists").innerHTML =`<option value="0" selected>Select List</option>`;
-                c=true;
-            }
-            document.getElementById("editmodal_lists").innerHTML += `<option value="${item.id}">${item.name}</option>`;
-        });
-    }
+    
     function createChannellist(data){
 
         document.getElementById("channels").innerHTML =`<option value="0">All</option>`;
@@ -194,27 +174,7 @@
             document.getElementById("dropDownChannelForNewList").innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
     }
-    function submitChanges() {
-        fetch('links/update?format=raw', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id : document.getElementById('editId').value,
-                title: document.getElementById('editTitle').value,
-                url: document.getElementById('editURL').value,
-                thumbnailUrl: document.getElementById('editThumbURL').value,
-                channel_id: document.getElementById('editmodal_channels').value,
-                list_id: document.getElementById('editmodal_lists').value,
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('myModal').style.display = 'none';
-            filterChannels();
-        });
-    }
+    
     function deletePost(id){
         event.stopPropagation();
         if(confirm("are you sure you want to delete this post?")){
@@ -356,8 +316,11 @@
         // Check if the pressed key is the Escape key (keyCode 27)
         if (event.keyCode === 27) {
             // Close the popup by setting its display property to "none"
-            document.getElementById('myModal').style.display = 'none';
+            document.getElementById('editUrlModal').style.display = 'none';
             document.getElementById('newListModal').style.display = 'none';
+            document.getElementById('addUrlModal').style.display = 'none';
+            document.getElementById('checkUrlModal').style.display = 'none';
+            
         }
     });
 
