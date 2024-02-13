@@ -51,4 +51,9 @@
         }
 
     }
+
+    function newList(){
+        document.getElementById('newListModal').style.display = 'block';
+    }
+
 </script>

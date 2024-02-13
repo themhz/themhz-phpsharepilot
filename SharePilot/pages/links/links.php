@@ -40,10 +40,12 @@
     <?php include "urls.php" //List of the urls?>
     </div>    
 </div>
+<?php include "modals/addurlmodal.php" //when I click to add the url from the menu?>
+<?php include "modals/checkurlmodal.php" //when I click to check if the url exists from the add url modal?>
 <?php include "modals/editurlmodal.php" //when you click on a url to edit it this will popup?>
-<?php include "modals/newlistmodal.php" //when you add a new list this will open?>
-<?php include "modals/checkurlmodal.php" ?>
-<?php include "modals/addurlmodal.php"?>
+<?php //include "modals/newlistmodal.php" //To be used?>
+
+
 <script>
     //Loads the urls on the main page
     function loadUrls() {
@@ -66,7 +68,7 @@
             }
         }).then(response => response.json())
         .then(data => {
-            createUrls(data);
+            createUrlDivs(data);
         });
     }
     //Loads the channels on the main page
@@ -89,18 +91,18 @@
         }
     }
 
-    function newList(){
-        document.getElementById('newListModal').style.display = 'block';
-    }
-
+   
     function filterChannels(){
         loadUrls();
         loadLists();
     }
+
     function filterLists(){
         loadUrls();
     }
-    function createUrls(data){
+
+    //This function creates the div items of the links in the list
+    function createUrlDivs(data){        
         const ul = document.querySelector(".w3-ul");
         ul.innerHTML = '';
         ul.classList = "w3-ul w3-hoverable";
@@ -136,6 +138,8 @@
             ul.appendChild(li);
         });
     }
+
+    
     function loadListsModal(item){
 
         if(!(item.channel_id == "0" || item.channel_id == "" || item.channel_id == null)){
@@ -239,7 +243,7 @@
             .then(response => response.json())
             .then(data => {
                 //console.log(data);
-                createUrls(data);
+                createUrlDivs(data);
             });
     }
     
