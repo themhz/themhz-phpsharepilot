@@ -140,6 +140,7 @@
     }
 
     
+    //Load the logical lists of links to the url modal
     function loadListsModal(item){
 
         if(!(item.channel_id == "0" || item.channel_id == "" || item.channel_id == null)){
@@ -155,7 +156,7 @@
     }
 
     
-
+    //Creates the list in the menu
     function createList(data){
         document.getElementById("lists").innerHTML =`<option value="0">All</option>`;
         document.getElementById("editmodal_lists").innerHTML ="";
@@ -166,6 +167,7 @@
         });
     }
     
+    //Creates the channels in the menu
     function createChannellist(data){
 
         document.getElementById("channels").innerHTML =`<option value="0">All</option>`;
@@ -255,8 +257,7 @@
             return false;
         }
         return url.protocol === "http:" || url.protocol === "https:";
-    }
-    
+    }    
     let isAscending = true;
     function sortUrls() {
         var list, i, switching, b, shouldSwitch;
@@ -295,6 +296,14 @@
         }
     }
 
+    function openNewLinkPopup(){        
+        document.getElementById('addUrlModal').style.display = 'block';        
+    }
+
+    function closeModal(modalName) {
+        document.querySelector(modalName).style.display = "none";
+    }
+
     let urlData = null;
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
@@ -328,13 +337,7 @@
     });
 
 
-    function openNewLinkPopup(){        
-        document.getElementById('addUrlModal').style.display = 'block';        
-    }
-
-    function closeModal(modalName) {
-        document.querySelector(modalName).style.display = "none";
-    }
+   
 
 
 </script>
