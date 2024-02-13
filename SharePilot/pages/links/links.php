@@ -304,6 +304,7 @@
         document.querySelector(modalName).style.display = "none";
     }
 
+    //Events
     let urlData = null;
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
