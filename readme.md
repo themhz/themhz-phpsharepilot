@@ -28,7 +28,7 @@ simple ORM. It uses php 8+ and mysql 5.7 . You can install it on your server and
 Features
 --
 1. Manage your posts (create delete and update) your posts
-2. Post them in multiple channels (A Channel is a set of all pages or groups or any socialmedia type of sites across all social media websites)
+2. Post them in multiple channels (A Channel is a set of all pages or groups or any socialmedia type of page across all social media websites)
 3. Schedule the posts in any number or any date
 4. Filter your schedule to post specific hours in the day
 5. Manage more the one channel on each social media site. For example you can use multiple pages and post different content in different pages
