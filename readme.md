@@ -40,7 +40,6 @@ Installation
 *Step-by-step installation instructions, starting from the very basics. Assume the user knows nothing about your software.*
 
 1. Download the script and unzip it to your server.
-1.1
 2. Type the domain that the script is hosted in your browser, like https://{my_domain_name}/install where {my_domain_name} is the domain name of your site and sharepilot is the name of the script. 
 3. Enter the database credentials like where the db is hosted, the username and password and the name of the database and enter the username and password for the admin.
 4. Click on the install button and if everything went ok, you will be redirected to the webpage of the successfull instalation. If not then see if there is a problem with the connection of the database. Feel free to contact me if you find any problem you cant solve alown.
