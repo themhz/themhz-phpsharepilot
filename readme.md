@@ -23,7 +23,7 @@ Introduction
 pages in facebook, you can create separate schedule posts for those channels. 
 You can add many users to work with campaigns. You can add more social media channels 
 or extend the script as you please in order to solve your issues. The script uses a simple php framework with a very 
-simple ORM. It uses php 8+ and mysql. You can install it on your server and use it even if you have wordpress or joomla or any other framework. You seemply need to provide the links that are to be shared and posted in the social media.* 
+simple ORM. It uses php 8+ and mysql 5.7 . You can install it on your server and use it even if you have wordpress or joomla or any other framework. You simply need to provide the links that are to be shared and posted in the social media.* 
 
 Features
 --
@@ -41,11 +41,11 @@ Installation
 
 1. Download the script and unzip it to your server.
 1.1
-2. Type the domain that the script is hosted in your browser, like https://{my_domain_name}/sharepilot/install where {my_domain_name} is the domain name of your site and sharepilot is the name of the script. 
+2. Type the domain that the script is hosted in your browser, like https://{my_domain_name}/install where {my_domain_name} is the domain name of your site and sharepilot is the name of the script. 
 3. Enter the database credentials like where the db is hosted, the username and password and the name of the database and enter the username and password for the admin.
 4. Click on the install button and if everything went ok, you will be redirected to the webpage of the successfull instalation. If not then see if there is a problem with the connection of the database. Feel free to contact me if you find any problem you cant solve alown.
 5. If everything when well then delete the install folder.
-6. Login to the script https://{my_domain_name}/sharepilot by providing the username and password you created.
+6. Login to the script https://{my_domain_name} by providing the username and password you created.
 7. Log in to you Cpanel or your provider and create a cron job. You need to give the cron job the path of the script to the worker.php with in the cron folder.
 8. Make sure to set the cron job to run every minute. 
 9. Then create your socials in the social tab...
