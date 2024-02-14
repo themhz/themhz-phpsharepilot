@@ -1,6 +1,6 @@
 <?php
 //https://developers.facebook.com/docs/pages-api/posts/
-//This tutorial referse to facebook api in 14/02/2024
+//This tutorial refers to facebook api in 14/02/2024
 //1. Go and create an access token on this facebook link https://developers.facebook.com/tools/explorer/
 //2. It will ask you to Register as a Facebook Developer to get started. 
 //3. You will be redirected to this page https://developers.facebook.com/
