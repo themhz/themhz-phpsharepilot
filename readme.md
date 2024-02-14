@@ -37,7 +37,7 @@ Features
 Installation
 ---
 
-*Step-by-step installation instructions, starting from the very basics. Assume the user knows nothing about your software.*
+*Step-by-step installation instructions*
 
 1. Download the script and unzip it to your server.
 2. Type the domain that the script is hosted in your browser, like https://{my_domain_name}/install where {my_domain_name} is the domain name of your site and sharepilot is the name of the script. 
