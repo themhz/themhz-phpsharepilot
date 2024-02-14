@@ -5,6 +5,18 @@
     </div>
     <div class="w3-container">
         <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
+        <div class="w3-container w3-card-4" >
+            <h2 class="w3-text-teal">Search links</h2>
+            <p>Search links from database</p>
+            <p>
+                <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
+                <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
+            </p>
+        </div>
+    </div>
+    <div class="w3-container w3-margin-top">
+        
         <div class="w3-bar w3-teal">
             <div class="w3-dropdown-hover w3-teal">
                 <div class="w3-container w3-teal">
@@ -21,17 +33,6 @@
                     <select class="w3-select w3-teal w3-dropdown-hover" name="lists" id="lists" onchange="filterLists()"></select>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="w3-container w3-margin-top">
-        <div class="w3-container w3-card-4" >
-            <h2 class="w3-text-teal">Search links</h2>
-            <p>Search links from database</p>
-            <p>
-                <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
-                <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
-            </p>
         </div>
     </div>
 </div>
