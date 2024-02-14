@@ -73,6 +73,7 @@
     }
     //Loads the channels on the main page
     function loadChannels(){
+      
         fetch('channels/loadchannels?format=raw')
             .then(response => response.json())
             .then(data => {
@@ -80,7 +81,7 @@
             });
     }
     //Loads the lists on the main page if channels are selected
-    function loadLists(){
+    function loadLists(){        
         let channel_id = document.getElementById("channels").value;
         if(!(channel_id == "0" || channel_id == "")){
             fetch(`links/loadlists?format=raw&channel_id=${channel_id}`)
@@ -158,7 +159,7 @@
     
     //Creates the list in the menu
     function createList(data){
-        document.getElementById("lists").innerHTML =`<option value="0">All</option>`;
+        document.getElementById("lists").innerHTML =`<option value="0">Select List</option>`;
         document.getElementById("editmodal_lists").innerHTML ="";
 
         data.forEach(item => {
@@ -170,13 +171,13 @@
     //Creates the channels in the menu
     function createChannellist(data){
 
-        document.getElementById("channels").innerHTML =`<option value="0">All</option>`;
+        document.getElementById("channels").innerHTML =`<option value="0">Select Channel</option>`;
         document.getElementById("editmodal_channels").innerHTML =`<option value="0">Select Channel</option>`;
-        document.getElementById("dropDownChannelForNewList").innerHTML = `<option value="0">Select Channel</option>`;
+        //document.getElementById("dropDownChannelForNewList").innerHTML = `<option value="0">Select Channel</option>`;      
         data.forEach(item => {
             document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
             document.getElementById("editmodal_channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
-            document.getElementById("dropDownChannelForNewList").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+            //document.getElementById("dropDownChannelForNewList").innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
     }
     
@@ -310,7 +311,10 @@
         if(evt.target.readyState == "complete")
         {
             loadChannels();
-            loadUrls();
+            loadLists();
+            loadUrls();            
+            
+            
         }
     }, false);
     

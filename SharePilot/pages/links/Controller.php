@@ -57,7 +57,8 @@ use SharePilotV2\Components\RequestHandler;
             $lists = $l->select()->where("channel_id", "=", $channel_id)->execute();
             ResponseHandler::respond($lists);
         }else{
-            ResponseHandler::respond([]);
+            $lists = $l->select()->execute();
+            ResponseHandler::respond($lists);
         }
     }
     public function delete(){
