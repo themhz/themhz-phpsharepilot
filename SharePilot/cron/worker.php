@@ -1,10 +1,11 @@
 <?php
 require_once 'CronConfig.php';
-require_once 'Facebook.php';
-require_once 'Reddit.php';
-require_once 'Twitter.php';
-require_once 'LinkedIn.php';
 require_once 'Database.php';
+require_once 'implementations/Facebook.php';
+require_once 'implementations/Reddit.php';
+require_once 'implementations/Twitter.php';
+require_once 'implementations/LinkedIn.php';
+
 
 
 interface ISocialMediaService
@@ -15,6 +16,49 @@ interface ISocialMediaService
 class PostingService
 {
     private $sm = [];
+
+    public function start(){
+        
+        //I have saved the social media channels in the database. So I do a select to get them. the name social is associated with the filename in the current directory in order to execute the code
+        //that will be used to post the message in the social media. Each channel has it unique keys. So If you need to add a new social media channel then add it customly but also define it in the database.
+        //You define a new social from the admin
+        $db = Database::getInstance();
+        $sql = "select distinct b.name channel, c.name social , channel_id, social_id
+                from channel_social_keys a
+                inner join channels b on a.channel_id = b.id
+                inner join socials c on a.social_id = c.id
+             ;";
+        $sth = $db->prepare($sql);
+        $sth->execute();
+        $results = $sth->fetchAll(\PDO::FETCH_OBJ);
+        
+        //So for each social media and channel I add it to the posting service
+        foreach ($results as $result){
+        
+            $channel_id = $result->channel_id;
+            $social_id = $result->social_id;    
+        
+            $sql = "select name, value from channel_social_keys where channel_id=$channel_id and social_id=$social_id";
+        
+            $sth = $db->prepare($sql);
+            $sth->execute();
+            $keyvalue = $sth->fetchAll(\PDO::FETCH_OBJ);
+        
+            //print_r($keyvalue);
+        
+            $assocArray = array();
+        
+            foreach($keyvalue as $obj){
+                $assocArray[$obj->name] = $obj->value;
+            }
+        
+            $class = ucfirst(strtolower($result->social));
+            $this->add(new $class($assocArray));
+                
+        }
+        //and finally I post them
+        $this->post();
+    }
 
     public function add(ISocialMediaService $sm)
     {
@@ -45,7 +89,7 @@ class PostingService
 
         //foreach social media
         for ($i = 0; $i < count($this->sm); $i++) {
-            echo $this->sm[$i]->post($messages) . "\n\r";
+            print_r($this->sm[$i]->post($messages)) . "\n\r";
         }
 
         //$this->updatePosted($messages);
@@ -65,44 +109,6 @@ class PostingService
     }
 }
 
-
-//I have saved the social media channels in the database. So I do a select to get them. the name social is associated with the filename in the current directory in order to execute the code
-//that will be used to post the message in the social media. Each channel has it unique keys. So If you need to add a new social media channel then add it customly but also define it in the database.
-//You define a new social from the admin
-
-
 $ps = new PostingService();
-$db = Database::getInstance();
-$sql = "select distinct b.name channel, c.name social , channel_id, social_id
-        from channel_social_keys a
-        inner join channels b on a.channel_id = b.id
-        inner join socials c on a.social_id = c.id
-     ;";
-$sth = $db->prepare($sql);
-$sth->execute();
-$results = $sth->fetchAll(\PDO::FETCH_OBJ);
+$ps->start();
 
-//So for each social media and channelI add it to the posting service
-foreach ($results as $result){
-
-    $channel_id=$result->channel_id;
-    $social_id=$result->social_id;
-    //echo $result->channel." | " .ucfirst(strtolower($result->social)) ."\n\r";
-
-    $sql = "select name, value from channel_social_keys where channel_id=$channel_id and social_id=$social_id";
-    $sth = $db->prepare($sql);
-    $sth->execute();
-    $keyvalue = $sth->fetchAll(\PDO::FETCH_OBJ);
-    $assocArray = array();
-
-    foreach($keyvalue as $obj){
-        $assocArray[$obj->name] = $obj->value;
-    }
-
-    $class = ucfirst(strtolower($result->social));
-    $ps->add(new $class($assocArray));
-
-
-}
-//and finally I post them
-$ps->post();
