@@ -43,9 +43,7 @@ class PostingService
             $sth = $db->prepare($sql);
             $sth->execute();
             $keyvalue = $sth->fetchAll(\PDO::FETCH_OBJ);
-        
-            //print_r($keyvalue);
-        
+                  
             $assocArray = array();
         
             foreach($keyvalue as $obj){

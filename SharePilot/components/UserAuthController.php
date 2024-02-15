@@ -13,7 +13,7 @@ class UserAuthController {
         // checking if a token cookie is set
         if (isset($_COOKIE['token'])) {
            
-            // if the user has a token, authenticate them
+            // if the user has a token, authenticate the token
             $user = $this->auth->authenticate();
             // if the token is invalid or expired, ask them to log in again
             if (!$user) {

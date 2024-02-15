@@ -27,8 +27,8 @@ class Website{
         $this->loadErrorHandler();
         $this->setTimeZone();
         
-        $result = $this->userAuth();        
-        $raw = RequestHandler::get("format");                
+        $result = $this->userAuth();
+        $raw = RequestHandler::get("format");
         if($raw == 'raw'){
             $controller = new MasterController();
             $controller->start();
@@ -36,33 +36,23 @@ class Website{
             $this->loadPage();
         }
     }
-
+    private function startSession(){
+        session_start();
+    }
+    private function loadEnvFile(){
+        $dotenv = Dotenv::createImmutable(dirname($_SERVER['SCRIPT_FILENAME']));
+        $dotenv->load();
+    }
     private function loadErrorHandler(){
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
 
-    private function loadEnvFile(){
-        $dotenv = Dotenv::createImmutable(dirname($_SERVER['SCRIPT_FILENAME']));
-        $dotenv->load();
-    }
-
-    private function loadPage(){
-        $page =  new Pages();
-        $page = $page->load();
-        include __DIR__ . '/../template/index.php';
-    }
-
-    private function startSession(){
-        session_start();
-    }
-
     private function setTimeZone(){
         $timezone2 = new TimeZone();
         $dbTimeZone2 = $timezone2->GetTimeZoneFromDb();
-        $timezone2->SetCurrentTimeZone($dbTimeZone2["timezone"]);
-
+        $timezone2->SetCurrentTimeZone($dbTimeZone2["timezone"]);        
     }
 
     private function userAuth(){
@@ -70,5 +60,10 @@ class Website{
         return $userAuth->handleRequest();
     }
 
+    private function loadPage(){
+        $page =  new Pages();
+        $page = $page->load();
+        include __DIR__ . '/../template/index.php';
+    }
 
 }
