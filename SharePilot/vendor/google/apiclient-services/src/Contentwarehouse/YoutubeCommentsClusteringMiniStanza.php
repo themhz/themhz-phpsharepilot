@@ -40,6 +40,8 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
    */
   public $commentClassificationBuckets;
   public $commentClassificationRanking;
+  protected $commentModeratedRestrictionsType = YoutubeCommentsApiCommentModeratedRestriction::class;
+  protected $commentModeratedRestrictionsDataType = 'array';
   /**
    * @var string
    */
@@ -85,6 +87,7 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
    * @var bool
    */
   public $hasCreatorReply;
+  public $impersonationScores;
   /**
    * @var bool
    */
@@ -121,6 +124,7 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
    * @var bool[]
    */
   public $lowQualityDecisions;
+  public $lowQualityScores;
   /**
    * @var int
    */
@@ -324,6 +328,20 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
     return $this->commentClassificationRanking;
   }
   /**
+   * @param YoutubeCommentsApiCommentModeratedRestriction[]
+   */
+  public function setCommentModeratedRestrictions($commentModeratedRestrictions)
+  {
+    $this->commentModeratedRestrictions = $commentModeratedRestrictions;
+  }
+  /**
+   * @return YoutubeCommentsApiCommentModeratedRestriction[]
+   */
+  public function getCommentModeratedRestrictions()
+  {
+    return $this->commentModeratedRestrictions;
+  }
+  /**
    * @param string
    */
   public function setCommentType($commentType)
@@ -499,6 +517,14 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
   {
     return $this->hasCreatorReply;
   }
+  public function setImpersonationScores($impersonationScores)
+  {
+    $this->impersonationScores = $impersonationScores;
+  }
+  public function getImpersonationScores()
+  {
+    return $this->impersonationScores;
+  }
   /**
    * @param bool
    */
@@ -624,6 +650,14 @@ class YoutubeCommentsClusteringMiniStanza extends \Google\Collection
   public function getLowQualityDecisions()
   {
     return $this->lowQualityDecisions;
+  }
+  public function setLowQualityScores($lowQualityScores)
+  {
+    $this->lowQualityScores = $lowQualityScores;
+  }
+  public function getLowQualityScores()
+  {
+    return $this->lowQualityScores;
   }
   /**
    * @param int

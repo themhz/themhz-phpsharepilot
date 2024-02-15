@@ -96,6 +96,8 @@ class NodeConfig extends \Google\Collection
    * @var string[]
    */
   public $resourceLabels;
+  protected $resourceManagerTagsType = ResourceManagerTags::class;
+  protected $resourceManagerTagsDataType = '';
   protected $sandboxConfigType = SandboxConfig::class;
   protected $sandboxConfigDataType = '';
   /**
@@ -104,6 +106,8 @@ class NodeConfig extends \Google\Collection
   public $serviceAccount;
   protected $shieldedInstanceConfigType = ShieldedInstanceConfig::class;
   protected $shieldedInstanceConfigDataType = '';
+  protected $soleTenantConfigType = SoleTenantConfig::class;
+  protected $soleTenantConfigDataType = '';
   /**
    * @var bool
    */
@@ -470,6 +474,20 @@ class NodeConfig extends \Google\Collection
     return $this->resourceLabels;
   }
   /**
+   * @param ResourceManagerTags
+   */
+  public function setResourceManagerTags(ResourceManagerTags $resourceManagerTags)
+  {
+    $this->resourceManagerTags = $resourceManagerTags;
+  }
+  /**
+   * @return ResourceManagerTags
+   */
+  public function getResourceManagerTags()
+  {
+    return $this->resourceManagerTags;
+  }
+  /**
    * @param SandboxConfig
    */
   public function setSandboxConfig(SandboxConfig $sandboxConfig)
@@ -510,6 +528,20 @@ class NodeConfig extends \Google\Collection
   public function getShieldedInstanceConfig()
   {
     return $this->shieldedInstanceConfig;
+  }
+  /**
+   * @param SoleTenantConfig
+   */
+  public function setSoleTenantConfig(SoleTenantConfig $soleTenantConfig)
+  {
+    $this->soleTenantConfig = $soleTenantConfig;
+  }
+  /**
+   * @return SoleTenantConfig
+   */
+  public function getSoleTenantConfig()
+  {
+    return $this->soleTenantConfig;
   }
   /**
    * @param bool

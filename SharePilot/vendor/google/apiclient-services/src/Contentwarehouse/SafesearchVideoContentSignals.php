@@ -19,6 +19,12 @@ namespace Google\Service\Contentwarehouse;
 
 class SafesearchVideoContentSignals extends \Google\Model
 {
+  protected $internalMultiLabelClassificationType = SafesearchVideoContentSignalsMultiLabelClassificationInfo::class;
+  protected $internalMultiLabelClassificationDataType = '';
+  /**
+   * @var bool
+   */
+  public $isAbuseWithHighConfidence;
   /**
    * @var float[]
    */
@@ -30,6 +36,34 @@ class SafesearchVideoContentSignals extends \Google\Model
   protected $videoClassifierOutputType = SafesearchVideoClassifierOutput::class;
   protected $videoClassifierOutputDataType = '';
 
+  /**
+   * @param SafesearchVideoContentSignalsMultiLabelClassificationInfo
+   */
+  public function setInternalMultiLabelClassification(SafesearchVideoContentSignalsMultiLabelClassificationInfo $internalMultiLabelClassification)
+  {
+    $this->internalMultiLabelClassification = $internalMultiLabelClassification;
+  }
+  /**
+   * @return SafesearchVideoContentSignalsMultiLabelClassificationInfo
+   */
+  public function getInternalMultiLabelClassification()
+  {
+    return $this->internalMultiLabelClassification;
+  }
+  /**
+   * @param bool
+   */
+  public function setIsAbuseWithHighConfidence($isAbuseWithHighConfidence)
+  {
+    $this->isAbuseWithHighConfidence = $isAbuseWithHighConfidence;
+  }
+  /**
+   * @return bool
+   */
+  public function getIsAbuseWithHighConfidence()
+  {
+    return $this->isAbuseWithHighConfidence;
+  }
   /**
    * @param float[]
    */

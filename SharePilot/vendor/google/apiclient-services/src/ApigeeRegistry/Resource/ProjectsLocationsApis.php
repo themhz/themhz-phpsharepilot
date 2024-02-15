@@ -48,6 +48,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * 4-63 characters, and valid characters are /a-z-/. Following AIP-162, IDs must
    * not have the form of a UUID.
    * @return Api
+   * @throws \Google\Service\Exception
    */
   public function create($parent, Api $postBody, $optParams = [])
   {
@@ -66,6 +67,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * deleted. (Otherwise, the request will only work if there are no child
    * resources.)
    * @return ApigeeregistryEmpty
+   * @throws \Google\Service\Exception
    */
   public function delete($name, $optParams = [])
   {
@@ -80,6 +82,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * `projects/locations/apis`
    * @param array $optParams Optional parameters.
    * @return Api
+   * @throws \Google\Service\Exception
    */
   public function get($name, $optParams = [])
   {
@@ -110,6 +113,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * documentation](https://cloud.google.com/iam/help/conditions/resource-
    * policies).
    * @return Policy
+   * @throws \Google\Service\Exception
    */
   public function getIamPolicy($resource, $optParams = [])
   {
@@ -127,9 +131,9 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * @opt_param string filter An expression that can be used to filter the list.
    * Filters use the Common Expression Language and can refer to all message
    * fields.
-   * @opt_param string orderBy A comma-separated list of fields, e.g. "bar,bar"
+   * @opt_param string orderBy A comma-separated list of fields, e.g. "foo,bar"
    * Fields can be sorted in descending order using the "desc" identifier, e.g.
-   * "bar desc,bar"
+   * "foo desc,bar"
    * @opt_param int pageSize The maximum number of APIs to return. The service may
    * return fewer than this value. If unspecified, at most 50 values will be
    * returned. The maximum is 1000; values above 1000 will be coerced to 1000.
@@ -138,6 +142,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * other parameters provided to `ListApis` must match the call that provided the
    * page token.
    * @return ListApisResponse
+   * @throws \Google\Service\Exception
    */
   public function listProjectsLocationsApis($parent, $optParams = [])
   {
@@ -159,6 +164,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * default values are ignored). If an asterisk "*" is specified, all fields are
    * updated, including fields that are unspecified/default in the request.
    * @return Api
+   * @throws \Google\Service\Exception
    */
   public function patch($name, Api $postBody, $optParams = [])
   {
@@ -178,6 +184,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * @param SetIamPolicyRequest $postBody
    * @param array $optParams Optional parameters.
    * @return Policy
+   * @throws \Google\Service\Exception
    */
   public function setIamPolicy($resource, SetIamPolicyRequest $postBody, $optParams = [])
   {
@@ -199,6 +206,7 @@ class ProjectsLocationsApis extends \Google\Service\Resource
    * @param TestIamPermissionsRequest $postBody
    * @param array $optParams Optional parameters.
    * @return TestIamPermissionsResponse
+   * @throws \Google\Service\Exception
    */
   public function testIamPermissions($resource, TestIamPermissionsRequest $postBody, $optParams = [])
   {

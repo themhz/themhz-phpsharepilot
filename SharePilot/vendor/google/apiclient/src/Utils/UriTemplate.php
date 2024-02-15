@@ -269,7 +269,7 @@ class UriTemplate
             return $value;
         }
 
-        // Else we combine the key name: bar=bar, if value is not the empty string.
+        // Else we combine the key name: foo=bar, if value is not the empty string.
         return $key . ($value != '' || $combine_on_empty ? $combine . $value : '');
     }
 

@@ -108,9 +108,9 @@ class InstalledVersions
     /**
      * Checks whether the given package satisfies a version constraint
      *
-     * e.g. If you want to know whether version 2.3+ of package bar/bar is installed, you would call:
+     * e.g. If you want to know whether version 2.3+ of package foo/bar is installed, you would call:
      *
-     *   Composer\InstalledVersions::satisfies(new VersionParser, 'bar/bar', '^2.3')
+     *   Composer\InstalledVersions::satisfies(new VersionParser, 'foo/bar', '^2.3')
      *
      * @param  VersionParser $parser      Install composer/semver to have access to this class and functionality
      * @param  string        $packageName

@@ -17,7 +17,7 @@
 
 namespace Google\Service\AdMob;
 
-class Reportbarter extends \Google\Collection
+class ReportFooter extends \Google\Collection
 {
   protected $collection_key = 'warnings';
   /**
@@ -58,4 +58,4 @@ class Reportbarter extends \Google\Collection
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(Reportbarter::class, 'Google_Service_AdMob_Reportbarter');
+class_alias(ReportFooter::class, 'Google_Service_AdMob_ReportFooter');

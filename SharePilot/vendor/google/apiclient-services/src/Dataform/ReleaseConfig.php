@@ -22,11 +22,14 @@ class ReleaseConfig extends \Google\Collection
   protected $collection_key = 'recentScheduledReleaseRecords';
   protected $codeCompilationConfigType = CodeCompilationConfig::class;
   protected $codeCompilationConfigDataType = '';
-  public $codeCompilationConfig;
   /**
    * @var string
    */
   public $cronSchedule;
+  /**
+   * @var bool
+   */
+  public $disabled;
   /**
    * @var string
    */
@@ -37,7 +40,6 @@ class ReleaseConfig extends \Google\Collection
   public $name;
   protected $recentScheduledReleaseRecordsType = ScheduledReleaseRecord::class;
   protected $recentScheduledReleaseRecordsDataType = 'array';
-  public $recentScheduledReleaseRecords = [];
   /**
    * @var string
    */
@@ -74,6 +76,20 @@ class ReleaseConfig extends \Google\Collection
   public function getCronSchedule()
   {
     return $this->cronSchedule;
+  }
+  /**
+   * @param bool
+   */
+  public function setDisabled($disabled)
+  {
+    $this->disabled = $disabled;
+  }
+  /**
+   * @return bool
+   */
+  public function getDisabled()
+  {
+    return $this->disabled;
   }
   /**
    * @param string

@@ -103,6 +103,14 @@ class GoogleCloudRunV2Task extends \Google\Collection
    */
   public $retried;
   /**
+   * @var bool
+   */
+  public $satisfiesPzs;
+  /**
+   * @var string
+   */
+  public $scheduledTime;
+  /**
    * @var string
    */
   public $serviceAccount;
@@ -434,6 +442,34 @@ class GoogleCloudRunV2Task extends \Google\Collection
   public function getRetried()
   {
     return $this->retried;
+  }
+  /**
+   * @param bool
+   */
+  public function setSatisfiesPzs($satisfiesPzs)
+  {
+    $this->satisfiesPzs = $satisfiesPzs;
+  }
+  /**
+   * @return bool
+   */
+  public function getSatisfiesPzs()
+  {
+    return $this->satisfiesPzs;
+  }
+  /**
+   * @param string
+   */
+  public function setScheduledTime($scheduledTime)
+  {
+    $this->scheduledTime = $scheduledTime;
+  }
+  /**
+   * @return string
+   */
+  public function getScheduledTime()
+  {
+    return $this->scheduledTime;
   }
   /**
    * @param string

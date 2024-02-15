@@ -45,6 +45,8 @@ class Service extends \Google\Model
   public $labels;
   protected $maintenanceWindowType = MaintenanceWindow::class;
   protected $maintenanceWindowDataType = '';
+  protected $metadataIntegrationType = MetadataIntegration::class;
+  protected $metadataIntegrationDataType = '';
   protected $metadataManagementActivityType = MetadataManagementActivity::class;
   protected $metadataManagementActivityDataType = '';
   /**
@@ -65,6 +67,8 @@ class Service extends \Google\Model
    * @var string
    */
   public $releaseChannel;
+  protected $scalingConfigType = ScalingConfig::class;
+  protected $scalingConfigDataType = '';
   /**
    * @var string
    */
@@ -201,6 +205,20 @@ class Service extends \Google\Model
     return $this->maintenanceWindow;
   }
   /**
+   * @param MetadataIntegration
+   */
+  public function setMetadataIntegration(MetadataIntegration $metadataIntegration)
+  {
+    $this->metadataIntegration = $metadataIntegration;
+  }
+  /**
+   * @return MetadataIntegration
+   */
+  public function getMetadataIntegration()
+  {
+    return $this->metadataIntegration;
+  }
+  /**
    * @param MetadataManagementActivity
    */
   public function setMetadataManagementActivity(MetadataManagementActivity $metadataManagementActivity)
@@ -283,6 +301,20 @@ class Service extends \Google\Model
   public function getReleaseChannel()
   {
     return $this->releaseChannel;
+  }
+  /**
+   * @param ScalingConfig
+   */
+  public function setScalingConfig(ScalingConfig $scalingConfig)
+  {
+    $this->scalingConfig = $scalingConfig;
+  }
+  /**
+   * @return ScalingConfig
+   */
+  public function getScalingConfig()
+  {
+    return $this->scalingConfig;
   }
   /**
    * @param string

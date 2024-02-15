@@ -19,7 +19,7 @@ namespace Google\Service\Compute;
 
 class BackendService extends \Google\Collection
 {
-  protected $collection_key = 'serviceBindings';
+  protected $collection_key = 'usedBy';
   /**
    * @var int
    */
@@ -99,6 +99,10 @@ class BackendService extends \Google\Collection
   protected $maxStreamDurationType = Duration::class;
   protected $maxStreamDurationDataType = '';
   /**
+   * @var string[]
+   */
+  public $metadatas;
+  /**
    * @var string
    */
   public $name;
@@ -148,6 +152,8 @@ class BackendService extends \Google\Collection
    * @var int
    */
   public $timeoutSec;
+  protected $usedByType = BackendServiceUsedBy::class;
+  protected $usedByDataType = 'array';
 
   /**
    * @param int
@@ -500,6 +506,20 @@ class BackendService extends \Google\Collection
     return $this->maxStreamDuration;
   }
   /**
+   * @param string[]
+   */
+  public function setMetadatas($metadatas)
+  {
+    $this->metadatas = $metadatas;
+  }
+  /**
+   * @return string[]
+   */
+  public function getMetadatas()
+  {
+    return $this->metadatas;
+  }
+  /**
    * @param string
    */
   public function setName($name)
@@ -694,6 +714,20 @@ class BackendService extends \Google\Collection
   public function getTimeoutSec()
   {
     return $this->timeoutSec;
+  }
+  /**
+   * @param BackendServiceUsedBy[]
+   */
+  public function setUsedBy($usedBy)
+  {
+    $this->usedBy = $usedBy;
+  }
+  /**
+   * @return BackendServiceUsedBy[]
+   */
+  public function getUsedBy()
+  {
+    return $this->usedBy;
   }
 }
 

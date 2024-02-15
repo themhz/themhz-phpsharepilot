@@ -19,17 +19,15 @@ namespace Google\Service\CloudWorkstations;
 
 class WorkstationConfig extends \Google\Collection
 {
-  protected $collection_key = 'persistentDirectories';
+  protected $collection_key = 'replicaZones';
   /**
    * @var string[]
    */
   public $annotations;
   protected $conditionsType = Status::class;
   protected $conditionsDataType = 'array';
-  public $conditions;
   protected $containerType = Container::class;
   protected $containerDataType = '';
-  public $container;
   /**
    * @var string
    */
@@ -43,19 +41,25 @@ class WorkstationConfig extends \Google\Collection
    */
   public $deleteTime;
   /**
+   * @var bool
+   */
+  public $disableTcpConnections;
+  /**
    * @var string
    */
   public $displayName;
+  /**
+   * @var bool
+   */
+  public $enableAuditAgent;
   protected $encryptionKeyType = CustomerEncryptionKey::class;
   protected $encryptionKeyDataType = '';
-  public $encryptionKey;
   /**
    * @var string
    */
   public $etag;
   protected $hostType = Host::class;
   protected $hostDataType = '';
-  public $host;
   /**
    * @var string
    */
@@ -70,11 +74,16 @@ class WorkstationConfig extends \Google\Collection
   public $name;
   protected $persistentDirectoriesType = PersistentDirectory::class;
   protected $persistentDirectoriesDataType = 'array';
-  public $persistentDirectories;
+  protected $readinessChecksType = ReadinessCheck::class;
+  protected $readinessChecksDataType = 'array';
   /**
    * @var bool
    */
   public $reconciling;
+  /**
+   * @var string[]
+   */
+  public $replicaZones;
   /**
    * @var string
    */
@@ -173,6 +182,20 @@ class WorkstationConfig extends \Google\Collection
     return $this->deleteTime;
   }
   /**
+   * @param bool
+   */
+  public function setDisableTcpConnections($disableTcpConnections)
+  {
+    $this->disableTcpConnections = $disableTcpConnections;
+  }
+  /**
+   * @return bool
+   */
+  public function getDisableTcpConnections()
+  {
+    return $this->disableTcpConnections;
+  }
+  /**
    * @param string
    */
   public function setDisplayName($displayName)
@@ -185,6 +208,20 @@ class WorkstationConfig extends \Google\Collection
   public function getDisplayName()
   {
     return $this->displayName;
+  }
+  /**
+   * @param bool
+   */
+  public function setEnableAuditAgent($enableAuditAgent)
+  {
+    $this->enableAuditAgent = $enableAuditAgent;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableAuditAgent()
+  {
+    return $this->enableAuditAgent;
   }
   /**
    * @param CustomerEncryptionKey
@@ -285,6 +322,20 @@ class WorkstationConfig extends \Google\Collection
     return $this->persistentDirectories;
   }
   /**
+   * @param ReadinessCheck[]
+   */
+  public function setReadinessChecks($readinessChecks)
+  {
+    $this->readinessChecks = $readinessChecks;
+  }
+  /**
+   * @return ReadinessCheck[]
+   */
+  public function getReadinessChecks()
+  {
+    return $this->readinessChecks;
+  }
+  /**
    * @param bool
    */
   public function setReconciling($reconciling)
@@ -297,6 +348,20 @@ class WorkstationConfig extends \Google\Collection
   public function getReconciling()
   {
     return $this->reconciling;
+  }
+  /**
+   * @param string[]
+   */
+  public function setReplicaZones($replicaZones)
+  {
+    $this->replicaZones = $replicaZones;
+  }
+  /**
+   * @return string[]
+   */
+  public function getReplicaZones()
+  {
+    return $this->replicaZones;
   }
   /**
    * @param string

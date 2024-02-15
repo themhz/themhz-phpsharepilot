@@ -115,6 +115,16 @@ class Contactcenterinsights extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'bulkDelete' => [
+              'path' => 'v1/{+parent}/conversations:bulkDelete',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'calculateStats' => [
               'path' => 'v1/{+location}/conversations:calculateStats',
               'httpMethod' => 'GET',
@@ -194,6 +204,10 @@ class Contactcenterinsights extends \Google\Service
                   'location' => 'query',
                   'type' => 'string',
                 ],
+                'orderBy' => [
+                  'location' => 'query',
+                  'type' => 'string',
+                ],
                 'pageSize' => [
                   'location' => 'query',
                   'type' => 'integer',
@@ -219,6 +233,16 @@ class Contactcenterinsights extends \Google\Service
                 'updateMask' => [
                   'location' => 'query',
                   'type' => 'string',
+                ],
+              ],
+            ],'upload' => [
+              'path' => 'v1/{+parent}/conversations:upload',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
                 ],
               ],
             ],
@@ -353,11 +377,31 @@ class Contactcenterinsights extends \Google\Service
                   'required' => true,
                 ],
               ],
+            ],'export' => [
+              'path' => 'v1/{+name}:export',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
             ],'get' => [
               'path' => 'v1/{+name}',
               'httpMethod' => 'GET',
               'parameters' => [
                 'name' => [
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ],
+              ],
+            ],'import' => [
+              'path' => 'v1/{+parent}/issueModels:import',
+              'httpMethod' => 'POST',
+              'parameters' => [
+                'parent' => [
                   'location' => 'path',
                   'type' => 'string',
                   'required' => true,

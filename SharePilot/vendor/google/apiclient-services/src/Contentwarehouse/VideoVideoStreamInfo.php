@@ -61,7 +61,7 @@ class VideoVideoStreamInfo extends \Google\Collection
    */
   public $audioStreamCodecTag;
   /**
-   * @var int
+   * @var string
    */
   public $avDistance;
   public $avLength;
@@ -116,6 +116,8 @@ class VideoVideoStreamInfo extends \Google\Collection
    * @var int
    */
   public $fileType;
+  protected $googleVideoClipInfoType = VideoGoogleVideoClipInfo::class;
+  protected $googleVideoClipInfoDataType = '';
   protected $imageStreamType = VideoVideoStreamInfoVideoStream::class;
   protected $imageStreamDataType = 'array';
   /**
@@ -160,6 +162,10 @@ class VideoVideoStreamInfo extends \Google\Collection
    * @var bool
    */
   public $parsedByFfmpeg;
+  /**
+   * @var bool
+   */
+  public $parsedByInHouseParsers;
   /**
    * @var bool
    */
@@ -421,14 +427,14 @@ class VideoVideoStreamInfo extends \Google\Collection
     return $this->audioStreamCodecTag;
   }
   /**
-   * @param int
+   * @param string
    */
   public function setAvDistance($avDistance)
   {
     $this->avDistance = $avDistance;
   }
   /**
-   * @return int
+   * @return string
    */
   public function getAvDistance()
   {
@@ -633,6 +639,20 @@ class VideoVideoStreamInfo extends \Google\Collection
     return $this->fileType;
   }
   /**
+   * @param VideoGoogleVideoClipInfo
+   */
+  public function setGoogleVideoClipInfo(VideoGoogleVideoClipInfo $googleVideoClipInfo)
+  {
+    $this->googleVideoClipInfo = $googleVideoClipInfo;
+  }
+  /**
+   * @return VideoGoogleVideoClipInfo
+   */
+  public function getGoogleVideoClipInfo()
+  {
+    return $this->googleVideoClipInfo;
+  }
+  /**
    * @param VideoVideoStreamInfoVideoStream[]
    */
   public function setImageStream($imageStream)
@@ -799,6 +819,20 @@ class VideoVideoStreamInfo extends \Google\Collection
   public function getParsedByFfmpeg()
   {
     return $this->parsedByFfmpeg;
+  }
+  /**
+   * @param bool
+   */
+  public function setParsedByInHouseParsers($parsedByInHouseParsers)
+  {
+    $this->parsedByInHouseParsers = $parsedByInHouseParsers;
+  }
+  /**
+   * @return bool
+   */
+  public function getParsedByInHouseParsers()
+  {
+    return $this->parsedByInHouseParsers;
   }
   /**
    * @param bool

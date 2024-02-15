@@ -34,7 +34,7 @@ class VolumeSaleInfo extends \Google\Collection
   public $isEbook;
   protected $listPriceType = VolumeSaleInfoListPrice::class;
   protected $listPriceDataType = '';
-  protected $offersType = VolumeSaleInbarffers::class;
+  protected $offersType = VolumeSaleInfoOffers::class;
   protected $offersDataType = 'array';
   /**
    * @var string
@@ -104,14 +104,14 @@ class VolumeSaleInfo extends \Google\Collection
     return $this->listPrice;
   }
   /**
-   * @param VolumeSaleInbarffers[]
+   * @param VolumeSaleInfoOffers[]
    */
   public function setOffers($offers)
   {
     $this->offers = $offers;
   }
   /**
-   * @return VolumeSaleInbarffers[]
+   * @return VolumeSaleInfoOffers[]
    */
   public function getOffers()
   {

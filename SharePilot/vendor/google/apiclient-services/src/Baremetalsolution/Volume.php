@@ -17,8 +17,13 @@
 
 namespace Google\Service\Baremetalsolution;
 
-class Volume extends \Google\Model
+class Volume extends \Google\Collection
 {
+  protected $collection_key = 'instances';
+  /**
+   * @var bool
+   */
+  public $attached;
   /**
    * @var string
    */
@@ -43,6 +48,10 @@ class Volume extends \Google\Model
    * @var string
    */
   public $id;
+  /**
+   * @var string[]
+   */
+  public $instances;
   /**
    * @var string[]
    */
@@ -96,15 +105,7 @@ class Volume extends \Google\Model
   /**
    * @var string
    */
-  public $snapshotSchedulePolicy;
-  /**
-   * @var string
-   */
   public $state;
-  /**
-   * @var string
-   */
-  public $storageAggregatePool;
   /**
    * @var string
    */
@@ -114,6 +115,20 @@ class Volume extends \Google\Model
    */
   public $workloadProfile;
 
+  /**
+   * @param bool
+   */
+  public function setAttached($attached)
+  {
+    $this->attached = $attached;
+  }
+  /**
+   * @return bool
+   */
+  public function getAttached()
+  {
+    return $this->attached;
+  }
   /**
    * @param string
    */
@@ -197,6 +212,20 @@ class Volume extends \Google\Model
   public function getId()
   {
     return $this->id;
+  }
+  /**
+   * @param string[]
+   */
+  public function setInstances($instances)
+  {
+    $this->instances = $instances;
+  }
+  /**
+   * @return string[]
+   */
+  public function getInstances()
+  {
+    return $this->instances;
   }
   /**
    * @param string[]
@@ -383,20 +412,6 @@ class Volume extends \Google\Model
   /**
    * @param string
    */
-  public function setSnapshotSchedulePolicy($snapshotSchedulePolicy)
-  {
-    $this->snapshotSchedulePolicy = $snapshotSchedulePolicy;
-  }
-  /**
-   * @return string
-   */
-  public function getSnapshotSchedulePolicy()
-  {
-    return $this->snapshotSchedulePolicy;
-  }
-  /**
-   * @param string
-   */
   public function setState($state)
   {
     $this->state = $state;
@@ -407,20 +422,6 @@ class Volume extends \Google\Model
   public function getState()
   {
     return $this->state;
-  }
-  /**
-   * @param string
-   */
-  public function setStorageAggregatePool($storageAggregatePool)
-  {
-    $this->storageAggregatePool = $storageAggregatePool;
-  }
-  /**
-   * @return string
-   */
-  public function getStorageAggregatePool()
-  {
-    return $this->storageAggregatePool;
   }
   /**
    * @param string

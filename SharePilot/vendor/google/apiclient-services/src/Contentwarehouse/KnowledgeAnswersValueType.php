@@ -17,8 +17,9 @@
 
 namespace Google\Service\Contentwarehouse;
 
-class KnowledgeAnswersValueType extends \Google\Model
+class KnowledgeAnswersValueType extends \Google\Collection
 {
+  protected $collection_key = 'viewSpecificNumberTypes';
   protected $anyTypeType = KnowledgeAnswersAnyType::class;
   protected $anyTypeDataType = '';
   protected $attributeTypeType = KnowledgeAnswersAttributeType::class;
@@ -51,10 +52,6 @@ class KnowledgeAnswersValueType extends \Google\Model
   protected $opaqueTypeDataType = '';
   protected $plexityRequirementType = KnowledgeAnswersPlexityRequirement::class;
   protected $plexityRequirementDataType = '';
-  /**
-   * @var string
-   */
-  public $pluralityType;
   protected $polarQuestionTypeType = KnowledgeAnswersPolarQuestionType::class;
   protected $polarQuestionTypeDataType = '';
   protected $semanticTypeType = KnowledgeAnswersSemanticType::class;
@@ -67,8 +64,8 @@ class KnowledgeAnswersValueType extends \Google\Model
   protected $timezoneTypeDataType = '';
   protected $trackingNumberTypeType = KnowledgeAnswersTrackingNumberType::class;
   protected $trackingNumberTypeDataType = '';
-  protected $withTraitType = KnowledgeAnswersTypeTrait::class;
-  protected $withTraitDataType = '';
+  protected $viewSpecificNumberTypesType = KnowledgeAnswersNumberType::class;
+  protected $viewSpecificNumberTypesDataType = 'array';
 
   /**
    * @param KnowledgeAnswersAnyType
@@ -281,20 +278,6 @@ class KnowledgeAnswersValueType extends \Google\Model
     return $this->plexityRequirement;
   }
   /**
-   * @param string
-   */
-  public function setPluralityType($pluralityType)
-  {
-    $this->pluralityType = $pluralityType;
-  }
-  /**
-   * @return string
-   */
-  public function getPluralityType()
-  {
-    return $this->pluralityType;
-  }
-  /**
    * @param KnowledgeAnswersPolarQuestionType
    */
   public function setPolarQuestionType(KnowledgeAnswersPolarQuestionType $polarQuestionType)
@@ -379,18 +362,18 @@ class KnowledgeAnswersValueType extends \Google\Model
     return $this->trackingNumberType;
   }
   /**
-   * @param KnowledgeAnswersTypeTrait
+   * @param KnowledgeAnswersNumberType[]
    */
-  public function setWithTrait(KnowledgeAnswersTypeTrait $withTrait)
+  public function setViewSpecificNumberTypes($viewSpecificNumberTypes)
   {
-    $this->withTrait = $withTrait;
+    $this->viewSpecificNumberTypes = $viewSpecificNumberTypes;
   }
   /**
-   * @return KnowledgeAnswersTypeTrait
+   * @return KnowledgeAnswersNumberType[]
    */
-  public function getWithTrait()
+  public function getViewSpecificNumberTypes()
   {
-    return $this->withTrait;
+    return $this->viewSpecificNumberTypes;
   }
 }
 

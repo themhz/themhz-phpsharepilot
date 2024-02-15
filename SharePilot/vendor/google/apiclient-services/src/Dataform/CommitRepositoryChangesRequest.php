@@ -21,10 +21,12 @@ class CommitRepositoryChangesRequest extends \Google\Model
 {
   protected $commitMetadataType = CommitMetadata::class;
   protected $commitMetadataDataType = '';
-  public $commitMetadata;
   protected $fileOperationsType = FileOperation::class;
   protected $fileOperationsDataType = 'map';
-  public $fileOperations = [];
+  /**
+   * @var string
+   */
+  public $requiredHeadCommitSha;
 
   /**
    * @param CommitMetadata
@@ -53,6 +55,20 @@ class CommitRepositoryChangesRequest extends \Google\Model
   public function getFileOperations()
   {
     return $this->fileOperations;
+  }
+  /**
+   * @param string
+   */
+  public function setRequiredHeadCommitSha($requiredHeadCommitSha)
+  {
+    $this->requiredHeadCommitSha = $requiredHeadCommitSha;
+  }
+  /**
+   * @return string
+   */
+  public function getRequiredHeadCommitSha()
+  {
+    return $this->requiredHeadCommitSha;
   }
 }
 

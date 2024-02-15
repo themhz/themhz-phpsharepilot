@@ -20,6 +20,8 @@ namespace Google\Service\Integrations;
 class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collection
 {
   protected $collection_key = 'triggerConfigsInternal';
+  protected $cloudLoggingDetailsType = GoogleCloudIntegrationsV1alphaCloudLoggingDetails::class;
+  protected $cloudLoggingDetailsDataType = '';
   /**
    * @var string
    */
@@ -32,8 +34,14 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
    * @var string
    */
   public $description;
+  /**
+   * @var bool
+   */
+  public $enableVariableMasking;
   protected $errorCatcherConfigsType = GoogleCloudIntegrationsV1alphaErrorCatcherConfig::class;
   protected $errorCatcherConfigsDataType = 'array';
+  protected $integrationConfigParametersType = GoogleCloudIntegrationsV1alphaIntegrationConfigParameter::class;
+  protected $integrationConfigParametersDataType = 'array';
   protected $integrationParametersType = GoogleCloudIntegrationsV1alphaIntegrationParameter::class;
   protected $integrationParametersDataType = 'array';
   protected $integrationParametersInternalType = EnterpriseCrmFrontendsEventbusProtoWorkflowParameters::class;
@@ -58,6 +66,10 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
    * @var string
    */
   public $parentTemplateId;
+  /**
+   * @var string
+   */
+  public $runAsServiceAccount;
   /**
    * @var string
    */
@@ -89,6 +101,20 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
    */
   public $userLabel;
 
+  /**
+   * @param GoogleCloudIntegrationsV1alphaCloudLoggingDetails
+   */
+  public function setCloudLoggingDetails(GoogleCloudIntegrationsV1alphaCloudLoggingDetails $cloudLoggingDetails)
+  {
+    $this->cloudLoggingDetails = $cloudLoggingDetails;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaCloudLoggingDetails
+   */
+  public function getCloudLoggingDetails()
+  {
+    return $this->cloudLoggingDetails;
+  }
   /**
    * @param string
    */
@@ -132,6 +158,20 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
     return $this->description;
   }
   /**
+   * @param bool
+   */
+  public function setEnableVariableMasking($enableVariableMasking)
+  {
+    $this->enableVariableMasking = $enableVariableMasking;
+  }
+  /**
+   * @return bool
+   */
+  public function getEnableVariableMasking()
+  {
+    return $this->enableVariableMasking;
+  }
+  /**
    * @param GoogleCloudIntegrationsV1alphaErrorCatcherConfig[]
    */
   public function setErrorCatcherConfigs($errorCatcherConfigs)
@@ -144,6 +184,20 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
   public function getErrorCatcherConfigs()
   {
     return $this->errorCatcherConfigs;
+  }
+  /**
+   * @param GoogleCloudIntegrationsV1alphaIntegrationConfigParameter[]
+   */
+  public function setIntegrationConfigParameters($integrationConfigParameters)
+  {
+    $this->integrationConfigParameters = $integrationConfigParameters;
+  }
+  /**
+   * @return GoogleCloudIntegrationsV1alphaIntegrationConfigParameter[]
+   */
+  public function getIntegrationConfigParameters()
+  {
+    return $this->integrationConfigParameters;
   }
   /**
    * @param GoogleCloudIntegrationsV1alphaIntegrationParameter[]
@@ -242,6 +296,20 @@ class GoogleCloudIntegrationsV1alphaIntegrationVersion extends \Google\Collectio
   public function getParentTemplateId()
   {
     return $this->parentTemplateId;
+  }
+  /**
+   * @param string
+   */
+  public function setRunAsServiceAccount($runAsServiceAccount)
+  {
+    $this->runAsServiceAccount = $runAsServiceAccount;
+  }
+  /**
+   * @return string
+   */
+  public function getRunAsServiceAccount()
+  {
+    return $this->runAsServiceAccount;
   }
   /**
    * @param string

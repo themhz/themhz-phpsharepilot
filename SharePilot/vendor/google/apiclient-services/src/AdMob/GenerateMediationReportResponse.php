@@ -19,26 +19,26 @@ namespace Google\Service\AdMob;
 
 class GenerateMediationReportResponse extends \Google\Model
 {
-  protected $barterType = Reportbarter::class;
-  protected $barterDataType = '';
+  protected $footerType = ReportFooter::class;
+  protected $footerDataType = '';
   protected $headerType = ReportHeader::class;
   protected $headerDataType = '';
   protected $rowType = ReportRow::class;
   protected $rowDataType = '';
 
   /**
-   * @param Reportbarter
+   * @param ReportFooter
    */
-  public function setbarter(Reportbarter $barter)
+  public function setFooter(ReportFooter $footer)
   {
-    $this->barter = $barter;
+    $this->footer = $footer;
   }
   /**
-   * @return Reportbarter
+   * @return ReportFooter
    */
-  public function getbarter()
+  public function getFooter()
   {
-    return $this->barter;
+    return $this->footer;
   }
   /**
    * @param ReportHeader

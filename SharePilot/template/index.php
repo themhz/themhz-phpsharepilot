@@ -15,7 +15,7 @@ namespace SharePilotV2\Components;
 <link rel="stylesheet" href="template/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<script src="template/js/main.js?v="<?php echo time(); ?>"></script>
+<script src="template/js/main.js?v=<?php echo time(); ?>"></script>
 
 </head>
 <body>
@@ -50,6 +50,7 @@ if (isset($_SESSION["user"])){ ?>
     <a class="w3-bar-item w3-button w3-hover-teal" href="lists">Lists</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="schedule">Scheduled Links</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="cron">Cron</a>
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
@@ -61,9 +62,11 @@ if (isset($_SESSION["user"])){ ?>
     <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
     <div class="w3-main">
     <?php }?>
-<?php
-include $page;
-?>
+    <?php
+    if (file_exists($page)) {
+        include $page;
+    }
+    ?>
     <!-- END MAIN -->
 </div>
 <script>

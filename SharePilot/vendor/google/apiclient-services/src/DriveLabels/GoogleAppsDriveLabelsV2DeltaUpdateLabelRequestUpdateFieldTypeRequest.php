@@ -21,30 +21,22 @@ class GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldTypeRequest exten
 {
   protected $dateOptionsType = GoogleAppsDriveLabelsV2FieldDateOptions::class;
   protected $dateOptionsDataType = '';
-  public $dateOptions;
   /**
    * @var string
    */
   public $id;
   protected $integerOptionsType = GoogleAppsDriveLabelsV2FieldIntegerOptions::class;
   protected $integerOptionsDataType = '';
-  public $integerOptions;
-  protected $longTextOptionsType = GoogleAppsDriveLabelsV2FieldLongTextOptions::class;
-  protected $longTextOptionsDataType = '';
-  public $longTextOptions;
   protected $selectionOptionsType = GoogleAppsDriveLabelsV2FieldSelectionOptions::class;
   protected $selectionOptionsDataType = '';
-  public $selectionOptions;
   protected $textOptionsType = GoogleAppsDriveLabelsV2FieldTextOptions::class;
   protected $textOptionsDataType = '';
-  public $textOptions;
   /**
    * @var string
    */
   public $updateMask;
   protected $userOptionsType = GoogleAppsDriveLabelsV2FieldUserOptions::class;
   protected $userOptionsDataType = '';
-  public $userOptions;
 
   /**
    * @param GoogleAppsDriveLabelsV2FieldDateOptions
@@ -87,20 +79,6 @@ class GoogleAppsDriveLabelsV2DeltaUpdateLabelRequestUpdateFieldTypeRequest exten
   public function getIntegerOptions()
   {
     return $this->integerOptions;
-  }
-  /**
-   * @param GoogleAppsDriveLabelsV2FieldLongTextOptions
-   */
-  public function setLongTextOptions(GoogleAppsDriveLabelsV2FieldLongTextOptions $longTextOptions)
-  {
-    $this->longTextOptions = $longTextOptions;
-  }
-  /**
-   * @return GoogleAppsDriveLabelsV2FieldLongTextOptions
-   */
-  public function getLongTextOptions()
-  {
-    return $this->longTextOptions;
   }
   /**
    * @param GoogleAppsDriveLabelsV2FieldSelectionOptions

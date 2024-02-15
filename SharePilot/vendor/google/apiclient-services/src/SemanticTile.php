@@ -70,7 +70,7 @@ class SemanticTile extends \Google\Service
                   'type' => 'string',
                   'required' => true,
                 ],
-                'alwaysIncludeBuildingbartprints' => [
+                'alwaysIncludeBuildingFootprints' => [
                   'location' => 'query',
                   'type' => 'boolean',
                 ],

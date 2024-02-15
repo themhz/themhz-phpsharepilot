@@ -17,7 +17,7 @@
 
 namespace Google\Service\Books;
 
-class VolumeSaleInbarffersRentalDuration extends \Google\Model
+class VolumeSaleInfoOffersRentalDuration extends \Google\Model
 {
   public $count;
   /**
@@ -50,4 +50,4 @@ class VolumeSaleInbarffersRentalDuration extends \Google\Model
 }
 
 // Adding a class alias for backwards compatibility with the previous class name.
-class_alias(VolumeSaleInbarffersRentalDuration::class, 'Google_Service_Books_VolumeSaleInbarffersRentalDuration');
+class_alias(VolumeSaleInfoOffersRentalDuration::class, 'Google_Service_Books_VolumeSaleInfoOffersRentalDuration');

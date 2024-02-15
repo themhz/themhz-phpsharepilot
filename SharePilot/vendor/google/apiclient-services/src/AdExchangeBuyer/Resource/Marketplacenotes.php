@@ -54,7 +54,7 @@ class Marketplacenotes extends \Google\Service\Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param string pqlQuery Query string to retrieve specific notes. To search
-   * the text contents of notes, please use syntax like "WHERE note.note = "bar"
+   * the text contents of notes, please use syntax like "WHERE note.note = "foo"
    * or "WHERE note.note LIKE "%bar%"
    * @return GetOrderNotesResponse
    */

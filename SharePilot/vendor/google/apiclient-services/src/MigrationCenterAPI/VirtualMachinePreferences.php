@@ -25,14 +25,20 @@ class VirtualMachinePreferences extends \Google\Model
   public $commitmentPlan;
   protected $computeEnginePreferencesType = ComputeEnginePreferences::class;
   protected $computeEnginePreferencesDataType = '';
-  public $computeEnginePreferences;
   protected $regionPreferencesType = RegionPreferences::class;
   protected $regionPreferencesDataType = '';
-  public $regionPreferences;
   /**
    * @var string
    */
   public $sizingOptimizationStrategy;
+  protected $soleTenancyPreferencesType = SoleTenancyPreferences::class;
+  protected $soleTenancyPreferencesDataType = '';
+  /**
+   * @var string
+   */
+  public $targetProduct;
+  protected $vmwareEnginePreferencesType = VmwareEnginePreferences::class;
+  protected $vmwareEnginePreferencesDataType = '';
 
   /**
    * @param string
@@ -89,6 +95,48 @@ class VirtualMachinePreferences extends \Google\Model
   public function getSizingOptimizationStrategy()
   {
     return $this->sizingOptimizationStrategy;
+  }
+  /**
+   * @param SoleTenancyPreferences
+   */
+  public function setSoleTenancyPreferences(SoleTenancyPreferences $soleTenancyPreferences)
+  {
+    $this->soleTenancyPreferences = $soleTenancyPreferences;
+  }
+  /**
+   * @return SoleTenancyPreferences
+   */
+  public function getSoleTenancyPreferences()
+  {
+    return $this->soleTenancyPreferences;
+  }
+  /**
+   * @param string
+   */
+  public function setTargetProduct($targetProduct)
+  {
+    $this->targetProduct = $targetProduct;
+  }
+  /**
+   * @return string
+   */
+  public function getTargetProduct()
+  {
+    return $this->targetProduct;
+  }
+  /**
+   * @param VmwareEnginePreferences
+   */
+  public function setVmwareEnginePreferences(VmwareEnginePreferences $vmwareEnginePreferences)
+  {
+    $this->vmwareEnginePreferences = $vmwareEnginePreferences;
+  }
+  /**
+   * @return VmwareEnginePreferences
+   */
+  public function getVmwareEnginePreferences()
+  {
+    return $this->vmwareEnginePreferences;
   }
 }
 
