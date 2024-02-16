@@ -102,7 +102,7 @@
     }
     function loadTableData() {
         // Fetch data from your endpoint
-        fetch('settings?method=getusers&format=raw')
+        fetch('settings?method=getusers&format=json')
             .then(response => response.json())
             .then(data => {
                 // If the request was successful, populate the table with the data
@@ -147,7 +147,7 @@
 
             // AJAX call for create/update user
             var method = isEdit==0? "registeruser" : "updateuser";
-            fetch(`settings?method=${method}&format=raw`, {
+            fetch(`settings?method=${method}&format=json`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -185,7 +185,7 @@
         event.preventDefault(); // Prevent page reload
         if(confirm("are you sure you want to delete the user?")){
             // AJAX call for delete user
-            fetch(`settings?method=deleteuser&format=raw&id=${userId}`, {
+            fetch(`settings?method=deleteuser&format=json&id=${userId}`, {
                 method: 'get',
             })
                 .then(response => response.json())
@@ -202,7 +202,7 @@
     // Handle edit action
     function handleEdit(userId) {
         // Fetch user data for the user with the specified ID
-        fetch(`settings?method=getuserbyid&id=${userId}&format=raw`)
+        fetch(`settings?method=getuserbyid&id=${userId}&format=json`)
             .then(response => response.json())
             .then(data => {
                 // If the request was successful, populate the form with the user data

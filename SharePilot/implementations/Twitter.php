@@ -1,8 +1,4 @@
 <?php
-require 'vendor/autoload.php';
-
-use Abraham\TwitterOAuth\TwitterOAuth;
-
 //Important urls
 //https://twittercommunity.com/new
 //https://developer.twitter.com/en/portal/dashboard
@@ -11,7 +7,11 @@ use Abraham\TwitterOAuth\TwitterOAuth;
 //https://www.postman.com/explore
 //https://developer.twitter.com/en/docs/tutorials/postman-getting-started
 //https://twittercommunity.com/t/453-you-currently-have-access-to-twitter-api-v2-endpoints-and-limited-v1-1-endpoints-only/193292/10
+
 namespace SharePilotV2\Implementations;
+
+use Abraham\TwitterOAuth\TwitterOAuth;
+
 class Twitter implements ISocialMediaService{
 
     public $Keys;

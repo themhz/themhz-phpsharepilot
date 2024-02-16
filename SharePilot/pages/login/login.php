@@ -2,7 +2,7 @@
     <h1>SharePilot</h1>
 </div>
 <div class="login-container">
-    <form action="login/authentication?format=raw" method="post">
+    <form action="login/authentication?format=json" method="post">
         <label for="username">Username:</label><br>
         <input type="text" id="email" name="email"><br>
         <label for="password">Password:</label><br>

@@ -26,7 +26,7 @@
         }
         const formData = new FormData();
         formData.append('url', url);
-        fetch('links/fetchurl?format=raw', {
+        fetch('links/fetchurl?format=json', {
             method: 'POST',
             body: formData
         })

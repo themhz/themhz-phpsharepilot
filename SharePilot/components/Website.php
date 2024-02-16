@@ -22,19 +22,25 @@ use SharePilotV2\Libs\Functions;
 class Website{
 
     public function start(){                
-        $this->startSession();        
+        $this->startSession();
         $this->loadEnvFile();
         $this->loadErrorHandler();
         $this->setTimeZone();
-        
         $result = $this->userAuth();
-        $raw = RequestHandler::get("format");
-        if($raw == 'raw'){
+        
+        $this->loadPage();
+        /*$json = RequestHandler::get("format");
+        if($json == 'json'){
+            //if($result["userAuth"] == false){
+                
+                //echo json_encode($result)."\r\n";
+                //return;
+            //}
             $controller = new MasterController();
             $controller->start();
         }else{
             $this->loadPage();
-        }
+        }*/
     }
     private function startSession(){
         session_start();
@@ -62,8 +68,7 @@ class Website{
 
     private function loadPage(){
         $page =  new Pages();
-        $page = $page->load();
-        include __DIR__ . '/../template/index.php';
+        $page = $page->load();        
     }
 
 }

@@ -28,7 +28,7 @@
     function loadListsModalBySelectedChannel(){
         let selectedChannel = document.getElementById('editmodal_channels').value;
         if(selectedChannel!="0"){
-            fetch(`links/loadlists?format=raw&channel_id=${selectedChannel}`)
+            fetch(`links/loadlists?format=json&channel_id=${selectedChannel}`)
                 .then(response => response.json())
                 .then(data => {
                     createListListsModal(data);
@@ -50,7 +50,7 @@
     }
 
     function submitChanges() {
-        fetch('links/update?format=raw', {
+        fetch('links/update?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

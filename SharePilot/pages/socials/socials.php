@@ -93,7 +93,7 @@
         }
     }, false);
     function loadsocials(){
-        fetch('socials?format=raw', {
+        fetch('socials?format=json', {
             method: 'get',
             })
             .then(response => response.json())
@@ -145,7 +145,7 @@
         document.getElementById('myModal').style.display = 'block';
     }
     function update() {
-        fetch('socials?format=raw', {
+        fetch('socials?format=json', {
             method: 'put',
             headers: {
                 "Content-Type": "application/json"
@@ -165,7 +165,7 @@
     function deletesocial(id){
         event.stopPropagation();
         if(confirm("are you sure you want to delete this social?")){
-            fetch('socials/delete?format=raw', {
+            fetch('socials/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -240,7 +240,7 @@
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('socials/addsocial?format=raw', {
+            fetch('socials/addsocial?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

@@ -39,7 +39,7 @@ echo '<select id="timezone-select" name="timezone">';
 
 
     function saveTimeZone(){
-            fetch(`settings?method=savetimezone&timezone=${serverTimezone}&format=raw`, {
+            fetch(`settings?method=savetimezone&timezone=${serverTimezone}&format=json`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

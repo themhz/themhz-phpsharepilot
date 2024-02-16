@@ -67,7 +67,7 @@
     }, false);
 
     function loadLists(channel_id=null){
-        let url ='lists?format=raw';
+        let url ='lists?format=json';
         if(channel_id!=null){
             url+= "&channel_id="+channel_id;
         }
@@ -98,7 +98,7 @@
             })
     }
     function loadChannels(){
-        fetch('channels/loadchannels?format=raw')
+        fetch('channels/loadchannels?format=json')
             .then(response => response.json())
             .then(data => {
                 document.getElementById("channelsTopBar").innerHTML += `<option value="">All</option>`;
@@ -110,7 +110,7 @@
             });
     }
     function selectListItem(item){
-        fetch(`lists?format=raw&id=${item.id}`, {
+        fetch(`lists?format=json&id=${item.id}`, {
             method: 'get',
         })
             .then(response => response.json())
@@ -124,7 +124,7 @@
         event.stopPropagation();
         if(confirm("are you sure you want to delete this List?")){
 
-            fetch(`lists/delete?format=raw&id=${id}`, {
+            fetch(`lists/delete?format=json&id=${id}`, {
                 method: 'get',
             })
                 .then(response => response.json())
@@ -220,7 +220,7 @@
         let name = document.getElementById("ListName").value;
         let channel_id = document.getElementById("channels").value;
 
-        fetch('lists/update?format=raw', {
+        fetch('lists/update?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -246,7 +246,7 @@
         let name = document.getElementById("ListName").value;
         let channel_id = document.getElementById("channels").value;
 
-        fetch('lists/add?format=raw', {
+        fetch('lists/add?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

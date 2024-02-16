@@ -18,7 +18,7 @@
 </div>
 <script>
     function saveLink(){
-        fetch("links/addurl?format=raw", {
+        fetch("links/addurl?format=json", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

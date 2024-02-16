@@ -101,7 +101,7 @@
         }
     }, false);
     function loadChannels(){
-        fetch('channels?format=raw', {
+        fetch('channels?format=json', {
             method: 'get',
             })
             .then(response => response.json())
@@ -111,7 +111,7 @@
     }
     function loadSocials(){
         //txtSocialId
-        fetch('channels/getsocials?format=raw', {
+        fetch('channels/getsocials?format=json', {
             method: 'get',
         })
             .then(response => response.json())
@@ -127,7 +127,7 @@
         }
     }
     function onChangeSelectedSocial(){
-        fetch('channels/loadkeys?format=raw',{
+        fetch('channels/loadkeys?format=json',{
             method: 'post',
             headers: {
                 "Content-Type": "application/json"
@@ -186,7 +186,7 @@
         onChangeSelectedSocial();
     }
     function update() {
-        fetch('channels?format=raw', {
+        fetch('channels?format=json', {
             method: 'put',
             headers: {
                 "Content-Type": "application/json"
@@ -209,7 +209,7 @@
     function deleteChannel(id){
         event.stopPropagation();
         if(confirm("are you sure you want to delete this channel?")){
-            fetch('channels/delete?format=raw', {
+            fetch('channels/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -283,7 +283,7 @@
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('channels/addchannel?format=raw', {
+            fetch('channels/addchannel?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

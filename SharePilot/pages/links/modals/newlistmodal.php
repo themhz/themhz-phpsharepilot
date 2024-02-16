@@ -28,7 +28,7 @@
         let name = document.getElementById("txtlist").value;
 
         if(channel_id!=0){
-            fetch('links/addnewlist?format=raw', {
+            fetch('links/addnewlist?format=json', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

@@ -53,7 +53,7 @@
         let channelId = document.getElementById("channels").value;
         let listId = document.getElementById("lists").value;
 
-        let url = 'links/getlinks?format=raw';
+        let url = 'links/getlinks?format=json';
         if (channelId != "0" && channelId!="") {
             url += '&channelid=' + encodeURIComponent(channelId);
         }
@@ -75,7 +75,7 @@
     //Loads the channels on the main page
     function loadChannels(){
       
-        fetch('channels/loadchannels?format=raw')
+        fetch('channels/loadchannels?format=json')
             .then(response => response.json())
             .then(data => {
                 createChannellist(data);
@@ -85,7 +85,7 @@
     function loadLists(){        
         let channel_id = document.getElementById("channels").value;
         if(!(channel_id == "0" || channel_id == "")){
-            fetch(`links/loadlists?format=raw&channel_id=${channel_id}`)
+            fetch(`links/loadlists?format=json&channel_id=${channel_id}`)
                 .then(response => response.json())
                 .then(data => {
                     createList(data);
@@ -146,7 +146,7 @@
     function loadListsModal(item){
 
         if(!(item.channel_id == "0" || item.channel_id == "" || item.channel_id == null)){
-            fetch(`links/loadlists?format=raw&channel_id=${item.channel_id}`)
+            fetch(`links/loadlists?format=json&channel_id=${item.channel_id}`)
                 .then(response => response.json())
                 .then(data => {
                     createListListsModal(data);
@@ -186,7 +186,7 @@
         event.stopPropagation();
         if(confirm("are you sure you want to delete this post?")){
             let scheduled_id = id;
-            fetch('links/delete?format=raw', {
+            fetch('links/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -211,7 +211,7 @@
     function schedulePost(id){
         event.stopPropagation();
         let scheduled_id = id;
-        fetch('links/schedulepost?format=raw', {
+        fetch('links/schedulepost?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -237,7 +237,7 @@
             loadUrls();
             return;
         }
-        fetch('links/search?format=raw', {
+        fetch('links/search?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

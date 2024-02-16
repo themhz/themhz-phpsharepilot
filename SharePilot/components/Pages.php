@@ -25,7 +25,6 @@ class Pages
 
     public function load()
     {
-
         if(isset($_SESSION["user"])){
             if (isset($_REQUEST['page'])) {
                 $this->page = $_REQUEST['page'];
@@ -33,19 +32,21 @@ class Pages
                 //Check If the directory exists
                 if (is_dir($directory)) {
                     //Load the directory
-                    return $directory . '/' . $this->page . '.php';
+                    $page = $directory . '/' . $this->page . '.php';
                 } else {
                     //Load the default directory
-                    return getcwd() . "/pages/default/default.php";
+                    $page = getcwd() . "/pages/default/default.php";
                 }
             }else {
                 //Load the default directory
-                return getcwd() . "/pages/default/default.php";
+                $page = getcwd() . "/pages/default/default.php";
             }
         }else{
-            return  getcwd() .'/pages/login/login.php';
+            $page =  getcwd() .'/pages/login/login.php';
 
         }
+
+        include __DIR__ . '/../template/index.php';
 
     }
 }

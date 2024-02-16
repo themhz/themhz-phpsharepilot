@@ -94,12 +94,12 @@
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete"){
             var tableid = "table";
-            var getAllUrl = "youtube/getvideo?format=raw"; //OK
+            var getAllUrl = "youtube/getvideo?format=json"; //OK
             var rows = ["id", {name:"thumbnailUrl", type:"image", width:"150px"},"title", {name:"videoUrl", type:"url", alt:"url"},"publishedAt"];
             var getItemUrl= null; //OK
-            var deleteUrl = "youtube/addvideo?format=raw"; //OK
+            var deleteUrl = "youtube/addvideo?format=json"; //OK
             var updateUrl = null; //OK
-            var insertUrl = "youtube/addvideo?format=raw"; //OK
+            var insertUrl = "youtube/addvideo?format=json"; //OK
             var deleteconfirmmsg = "Είστε σίγουρος ότι θέλετε να διαγράψετε το video?";
             var insertconfirmmsg = "Είστε σίγουρος ότι θέλετε να εισάγετε το video?";
             var updateconfirmmsg = "Είστε σίγουρος ότι θέλετε να ενημερώσετε το video?";

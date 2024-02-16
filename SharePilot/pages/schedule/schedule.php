@@ -101,7 +101,7 @@
     }, false);
     function loadList(){
         channelId = document.getElementById("channels").value;
-        let url = 'schedule/getscheduledlinks?format=raw';
+        let url = 'schedule/getscheduledlinks?format=json';
         if (channelId !== null && channelId !== "") {
             url += '&channelid=' + encodeURIComponent(channelId);
         }
@@ -156,7 +156,7 @@
         if(confirm("are you sure you want to delete this item?")){
             const scheduled_id = id;
 
-            fetch('schedule/delete?format=raw', {
+            fetch('schedule/delete?format=json', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -174,33 +174,14 @@
                     }
                     loadList();
                 });
-
-
-            // $.ajax({
-            //     type: "POST",
-            //     url: "schedule/delete?format=raw",
-            //     data: {
-            //         id: scheduled_id,
-            //     },
-            //     success: (response) => {
-            //         if(response.result == true){
-            //             alert("deleted successfully");
-            //         }else{
-            //             alert("problem with deletion");
-            //         }
-            //         loadList();
-            //     },
-            //     error: () => {
-            //         alert("An error occurred while scheduling the video.");
-            //     },
-            // });
+            
         }
     }
     function updateSchedulePost(id){
         event.stopPropagation();
         var post_time = document.getElementById('post_time_'+id).value;
 
-        fetch('schedule/updateschedulepost?format=raw', {
+        fetch('schedule/updateschedulepost?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -221,7 +202,7 @@
             });
     }
     function loadChannels(){
-        fetch('channels/loadchannels?format=raw')
+        fetch('channels/loadchannels?format=json')
             .then(response => response.json())
             .then(data => {
                 createChannellist(data);
@@ -264,7 +245,7 @@
                 if(channelId == "") {
                     channelId = null;
                 }
-                let url = 'schedule/autoscheduleposts?format=raw';
+                let url = 'schedule/autoscheduleposts?format=json';
                 if (channelId !== null) {
                     url += '&channelid=' + encodeURIComponent(channelId);
                 }
@@ -295,7 +276,7 @@
         if(confirm("Are you sure you want to clear all schedules?")){
             try {
                 var channelId = document.getElementById("channels").value;
-                let url = 'schedule/deleteautoscheduleposts?format=raw';
+                let url = 'schedule/deleteautoscheduleposts?format=json';
                 if (channelId !== null) {
                     url += '&channelid=' + encodeURIComponent(channelId);
                 }
@@ -322,7 +303,7 @@
         if(confirm("Are you sure you want to clear all schedules?")){
             try {
                 var channelId = document.getElementById("channels").value;
-                let url = 'schedule/clearautoscheduleposts?format=raw';
+                let url = 'schedule/clearautoscheduleposts?format=json';
                 if (channelId !== null) {
                     url += '&channelid=' + encodeURIComponent(channelId);
                 }
@@ -354,7 +335,7 @@
             avoid_start_hour.trim().length>0 &&
             avoid_end_hour.trim().length>0) {
             try {
-                const response = await fetch("schedule/restateschedule?format=raw", {
+                const response = await fetch("schedule/restateschedule?format=json", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"

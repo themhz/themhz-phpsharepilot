@@ -1,8 +1,6 @@
 <?php
 namespace SharePilotV2\Components;
 
-use SharePilotV2\Implementations\Facebook;
-
 class PostingService
 {
     private $sm = [];
@@ -40,11 +38,11 @@ class PostingService
                 $assocArray[$obj->name] = $obj->value;
             }
         
-            $class = ucfirst(strtolower($result->social));
+            $class = "SharePilotV2\Implementations\\".ucfirst(strtolower($result->social));        
             $this->add(new $class($assocArray));
-                
+                            
         }
-        //and finally I post them
+
         $this->post();
     }
 
@@ -95,7 +93,4 @@ class PostingService
             }
     }
 }
-
-$ps = new PostingService();
-$ps->start();
 
