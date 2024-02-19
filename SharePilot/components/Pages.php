@@ -49,4 +49,8 @@ class Pages
         include __DIR__ . '/../template/index.php';
 
     }
+
+    public function loadLogin(){
+        include __DIR__ . '/../template/login.php';
+    }
 }

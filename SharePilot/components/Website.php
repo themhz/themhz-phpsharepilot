@@ -22,25 +22,34 @@ use SharePilotV2\Libs\Functions;
 class Website{
 
     public function start(){                
-        $this->startSession();
-        $this->loadEnvFile();
-        $this->loadErrorHandler();
-        $this->setTimeZone();
-        $result = $this->userAuth();
-        
-        $this->loadPage();
-        /*$json = RequestHandler::get("format");
-        if($json == 'json'){
-            //if($result["userAuth"] == false){
-                
-                //echo json_encode($result)."\r\n";
-                //return;
-            //}
-            $controller = new MasterController();
-            $controller->start();
-        }else{
-            $this->loadPage();
-        }*/
+        try{    
+            $this->startSession();
+            $this->loadEnvFile();
+            $this->loadErrorHandler();
+            $this->setTimeZone();
+            $result = $this->userAuth();
+    
+            if(isset($result["userAuth"]) && $result["userAuth"] == false){
+                $this->loadLogin();
+            }else{
+                $this->loadPage();
+            }
+            
+            /*$json = RequestHandler::get("format");
+            if($json == 'json'){
+                //if($result["userAuth"] == false){
+                    
+                    //echo json_encode($result)."\r\n";
+                    //return;
+                //}
+                $controller = new MasterController();
+                $controller->start();
+            }else{
+                $this->loadPage();
+            }*/
+        }catch(Exception $ex){
+            print_r($ex);
+        }        
     }
     private function startSession(){
         session_start();
@@ -69,6 +78,11 @@ class Website{
     private function loadPage(){
         $page =  new Pages();
         $page = $page->load();        
+    }
+
+    private function loadLogin(){
+        $page =  new Pages();
+        $page = $page->loadLogin();        
     }
 
 }
