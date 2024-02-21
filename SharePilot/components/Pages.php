@@ -24,28 +24,23 @@ class Pages
     }
 
     public function load()
-    {
-        if(isset($_SESSION["user"])){
-            if (isset($_REQUEST['page'])) {
-                $this->page = $_REQUEST['page'];
-                $directory = getcwd() . "/pages/$this->page";
-                //Check If the directory exists
-                if (is_dir($directory)) {
-                    //Load the directory
-                    $page = $directory . '/' . $this->page . '.php';
-                } else {
-                    //Load the default directory
-                    $page = getcwd() . "/pages/default/default.php";
-                }
-            }else {
+    {       
+        if (isset($_REQUEST['page'])) {
+            $this->page = $_REQUEST['page'];
+            $directory = getcwd() . "/pages/$this->page";
+            //Check If the directory exists
+            if (is_dir($directory)) {
+                //Load the directory
+                $page = $directory . '/' . $this->page . '.php';
+            } else {
                 //Load the default directory
                 $page = getcwd() . "/pages/default/default.php";
             }
-        }else{
-            $page =  getcwd() .'/pages/login/login.php';
-
+        }else {
+            //Load the default directory
+            $page = getcwd() . "/pages/default/default.php";
         }
-
+       
         include __DIR__ . '/../template/index.php';
 
     }

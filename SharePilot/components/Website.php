@@ -27,10 +27,14 @@ class Website{
             $this->loadEnvFile();
             $this->loadErrorHandler();
             $this->setTimeZone();
-            $result = $this->userAuth();
-    
+            
+            $result = $this->userAuth();    
+            print_r($result);
+            die();
             if(isset($result["userAuth"]) && $result["userAuth"] == false){
-                $this->loadLogin();
+                
+                $this->loadLogin();                
+                
             }else{
                 $this->loadPage();
             }
