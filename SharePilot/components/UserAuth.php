@@ -22,21 +22,22 @@ class UserAuth {
         $user = $users->select()->where("email","=",$email)->execute();
         $user = empty($user)?false:$user[0];
 
-        if ($user && password_verify($password, $user['password'])) {
+        
+        if ($user && password_verify($password, $user['password'])) {        
             // password is correct
             // generate a new session token
             $token = bin2hex(openssl_random_pseudo_bytes(16));
             $users->token = $token;
 
-            $result = $users->update()->where("id","=",$user['id'])->execute();
-            if($result){
-                $_SESSION["user"] = $user;
-                // set the token cookie if remember me is checked for 1 hour
-                if(RequestHandler::get("remember")=="on"){
-                    setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration
-                }
-                return true;
+            //$result = $users->update()->where("id","=",$user['id'])->execute();
+            //if($result){
+            $_SESSION["user"] = $user;
+            // set the token cookie if remember me is checked for 1 hour
+            if(RequestHandler::get("remember")=="on"){
+                setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration
             }
+            return true;
+            //}
         }
         return false;
     }

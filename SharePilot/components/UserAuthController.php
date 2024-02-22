@@ -24,22 +24,17 @@ class UserAuthController {
             }
             
         } else {            
-            // if no token cookie is set, the user is not logged in            
-            // handle registration
-            if (isset($_POST['register'])) {
-                $email = RequestHandler::get("register");
-                $password = RequestHandler::get("password");
-
-                if ($this->auth->register($email, $password)) {
-                    return ["userAuth"=> false, "message" =>"Registration successful."];
-                } else {
-                    return ["userAuth"=> false, "message" =>"Registration failed."];
-                }
-            }
+            // if no token cookie is set, check username or password        
                         
-        }
+            $email = RequestHandler::get("email");
+            $password = RequestHandler::get("password");
 
-        return ["userAuth"=> false, "message" =>"Not authenticated."];
+            if ($this->auth->login($email, $password)) {
+                return ["userAuth"=> true, "message" =>"login successful."];
+            } else {
+                return ["userAuth"=> false, "message" =>"Not authenticated."];
+            }                                
+        }        
     }
 }
 

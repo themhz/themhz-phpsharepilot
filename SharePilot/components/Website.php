@@ -23,22 +23,21 @@ class Website{
 
     public function start(){                
         try{    
-            $this->startSession();
-            $this->loadEnvFile();
             $this->loadErrorHandler();
+            $this->startSession();
+            $this->loadEnvFile();            
             $this->setTimeZone();
             
-            $result = $this->userAuth();    
-            print_r($result);
-            die();
-            if(isset($result["userAuth"]) && $result["userAuth"] == false){
-                
+            $result = $this->authenticateUser();
+           
+            if(isset($result["userAuth"]) && $result["userAuth"] == false){                
                 $this->loadLogin();                
                 
             }else{
                 $this->loadPage();
             }
-            
+            //print_r($result);
+            //die();
             /*$json = RequestHandler::get("format");
             if($json == 'json'){
                 //if($result["userAuth"] == false){
@@ -74,7 +73,7 @@ class Website{
         $timezone2->SetCurrentTimeZone($dbTimeZone2["timezone"]);        
     }
 
-    private function userAuth(){
+    private function authenticateUser(){
         $userAuth = new UserAuthController(Database::getInstance());
         return $userAuth->handleRequest();
     }
