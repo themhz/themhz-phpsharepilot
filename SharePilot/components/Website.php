@@ -29,27 +29,30 @@ class Website{
             $this->setTimeZone();
             
             $result = $this->authenticateUser();
-           
-            if(isset($result["userAuth"]) && $result["userAuth"] == false){                
+            
+
+            if(isset($result["userAuth"]) && $result["userAuth"] == false){      
+                 
                 $this->loadLogin();                
                 
-            }else{
-                $this->loadPage();
-            }
-            //print_r($result);
-            //die();
-            /*$json = RequestHandler::get("format");
-            if($json == 'json'){
-                //if($result["userAuth"] == false){
+            }else{               
+                $json = RequestHandler::get("format");
+                if($json == 'json'){
+                    //if($result["userAuth"] == false){
+                        
+                        //echo json_encode($result)."\r\n";
+                        //return;
+                    //}
+                    $controller = new MasterController();
+                    ResponseHandler::respond($controller->start());
+                    //$this->loadPage();
+                }else{
                     
-                    //echo json_encode($result)."\r\n";
-                    //return;
-                //}
-                $controller = new MasterController();
-                $controller->start();
-            }else{
-                $this->loadPage();
-            }*/
+                    $this->loadPage();
+                }
+            }
+                        
+            
         }catch(Exception $ex){
             print_r($ex);
         }        
@@ -68,9 +71,9 @@ class Website{
     }
 
     private function setTimeZone(){
-        $timezone2 = new TimeZone();
-        $dbTimeZone2 = $timezone2->GetTimeZoneFromDb();
-        $timezone2->SetCurrentTimeZone($dbTimeZone2["timezone"]);        
+        $timezone = new TimeZone();
+        $dbTimeZone = $timezone->GetTimeZoneFromDb();
+        $timezone->SetCurrentTimeZone($dbTimeZone["timezone"]);        
     }
 
     private function authenticateUser(){

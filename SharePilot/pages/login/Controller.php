@@ -26,6 +26,7 @@ class Controller
     }
     public function authentication()
     {     
+       
         // handle login
         if (RequestHandler::get("page")=="login") {
             $email = RequestHandler::get('email');
@@ -37,8 +38,9 @@ class Controller
                 $result = ["userAuth"=> "false", "message" =>"Invalid email or password."];
             }
         }
-                
-        header("Location: $this->baseurl/default?result=".$result["userAuth"]."&message=".$result["message"]);
+                  
+        return $result;
+        //header("Location: $this->baseurl/default?result=".$result["userAuth"]."&message=".$result["message"]);
     }
     public function logout(){
 
