@@ -23,7 +23,7 @@
 
 <script>
     function login(){
-        fetch('login/authentication?format=json', {
+        fetch('default', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

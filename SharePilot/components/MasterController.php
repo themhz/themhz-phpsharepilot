@@ -25,11 +25,11 @@ class MasterController{
         if(isset($_REQUEST["method"])){
             $method = stripslashes($_REQUEST["method"]);
             $obj= new \Controller();
-            call_user_func_array(array($obj, $method),array());
+            return call_user_func_array(array($obj, $method),array());
         }else{            
             $method = strtolower($_SERVER['REQUEST_METHOD']);
             $obj= new \Controller;
-            call_user_func_array(array($obj, $method),array());
+            return call_user_func_array(array($obj, $method),array());
         }
     }
 }

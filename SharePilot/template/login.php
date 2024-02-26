@@ -43,6 +43,7 @@ namespace SharePilotV2\Components;
                         echo "wrong username or password";
                         echo "<div>";
                     }*/
+                    print_r($_SESSION["user"]);
                 ?>        
             </div>
         </div>
@@ -62,7 +63,9 @@ namespace SharePilotV2\Components;
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                window.location.href="default";
                 //createUrlDivs(data);
+                
             });
     }
 </script>

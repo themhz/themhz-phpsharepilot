@@ -29,23 +29,21 @@ class Website{
             $this->setTimeZone();
             
             $result = $this->authenticateUser();
-            
-
+           
+            print_r($_SESSION);
+            print_r($result);
+            die();
             if(isset($result["userAuth"]) && $result["userAuth"] == false){      
                  
                 $this->loadLogin();                
                 
             }else{               
-                $json = RequestHandler::get("format");
+                $json = RequestHandler::get("format");                
                 if($json == 'json'){
-                    //if($result["userAuth"] == false){
-                        
-                        //echo json_encode($result)."\r\n";
-                        //return;
-                    //}
+                    
+                    
                     $controller = new MasterController();
-                    ResponseHandler::respond($controller->start());
-                    //$this->loadPage();
+                    ResponseHandler::respond($controller->start());                                    
                 }else{
                     
                     $this->loadPage();

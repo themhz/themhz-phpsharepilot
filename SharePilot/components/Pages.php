@@ -25,6 +25,7 @@ class Pages
 
     public function load()
     {       
+        
         if (isset($_REQUEST['page'])) {
             $this->page = $_REQUEST['page'];
             $directory = getcwd() . "/pages/$this->page";
