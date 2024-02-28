@@ -37,11 +37,8 @@ class Controller
             } else {                    
                 $result = ["userAuth"=> "false", "message" =>"Invalid email or password."];
             }
-        }
-        
-        
-        return $result;
-        //header("Location: $this->baseurl/default?result=".$result["userAuth"]."&message=".$result["message"]);
+        }        
+        ResponseHandler::respond($result);        
     }
     public function logout(){
 

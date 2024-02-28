@@ -43,7 +43,7 @@ namespace SharePilotV2\Components;
                         echo "wrong username or password";
                         echo "<div>";
                     }*/
-                    print_r($_SESSION["user"]);
+                    //print_r($_SESSION["user"]);
                 ?>        
             </div>
         </div>
@@ -58,6 +58,7 @@ namespace SharePilotV2\Components;
                 body: JSON.stringify({ 
                     email: document.querySelector("#email").value,
                     password:document.querySelector("#password").value,
+                    remember:document.querySelector("#remember").value,
                 })
             })
             .then(response => response.json())

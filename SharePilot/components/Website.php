@@ -25,27 +25,18 @@ class Website{
         try{    
             $this->loadErrorHandler();
             $this->startSession();
-            $this->loadEnvFile();            
-            $this->setTimeZone();
-            
+            $this->loadEnvFile();
+            $this->setTimeZone();            
             $result = $this->authenticateUser();
-           
-            print_r($_SESSION);
-            print_r($result);
-            die();
-            if(isset($result["userAuth"]) && $result["userAuth"] == false){      
-                 
-                $this->loadLogin();                
-                
-            }else{               
-                $json = RequestHandler::get("format");                
+            if(isset($result["userAuth"]) && $result["userAuth"] == false){
+                $this->loadLogin();
+            }else{
+                $json = RequestHandler::get("format");
                 if($json == 'json'){
-                    
-                    
                     $controller = new MasterController();
-                    ResponseHandler::respond($controller->start());                                    
+                    //ResponseHandler::respond($controller->start());
+                    $controller->start();
                 }else{
-                    
                     $this->loadPage();
                 }
             }
