@@ -35,21 +35,12 @@ namespace SharePilotV2\Components;
                 <input type="password" id="password" name="password"><br>
                 <input type="checkbox" id="remember" name="remember">
                 <label for="remember">Remember me</label><br>
-                <input type="button" value="Login" name="Login" onclick="login()">
-                <!-- Placeholder for the message -->        
-                <?php
-                    /*if (isset($_GET["result"]) && $_GET["result"] === "false") {
-                        echo '<div id="message" class="w3-red" style="padding:10px;">';
-                        echo "wrong username or password";
-                        echo "<div>";
-                    }*/
-                    //print_r($_SESSION["user"]);
-                ?>        
+                <input type="button" value="Login" name="Login" onclick="login()">                
             </div>
         </div>
     </div>
     <script>
-    function login(){
+    function login(){        
         fetch('login/authentication?format=json', {
                 method: "POST",
                 headers: {
@@ -58,7 +49,7 @@ namespace SharePilotV2\Components;
                 body: JSON.stringify({ 
                     email: document.querySelector("#email").value,
                     password:document.querySelector("#password").value,
-                    remember:document.querySelector("#remember").value,
+                    remember:document.querySelector("#remember").checked,
                 })
             })
             .then(response => response.json())

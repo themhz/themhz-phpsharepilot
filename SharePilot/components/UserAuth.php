@@ -33,10 +33,11 @@ class UserAuth {
             if($result){
                 $_SESSION["user"] = $user;               
                 // set the token cookie if remember me is checked for 1 hour                
-                //if(RequestHandler::get("remember")=="on"){
-                setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration                    
-                    //die("ok");
-                //}
+                
+                if(RequestHandler::get("remember")==true){
+                    setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration                                        
+                }
+                                
                 return true;
             }
         }

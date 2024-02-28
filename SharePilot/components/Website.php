@@ -26,7 +26,7 @@ class Website{
             $this->loadErrorHandler();
             $this->startSession();
             $this->loadEnvFile();
-            $this->setTimeZone();            
+            $this->setTimeZone();
             $result = $this->authenticateUser();
             if(isset($result["userAuth"]) && $result["userAuth"] == false){
                 $this->loadLogin();
@@ -34,14 +34,11 @@ class Website{
                 $json = RequestHandler::get("format");
                 if($json == 'json'){
                     $controller = new MasterController();
-                    //ResponseHandler::respond($controller->start());
                     $controller->start();
                 }else{
                     $this->loadPage();
                 }
             }
-                        
-            
         }catch(Exception $ex){
             print_r($ex);
         }        

@@ -46,7 +46,7 @@ use SharePilotV2\Components\RequestHandler;
 
             $videos = $u->query($sql);
         }
-        ResponseHandler::respond($videos);        
+        ResponseHandler::respond($videos);
     }
 
 
