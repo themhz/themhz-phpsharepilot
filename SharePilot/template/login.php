@@ -14,12 +14,9 @@ namespace SharePilotV2\Components;
 <link rel="stylesheet" href="template/css/login.css">
 <link rel="stylesheet" href="template/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 <script src="template/js/main.js?v=<?php echo time(); ?>"></script>
-
 </head>
 <body>
-
     <!-- Overlay effect when opening sidebar on small screens -->
     <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
     <!-- Main content: shift it to the right by 250 pixels when the sidebar is visible -->
@@ -32,15 +29,18 @@ namespace SharePilotV2\Components;
                 <label for="username">Username:</label><br>
                 <input type="text" id="email" name="email"><br>
                 <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password"><br>
-                <input type="checkbox" id="remember" name="remember">
-                <label for="remember">Remember me</label><br>
-                <input type="button" value="Login" name="Login" onclick="login()">                
+                <input type="password" id="password" name="password"><br>                                
+                <input type="button" value="Login" name="Login" id="Login" onclick="login()">                
             </div>
+            <div class="w3-panel w3-red" style="display:none;" id="error">
+                <p>Wrong username or password</p>
+            </div> 
         </div>
     </div>
     <script>
     function login(){        
+        document.querySelector("#Login").style.backgroundColor  = "grey";
+        document.querySelector("#Login").style.disabled = true;
         fetch('login/authentication?format=json', {
                 method: "POST",
                 headers: {
@@ -48,16 +48,19 @@ namespace SharePilotV2\Components;
                 },
                 body: JSON.stringify({ 
                     email: document.querySelector("#email").value,
-                    password:document.querySelector("#password").value,
-                    remember:document.querySelector("#remember").checked,
+                    password:document.querySelector("#password").value,                    
                 })
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
-                window.location.href="default";
-                //createUrlDivs(data);
-                
+                document.querySelector("#Login").style.backgroundColor  = "#4CAF50";
+                document.querySelector("#Login").style.disabled = false;
+                document.querySelector("#error").style.display="none";
+                if(data.userAuth==false){
+                    document.querySelector("#error").style.display="block";
+                }else{
+                    window.location.href="default";
+                }                
             });
     }
 </script>

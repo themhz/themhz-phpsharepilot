@@ -22,10 +22,7 @@ class UserAuthController {
                 $_SESSION["user"] = $user;
                 return ["userAuth"=> true, "message" =>"Welcome back, {$user['email']}."];
             }
-            
-        } elseif(isset($_SESSION["user"])){  
-            //$user = $this->auth->authenticateSession();            
-            return ["userAuth"=> true, "message" =>"Welcome back,".$_SESSION["user"]["name"]];
+                    
         } else {            
             // if no token cookie is set, check username or password        
                         

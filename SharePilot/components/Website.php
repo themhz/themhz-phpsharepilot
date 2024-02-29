@@ -29,7 +29,13 @@ class Website{
             $this->setTimeZone();
             $result = $this->authenticateUser();
             if(isset($result["userAuth"]) && $result["userAuth"] == false){
-                $this->loadLogin();
+                $json = RequestHandler::get("format");
+                if($json == 'json'){
+                    ResponseHandler::respond($result);
+                }else{
+                    $this->loadLogin();
+                }
+                
             }else{
                 $json = RequestHandler::get("format");
                 if($json == 'json'){

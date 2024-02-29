@@ -32,12 +32,8 @@ class UserAuth {
 
             if($result){
                 $_SESSION["user"] = $user;               
-                // set the token cookie if remember me is checked for 1 hour                
-                
-                if(RequestHandler::get("remember")==true){
-                    setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration                                        
-                }
-                                
+                // set the token cookie if remember me is checked for 1 hour                                                
+                setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration                                                
                 return true;
             }
         }
@@ -54,15 +50,6 @@ class UserAuth {
 
         return $users->select()->where("token","=",$_COOKIE['token'])->execute()[0];
     }
-
-    public function authenticateSession(){
-        if (!isset($_SESSION["user"])) {
-            return null;
-        }
-        $users = new Users();
-        $users->token = $_SESSION["user"];
-        
-        return $users->select()->where("token","=",$_SESSION["user"]["token"])->execute()[0];
-    }
+    
 }
 
