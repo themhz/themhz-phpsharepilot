@@ -25,10 +25,10 @@
 </div>
 <!--Lists-->
 <!--row click popup-->
-<div id="myModal" class="w3-modal">
+<div id="socialModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('myModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
+            <span onclick="document.getElementById('socialModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
             <h2>social</h2>
         </header>
         <div class="w3-container">
@@ -142,7 +142,7 @@
     function editsocialKeys(item){
         document.getElementById('txtsocialName').value = item.name;
         document.getElementById('txtsocialId').value = item.id;
-        document.getElementById('myModal').style.display = 'block';
+        document.getElementById('socialModal').style.display = 'block';
     }
     function update() {
         fetch('socials?format=json', {
@@ -160,7 +160,7 @@
                 loadsocials();
             })
 
-        document.getElementById('myModal').style.display = 'none';
+        document.getElementById('socialModal').style.display = 'none';
     }
     function deletesocial(id){
         event.stopPropagation();
@@ -233,8 +233,7 @@
         }
     }
     document.getElementById('create-social').addEventListener('click', function(){
-        document.getElementById('socialName').value = document.getElementById('socialName').value.trim();
-        //alert(document.getElementById('socialName').value);
+        document.getElementById('socialName').value = document.getElementById('socialName').value.trim();       
         var socialName = document.getElementById('socialName').value;
         if(socialName === ""){
             document.getElementById('error-message').style.display = 'block';
@@ -297,4 +296,14 @@
         }
         return data;
     }
+
+
+    document.addEventListener("keydown", function(event) {
+        // Check if the pressed key is the Escape key (keyCode 27)
+        if (event.keyCode === 27) {
+            // Close the popup by setting its display property to "none"
+            document.getElementById('socialModal').style.display = 'none';            
+            
+        }
+    });
 </script>
