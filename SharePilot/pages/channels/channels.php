@@ -25,10 +25,10 @@
 </div>
 <!--Lists-->
 <!--row click popup-->
-<div id="myModal" class="w3-modal">
+<div id="rowClickModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('myModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
+            <span onclick="document.getElementById('rowClickModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
             <h2>Channel</h2>
         </header>
         <div class="w3-container">
@@ -50,29 +50,7 @@
     </div>
 </div>
 <!--popup-->
-<!--new channel popup-->
-<!-- check channel Modal -->
-<div id="modal" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom w3-card-4">
-        <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('modal').style.display='none'"
-                  class="w3-button w3-display-topright">&times;</span>
-            <h2 id="modalTitle"></h2>
-        </header>
-        <div class="w3-container">
-            <br>
-            <img id="modalImage" class="w3-image" alt="Image" style="width:50%;"/>
-            <p id="modalDescription"></p>
-            <p id="modalPostTime"></p>
-        </div>
-        <barter class="w3-container w3-teal w3-padding">
-            <input id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()" value="Save">
-            <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>
-            
-        </barter>
-    </div>
-</div>
-<!--new channel popup-->
+
 <!--new Channel window-->
 <div id="newChannelModal" class="w3-modal">
     <div class="w3-modal-content">
@@ -86,8 +64,7 @@
             <p id="error-message" style="color: red; display: none;">Please enter a channel name!</p>
         </div>
         <footer class="w3-container w3-teal w3-padding">            
-            <button class="w3-button w3-green" id="create-channel">Create Channel</button>
-            <button class="w3-button w3-red" onclick="document.getElementById('newChannelModal').style.display='none'">Cancel</button>
+            <button class="w3-button w3-green" id="create-channel">Create Channel</button>            
         </footer>
     </div>
 </div>
@@ -182,7 +159,7 @@
     function editChannelKeys(item){
         document.getElementById('txtChannelName').value = item.name;
         document.getElementById('txtChannelId').value = item.id;
-        document.getElementById('myModal').style.display = 'block';
+        document.getElementById('rowClickModal').style.display = 'block';
         onChangeSelectedSocial();
     }
     function update() {
@@ -204,7 +181,7 @@
                 //createlist(data);
             })
 
-        document.getElementById('myModal').style.display = 'none';
+        document.getElementById('rowClickModal').style.display = 'none';
     }
     function deleteChannel(id){
         event.stopPropagation();
@@ -340,4 +317,13 @@
         }
         return data;
     }
+
+    document.addEventListener("keydown", function(event) {
+        // Check if the pressed key is the Escape key (keyCode 27)
+        if (event.keyCode === 27) {
+            // Close the popup by setting its display property to "none"            
+            document.getElementById('newChannelModal').style.display = 'none';
+            document.getElementById('rowClickModal').style.display = 'none';
+        }
+    });
 </script>

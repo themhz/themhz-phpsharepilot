@@ -77,8 +77,7 @@
             <input type="text" id="socialName" name="socialName" class="w3-input w3-border" value="">
             <p id="error-message" style="color: red; display: none;">Please enter a social name!</p>
         </div>
-        <footer class="w3-container w3-teal w3-padding">
-            <button class="w3-button w3-red" onclick="document.getElementById('newsocialModal').style.display='none'">Cancel</button>
+        <footer class="w3-container w3-teal w3-padding">            
             <button class="w3-button w3-green" id="create-social">Create social</button>
         </footer>
     </div>
@@ -303,6 +302,8 @@
         if (event.keyCode === 27) {
             // Close the popup by setting its display property to "none"
             document.getElementById('socialModal').style.display = 'none';            
+            document.getElementById('newsocialModal').style.display = 'none';            
+            
             
         }
     });
