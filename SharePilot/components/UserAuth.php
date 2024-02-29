@@ -44,8 +44,7 @@ class UserAuth {
         return false;
     }
 
-    public function authenticate() {
-
+    public function authenticateToken() {
         if (!isset($_COOKIE['token'])) {
             return null;
         }
@@ -54,6 +53,16 @@ class UserAuth {
         $users->token = $_COOKIE['token'];
 
         return $users->select()->where("token","=",$_COOKIE['token'])->execute()[0];
+    }
+
+    public function authenticateSession(){
+        if (!isset($_SESSION["user"])) {
+            return null;
+        }
+        $users = new Users();
+        $users->token = $_SESSION["user"];
+        
+        return $users->select()->where("token","=",$_SESSION["user"]["token"])->execute()[0];
     }
 }
 

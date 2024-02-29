@@ -9,20 +9,23 @@ class UserAuthController {
         $this->auth = new UserAuth($db);
     }
 
-    public function handleRequest() {
+    public function handleRequest() {       
         // checking if a token cookie is set
         if (isset($_COOKIE['token'])) {
            
             // if the user has a token, authenticate the token
-            $user = $this->auth->authenticate();
+            $user = $this->auth->authenticateToken();
             // if the token is invalid or expired, ask them to log in again
             if (!$user) {
-                return ["userAuth"=> false, "message" =>"Session expired. Please log in again."];
+                return ["userAuth"=> false, "message" =>"Token expired. Please log in again."];
             } else {
                 $_SESSION["user"] = $user;
                 return ["userAuth"=> true, "message" =>"Welcome back, {$user['email']}."];
             }
             
+        } elseif(isset($_SESSION["user"])){  
+            //$user = $this->auth->authenticateSession();            
+            return ["userAuth"=> true, "message" =>"Welcome back,".$_SESSION["user"]["name"]];
         } else {            
             // if no token cookie is set, check username or password        
                         
