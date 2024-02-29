@@ -50,8 +50,7 @@
                 <select class="w3-select w3-dropdown-hover w3-white w3-border" name="option" id="channels"></select>
             </p>
         </div>
-        <footer class="w3-container w3-teal w3-padding">
-            <button class="w3-button w3-red" onclick="closeModal()">Cancel</button>
+        <footer class="w3-container w3-teal w3-padding">            
             <button class="w3-button w3-green" id="action_for_list" ></button>
         </footer>
     </div>
