@@ -302,9 +302,7 @@
         if (event.keyCode === 27) {
             // Close the popup by setting its display property to "none"
             document.getElementById('socialModal').style.display = 'none';            
-            document.getElementById('newsocialModal').style.display = 'none';            
-            
-            
+            document.getElementById('newsocialModal').style.display = 'none';                                
         }
     });
 </script>

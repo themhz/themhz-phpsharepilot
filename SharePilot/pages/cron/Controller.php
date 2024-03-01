@@ -13,8 +13,11 @@ class Controller{
        
     }    
 
-    public function posttheshit(){
-            //echo "posting the shit";
+    public function Post(){
+       echo "ok";
+    }    
+
+    public function posttheshit(){            
             $postingService = new PostingService();
             $postingService->start();
     }
