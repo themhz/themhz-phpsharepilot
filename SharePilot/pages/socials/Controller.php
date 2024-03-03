@@ -45,7 +45,7 @@ use SharePilotV2\Components\RequestHandler;
 
      public function addsocial(){
 
-        //print_r(RequestHandler::get("socialName")."adsda");
+        //ppostrint_r(RequestHandler::get("socialName")."adsda");
         //die();
          $social = new Socials();
          $social->name = RequestHandler::get("socialName");

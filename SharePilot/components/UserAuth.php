@@ -41,15 +41,19 @@ class UserAuth {
     }
 
     public function authenticateToken() {
-        if (!isset($_COOKIE['token'])) {
-            return null;
+        $token = isset($_COOKIE['token']) ? $_COOKIE['token'] : RequestHandler::get("token");
+            
+        if ($token) {
+            $users = new Users();
+            $users->token = $token;
+    
+            $result = $users->select()->where("token", "=", $token)->execute();
+            return !empty($result) ? $result[0] : null;
         }
-
-        $users = new Users();
-        $users->token = $_COOKIE['token'];
-
-        return $users->select()->where("token","=",$_COOKIE['token'])->execute()[0];
+    
+        return null;
     }
+    
     
 }
 

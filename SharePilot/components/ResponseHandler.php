@@ -29,6 +29,9 @@ class ResponseHandler
         // headers to tell that result is JSON
         header('Content-type: application/json');
 
-        echo json_encode($data);
+         // Output the JSON-encoded data
+        // In CLI mode, append a newline character for better readability
+        echo json_encode($data) . (php_sapi_name() == 'cli' ? "\n" : '');
+        
     }
 }

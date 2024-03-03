@@ -7,8 +7,10 @@ class MasterController{
         $page='';
         $directory='';
 
-        if(isset($_REQUEST["page"])){
-            $page = $_REQUEST['page'];
+     
+        //if(isset($_REQUEST["page"])){
+        if(null!=RequestHandler::get("page")){
+            $page = RequestHandler::get("page");
             $directory = getcwd()."/pages/$page";
         }
         //Include the controller
@@ -22,12 +24,19 @@ class MasterController{
         }
 
         //Then call the method of the included controller
-        if(isset($_REQUEST["method"])){
-            $method = stripslashes($_REQUEST["method"]);
+        //if(isset($_REQUEST["method"])){
+        if(null!=RequestHandler::get("method")){
+            $method = stripslashes(RequestHandler::get("method"));
             $obj= new \Controller();
             return call_user_func_array(array($obj, $method),array());
         }else{            
-            $method = strtolower($_SERVER['REQUEST_METHOD']);
+
+            //Check if in cli or not
+            if(isset($_SERVER['REQUEST_METHOD'])){
+                $method = strtolower($_SERVER['REQUEST_METHOD']);
+            }else{
+                $method = strtolower(RequestHandler::get("method"));
+            }                                    
             $obj= new \Controller;
             return call_user_func_array(array($obj, $method),array());
         }

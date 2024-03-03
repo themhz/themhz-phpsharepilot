@@ -14,8 +14,9 @@ class Controller{
     }    
 
     public function Post(){
-       echo "ok";
+       echo "ok \n";
     }    
+
 
     public function posttheshit(){            
             $postingService = new PostingService();

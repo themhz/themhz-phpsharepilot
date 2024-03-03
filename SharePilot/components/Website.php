@@ -26,8 +26,10 @@ class Website{
             $this->loadErrorHandler();
             $this->startSession();
             $this->loadEnvFile();
-            $this->setTimeZone();
+            $this->setTimeZone();          
             $result = $this->authenticateUser();
+
+          
             if(isset($result["userAuth"]) && $result["userAuth"] == false){
                 $json = RequestHandler::get("format");
                 if($json == 'json'){

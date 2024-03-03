@@ -11,8 +11,14 @@ class UserAuthController {
 
     public function handleRequest() {       
         // checking if a token cookie is set
-        if (isset($_COOKIE['token'])) {
+        //if (isset($_COOKIE['token'])) {
+
+            //ResponseHandler::respond(RequestHandler::get("token"));
+            //die();
+        if(null !==RequestHandler::get("token")){
            
+                //echo RequestHandler::get("token");
+                //die();
             // if the user has a token, authenticate the token
             $user = $this->auth->authenticateToken();
             // if the token is invalid or expired, ask them to log in again

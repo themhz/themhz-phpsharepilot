@@ -8,7 +8,7 @@ class RequestHandler
 {
     public static function get($var = null)
     {
-        // Check if the script is running from the command line
+        // Check if the script is running from the command line        
         if (php_sapi_name() == 'cli') {
             global $argv;
             // Parse command-line arguments into an associative array
@@ -34,8 +34,10 @@ class RequestHandler
                 if (isset($_POST[$var])) {
                     return $_POST[$var];
                 } elseif (isset($_GET[$var])) {
-                    return $_GET[$var];
-                } else {
+                    return $_GET[$var];                    
+                } elseif(isset($_COOKIE[$var])){
+                    return $_COOKIE[$var];          
+                }else {                                        
                     // Check in JSON data.
                     $jsonData = json_decode(file_get_contents('php://input'), true);
                     if (isset($jsonData[$var])) {
@@ -43,11 +45,15 @@ class RequestHandler
                     }
                 }
             } else {
+             
                 // If no specific variable is requested, return all input data.
                 $jsonData = json_decode(file_get_contents('php://input'), true);
+                
                 if (!empty($jsonData)) {
+                
                     return $jsonData;
                 }
+                
                 return array_merge($_POST, $_GET);
             }
         }
