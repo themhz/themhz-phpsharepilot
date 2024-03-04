@@ -38,6 +38,10 @@ use SharePilotV2\Components\RequestHandler;
              $keys->insert();
          }
 
+         $c = new Channels();
+         $c->name= RequestHandler::get("name");
+         $c->update()->where("id","=",$channel_id)->execute();
+
          ResponseHandler::respond(["status"=>"success"]);
      }
      public function getsocials(){

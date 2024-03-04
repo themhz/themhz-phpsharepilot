@@ -52,7 +52,7 @@
 namespace SharePilotV2\Implementations;
 use SharePilotV2\Components\ISocialMediaService;
 
-class Facebook implements ISocialMediaService{
+class Facebook_personal_page implements ISocialMediaService{
 
     public $Keys;
     public $Message;
@@ -70,7 +70,7 @@ class Facebook implements ISocialMediaService{
         $result = false;
         try {
             foreach ($messages as $message){
-                $result = $this->postToFacebookPageAsync($message->title, $message->url);
+                $result = $this->postToUserProfile($message->title, $message->url);
             }
             return $result;
 
@@ -80,16 +80,16 @@ class Facebook implements ISocialMediaService{
         }        
     }
 
-    public function postToFacebookPageAsync($message, $link)
+    public function postToUserProfile($message, $link)
     {
         $accessToken = $this->Keys["accessToken"];
-        $pageId = $this->Keys["pageId"];
-    
-        $requestUrl = "https://graph.facebook.com/v19.0/{$pageId}/feed?access_token={$accessToken}";
+        
+        // The endpoint for posting to a user's timeline would typically be "/me/feed"
+        $requestUrl = "https://graph.facebook.com/v19.0/me/feed?access_token={$accessToken}";
 
         $content = http_build_query([
             'message' => $message,
-            'link' => $link
+            'link' => $link,
         ]);
         
         $ch = curl_init();
@@ -112,9 +112,9 @@ class Facebook implements ISocialMediaService{
             throw new \Exception("Request failed with status code: {$httpCode} and response: {$response}");
         }
 
-        // Assuming success if we reach this point
         return array("result"=>true, "message"=>$response);
     }
+
 
 }
 

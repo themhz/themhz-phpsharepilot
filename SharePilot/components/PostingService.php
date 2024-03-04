@@ -1,5 +1,7 @@
 <?php
 namespace SharePilotV2\Components;
+use SharePilotV2\Implementations;
+use SharePilotV2\Implementations\Facebook;
 
 class PostingService
 {
@@ -19,6 +21,9 @@ class PostingService
         $sth = $db->prepare($sql);
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);
+
+        //print_r($results);
+        //die();
         
         //So for each social media and channel I add it to the posting service
         foreach ($results as $result){
@@ -38,7 +43,7 @@ class PostingService
                 $assocArray[$obj->name] = $obj->value;
             }
         
-            $class = "SharePilotV2\Implementations\\".ucfirst(strtolower($result->social));        
+            $class =  'SharePilotV2\\Implementations\\' .ucfirst(strtolower($result->social));        
             $this->add(new $class($assocArray));
                             
         }
@@ -69,11 +74,10 @@ class PostingService
     }
 
     public function post()
-    {
-       
+    {       
         $messages = $this->getMessages();
-
         //foreach social media
+        
         for ($i = 0; $i < count($this->sm); $i++) {
             print_r($this->sm[$i]->post($messages)) . "\n\r";
         }
