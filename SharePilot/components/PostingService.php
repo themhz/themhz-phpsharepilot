@@ -22,9 +22,7 @@ class PostingService
         $sth->execute();
         $results = $sth->fetchAll(\PDO::FETCH_OBJ);
 
-        //print_r($results);
-        //die();
-        
+               
         //So for each social media and channel I add it to the posting service
         foreach ($results as $result){
         

@@ -20,9 +20,6 @@ class Controller{
     }    
 
 
-    public function posttheshit(){            
-            $postingService = new PostingService();
-            $postingService->start();
-    }
+    
 }
  
