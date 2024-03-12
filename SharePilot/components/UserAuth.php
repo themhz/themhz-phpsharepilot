@@ -2,6 +2,7 @@
 
 namespace SharePilotV2\Components;
 use SharePilotV2\Models\Users;
+use SharePilotV2\Models\Settings;
 
 class UserAuth {
     private $db;
@@ -45,9 +46,13 @@ class UserAuth {
             
         if ($token) {
             $users = new Users();
-            $users->token = $token;
-    
+            $users->token = $token;    
             $result = $users->select()->where("token", "=", $token)->execute();
+            if(empty($result)){
+                $settings = new Settings();
+                $result = $settings->select()->where("crontoken", "=", $token)->execute();                                               
+            }            
+            
             return !empty($result) ? $result[0] : null;
         }
     

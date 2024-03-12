@@ -14,6 +14,7 @@
             <div class="w3-container">
                 <input class="w3-btn w3-teal" value="Execute Cron" type="button" id="btnsearch" name="btnsearch" onclick="executeCron()">
                 <input class="w3-btn w3-teal" value="Check if cron is running" type="button" id="btnsearch" name="btnsearch" onclick="checkCronTab()">
+                <input class="w3-btn w3-teal" value="Create Cron Token" type="button" id="btnsearch" name="btnsearch" onclick="createCronToken()">
             </div>        
         </div>
         <div class="w3-container w3-margin">            
@@ -46,8 +47,8 @@
                     <li>
                         <strong>Adding Your Specific Cron Job:</strong>
                         <p>To add your cron job, ensuring it executes in the correct directory:</p>
-                        <code>* * * * * cd /var/www/html &amp;&amp; /usr/local/bin/php index.php page=cron method=post format=json token={Login Token} &gt; /var/www/html/logfile.log 2&gt;&amp;1</code>
-                        <p>Replace <code>{Cron Token}</code> with your actual token. This configuration changes the working directory before executing the script and redirects output and errors to a log file.</p>
+                        <code>* * * * * cd /var/www/html &amp;&amp; /usr/local/bin/php index.php page=cron method=post format=json token=<span id="token1">{Cron Token}</span> &gt; /var/www/html/logfile.log 2&gt;&amp;1</code>
+                        <p>Replace <code id="token2">{Cron Token}</code> with your actual token. This configuration changes the working directory before executing the script and redirects output and errors to a log file.</p>
                     </li>
                 </ul>
             </p>
@@ -57,6 +58,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             checkCronTab();
+            getToken();
         });
 
         function executeCron(){
@@ -103,6 +105,40 @@
                     cronStatusElement.classList.add("w3-text-red");
                 }
 
+            });
+        }
+
+        function createCronToken(){
+            fetch('cron/createcrontoken?format=json', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    test:1
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.token);
+                document.querySelector("#token1").innerText = data.token;
+                document.querySelector("#token2").innerText = data.token;
+            });
+        }
+
+        function getToken(){
+            fetch('cron?format=json', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }                
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data.token);
+                document.querySelector("#token1").innerText = data.token;
+                document.querySelector("#token2").innerText = data.token;
+                
             });
         }
         

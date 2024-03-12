@@ -29,7 +29,7 @@ class Website{
             $this->setTimeZone();          
             $result = $this->authenticateUser();
 
-          
+            //If login fails.
             if(isset($result["userAuth"]) && $result["userAuth"] == false){
                 $json = RequestHandler::get("format");
                 if($json == 'json'){
@@ -39,6 +39,7 @@ class Website{
                 }
                 
             }else{
+                //If login succeeds 
                 $json = RequestHandler::get("format");
                 if($json == 'json'){
                     $controller = new MasterController();
