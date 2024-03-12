@@ -34,7 +34,7 @@
 
 <!--new List window-->
 <div id="newListModal" class="w3-modal">
-    <div class="w3-modal-content">
+    <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
         <span onclick="closeModal()" class="w3-button w3-display-topright">&times;</span>
             <h2>List Item</h2>

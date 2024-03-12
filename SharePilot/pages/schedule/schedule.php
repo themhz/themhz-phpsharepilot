@@ -383,5 +383,14 @@ function loadAvoidStartHoursAndEndHours(){
     document.getElementById("avoid_end_hour").value = "7";
 
 }
+
+document.addEventListener("keydown", function(event) {
+        // Check if the pressed key is the Escape key (keyCode 27)
+       
+        if (event.keyCode === 27) {
+            closeModal();
+            document.getElementById('myModal').style.display='none';
+        }
+    });
 </script>
 <script src="template/js/calendar.js?v="<?php echo time(); ?>"></script>
