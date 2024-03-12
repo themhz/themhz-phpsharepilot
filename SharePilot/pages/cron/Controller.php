@@ -19,6 +19,25 @@ class Controller{
         $postingService->start();
     }    
 
+    public function checkcrontab(){        
+        // Check if shell_exec is available and enabled
+        //if (function_exists('shell_exec') && is_callable('shell_exec')) {
+            // Try to get the status of the cron service
+            $output = shell_exec('service cron status');
+            ResponseHandler::respond(["cronstatus"=>$output]);
+            //print_r($output);
+            // Check if the output contains a specific string indicating it's active
+          /*  if (strpos($output, 'active (running)') !== false) {
+                echo "Cron service is running.";
+            } else {
+                echo "Cron service is not running or not installed.";
+            }*/
+        //} else {
+            // shell_exec is not available
+          //  echo "Unable to check cron status because shell_exec is not available.";
+        //}        
+    }
+
 
     
 }
