@@ -1,4 +1,4 @@
-#docker run -d -p 80:80 -p 3306:3306 --name sharepilot -v C:\Users\themh\Documents\dockerfiles\SharePilot:/var/www/html sharepilot:v3
+#docker run -d -p 80:80 -p 3306:3306 --name sharepilot -v C:\Users\themis\Code\Sharepilot\SharePilot:/var/www/html sharepilot:v3
 
 #docker build --no-cache -t sharepilot:v4 .
 
