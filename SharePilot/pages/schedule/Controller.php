@@ -10,7 +10,7 @@ use SharePilotV2\Components\RequestHandler;
     }
      public function delete(){
          $u = new Scheduled_posts();
-         $data = $u->delete()->where("id","=",$_POST["id"]);
+         $data = $u->delete()->where("id","=",RequestHandler::get("id"))->execute();
          ResponseHandler::respond(["result"=>$data]);
      }
      public function getscheduledlinks()

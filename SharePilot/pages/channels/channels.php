@@ -86,19 +86,16 @@
                 createlist(data);
             })
     }
-    function loadSocials(){
-        //txtSocialId
+    function loadSocials(){     
         fetch('channels/getsocials?format=json', {
             method: 'get',
         })
             .then(response => response.json())
-            .then(data => {
-                //createlist(data);
+            .then(data => {                
                 createSosials(data);
             })
     }
-    function createSosials(data){
-        //console.log(data);
+    function createSosials(data){        
         for(var i=0;i<data.length;i++){
             document.getElementById("selectedSocialId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
         }

@@ -14,7 +14,6 @@ namespace SharePilotV2\Components;
 <link rel="stylesheet" href="template/css/login.css">
 <link rel="stylesheet" href="template/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
 <script src="template/js/main.js?v=<?php echo time(); ?>"></script>
 
 </head>
@@ -30,7 +29,7 @@ if (isset($_SESSION["user"])){ ?>
         <a href="login?method=logout&format=json" class="w3-bar-item w3-button w3-right w3-hover-white custom-margin-top-45">Exit</a>
         <span class="w3-bar-item w3-right w3-padding custom-margin-top-45">
             <span id="clockMain"></span>&nbsp;&nbsp;&nbsp;
-            Καλώς Όρισες
+            Welcome
             <?php
                  echo $_SESSION["user"]["name"]. " " . $_SESSION["user"]["lastname"];
                 ?>

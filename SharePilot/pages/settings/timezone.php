@@ -18,7 +18,7 @@ echo '<select id="timezone-select" name="timezone">';
 ?>
 
 <p id="clock"></p>
-<input type="button" value="save" onclick="saveTimeZone()">
+<input class="w3-button w3-green" type="button" value="save" onclick="saveTimeZone()">
 
 <script>
     let serverTimezone = defaultTimezone;
@@ -49,6 +49,7 @@ echo '<select id="timezone-select" name="timezone">';
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                location.reload();
             })
             .catch((error) => {
                 console.error('Error:', error);
