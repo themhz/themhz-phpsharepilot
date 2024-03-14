@@ -218,7 +218,6 @@ CREATE TABLE `users` (
 
 -- Stored Procedures
 --
-
 CREATE PROCEDURE `schedule_posts`(start_datetime DATETIME, hourInterval int, channel_id int, avoid_start_hour INT, avoid_end_hour INT, OUT procedure_success BOOLEAN)
 BEGIN
   DECLARE current_id INT;

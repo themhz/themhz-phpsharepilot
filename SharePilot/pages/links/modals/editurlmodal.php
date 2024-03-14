@@ -1,7 +1,7 @@
 <div id="editUrlModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('editUrlModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
+            <span onclick="closeModal('#editUrlModal')" class="w3-button w3-display-topright w3-large">&times;</span>
             <h2>Edit Link</h2>
         </header>
         <div class="w3-container">

@@ -331,14 +331,13 @@
     });
     // Add an event listener to the document object
     document.addEventListener("keydown", function(event) {
-        // Check if the pressed key is the Escape key (keyCode 27)
+        // Check if the pressed key is the Escape key (keyCode 27)        
         if (event.keyCode === 27) {
-            // Close the popup by setting its display property to "none"
-            document.getElementById('editUrlModal').style.display = 'none';
-            document.getElementById('newListModal').style.display = 'none';
-            document.getElementById('addUrlModal').style.display = 'none';
-            document.getElementById('checkUrlModal').style.display = 'none';
-            
+            // Close the popup by setting its display property to "none"            
+            closeModal('#addUrlModal');
+            closeModal('#checkUrlModal');
+            closeModal('#editUrlModal');
+            closeModal('#newListModal');            
         }
     });
 
