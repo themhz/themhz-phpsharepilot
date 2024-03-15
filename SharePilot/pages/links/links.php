@@ -3,20 +3,7 @@
     <div class="w3-container w3-teal">
         <h1>Links</h1>
     </div>
-    <div class="w3-container">
-        <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
-        <div class="w3-container w3-card-4" >
-            <h2 class="w3-text-teal">Search links</h2>
-            <p>Search links from database</p>
-            <p>
-                <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
-                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
-                <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
-            </p>
-        </div>
-    </div>
-    <div class="w3-container w3-margin-top">
-        
+    <div class="w3-container w3-margin-top">        
         <div class="w3-bar w3-teal">
             <div class="w3-dropdown-hover w3-teal">
                 <div class="w3-container w3-teal">
@@ -35,6 +22,19 @@
             </div>
         </div>
     </div>
+    <div class="w3-container">
+        <p>Hover over the "Select Channel" to select the links of a Channel. Click on "New Channel" to create a new one.</p>
+        <div class="w3-container w3-card-4" >
+            <h2 class="w3-text-teal">Search links</h2>
+            <p>Search links from database</p>
+            <p>
+                <label for="txtUrl" class="w3-text-teal"><b>search</b></label>
+                <input class="w3-input w3-border w3-margin-bottom" type="text" name="txtsearch" id="txtsearch">
+                <input class="w3-btn w3-teal" value="search" type="button" id="btnsearch" name="btnsearch">
+            </p>
+        </div>
+    </div>
+    
 </div>
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">    
@@ -127,8 +127,11 @@
             li.addEventListener('click', function() {
                 document.getElementById('editId').value = item.id;
                 document.getElementById('editTitle').value = item.title;
+                document.getElementById('editDescription').value = item.description;
+                
                 document.getElementById('editURL').value = item.url;
-                document.getElementById('editThumbURL').value = item.thumbnailUrl;
+                document.getElementById('editThumbURL').value = item.thumbnailUrl;                
+                document.getElementById('editThumbURLImage').src = item.thumbnailUrl;
                 document.getElementById('editUrlModal').style.display = 'block';
                 document.getElementById('editmodal_channels').value = item.channel_id;
                 if(item.channel_id!=null){
@@ -174,11 +177,12 @@
 
         document.getElementById("channels").innerHTML =`<option value="0">Select Channel</option>`;
         document.getElementById("editmodal_channels").innerHTML =`<option value="0">Select Channel</option>`;
-        //document.getElementById("dropDownChannelForNewList").innerHTML = `<option value="0">Select Channel</option>`;      
+        document.getElementById("checkUrl_channels").innerHTML =`<option value="0">Select Channel</option>`;
+                
         data.forEach(item => {
             document.getElementById("channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
-            document.getElementById("editmodal_channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
-            //document.getElementById("dropDownChannelForNewList").innerHTML += `<option value="${item.id}">${item.name}</option>`;
+            document.getElementById("editmodal_channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;            
+            document.getElementById("checkUrl_channels").innerHTML += `<option value="${item.id}">${item.name}</option>`;
         });
     }
     
@@ -306,6 +310,8 @@
         document.querySelector(modalName).style.display = "none";
     }
 
+    
+
     //Events
     let urlData = null;
     document.addEventListener('readystatechange', function(evt) {
@@ -313,9 +319,7 @@
         {
             loadChannels();
             loadLists();
-            loadUrls();            
-            
-            
+            loadUrls();                                    
         }
     }, false);
     
@@ -329,6 +333,7 @@
     document.querySelector('#btnsearch').addEventListener('click', () => {
         search();
     });
+    
     // Add an event listener to the document object
     document.addEventListener("keydown", function(event) {
         // Check if the pressed key is the Escape key (keyCode 27)        
@@ -340,9 +345,4 @@
             closeModal('#newListModal');            
         }
     });
-
-
-   
-
-
 </script>

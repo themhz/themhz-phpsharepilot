@@ -176,6 +176,9 @@ use SharePilotV2\Components\RequestHandler;
         $u = new Urls();
         $u->url = RequestHandler::get("url");
         $u->title = RequestHandler::get("title");
+        $u->description = RequestHandler::get("description");
+        $u->channel_id = RequestHandler::get("channel_id");
+        $u->list_id = RequestHandler::get("list_id");
         $u->source = 1;
         $u->type = 1;
         $u->thumbnailUrl = RequestHandler::get("image");
@@ -188,6 +191,7 @@ use SharePilotV2\Components\RequestHandler;
         $u = new Urls();
 
         $u->title = RequestHandler::get("title");
+        $u->description = RequestHandler::get("description");
         $u->url = RequestHandler::get("url");
         $u->thumbnailUrl = RequestHandler::get("thumbnailUrl");
 

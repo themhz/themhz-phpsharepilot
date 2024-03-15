@@ -1,6 +1,9 @@
-#docker run -d -p 80:80 -p 3306:3306 --name sharepilot -v C:\Users\themis\Code\Sharepilot\SharePilot:/var/www/html sharepilot:v3
+Navigate to the directory containing your docker-compose.yml file and run:
+#docker-compose up -d
 
-#docker build --no-cache -t sharepilot:v4 .
+#docker build --no-cache -t sharepilot:v5 .
+
+#docker run -d -p 80:80 -p 3306:3306 --name sharepilot -v C:\Users\themis\Code\Sharepilot\SharePilot:/var/www/html sharepilot:v5
 
 #docker exec -it your_container_name service mysql restart
 
@@ -12,8 +15,6 @@ remove all docker containers
 
 remove specific container
 docker rm 0e37e2f4b7de
-Navigate to the directory containing your docker-compose.yml file and run:
-#docker-compose up -d
 
 To copy a local folder to container folder
 This command starts all the services defined in your docker-compose.yml. Add the -d flag to run them in detached mode (in the background):

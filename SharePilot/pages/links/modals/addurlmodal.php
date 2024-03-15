@@ -40,9 +40,15 @@
 
                 //Set the values for checkurl modal
                 document.querySelector('#checkUrlModalTitle').innerText = data.title;
-                document.querySelector('#checkUrlModalDescription').innerText = data.description;
+                document.querySelector('#checkUrlModalTitleText').value = data.title;
+                document.querySelector('#checkUrlModalDescription').value = data.description;
                 document.querySelector('#checkUrlModalImage').src = data.image;
+                document.querySelector('#checkUrlModalImageText').value = data.image;
                 document.querySelector('#checkUrlModalPostTime').innerText = data.postedtime ? 'Posted on: ' + data.postedtime : '';
+                document.querySelector('#checkUrl_channels').selectedIndex = -1;
+                document.querySelector('#checkUrl_lists').selectedIndex = -1;
+                
+                
                 
                 
                 data.url =  url;

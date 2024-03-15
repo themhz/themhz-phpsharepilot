@@ -160,6 +160,7 @@ CREATE TABLE `urls` (
   `list_id` int DEFAULT NULL,
   `url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8mb4_unicode_ci NOT NULL,
   `source` int NOT NULL,
   `type` int NOT NULL,
   `thumbnailUrl` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,

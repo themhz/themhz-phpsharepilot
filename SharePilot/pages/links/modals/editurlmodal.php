@@ -4,11 +4,19 @@
             <span onclick="closeModal('#editUrlModal')" class="w3-button w3-display-topright w3-large">&times;</span>
             <h2>Edit Link</h2>
         </header>
-        <div class="w3-container">
+        <div class="w3-container">            
             <input type="text" id="editId" style="display: none">
-            <p>Title: <input id="editTitle" class="w3-input w3-border w3-margin-top" type="text"></p>
             <p>URL: <input id="editURL" class="w3-input w3-border w3-margin-top" type="text"></p>
-            <p>Thumbnail URL: <input id="editThumbURL" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <p>Title: <input id="editTitle" class="w3-input w3-border w3-margin-top" type="text"></p>            
+            <p> 
+                Image preview:   
+                <img id="editThumbURLImage" class="w3-image" alt="Image" style="width:50%;"/>
+            </p>
+            <p>Image URL: <input id="editThumbURL" class="w3-input w3-border w3-margin-top" type="text" onchange= "changeUrlImage()"></p>
+            <p>
+                Description:
+                <textarea class="w3-input w3-border w3-round-large" value="" id="editDescription"></textarea>            
+            </p>
             <p>
                 Channel:
                 <select class="w3-select w3-dropdown-hover w3-white w3-border" name="option" id="editmodal_channels" onchange="loadListsModalBySelectedChannel()"></select>
@@ -51,13 +59,14 @@
 
     function submitChanges() {
         fetch('links/update?format=json', {
-            method: "POST",
+            method: "POST", 
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
                 id : document.getElementById('editId').value,
                 title: document.getElementById('editTitle').value,
+                description: document.getElementById('editDescription').value,                
                 url: document.getElementById('editURL').value,
                 thumbnailUrl: document.getElementById('editThumbURL').value,
                 channel_id: document.getElementById('editmodal_channels').value,
@@ -69,5 +78,9 @@
             document.getElementById('editUrlModal').style.display = 'none';
             filterChannels();
         });
+    }
+
+    function changeUrlImage(){
+        document.getElementById("editThumbURLImage").src=document.getElementById("editThumbURL").value;
     }
 </script>

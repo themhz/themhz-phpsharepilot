@@ -22,8 +22,7 @@
 
 
 <script>
-    function addNewList(){
-        //alert(`adding new list channel id: ${document.getElementById("dropDownChannelForNewList").value} and listname:${document.getElementById("txtlist").value}`);
+    function addNewList(){        
         let channel_id = document.getElementById("dropDownChannelForNewList").value;
         let name = document.getElementById("txtlist").value;
 
@@ -38,7 +37,7 @@
                 .then(response => response.json())
                 .then(data => {
                     if(data.result == true){
-                        alert(`List "${name}" added`);
+                        //alert(`List "${name}" added`);
                         loadLists();
                     }else{
                         alert(`List "${name}" was not added`);
