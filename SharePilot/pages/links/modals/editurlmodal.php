@@ -66,7 +66,7 @@
             body: JSON.stringify({
                 id : document.getElementById('editId').value,
                 title: document.getElementById('editTitle').value,
-                description: document.getElementById('editDescription').value,                
+                description: document.getElementById('editDescription').value,
                 url: document.getElementById('editURL').value,
                 thumbnailUrl: document.getElementById('editThumbURL').value,
                 channel_id: document.getElementById('editmodal_channels').value,
