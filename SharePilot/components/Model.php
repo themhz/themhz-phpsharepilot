@@ -57,7 +57,9 @@ abstract class Model
             }
 
             $stmt->execute();
-            return true;
+            $lastInsertId = self::$pdo->lastInsertId();
+            return $lastInsertId;
+            
         } catch (\PDOException $e) {
             echo "Insert failed: " . $e->getMessage();
             return false;
