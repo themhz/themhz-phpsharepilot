@@ -5,6 +5,7 @@ services:
     build: .
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./SharePilot:/var/www/html
     depends_on:
