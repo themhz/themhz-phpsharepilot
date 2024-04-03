@@ -14,7 +14,8 @@ RUN apt-get update && apt-get install -y \
 # Generate SSL certificates
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -keyout /etc/ssl/private/localhost.key -out /etc/ssl/certs/localhost.crt \
-    -subj "/C=US/ST=YourState/L=YourCity/O=YourOrganization/CN=localhost"
+    -subj "/C=GR/ST=Attica/L=Zografou/O=Personal/CN=localhost"
+
 
 # Copy custom Apache virtual host configuration for both HTTP and HTTPS
 COPY my-000-default.conf /etc/apache2/sites-available/000-default.conf
