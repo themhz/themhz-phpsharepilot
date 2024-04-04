@@ -5,8 +5,10 @@ services:
     build: .
     ports:
       - "80:80"
-      - "443:443"
+      - "8443:443"
     volumes:
+      - ./mycert.crt:/etc/ssl/certs/mycert.crt
+      - ./mycert.key:/etc/ssl/private/mycert.key
       - ./SharePilot:/var/www/html
     depends_on:
       - db

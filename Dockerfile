@@ -11,18 +11,25 @@ RUN apt-get update && apt-get install -y \
     && a2enmod rewrite ssl headers \
     && rm -rf /var/lib/apt/lists/*
 
-# Generate SSL certificates
-RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout /etc/ssl/private/localhost.key -out /etc/ssl/certs/localhost.crt \
-    -subj "/C=GR/ST=Attica/L=Zografou/O=Personal/CN=localhost"
-
+COPY mycert.crt /etc/ssl/certs/mycert.crt
+COPY mycert.key /etc/ssl/private/mycert.key
 
 # Copy custom Apache virtual host configuration for both HTTP and HTTPS
-COPY my-000-default.conf /etc/apache2/sites-available/000-default.conf
-COPY my-default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+COPY default.conf /etc/apache2/sites-available/default.conf
+COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
+
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli && docker-php-ext-install pdo_mysql
+RUN a2enmod rewrite && a2enmod ssl && a2enmod socache_shmcb
+RUN a2ensite default-ssl
+RUN apt-get update && apt-get upgrade -y
+
+RUN sed -i '/SSLCertificateFile.*snakeoil\.pem/c\SSLCertificateFile \/etc\/ssl\/certs\/mycert.crt' /etc/apache2/sites-available/default-ssl.conf
+RUN sed -i '/SSLCertificateKeyFile.*snakeoil\.key/cSSLCertificateKeyFile /etc/ssl/private/mycert.key\' /etc/apache2/sites-available/default-ssl.conf
+
 
 # Enable the SSL site
 RUN a2ensite default-ssl
+RUN a2enmod ssl && a2enmod socache_shmcb
 
 # Copy your PHP application into the container
 COPY SharePilot /var/www/html/
