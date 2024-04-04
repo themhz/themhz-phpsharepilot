@@ -26,3 +26,5 @@ Data Migration: If your application relies on a database or other persistent dat
 Test the Setup: Once everything is up and running, thoroughly test your application to ensure it functions correctly in the new environment.
 
 Remember, Docker's main advantage is its ability to package applications and their dependencies into a single container that can run almost anywhere. This makes transferring and deploying applications across different environments much more seamless compared to traditional methods.
+
+https://forums.docker.com/t/setup-local-domain-and-ssl-for-php-apache-container/116015/8
