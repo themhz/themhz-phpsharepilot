@@ -28,6 +28,6 @@ self.addEventListener('notificationclick', function(event) {
 
     // Do something with the event
     event.waitUntil(
-        clients.openWindow('http://localhost') // Replace with your own URL
+        clients.openWindow('https://localhost') // Replace with your own URL
     );
 });

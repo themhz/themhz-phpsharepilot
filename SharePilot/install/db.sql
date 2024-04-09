@@ -96,7 +96,7 @@ DROP TABLE IF EXISTS `settings`;
 CREATE TABLE `settings` (
   `timezone` varchar(45) DEFAULT NULL,
   `crontoken` varchar(250) DEFAULT NULL,
-  `email` varchar(250) DEFAULT NULL,
+  `email` varchar(250) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 insert into `settings` (timezone, email) values('UTC', 'default@default.gr');

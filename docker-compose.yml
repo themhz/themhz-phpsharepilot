@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - "80:80"
-      - "8443:443"
+      - "443:443"
     volumes:
       - ./mycert.crt:/etc/ssl/certs/mycert.crt
       - ./mycert.key:/etc/ssl/private/mycert.key

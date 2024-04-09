@@ -20,7 +20,7 @@
         </div>
         <div class="w3-container">
         <button onclick="sendNotification()" class="w3-button w3-teal w3-large">Send message</button>
-        <button onclick="subscribeToNotification()" class="w3-button w3-teal w3-large">Subscribe</button>        
+        <button onclick="subscribeToNotification2()" class="w3-button w3-teal w3-large">Subscribe</button>        
             <ul class="w3-ul w3-card-4" id="sociallist">
                 <!-- List items will be appended here -->
                 
@@ -41,9 +41,34 @@
         }
     }, false);
 
+    function subscribeToNotification2() {
+        // First, check if the browser supports service workers and notifications
+        if ('serviceWorker' in navigator && 'Notification' in window) {
+            // Request notification permission from the user
+            Notification.requestPermission().then(function(permission) {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+                // If permission is granted, register the service worker
+                navigator.serviceWorker.register("/sw.js")
+                .then(function(registration) {
+                    console.log("Service Worker registered successfully.");
+                    // TODO: You can now subscribe the user to push notifications
+                })
+                .catch(function(error) {
+                    console.error("Service Worker registration failed:", error);
+                });
+            } else {
+                console.log("Notification permission was not granted.");
+            }
+            });
+        } else {
+            console.log("Service Workers and/or Notifications are not supported in this browser.");
+        }
+        }
 
     function subscribeToNotification(){
         navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => navigator.serviceWorker.ready) // Ensure service worker is ready        
             .then(registration => {
             return registration.pushManager.subscribe({
                 userVisibleOnly: true,
@@ -56,7 +81,7 @@
             // Send subscriptionJson to your server to store it
             })
             .catch(error => {
-            console.error('Service worker registration or push subscription failed', error);
+                console.log(error);
             });
         }
 
@@ -76,7 +101,8 @@
         return outputArray;
         }
 
-    function sendNotification(){                
+        
+    /*function sendNotification(){                
         fetch('pushnotifications/sendnotification?format=json', {
             method: 'POST',
             headers: {
@@ -94,6 +120,37 @@
                 console.error('Error:', error);
             });
        
+    }*/
+
+    function sendNotification() {
+        // Check if the browser supports notifications
+        if (!("Notification" in window)) {
+            alert("This browser does not support desktop notification");
+        }
+        // Check whether notification permissions have already been granted
+        else if (Notification.permission === "granted") {
+            // If it's okay, create a notification
+            const notification = new Notification("Hi there!", {
+            body: "This is an example notification.",
+            icon: "http://localhost/template/images/logo-no-background-mini.png"
+            });
+        }
+        // Otherwise, we need to ask the user for permission
+        else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(permission => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Hi there!", {
+                body: "This is an example notification.",
+                icon: "http://localhost/template/images/logo-no-background-mini.png"
+                });
+            }
+            });
+        }
+        // At last, if the user has denied notifications, and you want to be respectful there is nothing more to do
     }
+
+//sendNotification();  // Call this function when you want to send the notification
+
 
 </script>
