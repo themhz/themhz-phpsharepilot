@@ -30,7 +30,7 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
 
       curl_setopt($ch, CURLOPT_POSTFIELDS, '{
          "message": {
-            "token": "fWPI-Kw1Db8nFiV-CJX-R4:APA91bE4fEKkEYndoWgxrec2ESd_r55PIhpPc03BabZXtpij-Nqs_9UxWuP59PUVXrPvDRhmbf3K-yIHE6ZFQRUkr0vhCNYvMJNqxvkKvS2hMe396Jj4BrGiKIphsaoEYlACBAu3FW-T",
+            "token": "{the token of got from the site}",
             "notification": {
             "title": "Background Message Title",
             "body": "Background message body",
