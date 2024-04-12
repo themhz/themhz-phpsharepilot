@@ -1,3 +1,5 @@
 SharePilot/.env
 SharePilot/pvKey.json
 SharePilot/vendor
+SharePilot/mycert.crt
+SharePilot/mycert.key
