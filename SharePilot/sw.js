@@ -1,18 +1,21 @@
+// Firebase Messaging Service Worker
+
 self.addEventListener("push", (event) => {
-    const notification = event.data.json();
-    // {"title":"Hi" , "body":"something amazing!" , "url":"./?message=123"}
-    
-    event.waitUntil(self.registration.showNotification(notification.title, {
-        body: notification.body,
-        icon: "icon.png",
+
+    const notif = event.data.json().notification;
+
+    event.waitUntil(self.registration.showNotification(notif.title , {
+        body: notif.body,
+        icon: notif.image,
         data: {
-            notifURL: notification.url
+            url: notif.click_action
         }
     }));
 
-    
 });
 
 self.addEventListener("notificationclick", (event) => {
-    event.waitUntil(clients.openWindow(event.notification.data.notifURL));
+
+    event.waitUntil(clients.openWindow(event.notification.data.url));
+
 });

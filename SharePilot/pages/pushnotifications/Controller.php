@@ -8,11 +8,54 @@ use SharePilotV2\Models\Channels;
 use SharePilotV2\Models\Channel_social_keys;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
+use Google\Auth\Credentials\ServiceAccountCredentials;
+use Google\Auth\HttpHandler\HttpHandlerFactory;
  class Controller{
 
+
+    public function send(){      
+      $credential = new ServiceAccountCredentials(
+         "https://www.googleapis.com/auth/firebase.messaging",
+         json_decode(file_get_contents("pvKey.json"), true)
+      );
+
+      $token = $credential->fetchAuthToken(HttpHandlerFactory::build());
+
+      $ch = curl_init("https://fcm.googleapis.com/v1/projects/sharepilot-939ee/messages:send");
+
+      curl_setopt($ch, CURLOPT_HTTPHEADER, [
+         'Content-Type: application/json',
+         'Authorization: Bearer '.$token['access_token']
+      ]);
+
+      curl_setopt($ch, CURLOPT_POSTFIELDS, '{
+         "message": {
+            "token": "fWPI-Kw1Db8nFiV-CJX-R4:APA91bE4fEKkEYndoWgxrec2ESd_r55PIhpPc03BabZXtpij-Nqs_9UxWuP59PUVXrPvDRhmbf3K-yIHE6ZFQRUkr0vhCNYvMJNqxvkKvS2hMe396Jj4BrGiKIphsaoEYlACBAu3FW-T",
+            "notification": {
+            "title": "Background Message Title",
+            "body": "Background message body",
+            "image": "https://cdn.shopify.com/s/files/1/1061/1924/files/Sunglasses_Emoji.png?2976903553660223024"
+            },
+            "webpush": {
+            "fcm_options": {
+               "link": "https://google.com"
+            }
+            }
+         }
+      }');
+
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "post");
+
+      $response = curl_exec($ch);
+
+      curl_close($ch);
+
+      echo $response;
+    }
     public function sendNotification()
     {
-
+         //To watch the video
+         //https://www.youtube.com/watch?v=iz5arafmatc&t=746s
          //Where I get my apiKey
          //https://console.cloud.google.com/apis/credentials?project=sharepilot-939ee
          //https://console.firebase.google.com/u/0/project/sharepilot-939ee/settings/general

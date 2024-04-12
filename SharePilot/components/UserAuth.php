@@ -33,8 +33,9 @@ class UserAuth {
 
             if($result){
                 $_SESSION["user"] = $user;               
-                // set the token cookie if remember me is checked for 1 hour                                                
-                setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration                                                
+                // set the token cookie if remember me is checked for 1 hour                                                                
+                //setcookie('token', $token, time() + 3600,'/'); // 1 hour expiration         
+                setcookie('token', $token, time() + (365 * 24 * 60 * 60), '/'); // 1 year expiration
                 return true;
             }
         }
