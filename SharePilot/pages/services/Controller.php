@@ -2,7 +2,7 @@
 use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
-use SharePilotV2\Models\Socials;
+use SharePilotV2\Models\Services;
 use SharePilotV2\Models\Scheduled_posts;
 use SharePilotV2\Models\Channels;
 use SharePilotV2\Models\Channel_social_keys;
@@ -11,26 +11,26 @@ use SharePilotV2\Components\RequestHandler;
  class Controller{
     public function get()
     {
-        $c = new Socials();
+        $c = new Services();
         $data = $c->select()->execute();
         ResponseHandler::respond($data);
     }
      public function delete()
      {
-         $c = new Socials();
+         $c = new Services();
          $result = $c->delete()->where("id","=",RequestHandler::get("id"))->execute();
          ResponseHandler::respond(["result"=>$result]);
      }
      public function put(){
-         $social_id = RequestHandler::get("id");
-         $socials = new Socials();
-         $socials->name = RequestHandler::get("name");
-         $socials->update()->where("id","=",$social_id)->execute();
+         $service_id = RequestHandler::get("id");
+         $services = new Services();
+         $services->name = RequestHandler::get("name");
+         $services->update()->where("id","=",$service_id)->execute();
 
          ResponseHandler::respond(["status"=>"success"]);
      }
-     public function getsocials(){
-//        $s = new Socials();
+     public function getservices(){
+//        $s = new Services();
 //         ResponseHandler::respond($s->select()->execute());
      }
      public function loadkeys(){
@@ -43,22 +43,22 @@ use SharePilotV2\Components\RequestHandler;
 //             ->where("social_id", "=", $socialId)->execute());
      }
 
-     public function addsocial(){
+     public function addservice(){
 
         //ppostrint_r(RequestHandler::get("socialName")."adsda");
         //die();
-         $social = new Socials();
-         $social->name = RequestHandler::get("socialName");
-         $social->regdate = date("Y-m-d H:i");
-         $social->active = 1;
+         $service = new Services();
+         $service->name = RequestHandler::get("serviceName");
+         $service->regdate = date("Y-m-d H:i");
+         $service->active = 1;
          if(empty($social->select()->where("name", "=", trim($social->name))->execute())){
              if($social->insert()>0){
-                 ResponseHandler::respond(["result"=>true, "message"=>"Social has been successfully inserted"]);
+                 ResponseHandler::respond(["result"=>true, "message"=>"Service has been successfully inserted"]);
              }else{
                  ResponseHandler::respond(["result"=>false, "message"=>"there was an error trying to insert the channel"]);
              }
          }else{
-             ResponseHandler::respond(["result"=>false, "message"=>"social name already exists"]);
+             ResponseHandler::respond(["result"=>false, "message"=>"service name already exists"]);
          }
      }
 

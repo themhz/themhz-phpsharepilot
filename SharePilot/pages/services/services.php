@@ -1,23 +1,23 @@
 <!--Lists-->
 <div class="w3-row custom-padding-45">
     <div class="w3-container w3-teal">
-        <h1>Socials</h1>
+        <h1>Services</h1>
     </div>
     <div class="w3-container">
-        <p>Create a new social.</p>
+        <p>Create a new service.</p>
         <div class="w3-bar w3-teal">
-            <button class="w3-button" onclick="document.getElementById('newsocialModal').style.display='block'">New social</button>
+            <button class="w3-button" onclick="document.getElementById('newserviceModal').style.display='block'">New service</button>
         </div>
     </div>
 </div>
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
-            <h1 class="w3-text-teal">socials</h1>
+            <h1 class="w3-text-teal">Service</h1>
             <button id="sortButton" onclick="sortList()" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
         </div>
         <div class="w3-container">
-            <ul class="w3-ul w3-card-4" id="sociallist">
+            <ul class="w3-ul w3-card-4" id="servicelist">
                 <!-- List items will be appended here -->
             </ul>
         </div>
@@ -25,15 +25,15 @@
 </div>
 <!--Lists-->
 <!--row click popup-->
-<div id="socialModal" class="w3-modal">
+<div id="serviceModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('socialModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
-            <h2>social</h2>
+            <span onclick="document.getElementById('serviceModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
+            <h2>Service</h2>
         </header>
         <div class="w3-container">
-            <p>social Name: <input id="txtsocialName" class="w3-input w3-border w3-margin-top" type="text"></p>
-            <input type="text" id="txtsocialId" name="txtsocialId" value="" style="display: none">
+            <p>Service Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <input type="text" id="txtserviceId" name="txtserviceId" value="" style="display: none">
         </div>
         <div class="w3-container" id="keylist">
         </div>
@@ -43,8 +43,8 @@
     </div>
 </div>
 <!--popup-->
-<!--new social popup-->
-<!-- check social Modal -->
+<!--new service popup-->
+<!-- check service Modal -->
 <div id="modal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
@@ -64,35 +64,34 @@
         </barter>
     </div>
 </div>
-<!--new social popup-->
-<!--new social window-->
-<div id="newsocialModal" class="w3-modal">
+<!--new service popup-->
+<!--new service window-->
+<div id="newserviceModal" class="w3-modal">
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('newsocialModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h2>New social</h2>
+            <span onclick="document.getElementById('newserviceModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h2>New service</h2>
         </header>
         <div class="w3-container w3-margin">
-            <label for="socialName">social Name:</label>
-            <input type="text" id="socialName" name="socialName" class="w3-input w3-border" value="">
-            <p id="error-message" style="color: red; display: none;">Please enter a social name!</p>
+            <label for="serviceName">service Name:</label>
+            <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value="">
+            <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>
         </div>
         <footer class="w3-container w3-teal w3-padding">            
-            <button class="w3-button w3-green" id="create-social">Create social</button>
+            <button class="w3-button w3-green" id="create-service">Create service</button>
         </footer>
     </div>
 </div>
-<!--new social window-->
+<!--new service window-->
 <script>
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
-            loadsocials();
-            //loadSocials();
+            loadservices();
         }
     }, false);
-    function loadsocials(){
-        fetch('socials?format=json', {
+    function loadservices(){
+        fetch('services?format=json', {
             method: 'get',
             })
             .then(response => response.json())
@@ -125,11 +124,11 @@
             li.className = "w3-bar w3-hover-teal";
             li.style.cursor = "pointer";
             li.id = item.id;
-            li.innerHTML = `<span onclick="deletesocial(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+            li.innerHTML = `<span onclick="deleteservice(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                             <div class="w3-bar-item" id=${item.id}>
                                 <span class="w3-large">${item.name}</span><br>
                                 <span>${item.regdate}</span><br>
-                                <button onclick="deletesocial(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
+                                <button onclick="deleteservice(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                             </div>
                                     `;
             li.addEventListener('click', function() {
@@ -139,32 +138,32 @@
         });
     }
     function editsocialKeys(item){
-        document.getElementById('txtsocialName').value = item.name;
-        document.getElementById('txtsocialId').value = item.id;
-        document.getElementById('socialModal').style.display = 'block';
+        document.getElementById('txtserviceName').value = item.name;
+        document.getElementById('txtserviceId').value = item.id;
+        document.getElementById('serviceModal').style.display = 'block';
     }
     function update() {
-        fetch('socials?format=json', {
+        fetch('services?format=json', {
             method: 'put',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                    id:document.getElementById("txtsocialId").value,
-                    name: document.getElementById("txtsocialName").value,
+                    id:document.getElementById("txtserviceId").value,
+                    name: document.getElementById("txtserviceName").value,
                 })
             })
             .then(response => response.json())
             .then(data => {
-                loadsocials();
+                loadservices();
             })
 
-        document.getElementById('socialModal').style.display = 'none';
+        document.getElementById('serviceModal').style.display = 'none';
     }
-    function deletesocial(id){
+    function deleteservice(id){
         event.stopPropagation();
-        if(confirm("are you sure you want to delete this social?")){
-            fetch('socials/delete?format=json', {
+        if(confirm("are you sure you want to delete this service?")){
+            fetch('services/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -181,8 +180,8 @@
                         alert("problem with deletion");
                     }
                     // Hide modal after successful operation
-                    document.getElementById('newsocialModal').style.display='none';
-                    loadsocials();
+                    document.getElementById('newserviceModal').style.display='none';
+                    loadservices();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -197,7 +196,7 @@
     let isAscending = true;
     function sortList() {
         var list, i, switching, b, shouldSwitch;
-        list = document.getElementById("sociallist");
+        list = document.getElementById("servicelist");
         switching = true;
         while (switching) {
             switching = false;
@@ -231,20 +230,20 @@
             sortButton.innerHTML = '<i class="fas fa-sort-down"></i> Sort';
         }
     }
-    document.getElementById('create-social').addEventListener('click', function(){
-        document.getElementById('socialName').value = document.getElementById('socialName').value.trim();       
-        var socialName = document.getElementById('socialName').value;
-        if(socialName === ""){
+    document.getElementById('create-service').addEventListener('click', function(){
+        document.getElementById('serviceName').value = document.getElementById('serviceName').value.trim();       
+        var serviceName = document.getElementById('serviceName').value;
+        if(serviceName === ""){
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('socials/addsocial?format=json', {
+            fetch('services/addservice?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    socialName: socialName
+                    serviceName: serviceName
                 })
             })
                 .then(response => response.json())
@@ -252,8 +251,8 @@
                     //console.log(data);
                     alert(data.message);
                     // Hide modal after successful operation
-                    document.getElementById('newsocialModal').style.display='none';
-                    loadsocials();
+                    document.getElementById('newserviceModal').style.display='none';
+                    loadservices();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -301,8 +300,8 @@
         // Check if the pressed key is the Escape key (keyCode 27)
         if (event.keyCode === 27) {
             // Close the popup by setting its display property to "none"
-            document.getElementById('socialModal').style.display = 'none';            
-            document.getElementById('newsocialModal').style.display = 'none';                                
+            document.getElementById('serviceModal').style.display = 'none';            
+            document.getElementById('newserviceModal').style.display = 'none';                                
         }
     });
 </script>
