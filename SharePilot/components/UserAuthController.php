@@ -10,24 +10,28 @@ class UserAuthController {
     }
 
     public function handleRequest() {       
-        // checking if a token cookie is set    
-        if(null !==RequestHandler::get("token")){
+        // checking if a token cookie is set         
+        if(RequestHandler::get("token")!==null){
            
                 //echo RequestHandler::get("token");
                 //die();
             // if the user has a token, authenticate the token
-            $user = $this->auth->authenticateToken();            
+            $user = $this->auth->authenticateToken();
             // if the token is invalid or expired, ask them to log in again
             if (!$user) {
-                return ["userAuth"=> false, "message" =>"Token expired. Please log in again."];
+                return $this->checkUsernamePass();
             } else {
+
                 $_SESSION["user"] = $user;
                 return ["userAuth"=> true, "message" =>"Welcome back, {$user['email']}."];
             }
-                    
         } else {            
-            // if no token cookie is set, check username or password        
-                        
+            // if no token cookie is set, check username or password
+            return $this->checkUsernamePass();                     
+        }        
+    }
+
+    public function checkUsernamePass(){
             $email = RequestHandler::get("email");
             $password = RequestHandler::get("password");
 
@@ -35,8 +39,7 @@ class UserAuthController {
                 return ["userAuth"=> true, "message" =>"login successful."];
             } else {
                 return ["userAuth"=> false, "message" =>"Not authenticated."];
-            }                                
-        }        
+            }                   
     }
 }
 

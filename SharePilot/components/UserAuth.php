@@ -24,7 +24,7 @@ class UserAuth {
         $user = empty($user)?false:$user[0];
 
         
-        if ($user && password_verify($password, $user['password'])) {        
+        if ($user && password_verify($password, $user['password']   )) {        
             // password is correct
             // generate a new session token
             $token = bin2hex(openssl_random_pseudo_bytes(16));            
@@ -44,7 +44,7 @@ class UserAuth {
 
     public function authenticateToken() {
         $token = isset($_COOKIE['token']) ? $_COOKIE['token'] : RequestHandler::get("token");
-            
+                
         if ($token) {
             $users = new Users();
             $users->token = $token;    
