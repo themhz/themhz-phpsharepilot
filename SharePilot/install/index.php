@@ -22,11 +22,11 @@ session_start();
         $db_name = $_POST["db_name"];
         $db_user = $_POST["db_user"];
         $db_pass = $_POST["db_pass"];
-        $base_url = $_POST["base_url"];
+        //$base_url = $_POST["base_url"];
         $admin_user = $_POST["admin_user"];
         $admin_pass = $_POST["admin_pass"];
 
-        $env_data = "DB_HOST=$db_host\nDB_NAME=$db_name\nDB_USER=$db_user\nDB_PASS=$db_pass\nBASE_URL=$base_url";
+        $env_data = "DB_HOST=$db_host\nDB_NAME=$db_name\nDB_USER=$db_user\nDB_PASS=$db_pass";
 
 
         // Write to .env file
@@ -130,9 +130,6 @@ session_start();
 
         <label class="w3-text-teal"><b>DB Password</b></label>
         <input class="w3-input w3-border w3-light-grey" type="password" name="db_pass">
-
-        <label class="w3-text-teal"><b>Base URL</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="base_url">
 
         <label class="w3-text-teal"><b>Admin User</b></label>
         <input class="w3-input w3-border w3-light-grey" type="text" name="admin_user">

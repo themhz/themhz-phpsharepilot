@@ -51,8 +51,8 @@ use SharePilotV2\Components\RequestHandler;
          $service->name = RequestHandler::get("serviceName");
          $service->regdate = date("Y-m-d H:i");
          $service->active = 1;
-         if(empty($social->select()->where("name", "=", trim($social->name))->execute())){
-             if($social->insert()>0){
+         if(empty($service->select()->where("name", "=", trim($service->name))->execute())){
+             if($service->insert()>0){
                  ResponseHandler::respond(["result"=>true, "message"=>"Service has been successfully inserted"]);
              }else{
                  ResponseHandler::respond(["result"=>false, "message"=>"there was an error trying to insert the channel"]);

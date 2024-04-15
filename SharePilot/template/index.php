@@ -42,10 +42,9 @@ if (isset($_SESSION["user"])){ ?>
     <i class="fa fa-remove"></i>
   </a>
   <h4 class="w3-bar-item"><b>Menu</b></h4>
-
-    <a class="w3-bar-item w3-button w3-hover-teal" href="links">Links</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="services">Service</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="services">Services</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="channels">Channels</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="links">Links</a>        
     <a class="w3-bar-item w3-button w3-hover-teal" href="lists">Lists</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="schedule">Scheduled Posts</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="cron">Cron</a>

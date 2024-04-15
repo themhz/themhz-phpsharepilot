@@ -73,7 +73,7 @@
             <h2>New service</h2>
         </header>
         <div class="w3-container w3-margin">
-            <label for="serviceName">service Name:</label>
+            <label for="serviceName">Service Name:</label>
             <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value="">
             <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>
         </div>

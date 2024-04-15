@@ -15,18 +15,13 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     
     // Read .env file
     $env_lines = file('../.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $base_url = "";
-    
-    foreach ($env_lines as $line) {
-        if (str_starts_with($line, 'BASE_URL=')) {
-            $base_url = substr($line, strlen('BASE_URL='));
-            break;
-        }
-    }
+    // Build the base URL dynamically
+    $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+    $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
+    $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL
 
-    // Redirect to the base url
+    // Redirect to the base URL
     header("Location: " . $base_url);
-    exit();
 }
 
 ?>

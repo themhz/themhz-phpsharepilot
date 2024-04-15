@@ -13,7 +13,11 @@ class Controller
 
     public function __construct()
     {
-        $this->baseurl = $_ENV['BASE_URL'];
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
+        $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL
+
+        $this->baseurl = $base_url;
         $this->auth = new UserAuth(Database::getInstance());
     }
 
