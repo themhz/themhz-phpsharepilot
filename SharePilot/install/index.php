@@ -55,7 +55,20 @@ session_start();
         $connection->select_db($db_name);
 
         // Load and execute SQL dump
-        $sql_dump = file_get_contents('db.sql');
+        $sql_dump = file_get_contents('db_php.sql');
+
+        if ($connection->multi_query($sql_dump)) {
+            do {
+                // Store first result set
+                if ($result = $connection->store_result()) {
+                    $result->free();
+                }
+                // If there are more results, prepare next result set
+            } while ($connection->next_result());
+        } else {
+            echo "Error when executing SQL: " . $connection->error;
+        }
+
         $connection->multi_query($sql_dump);
        
         // Wait for all queries to finish

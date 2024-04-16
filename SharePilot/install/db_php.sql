@@ -240,6 +240,7 @@ CREATE TABLE `users` (
 
 -- Stored Procedures
 --
+DROP procedure IF EXISTS `schedule_posts`;
 CREATE PROCEDURE `schedule_posts`(start_datetime DATETIME, hourInterval int, channel_id int, avoid_start_hour INT, avoid_end_hour INT, OUT procedure_success BOOLEAN)
 BEGIN
   DECLARE current_id INT;
@@ -286,6 +287,62 @@ BEGIN
     
     SET procedure_success := TRUE;
 
+  END LOOP;
+
+  CLOSE cur;
+
+  DROP TEMPORARY TABLE IF EXISTS final_ids;
+  
+  IF procedure_success IS NULL THEN
+    SET procedure_success := FALSE;
+  END IF;
+END;
+
+
+DROP procedure IF EXISTS `restateschedule_posts`;
+CREATE PROCEDURE `restateschedule_posts`(start_datetime DATETIME, hourInterval int, channel_id int, avoid_start_hour INT, avoid_end_hour INT, OUT procedure_success BOOLEAN)
+BEGIN
+  DECLARE current_id INT;
+  DECLARE done INT DEFAULT FALSE;
+  DECLARE cur CURSOR FOR SELECT * FROM final_ids;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+  DROP TEMPORARY TABLE IF EXISTS final_ids;
+
+  IF(channel_id IS NULL OR channel_id = 0) THEN
+    CREATE TEMPORARY TABLE final_ids AS
+      SELECT id
+      FROM scheduled_posts
+      ORDER BY id;
+  ELSE
+    CREATE TEMPORARY TABLE final_ids AS
+      SELECT id
+      FROM scheduled_posts
+      WHERE channel_id = channel_id
+      ORDER BY id;
+  END IF;
+
+  SET @next_post_time := start_datetime;
+
+  OPEN cur;
+
+  read_loop: LOOP
+    FETCH cur INTO current_id;
+    IF done THEN
+      LEAVE read_loop;
+    END IF;
+
+    WHILE HOUR(@next_post_time) BETWEEN avoid_start_hour AND avoid_end_hour DO
+      SET @next_post_time := DATE_ADD(@next_post_time, INTERVAL hourInterval HOUR);
+    END WHILE;
+
+    UPDATE scheduled_posts 
+    SET post_time = @next_post_time 
+    WHERE id = current_id;
+
+    SET @next_post_time := DATE_ADD(@next_post_time, INTERVAL hourInterval HOUR);
+    
+    SET procedure_success := TRUE;
   END LOOP;
 
   CLOSE cur;
