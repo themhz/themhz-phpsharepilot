@@ -106,16 +106,17 @@ insert into `settings` (timezone, email) values('UTC', 'default@default.gr');
 -- Table structure for table `services_categories`
 --
 
-DROP TABLE IF EXISTS `services_categories`;
+DROP TABLE IF EXISTS `service_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `services_categories` (
+CREATE TABLE `service_categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL, 
-  `channel_id` int DEFAULT NULL,
+  `regdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
-
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
+insert into service_categories (name, regdate) values('All', now());
+insert into service_categories (name, regdate) values('Add new service category', now());
 
 --
 -- Table structure for table `services`
@@ -130,8 +131,8 @@ CREATE TABLE `services` (
   `regdate` datetime DEFAULT NULL,
   `active` tinyint DEFAULT NULL,
   `service_category_id` int DEFAULT NULL,
-  FOREIGN KEY (`service_category_id`) REFERENCES `services_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`service_category_id`) REFERENCES `service_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 insert into services (name, regdate, active) values('facebook', now(), 1);
@@ -295,70 +296,3 @@ BEGIN
     SET procedure_success := FALSE;
   END IF;
 END;
-
-CREATE PROCEDURE `restateschedule_posts`(start_datetime DATETIME, hourInterval int, channel_id int, avoid_start_hour INT, avoid_end_hour INT, OUT procedure_success BOOLEAN)
-BEGIN
-  DECLARE current_id INT;
-  DECLARE done INT DEFAULT FALSE;
-  DECLARE cur CURSOR FOR SELECT * FROM final_ids;
-  DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
-
-  DROP TEMPORARY TABLE IF EXISTS final_ids;
-
-  IF(channel_id IS NULL OR channel_id = 0) THEN
-    CREATE TEMPORARY TABLE final_ids AS
-      SELECT id
-      FROM scheduled_posts
-      ORDER BY id;
-  ELSE
-    CREATE TEMPORARY TABLE final_ids AS
-      SELECT id
-      FROM scheduled_posts
-      WHERE channel_id = channel_id
-      ORDER BY id;
-  END IF;
-
-  SET @next_post_time := start_datetime;
-
-  OPEN cur;
-
-  read_loop: LOOP
-    FETCH cur INTO current_id;
-    IF done THEN
-      LEAVE read_loop;
-    END IF;
-
-    WHILE HOUR(@next_post_time) BETWEEN avoid_start_hour AND avoid_end_hour DO
-      SET @next_post_time := DATE_ADD(@next_post_time, INTERVAL hourInterval HOUR);
-    END WHILE;
-
-    UPDATE scheduled_posts 
-    SET post_time = @next_post_time 
-    WHERE id = current_id;
-
-    SET @next_post_time := DATE_ADD(@next_post_time, INTERVAL hourInterval HOUR);
-    
-    SET procedure_success := TRUE;
-  END LOOP;
-
-  CLOSE cur;
-
-  DROP TEMPORARY TABLE IF EXISTS final_ids;
-  
-  IF procedure_success IS NULL THEN
-    SET procedure_success := FALSE;
-  END IF;
-END;
-
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2023-08-02 19:00:22

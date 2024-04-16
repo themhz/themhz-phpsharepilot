@@ -4,7 +4,7 @@ use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
 use SharePilotV2\Models\Services;
 use SharePilotV2\Models\Scheduled_posts;
-use SharePilotV2\Models\Channels;
+use SharePilotV2\Models\Service_categories;
 use SharePilotV2\Models\Channel_social_keys;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
@@ -67,6 +67,21 @@ use SharePilotV2\Components\RequestHandler;
 //         $channels = $c->select()->orderBy("id","desc")->execute();
 //
 //         ResponseHandler::respond($channels);
+     }
+
+
+     public function createServiceCategory(){
+        $sc = new Service_categories();
+        $sc->name = RequestHandler::get("name");     
+        $sc->insert();  
+        ResponseHandler::respond(["result"=>true, "message"=>"Service category has been successfully inserted"]); 
+     }
+
+     public function selectservicecategory(){
+        $sc = new Service_categories();
+
+        $data = $sc->select()->execute()[0];
+        ResponseHandler::respond($data);
      }
  }
  

@@ -7,7 +7,7 @@ class Service_categories extends Model
 {
     public function GetTable()
     {
-        return "Service_categories";
+        return "service_categories";
     }
 }
 

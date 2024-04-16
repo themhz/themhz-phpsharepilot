@@ -7,6 +7,15 @@
         <p>Create a new service.</p>
         <div class="w3-bar w3-teal">
             <button class="w3-button" onclick="document.getElementById('newserviceModal').style.display='block'">New service</button>
+            <button class="w3-button" onclick="document.getElementById('newserviceCategoryModal').style.display='block'">New service category</button>
+            <div class="w3-dropdown-hover w3-teal">
+                <div class="w3-container w3-teal">
+                    <select class="w3-select w3-teal w3-dropdown-hover" name="serviceCateogiresTopBar" id="serviceCateogiresTopBar" onchange="filterServices()">
+                        <option value="2" >ALL</option>
+                        <option value="1" >New service category</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -32,7 +41,7 @@
             <h2>Service</h2>
         </header>
         <div class="w3-container">
-            <p>Service Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <p>Service Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>                        
             <input type="text" id="txtserviceId" name="txtserviceId" value="" style="display: none">
         </div>
         <div class="w3-container" id="keylist">
@@ -42,29 +51,7 @@
         </footer>
     </div>
 </div>
-<!--popup-->
-<!--new service popup-->
-<!-- check service Modal -->
-<div id="modal" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom w3-card-4">
-        <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('modal').style.display='none'"
-                  class="w3-button w3-display-topright">&times;</span>
-            <h2 id="modalTitle"></h2>
-        </header>
-        <div class="w3-container">
-            <br>
-            <img id="modalImage" class="w3-image" alt="Image" style="width:50%;"/>
-            <p id="modalDescription"></p>
-            <p id="modalPostTime"></p>
-        </div>
-        <barter class="w3-container w3-teal w3-padding">
-            <button id="closeModal" class="w3-button w3-white w3-border w3-round-large" onclick="closeModal()">Close</button>
-            <input id="saveLink" class="w3-button w3-white w3-border w3-round-large" onclick="saveLink()" value="Save">
-        </barter>
-    </div>
-</div>
-<!--new service popup-->
+
 <!--new service window-->
 <div id="newserviceModal" class="w3-modal">
     <div class="w3-modal-content">
@@ -73,23 +60,44 @@
             <h2>New service</h2>
         </header>
         <div class="w3-container w3-margin">
-            <label for="serviceName">Service Name:</label>
-            <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value="">
-            <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>
+            <p>Service Name: <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value=""></p>            
+            <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>            
         </div>
         <footer class="w3-container w3-teal w3-padding">            
-            <button class="w3-button w3-green" id="create-service">Create service</button>
+            <button class="w3-button w3-green" id="create-service">Create</button>
         </footer>
     </div>
 </div>
 <!--new service window-->
+
+<!--new service category window-->
+<div id="newserviceCategoryModal" class="w3-modal">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-teal">
+            <span onclick="document.getElementById('newserviceCategoryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h2>Service Category Modal</h2>
+        </header>
+        <div class="w3-container w3-margin">
+            <p>Service Categoy Name: <input type="text" id="serviceCategoryName" name="serviceCategoryName" class="w3-input w3-border" value=""></p>                                
+        </div>
+        <footer class="w3-container w3-teal w3-padding">            
+            <button class="w3-button w3-green" id="create-service-category" onclick="createServiceCategory()">Create</button>
+        </footer>
+    </div>
+</div>
+<!--new service category window-->
+
+
+<!--popup-->
+
 <script>
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
-            loadservices();
+            loadservices();            
         }
     }, false);
+
     function loadservices(){
         fetch('services?format=json', {
             method: 'get',
@@ -97,6 +105,7 @@
             .then(response => response.json())
             .then(data => {
                 createlist(data);
+                loadServiceCategories();
             })
     }
 
@@ -295,13 +304,71 @@
         return data;
     }
 
+    function filterServices(){
+        let serviceCategory_id = document.getElementById("serviceCateogiresTopBar").value;
+        if(serviceCategory_id==1){
+            showCategoryPopup();
+        }else{
+
+        }
+        //alert(channel_id);
+        //showCategoryPopup();
+        //var categoryName = document.querySelector("#").value;        
+    }
+
+    function createServiceCategory(){      
+        let name = document.getElementById("serviceCategoryName").value;        
+
+        fetch('services/createservicecategory?format=json', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name: name})
+        })
+        .then(response => response.json())
+        .then(data => {
+            if(data.result == true){
+                alert(`List "${name}" added`);
+                loadServiceCategories();
+            }else{
+                alert(`List "${name}" was not added`);
+            }
+            document.getElementById('newserviceCategoryModal').style.display = 'none';
+        });
+    }
+
+    function loadServiceCategories(){
+        let name = document.getElementById("serviceCategoryName").value;        
+
+        fetch('services/selectservicecategory?format=json', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }            
+        })
+        .then(response => response.json())
+        .then(data => {
+            
+            console.log(data);
+        });
+    }
+
+    function showCategoryPopup(){
+        document.getElementById('newserviceCategoryModal').style.display = 'block';
+    }
+
 
     document.addEventListener("keydown", function(event) {
         // Check if the pressed key is the Escape key (keyCode 27)
         if (event.keyCode === 27) {
             // Close the popup by setting its display property to "none"
             document.getElementById('serviceModal').style.display = 'none';            
-            document.getElementById('newserviceModal').style.display = 'none';                                
+            document.getElementById('newserviceModal').style.display = 'none';
+            document.getElementById('newserviceCategoryModal').style.display = 'none';
         }
     });
+
+
+    
 </script>

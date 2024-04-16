@@ -6,7 +6,7 @@
     <div class="w3-container">
         <p>Create a new Channel.</p>
         <div class="w3-bar w3-teal">
-            <button class="w3-button" onclick="document.getElementById('newChannelModal').style.display='block'">New Channel</button>
+            <button class="w3-button" onclick="document.getElementById('newChannelModal').style.display='block'">New Channel</button>            
         </div>
     </div>
 </div>

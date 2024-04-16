@@ -6,4 +6,4 @@ RewriteRule ^([0-9a-z]+)$ index.php?page=$1 [QSA,L]
 RewriteRule ^([0-9a-z]+)/([0-9a-z]+)$ index.php?page=$1&method=$2 [QSA,L]
 RewriteRule ^([0-9a-z]+)/([0-9a-z]+)/([0-9a-z]+)$ index.php?page=$1&method=$2&id=$3 [QSA,L]
 
-ErrorDocument 404 /404.html
+#ErrorDocument 404 /404.html
