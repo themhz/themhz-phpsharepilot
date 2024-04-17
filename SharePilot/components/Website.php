@@ -84,7 +84,7 @@ class Website {
     }
 
     private function loadPage() {
-        $page = new Pages();
+        $page = new Pages($this->publicPages);
         $page->load(); // Ensure this method either echoes directly or returns the output
     }
 

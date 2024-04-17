@@ -18,35 +18,37 @@
 namespace SharePilotV2\Components;
 class Pages
 {
-    private $page = null;
-    public function __construct()
-    {
+    private $page = null;    
+    private $publicPages = [];
+
+    public function __construct($publicPages=[]) {
+        $this->publicPages = $publicPages;
     }
 
-    public function load()
-    {       
-        
+    public function load($directLoad = false) {
         if (isset($_REQUEST['page'])) {
             $this->page = $_REQUEST['page'];
-            $directory = getcwd() . "/pages/$this->page";
-            //Check If the directory exists
-            if (is_dir($directory)) {
-                //Load the directory
-                $page = $directory . '/' . $this->page . '.php';
-            } else {
-                //Load the default directory
-                $page = getcwd() . "/pages/default/default.php";
-            }
-        }else {
-            //Load the default directory
+        } else {
+            // Default to a default page if none is specified
+            $this->page = 'default';
+        }
+
+        $directory = getcwd() . "/pages/{$this->page}";
+        // Check if the directory exists
+        if (is_dir($directory)) {
+            // Load the directory
+            $page = $directory . '/' . $this->page . '.php';
+        } else {
+            // Load the default directory
             $page = getcwd() . "/pages/default/default.php";
         }
-       
-        include __DIR__ . '/../template/index.php';
 
+       
+        if ($directLoad || in_array($this->page, $this->publicPages)) {
+            include $page;
+        } else {
+            include __DIR__ . '/../template/index.php';
+        }
     }
 
-    // public function loadLogin(){
-    //     include __DIR__ . '/../template/login.php';
-    // }
 }
