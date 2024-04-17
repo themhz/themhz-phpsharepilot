@@ -237,6 +237,80 @@ CREATE TABLE `users` (
   KEY `role_id` (`role`)
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb3;
 
+-- Dropping existing tables if they exist
+DROP TABLE IF EXISTS `subscriptions`;
+DROP TABLE IF EXISTS `subscription_types`;
+DROP TABLE IF EXISTS `subscribers`;
+DROP TABLE IF EXISTS `subscription_tokens`;
+DROP TABLE IF EXISTS `device_types`;
+
+
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+
+-- Creating a table for storing subscriber details
+CREATE TABLE `subscribers` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `firstName` varchar(100) DEFAULT NULL,
+    `lastName` varchar(100) DEFAULT NULL,
+    `email` varchar(100) DEFAULT NULL,
+    `phoneNumber` varchar(15) DEFAULT NULL,
+    `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Creating a table for different types of subscriptions
+CREATE TABLE `subscription_types` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `typeName` varchar(50) NOT NULL,
+    `description` text,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Creating a table to link subscribers and their subscriptions
+CREATE TABLE `subscriptions` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `subscriber_id` int NOT NULL,
+    `subscriptionType_id` int NOT NULL,
+    `isActive` boolean DEFAULT TRUE,
+    `subscribedOn` datetime DEFAULT CURRENT_TIMESTAMP,
+    `unsubscribedOn` datetime DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    KEY `subscriber_id` (`subscriber_id`),
+    KEY `subscription_type_id` (`subscriptionType_id`),
+    FOREIGN KEY (`subscriber_id`) REFERENCES `subscribers` (`id`),
+    FOREIGN KEY (`subscriptionType_id`) REFERENCES `subscription_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Creating a table for storing tokens related to subscriptions
+CREATE TABLE `device_types` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `type_name` varchar(50) NOT NULL,
+    `description` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO `device_types` (type_name, description)
+VALUES 
+('iOS', 'Apple iOS devices'),
+('Android', 'Android devices'),
+('Web', 'Web browsers'),
+('Desktop', 'Desktop applications');
+
+
+
+CREATE TABLE `subscription_tokens` (
+    `id` int NOT NULL AUTO_INCREMENT,
+    `subscription_id` int NOT NULL,
+    `token` varchar(255) NOT NULL,
+    `device_type_id` int DEFAULT NULL,  -- Now referencing the device_types table
+    `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`),
+    FOREIGN KEY (`device_type_id`) REFERENCES `device_types` (`id`)  -- New foreign key
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 -- Stored Procedures
 --
