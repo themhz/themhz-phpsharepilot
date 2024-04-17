@@ -1,5 +1,7 @@
 Navigate to the directory containing your docker-compose.yml file and run:
 #docker-compose up -d
+//or
+docker-compose up -d --build
 
 #docker build --no-cache -t sharepilot:v5 .
 

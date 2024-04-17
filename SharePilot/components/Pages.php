@@ -46,7 +46,7 @@ class Pages
 
     }
 
-    public function loadLogin(){
-        include __DIR__ . '/../template/login.php';
-    }
+    // public function loadLogin(){
+    //     include __DIR__ . '/../template/login.php';
+    // }
 }

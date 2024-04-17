@@ -19,71 +19,80 @@ namespace SharePilotV2\Components;
 use Dotenv\Dotenv;
 use SharePilotV2\Libs\Functions;
 
-class Website{
+class Website {
+    // Define an array of public pages
+    private $publicPages = ['testservice', 'login']; // Example public pages
 
-    public function start(){                
-        try{    
+    public function start() {                
+        try {    
             $this->loadErrorHandler();
             $this->startSession();
             $this->loadEnvFile();
-            $this->setTimeZone();          
-            $result = $this->authenticateUser();
-
-            //If login fails.
-            if(isset($result["userAuth"]) && $result["userAuth"] == false){
-                $json = RequestHandler::get("format");
-                if($json == 'json'){
-                    ResponseHandler::respond($result);
-                }else{
-                    $this->loadLogin();
-                }
-                
-            }else{
-                //If login succeeds 
-                $json = RequestHandler::get("format");
-                if($json == 'json'){
-                    $controller = new MasterController();
-                    $controller->start();
-                }else{
-                    $this->loadPage();
-                }
+            $this->setTimeZone();
+          
+            if ($this->isPublicPage() || $this->authenticateUser()["userAuth"]) {
+                $this->routeRequest();
+            } else {                
+                $this->loadLogin();
             }
-        }catch(Exception $ex){
-            print_r($ex);
+        } catch (Exception $ex) {            
+            error_log($ex->getMessage());
         }        
     }
-    private function startSession(){
-        session_start();
+
+    private function startSession() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
     }
-    private function loadEnvFile(){
-        $dotenv = Dotenv::createImmutable(dirname($_SERVER['SCRIPT_FILENAME']));
+
+    private function loadEnvFile() {
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
         $dotenv->load();
     }
-    private function loadErrorHandler(){
+
+    private function loadErrorHandler() {
         ini_set('display_errors', 1);
         ini_set('display_startup_errors', 1);
         error_reporting(E_ALL);
     }
 
-    private function setTimeZone(){
+    private function setTimeZone() {
         $timezone = new TimeZone();
         $dbTimeZone = $timezone->GetTimeZoneFromDb();
-        $timezone->SetCurrentTimeZone($dbTimeZone["timezone"]);        
+        date_default_timezone_set($dbTimeZone["timezone"]);
     }
 
-    private function authenticateUser(){
+    private function authenticateUser() {
         $userAuth = new UserAuthController(Database::getInstance());
         return $userAuth->handleRequest();
     }
 
-    private function loadPage(){
-        $page =  new Pages();
-        $page = $page->load();        
+    private function isPublicPage() {
+        $currentPage = RequestHandler::get("page"); // Adjust this according to how you determine the current page       
+        return in_array($currentPage, $this->publicPages);
     }
 
-    private function loadLogin(){
-        $page =  new Pages();
-        $page = $page->loadLogin();        
+    private function routeRequest() {
+        $json = RequestHandler::get("format");
+        if ($json == 'json') {
+            $controller = new MasterController();
+            $controller->start();
+        } else {
+            $this->loadPage();
+        }
     }
 
+    private function loadPage() {
+        $page = new Pages();
+        $page->load(); // Ensure this method either echoes directly or returns the output
+    }
+
+    private function loadLogin() {        
+        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+        $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
+        $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL                
+        header("Location: $base_url/login");
+    }
 }
+
