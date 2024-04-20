@@ -4,7 +4,7 @@ use SharePilotV2\Components\UserAuth;
 use SharePilotV2\Components\Database;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
-
+use SharePilotV2\Components\DeviceDetector;
 class Controller
 {
 
@@ -28,5 +28,15 @@ class Controller
     public function post(){
         
     }    
+
+    public function savetoken(){
+        
+        $token  = RequestHandler::get("ftoken");
+        //echo $token;
+
+        // Usage
+        $detector = new DeviceDetector();
+        echo "You are using a " . $detector->getDeviceType() . " with " . $detector->getOperatingSystem() . " OS.";
+    }
  
 }
