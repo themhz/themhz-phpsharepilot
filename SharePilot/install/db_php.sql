@@ -255,8 +255,9 @@ CREATE TABLE `subscribers` (
     `firstName` varchar(100) DEFAULT NULL,
     `lastName` varchar(100) DEFAULT NULL,
     `email` varchar(100) DEFAULT NULL,
-    `phoneNumber` varchar(15) DEFAULT NULL,
-    `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
+    `mobileNumber` varchar(15) DEFAULT NULL,
+    `userAgent_details` varchar(2048) DEFAULT NULL,
+    `regdate` datetime DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -267,21 +268,42 @@ CREATE TABLE `subscription_types` (
     `description` text,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- Inserting messaging subscription types into the subscription_types table
+INSERT INTO `subscription_types` (`typeName`, `description`) 
+VALUES
+('Email Subscription', 'Periodic emails including newsletters, promotions, and personalized messages.'),
+('SMS Subscription', 'Short message service notifications sent directly to the mobile phone.'),
+('Push Notification', 'Notifications sent through mobile or web app directly to the device.'),
+('Instant Messaging Subscription', 'Updates sent through platforms like WhatsApp, Telegram, or Messenger.'),
+('Social Media Updates', 'Notifications sent through social media platforms like Twitter, Facebook, or Instagram.'),
+('RSS Feeds', 'Automatically updated feeds for news and updates, subscribable via RSS reader.');
 
--- Creating a table to link subscribers and their subscriptions
-CREATE TABLE `subscriptions` (
-    `id` int NOT NULL AUTO_INCREMENT,
-    `subscriber_id` int NOT NULL,
-    `subscriptionType_id` int NOT NULL,
-    `isActive` boolean DEFAULT TRUE,
-    `subscribedOn` datetime DEFAULT CURRENT_TIMESTAMP,
-    `unsubscribedOn` datetime DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY `subscriber_id` (`subscriber_id`),
-    KEY `subscription_type_id` (`subscriptionType_id`),
-    FOREIGN KEY (`subscriber_id`) REFERENCES `subscribers` (`id`),
-    FOREIGN KEY (`subscriptionType_id`) REFERENCES `subscription_types` (`id`)
+-- Creating a table for topics
+CREATE TABLE `topics` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Creating a table to link subscribers, subscription types, and topics
+CREATE TABLE `subscriptions` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `subscriber_id` int NOT NULL,
+  `subscriptionType_id` int NOT NULL,
+  `topic_id` int NOT NULL,
+  `isActive` boolean DEFAULT TRUE,
+  `subscribedOn` datetime DEFAULT CURRENT_TIMESTAMP,
+  `unsubscribedOn` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriber_id_idx` (`subscriber_id`),
+  KEY `subscription_type_id_idx` (`subscriptionType_id`),
+  KEY `topic_id_idx` (`topic_id`),
+  CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`subscriber_id`) REFERENCES `subscribers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `subscriptions_ibfk_2` FOREIGN KEY (`subscriptionType_id`) REFERENCES `subscription_types` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `subscriptions_ibfk_3` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- Creating a table for storing tokens related to subscriptions
 CREATE TABLE `device_types` (

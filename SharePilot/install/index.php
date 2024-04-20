@@ -133,22 +133,22 @@ session_start();
 
     <form class="w3-container" method="post">
         <label class="w3-text-teal"><b>DB Host</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="db_host">
+        <input class="w3-input w3-border w3-light-grey" type="text" name="db_host" value="db">
 
         <label class="w3-text-teal"><b>DB Name</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="db_name">
+        <input class="w3-input w3-border w3-light-grey" type="text" name="db_name" value="sharepilot">
 
         <label class="w3-text-teal"><b>DB User</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="db_user">
+        <input class="w3-input w3-border w3-light-grey" type="text" name="db_user" value="root">
 
         <label class="w3-text-teal"><b>DB Password</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="password" name="db_pass">
+        <input class="w3-input w3-border w3-light-grey" type="password" name="db_pass" value="526996">
 
         <label class="w3-text-teal"><b>Admin User</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="text" name="admin_user">
+        <input class="w3-input w3-border w3-light-grey" type="text" name="admin_user" value="admin">
 
         <label class="w3-text-teal"><b>Admin Password</b></label>
-        <input class="w3-input w3-border w3-light-grey" type="password" name="admin_pass">
+        <input class="w3-input w3-border w3-light-grey" type="password" name="admin_pass" value="526996">
 
         <button class="w3-btn w3-teal w3-margin-top">Install</button>
     </form>

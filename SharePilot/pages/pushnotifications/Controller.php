@@ -16,7 +16,7 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
    public function getKeys(){
       echo "ok";
    }
-   public function send(){      
+   public function sendnotification(){      
       $credential = new ServiceAccountCredentials(
          "https://www.googleapis.com/auth/firebase.messaging",
          json_decode(file_get_contents("pvKey.json"), true)
@@ -33,7 +33,7 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
 
       curl_setopt($ch, CURLOPT_POSTFIELDS, '{
          "message": {
-            "token": "fcM4YeJOR5wVmR557eAv78:APA91bGhyS_nPS5EFWh3e-zOg7glCPOupAm68UdrU-2QqY2qKLkvTHtJ1W_g1-2gM4BM1yzXx2R3funKsQwOYASHfsHRZ2qpnVAb7mZMgQmQC0CCrBio6vHGwz9x47lLXpmiXc3XHjzn",                      
+            "token": "cBY6-MkxrSlq_Qy9nqYv-w:APA91bG9SXirz6PqHNFSYO1lF8lEe3HRtdqRADCfA1K6cjZUX82pJlYEwIazQC3fjUasetLHxidlbsEZeEkTE1XIQvA48JQKNEgByBPM08PmnjWZIbMBN143p7hM3t3mR6-BE7hd5xSw",                      
             "notification": {
             "title": "Tzoutzourini",
             "body": "Pitsikoni se agapw",
@@ -56,5 +56,48 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
       echo $response;
    }
     
+
+   public function sendMessageToTopic() {
+      $topic = "news1";
+  
+      $credential = new ServiceAccountCredentials(
+         "https://www.googleapis.com/auth/firebase.messaging",
+         json_decode(file_get_contents("pvKey.json"), true)
+      );
+
+      $token = $credential->fetchAuthToken(HttpHandlerFactory::build());
+
+      $ch = curl_init("https://fcm.googleapis.com/v1/projects/sharepilot-939ee/messages:send");
+
+      curl_setopt($ch, CURLOPT_HTTPHEADER, [
+         'Content-Type: application/json',
+         'Authorization: Bearer '.$token['access_token']
+      ]);
+
+      curl_setopt($ch, CURLOPT_POSTFIELDS, '{
+         "message": {
+            "topic": "news1",
+            "notification": {
+            "title": "Tzoutzourini",
+            "body": "Pitsikoni se agapw",
+            "image": "https://cdn.shopify.com/s/files/1/1061/1924/files/Sunglasses_Emoji.png?2976903553660223024"
+            },
+            "webpush": {
+            "fcm_options": {
+               "link": "http://localhost/cron"
+            }
+            }
+         }
+      }');
+
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "post");
+
+      $response = curl_exec($ch);
+
+      curl_close($ch);
+
+      echo $response;
+  }
+  
     
  }

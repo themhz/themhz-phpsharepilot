@@ -1,12 +1,15 @@
 <?php
 namespace SharePilotV2\Components;
+
 class DeviceDetector {
     private $userAgent;
+    private $userIp;
     private $deviceType;
     private $os;
 
     public function __construct() {
         $this->userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
+        $this->userIp = $_SERVER['REMOTE_ADDR'];
         $this->detectDeviceType();
         $this->detectOperatingSystem();
     }
@@ -41,6 +44,14 @@ class DeviceDetector {
                 $this->os = 'Unidentified OS';
             }
         }
+    }
+
+    public function getUserIp(){
+        return $this->userIp;
+    }
+
+    public function getUserAgentDetails(){
+        return $this->userAgent;
     }
 
     public function getDeviceType() {

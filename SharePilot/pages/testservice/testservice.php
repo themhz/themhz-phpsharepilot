@@ -29,33 +29,43 @@
 </head>
 <body>
 <div class="container">
+    <p><label for="email">e-mail </label><input type="text" id="email"/></p>
+</div>
+<div class="container">
     <div class="column">
         <h2>Single User Notification</h2>
-        <p>Subscribe to receive updates for individual notifications.</p>
+        <p>Subscribe to receive updates for individual notifications.</p>                
         <button id="singleSubscribeBtn">Single Subscribe</button>
     </div>
     <div class="column">
         <h2>Subscribe to a Group</h2>
-        <p>Join a group to receive collective notifications.</p>
+        <p>Join a group to receive collective notifications.</p>    
+        <p><label for="topic">Topic: </label>
+            <select id="topic">
+                
+            </select>
+        </p>
+    
         <button id="groupSubscribeBtn">Group Subscribe</button>
     </div>
 </div>
->
+
 <script type="module">         
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
     import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging.js";
-    
+    var fireToken;
     document.addEventListener('DOMContentLoaded', () => {
         const singleSubscribeBtn = document.getElementById('singleSubscribeBtn');
         const groupSubscribeBtn = document.getElementById('groupSubscribeBtn');
 
         singleSubscribeBtn.addEventListener('click', singleSubscribe);
-        groupSubscribeBtn.addEventListener('click', groupSubscribe);
+        groupSubscribeBtn.addEventListener('click', subscribeToTopic);
+        getTopic();
+        getFireToken();
     });
     
-
-    function singleSubscribe(){        
+    function getFireToken(){
         // TODO: Add SDKs for Firebase products that you want to use
         // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -85,8 +95,10 @@
                 serviceWorkerRegistration: registration,
                 vapidKey: 'BEb-UDdo4nmNGdfHw5qPYqAkTbh0H6ahBr1nIamO0amKS0lUkYgsTu-KRMq8lct-6-rNL9RxLpaEYk2cgAEPW0I' }).then((currentToken) => {
                 if (currentToken) {
-                    console.log("Token is: "+currentToken);
-                    saveToken(currentToken);
+                    //console.log("Token is: "+currentToken);
+                    //saveToken(currentToken);    
+                    fireToken = currentToken;
+                    console.log(fireToken);
                     //document.querySelector("#token").innerText = currentToken;
                     //console.log(currentToken);
                     // Send the token to your server and update the UI if necessary
@@ -103,6 +115,10 @@
         });
     }
 
+    function singleSubscribe(){        
+        saveToken(fireToken);
+    }
+
     function saveToken(token){
         fetch('testservice/savetoken?format=json', {
                 method: "POST",
@@ -110,7 +126,8 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({ 
-                    ftoken: token,                    
+                    email: document.querySelector("#email").value,
+                    ftoken: token,
                 })
             })
             .then(response => response.json())
@@ -121,9 +138,55 @@
             
     }
 
-    function groupSubscribe(){
-        alert(2);
+    function subscribeToTopic(){        
+        fetch('testservice/subscribetotopic?format=json', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ 
+                    email : document.querySelector("#email").value,                    
+                    topic : document.querySelector("#topic").value,
+                    ftoken: fireToken
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+              console.log(response);
+            })
+            .catch(error => {
+                console.log('Error fetching topics:', error);
+            });
+
     }
+
+    function getTopic(){
+        fetch('testservice/gettopics?format=json', {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Clear previous options
+                const select = document.getElementById('topic');
+                select.innerHTML = '';
+
+                // Populate dropdown with new options
+                data.message.forEach((item) => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = item.name;
+                    select.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching topics:', error);
+            });
+    }
+
+
 
 </script>
 </body>
