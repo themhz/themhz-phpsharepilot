@@ -286,17 +286,16 @@ CREATE TABLE `subscriptions` (
 -- Creating a table for storing tokens related to subscriptions
 CREATE TABLE `device_types` (
     `id` int NOT NULL AUTO_INCREMENT,
-    `type_name` varchar(50) NOT NULL,
-    `description` varchar(255) DEFAULT NULL,
+    `type_name` varchar(50) NOT NULL,    
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-INSERT INTO `device_types` (type_name, description)
+INSERT INTO `device_types` (type_name)
 VALUES 
-('iOS', 'Apple iOS devices'),
-('Android', 'Android devices'),
-('Web', 'Web browsers'),
-('Desktop', 'Desktop applications');
+('Mobile'),
+('Tablet'),
+('PC');
+
 
 
 CREATE TABLE `subscription_tokens` (
