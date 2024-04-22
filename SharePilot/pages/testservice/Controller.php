@@ -124,7 +124,89 @@ class Controller
         $result = curl_exec($ch);
         curl_close($ch);
 
-        echo $result;
+        //echo $result;
+        $this->saveSubscribeToTopic();
+    }
+
+    public function saveSubscribeToTopic(){
+
+        
+        $token  = RequestHandler::get("ftoken");
+        $email  = RequestHandler::get("email");
+        $topic_id  = RequestHandler::get("topic");
+        $subscriber_inserted = false;
+        $subscription_inserted = false;
+        $subscription_token_inserted = false;
+        
+        $detector = new DeviceDetector();
+        $subscriber_id = "";
+        $subscription_id = "";
+
+        $s = new Subscribers();
+        $subscriber = $s->select()
+        ->fields("subscribers.id,subscribers.email")
+        ->where("email","=", $email)        
+        ->execute();
+       
+        //Scheck if user is in Subscribers
+        if(empty($subscriber)) {                    
+        
+            $s->email = $email;
+            $s->userAgent_details = $detector->getUserAgentDetails() . '/' . $detector->getUserIp();
+            $s->regdate = date("Y/m/d H:i:s");
+            $subscriber_id = $s->insert();
+            $subscriber_inserted = true;
+        }else{            
+            $subscriber_id = $subscriber[0]["id"];
+        }
+        
+        //echo $subscriber_id;
+        //die();
+        //Check if user has subscriptions on that topic and that type
+        $s = new Subscriptions();
+        $subscription = $s->select()
+        ->fields("id,subscriptionType_id,isActive")
+        ->where("subscriber_id","=", $subscriber_id)        
+        ->where("subscriptionType_id","=", 3)        
+        ->where("topic_id","=", $topic_id)        
+        ->execute();
+      
+
+        if(empty($subscription)){
+            $s->subscriber_id = $subscriber_id;
+            $s->subscriptionType_id = "3";
+            $s->topic_id = $topic_id;
+            $s->isActive = 1;            
+            $s->subscribedOn = date("Y/m/d H:i:s");
+            $subscription_id = $s->insert();    
+            $subscription_inserted = true;            
+        }else{
+            $subscription_id = $subscription[0]["id"];            
+        }
+        
+        $s = new Subscription_tokens();
+        $Subscription_token = $s->select()
+        ->fields("*")
+        ->where("subscription_id","=", $subscription_id)
+        ->where("device_type_id","=", $this->getDeviceTypeId($detector->getDeviceType())[0]["id"])
+        ->execute();
+
+        if(empty($Subscription_token)){
+            $s->subscription_id = $subscription_id;
+            $s->token = $token;
+            $s->device_type_id = $this->getDeviceTypeId($detector->getDeviceType())[0]["id"];
+            $subscription_token_id = $s->insert();
+            $subscription_token_inserted = true;                        
+        }
+        
+       
+        if($subscriber_inserted == true || $subscription_inserted == true || $subscription_token_inserted == true){            
+            
+            ResponseHandler::respond(["result"=>true, "message"=>"successfully subscribed"]);      
+         } else {            
+            ResponseHandler::respond(["result"=>false, "message"=>"user has already been subscribed"]);
+         }      
+
     }
 
     public function gettopics(){
