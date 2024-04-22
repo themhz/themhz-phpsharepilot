@@ -38,6 +38,19 @@ namespace SharePilotV2\Components;
         </div>
     </div>
     <script>
+    document.addEventListener('readystatechange', function(evt) {
+        if(evt.target.readyState == "complete")
+        {
+    
+        }
+    }, false);
+
+    document.addEventListener("keydown", function(event) {       
+         if (event.key === "Enter" || event.keyCode === 13) {
+             login();
+         }
+    });
+
     function login(){        
         document.querySelector("#Login").style.backgroundColor  = "grey";
         document.querySelector("#Login").style.disabled = true;

@@ -239,6 +239,7 @@ CREATE TABLE `users` (
 
 -- Dropping existing tables if they exist
 DROP TABLE IF EXISTS `subscriptions`;
+DROP TABLE IF EXISTS `topics`;
 DROP TABLE IF EXISTS `subscription_types`;
 DROP TABLE IF EXISTS `subscribers`;
 DROP TABLE IF EXISTS `subscription_tokens`;
