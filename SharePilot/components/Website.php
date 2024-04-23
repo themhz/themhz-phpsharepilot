@@ -21,7 +21,7 @@ use SharePilotV2\Libs\Functions;
 
 class Website {
     // Define an array of public pages
-    private $publicPages = ['testservice', 'login']; // Example public pages
+    private $publicPages = ['testservice', 'login', 'home']; // Example public pages
 
     public function start() {                
         try {    
