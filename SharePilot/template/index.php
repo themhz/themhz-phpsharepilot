@@ -48,8 +48,9 @@ if (isset($_SESSION["user"])){ ?>
     <a class="w3-bar-item w3-button w3-hover-teal" href="links">Links</a>            
     <a class="w3-bar-item w3-button w3-hover-teal" href="schedule">Scheduled Posts</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="cron">Cron</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="pushnotifications">Push Notifications</a>    
+    <a class="w3-bar-item w3-button w3-hover-teal" href="pushnotifications">Push Notifications</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>    
+    <a class="w3-bar-item w3-button w3-hover-teal" href="updates">Updates</a>
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>

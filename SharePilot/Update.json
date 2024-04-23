@@ -1,0 +1,13 @@
+{
+    "files": [
+      {
+        "source": "newpage/newpage.php",
+        "destination": "pages/newpage/newpage.php"
+      },
+      {
+        "source": "newpage/Controller.php",
+        "destination": "pages/newpage/Controller.php"
+      }      
+    ]
+}
+  
