@@ -35,7 +35,7 @@
 
 
     function Update() {
-        fetch('updates?method=update&format=json', {
+        fetch('updates?method=checkupdate&format=json', {
             method: "POST"
         })
         .then(response => {
