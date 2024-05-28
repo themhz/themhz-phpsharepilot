@@ -35,7 +35,7 @@
 
 
     function Update() {
-        fetch('updates?method=checkupdate&format=json', {
+        fetch('updates?method=generateManifest&format=json', {
             method: "POST"
         })
         .then(response => {
