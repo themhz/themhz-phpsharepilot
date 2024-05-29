@@ -3,96 +3,82 @@
 namespace SharePilotV2\Components;
 
 class UpdateManager {
-    private $updateFilePath;
-    private $tempDirectory;
+    private $tempDir;
+    private $projectDir;
 
-    public function __construct($updateFilePath, $tempDirectory = 'temp/') {
-        $this->updateFilePath = $updateFilePath;
-        $this->tempDirectory = $tempDirectory;
+    public function __construct($projectDir, $tempDir) {
+        $this->projectDir = $projectDir;
+        $this->tempDir = $tempDir;
     }
 
-    // Generates a checksum for a given file
-    public function generateChecksum($filePath) {
+    public function downloadAndUnzipRelease($url) {
+        $zipFile = $this->tempDir . '/release.zip';  // Path to save the downloaded zip file
         
-        if (!file_exists($filePath)) {        
-            throw new \Exception("File does not exist.");            
+        // Download the release zip file
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout in seconds
+        curl_setopt($ch, CURLOPT_USERAGENT, 'sharepilot/1.0.1 (https://sharepilot.gr)'); // Set a User-Agent
+
+        $download = curl_exec($ch);
+        if (curl_errno($ch)) {
+            throw new Exception('Curl error: ' . curl_error($ch));
         }
-        return hash_file('sha256', $filePath);
-    }
+        curl_close($ch);
 
-    // Verifies the checksum of a file against a provided checksum
-    public function verifyChecksum($filePath, $providedChecksum) {
-        $actualChecksum = $this->generateChecksum($filePath);
-        return $actualChecksum === $providedChecksum;
-    }
-
-    // Downloads and extracts an update package, then applies update instructions
-    public function downloadAndExtract($url) {
-        // Download the file
-        file_put_contents($this->updateFilePath, fopen($url, 'r'));
-
-        // Check permissions and directory existence
-        if (!$this->checkPermissions()) {
-            throw new \Exception("Insufficient permissions.");
+        if (!$download) {
+            throw new Exception("Failed to download file.");
         }
 
-        // Extract the zip file
-        $zip = new \ZipArchive;
-        if ($zip->open($this->updateFilePath) === TRUE) {
-            $zip->extractTo($this->tempDirectory);
+        file_put_contents($zipFile, $download);
+
+        
+        $zip = new \ZipArchive();
+          
+        if ($zip->open($zipFile) === true) {            
+            $zip->extractTo($this->tempDir);
             $zip->close();
+            unlink($zipFile);  // Optionally delete the zip file after extracting
+            return true;
         } else {
-            throw new \Exception("Failed to open or extract the zip file.");
+            //throw new Exception("Failed to unzip file.");
+            return false;
         }
-
-        // Read JSON instructions and apply updates
-        $this->applyUpdateInstructions();
+        
     }
 
-    private function checkPermissions() {
-        // Check if we can write to the target directory and read/write the temporary directory
-        return is_writable(dirname($this->updateFilePath)) && is_writable($this->tempDirectory);
-    }
+    public function updateProjectFromManifest() {
+        $newManifestPath = $this->tempDir . '/manifest.json';
+        $currentManifestPath = $this->projectDir . '/manifest.json';
 
-    private function applyUpdateInstructions() {
-        $jsonFilePath = $this->tempDirectory . 'instructions.json';
-        if (!file_exists($jsonFilePath)) {
-            throw new \Exception("Instructions JSON file not found.");
-        }
+        $newManifest = json_decode(file_get_contents($newManifestPath), true);
+        $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
 
-        $instructions = json_decode(file_get_contents($jsonFilePath), true);
-        foreach ($instructions as $file => $targetPath) {
-            if (!copy($this->tempDirectory . $file, $targetPath)) {
-                throw new \Exception("Failed to copy {$file} to {$targetPath}");
+        // Update and add new files
+        foreach ($newManifest as $file => $info) {
+            $newFilePath = $this->tempDir . '/' . $info['directory'] . '/' . $file;
+            $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+
+            // Check if file needs to be updated or is new
+            if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
+                // Ensure the directory exists
+                if (!is_dir(dirname($projectFilePath))) {
+                    mkdir(dirname($projectFilePath), 0777, true);
+                }
+                copy($newFilePath, $projectFilePath);
             }
         }
+
+        // Remove old files
+        foreach ($currentManifest as $file => $info) {
+            $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+            if (!isset($newManifest[$file])) {
+                unlink($projectFilePath);
+            }
+        }
+
+        echo "Update completed successfully.";
     }
 }
-
-
-//Exampke of how the json file is structured 
-//{
-//     "files": [
-//       {
-//         "source": "newindex.php",
-//         "destination": "/var/www/html/index.php"
-//       },
-//       {
-//         "source": "lib/newlib.php",
-//         "destination": "/var/www/html/lib/lib.php"
-//       },
-//       {
-//         "source": "images/logo.png",
-//         "destination": "/var/www/html/images/logo.png"
-//       }
-//     ],
-//     "folders": [
-//       {
-//         "source": "newassets/",
-//         "destination": "/var/www/html/assets/"
-//       }
-//     ]
-//   }
-  
-
-

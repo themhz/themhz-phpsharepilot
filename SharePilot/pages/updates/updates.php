@@ -35,7 +35,7 @@
 
 
     function Update() {
-        fetch('updates?method=generateManifest&format=json', {
+        fetch('updates?method=downloadandunzip&format=json', {
             method: "POST"
         })
         .then(response => {

@@ -37,21 +37,20 @@ class DirectoryFilter extends RecursiveFilterIterator {
     }
 }
 
-
-
-
-class Controller
-{
+class Controller{
     public $baseurl;
     private $auth;
 
     public function __construct()
     {
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
-        $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL
-
-        $this->baseurl = $base_url;
+        if(isset($_SERVER['HTTP_HOST'])){
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+            $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
+            $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL
+    
+            $this->baseurl = $base_url;
+        }
+        
         
     }
 
@@ -63,17 +62,36 @@ class Controller
         
     }    
 
-    public function update(){        
+    public function downloadandunzip(){
+        $updateManager = new UpdateManager('/', 'temp');
+        $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/v1.0.1';  // Adjust this URL
+
         try {
-            $updateManager = new UpdateManager('Update.zip');        
-            $filePath = 'Update.zip';
-            $checksum = $updateManager->generateChecksum($filePath);
-            echo "Checksum: " . $checksum;
+            if ($updateManager->downloadAndUnzipRelease($url)) {
+                //$updateManager->updateProjectFromManifest();
+                
+                ResponseHandler::respond(["result"=>true, "message"=>"update will happen"]);
+            }else{
+                ResponseHandler::respond(["result"=>false, "message"=>"update will not happen"]);   
+            }
         } catch (Exception $e) {
-            // Here you might log the error and display a user-friendly message
-            error_log($e->getMessage()); // Log the error to the server's error log or your custom log
-            echo "Failed to update: " . $e->getMessage();
+            //echo "An error occurred: " . $e->getMessage();
+            ResponseHandler::respond(["result"=>true, "message"=>"An error occurred: " . $e->getMessage()]);
         }
+
+    }
+
+    public function update(){        
+        // try {
+        //     $updateManager = new UpdateManager('Update.zip');        
+        //     $filePath = 'Update.zip';
+        //     $checksum = $updateManager->generateChecksum($filePath);
+        //     echo "Checksum: " . $checksum;
+        // } catch (Exception $e) {
+        //     // Here you might log the error and display a user-friendly message
+        //     error_log($e->getMessage()); // Log the error to the server's error log or your custom log
+        //     echo "Failed to update: " . $e->getMessage();
+        // }
     }
 
     public function checkupdate(){
@@ -112,7 +130,7 @@ class Controller
     public function generateManifest() {
         $directory = $_SERVER['DOCUMENT_ROOT'];
         // Define a local class inside the function to filter the directories        
-        $excludeDirs = ['vendor', 'newpage'];  // Add directories to exclude
+        $excludeDirs = ['vendor', 'newpage', 'temp'];  // Add directories to exclude
         $excludedFiles = ['logfile.log', '.env', '.git'];
         // Create a Recursive Directory Iterator
         $directoryIterator = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
@@ -151,10 +169,5 @@ class Controller
         // Save the manifest as a JSON file in the directory
         file_put_contents($directory . '/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT));
         echo "Manifest generated successfully.";
-}
-
-
-
-
-
+    }
 }

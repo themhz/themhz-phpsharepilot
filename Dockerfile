@@ -7,6 +7,9 @@ RUN apt-get update && apt-get install -y \
     openssl \
     cron \
     nano \
+    libzip-dev \
+    zip \
+    && docker-php-ext-install zip \
     && docker-php-ext-install mysqli pdo pdo_mysql \
     && a2enmod rewrite ssl headers \
     && rm -rf /var/lib/apt/lists/*

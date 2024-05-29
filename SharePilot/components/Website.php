@@ -86,11 +86,14 @@ class Website {
         $page->load(); // Ensure this method either echoes directly or returns the output
     }
 
-    private function loadLogin() {        
-        $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
-        $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
-        $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL                
-        header("Location: $base_url/login");
+    private function loadLogin() {               
+        if(isset($_SERVER['HTTP_HOST'])== true){
+            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
+            $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
+            $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL                
+            header("Location: $base_url/login");
+        }
+        
     }
 }
 
