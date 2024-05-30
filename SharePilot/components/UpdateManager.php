@@ -50,10 +50,11 @@ class UpdateManager {
         $downloadDuration = $downloadTime - $startTime;
     
         // Extract using 7z
-        ini_set('memory_limit', '2024M');
+        ini_set('memory_limit', '4048M');
         set_time_limit(300); // Ensure the script has enough time to execute
     
-        $command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
+        //$command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
+        $command = "7z x -y -mmt=on '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction with multi-threading enabled
         exec($command, $output, $returnVar);
         if ($returnVar !== 0) {
             throw new \Exception("Failed to unzip file: " . implode("\n", $output));
