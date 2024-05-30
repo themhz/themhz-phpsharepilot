@@ -21,6 +21,10 @@ COPY mycert.key /etc/ssl/private/mycert.key
 COPY default.conf /etc/apache2/sites-available/default.conf
 COPY default-ssl.conf /etc/apache2/sites-available/default-ssl.conf
 
+# Copy the php.ini file
+#COPY php.ini-development /usr/local/etc/php/php.ini
+RUN mv /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
+
 RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli && docker-php-ext-install pdo_mysql
 RUN a2enmod rewrite && a2enmod ssl && a2enmod socache_shmcb
 RUN a2ensite default-ssl

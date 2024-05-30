@@ -1,6 +1,6 @@
 <?php
-
 namespace SharePilotV2\Components;
+use SharePilotV2\Components\EnvironmentDetails;
 
 class UpdateManager {
     private $tempDir;
@@ -12,42 +12,68 @@ class UpdateManager {
     }
 
     public function downloadAndUnzipRelease($url) {
+        $startTime = microtime(true);  // Start timer
+    
         $zipFile = $this->tempDir . '/release.zip';  // Path to save the downloaded zip file
-        
-        // Download the release zip file
+    
+        // Initialize curl
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);  // Direct output to file instead of memory
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 30); // Timeout in seconds
-        curl_setopt($ch, CURLOPT_USERAGENT, 'sharepilot/1.0.1 (https://sharepilot.gr)'); // Set a User-Agent
-
-        $download = curl_exec($ch);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 300); // Increase timeout for large files
+        curl_setopt($ch, CURLOPT_USERAGENT, 'sharepilot (https://sharepilot.gr)');
+    
+        // Open file handle
+        $fp = fopen($zipFile, 'w+');
+        if (!$fp) {
+            throw new Exception("Unable to open file: $zipFile");
+        }
+        curl_setopt($ch, CURLOPT_FILE, $fp);
+    
+        // Execute download
+        curl_exec($ch);
         if (curl_errno($ch)) {
+            fclose($fp); // Close the file handle
+            unlink($zipFile); // Delete partial file
             throw new Exception('Curl error: ' . curl_error($ch));
         }
+        fclose($fp);
         curl_close($ch);
-
-        if (!$download) {
+    
+        // Check if download was successful
+        if (!filesize($zipFile)) {
             throw new Exception("Failed to download file.");
         }
-
-        file_put_contents($zipFile, $download);
-
-        
-        $zip = new \ZipArchive();
-          
-        if ($zip->open($zipFile) === true) {            
-            $zip->extractTo($this->tempDir);
-            $zip->close();
-            unlink($zipFile);  // Optionally delete the zip file after extracting
-            return true;
-        } else {
-            //throw new Exception("Failed to unzip file.");
-            return false;
+    
+        $downloadTime = microtime(true);  // End timer for download
+        $downloadDuration = $downloadTime - $startTime;
+    
+        // Extract using unzip
+        ini_set('memory_limit', '2024M');
+        set_time_limit(300); // Ensure the script has enough time to execute
+    
+        $command = "unzip -o '$zipFile' -d '{$this->tempDir}'"; // Using unzip
+        exec($command, $output, $returnVar);
+        if ($returnVar !== 0) {
+            throw new Exception("Failed to unzip file: " . implode("\n", $output));
         }
-        
+    
+        unlink($zipFile); // Optionally delete the zip file after extracting
+    
+        $endTime = microtime(true);  // End timer for unzip
+        $unzipDuration = $endTime - $downloadTime;
+        $totalDuration = $endTime - $startTime;
+    
+        return [
+            'download_duration' => round($downloadDuration, 2),
+            'unzip_duration' => round($unzipDuration, 2),
+            'total_duration' => round($totalDuration, 2),
+            'success' => true
+        ];
     }
+    
+    
 
     public function updateProjectFromManifest() {
         $newManifestPath = $this->tempDir . '/manifest.json';
@@ -79,6 +105,33 @@ class UpdateManager {
             }
         }
 
-        echo "Update completed successfully.";
+        //echo "Update completed successfully.";
+        return;
+    }
+
+
+    public function checkupdate($currentVersion, $repo){
+        //$currentVersion = 'v1.0.0';
+        //$repo = 'themhz/themhz-phpsharepilot';  // Your GitHub repository
+        $url = "https://api.github.com/repos/$repo/releases/latest";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'PHP Update Checker');
+
+        $response = curl_exec($ch);
+        curl_close($ch);
+        $releaseInfo = json_decode($response, true);        
+
+        if ($releaseInfo && $releaseInfo['tag_name'] != $currentVersion) {
+            //echo "A new version is available: " . $releaseInfo['tag_name'];
+            //ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
+            //echo "\nPlease update at: " . $releaseInfo['html_url'];
+            return ["result"=>true, "message"=>$releaseInfo['tag_name']];
+        } else {
+            //echo "You are using the latest version.";
+            return ["result"=>false, "message"=>$releaseInfo];
+        }
     }
 }

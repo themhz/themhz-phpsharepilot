@@ -5,7 +5,9 @@ use SharePilotV2\Components\Database;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
 use SharePilotV2\Components\DeviceDetector;
+use SharePilotV2\Components\EnvironmentDetails;
 use SharePilotV2\Components\UpdateManager;
+
 
 class DirectoryFilter extends RecursiveFilterIterator {
     private $excludeDirs;
@@ -42,15 +44,7 @@ class Controller{
     private $auth;
 
     public function __construct()
-    {
-        if(isset($_SERVER['HTTP_HOST'])){
-            $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
-            $host = $_SERVER['HTTP_HOST'];  // Get the host from the server variables
-            $base_url = $protocol . '://' . $host;  // Concatenate to form the base URL
-    
-            $this->baseurl = $base_url;
-        }
-        
+    {                
         
     }
 
@@ -62,17 +56,22 @@ class Controller{
         
     }    
 
-    public function downloadandunzip(){
+    public function downloadandunzip(){     
         $updateManager = new UpdateManager('/', 'temp');
         $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/v1.0.1';  // Adjust this URL
 
         try {
-            if ($updateManager->downloadAndUnzipRelease($url)) {
+            $result = $updateManager->downloadAndUnzipRelease($url);
+            if ($result["success"]) {
                 //$updateManager->updateProjectFromManifest();
                 
-                ResponseHandler::respond(["result"=>true, "message"=>"update will happen"]);
+                ResponseHandler::respond(["result"=>true, 
+                "message"=>"was downloaded and unziped",
+                "download_duration"=>$result["download_duration"], 
+                "unzip_duration"=>$result["unzip_duration"], 
+                "total_duration"=>$result["total_duration"]]);
             }else{
-                ResponseHandler::respond(["result"=>false, "message"=>"update will not happen"]);   
+                ResponseHandler::respond(["result"=>false, "message"=>"there was a problem downloading the release"]);   
             }
         } catch (Exception $e) {
             //echo "An error occurred: " . $e->getMessage();
