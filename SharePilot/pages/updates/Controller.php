@@ -58,7 +58,7 @@ class Controller{
 
     public function downloadandunzip(){     
         $updateManager = new UpdateManager('/', 'temp');
-        $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/v1.0.1';  // Adjust this URL
+        $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/v1.0.2';  // Adjust this URL
 
         try {
             $result = $updateManager->downloadAndUnzipRelease($url);

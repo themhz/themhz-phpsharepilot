@@ -1,0 +1,18 @@
+{
+    "name": "themhz/cron",
+    "autoload": {
+        "psr-4": {
+            "Themhz\\Cron\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "themhz",
+            "email": "themhz@gmail.com"
+        }
+    ],
+    "require": {
+        "abraham/twitteroauth": "^5.0",
+        "guzzlehttp/guzzle": "^7.7"
+    }
+}
