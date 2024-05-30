@@ -36,27 +36,27 @@ class UpdateManager {
         if (curl_errno($ch)) {
             fclose($fp); // Close the file handle
             unlink($zipFile); // Delete partial file
-            throw new Exception('Curl error: ' . curl_error($ch));
+            throw new \Exception('Curl error: ' . curl_error($ch));
         }
         fclose($fp);
         curl_close($ch);
     
         // Check if download was successful
         if (!filesize($zipFile)) {
-            throw new Exception("Failed to download file.");
+            throw new \Exception("Failed to download file.");
         }
     
         $downloadTime = microtime(true);  // End timer for download
         $downloadDuration = $downloadTime - $startTime;
     
-        // Extract using unzip
+        // Extract using 7z
         ini_set('memory_limit', '2024M');
         set_time_limit(300); // Ensure the script has enough time to execute
     
-        $command = "unzip -o '$zipFile' -d '{$this->tempDir}'"; // Using unzip
+        $command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
         exec($command, $output, $returnVar);
         if ($returnVar !== 0) {
-            throw new Exception("Failed to unzip file: " . implode("\n", $output));
+            throw new \Exception("Failed to unzip file: " . implode("\n", $output));
         }
     
         unlink($zipFile); // Optionally delete the zip file after extracting
@@ -72,6 +72,7 @@ class UpdateManager {
             'success' => true
         ];
     }
+    
     
     
 

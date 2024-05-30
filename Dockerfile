@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     libzip-dev \
     zip \
+    p7zip-full \
     && docker-php-ext-install zip \
     && docker-php-ext-install mysqli pdo pdo_mysql \
     && a2enmod rewrite ssl headers \
