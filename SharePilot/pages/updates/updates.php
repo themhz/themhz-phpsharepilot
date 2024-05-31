@@ -35,7 +35,7 @@
 
 
     function Update() {
-        fetch('updates?method=downloadandunzip&format=json', {
+        fetch('updates?method=generatechecksum&format=json', {
             method: "POST"
         })
         .then(response => {

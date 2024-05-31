@@ -1,8 +1,9 @@
 <?php
 namespace SharePilotV2\Components;
 use SharePilotV2\Components\EnvironmentDetails;
+use SharePilotV2\Components\DirectoryFilter;
 
-class UpdateManager {
+class UpdateManager {    
     private $tempDir;
     private $projectDir;
 
@@ -76,7 +77,66 @@ class UpdateManager {
     
     
     
-
+    public function generateManifest($softwareVersion) {
+        $directory = $_SERVER['DOCUMENT_ROOT'];
+        if (empty($directory)) {
+            $directory = getcwd();
+        }
+       
+        // Define a local class inside the function to filter the directories        
+        $excludeDirs = ['vendor', 'newpage', 'temp'];  // Add directories to exclude
+        $excludedFiles = ['logfile.log', '.env', '.git'];
+        // Create a Recursive Directory Iterator
+        $directoryIterator = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
+        // Use the defined filter to exclude directories
+        $filterIterator = new DirectoryFilter($directoryIterator, $excludeDirs, $excludedFiles);
+        // Flatten the iterator
+        $files = new \RecursiveIteratorIterator($filterIterator, \RecursiveIteratorIterator::SELF_FIRST);
+    
+        $fileDetails = [];
+    
+        foreach ($files as $file) {
+            // Only include files in the manifest
+            if ($file->isFile()) {
+                $filePath = $file->getRealPath();
+                $relativePath = substr($filePath, strlen($directory) + 1);
+    
+                // Extract filename and directory
+                $filename = basename($filePath);
+                $directoryPath = dirname($relativePath);
+    
+                // Generate SHA-256 checksum for the file content
+                $contentChecksum = hash_file('sha256', $filePath);
+    
+                // Generate SHA-256 checksum for the file path
+                $pathChecksum = hash('sha256', $relativePath);
+    
+                // Add file info to the file details array
+                $fileDetails[] = [
+                    'filename' => $filename,
+                    'content_hash' => $contentChecksum,
+                    'path_hash' => $pathChecksum,
+                    'directory' => str_replace('\\', '/', $directoryPath)  // Normalize directory path
+                ];
+            }
+        }
+    
+        // Define the software version
+        //$softwareVersion = '1.0.0';  // Replace with your actual version
+    
+        // Create the manifest with version and files
+        $manifest = [
+            'sharepilot' => [
+                'version' => $softwareVersion,
+                'files' => $fileDetails
+            ]
+        ];
+    
+        // Save the manifest as a JSON file in the directory
+        file_put_contents($directory . '/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT));
+        return "Manifest generated successfully.";
+    }
+    
     public function updateProjectFromManifest() {
         $newManifestPath = $this->tempDir . '/manifest.json';
         $currentManifestPath = $this->projectDir . '/manifest.json';
@@ -115,7 +175,7 @@ class UpdateManager {
     public function checkupdate($currentVersion, $repo){
         //$currentVersion = 'v1.0.0';
         //$repo = 'themhz/themhz-phpsharepilot';  // Your GitHub repository
-        $url = "https://api.github.com/repos/$repo/releases/latest";
+        $url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
