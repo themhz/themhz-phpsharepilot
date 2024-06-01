@@ -67,6 +67,8 @@ class Controller{
     public function updateVersionOnManifest(){
         $updateManager = new UpdateManager('/', 'temp');           
         $message = $updateManager->updateVersionOnManifest("1.0.2-beta");
+
+        ResponseHandler::respond($message); 
     }
 
     public function checkupdate(){

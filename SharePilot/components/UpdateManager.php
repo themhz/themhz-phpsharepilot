@@ -202,25 +202,30 @@ class UpdateManager {
     
         // Load the manifest file
         if (!file_exists($manifestFile)) {
-            throw new \Exception("Manifest file not found. in $manifestFile");           
+            //throw new \Exception("Manifest file not found. in $manifestFile");           
+            return ["result"=>false, "message"=>"Manifest file not found. in $manifestFile"];
         }
     
         $manifestContent = file_get_contents($manifestFile);
         $manifest = json_decode($manifestContent, true);
     
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Invalid JSON in manifest file.');
+            //throw new \Exception('Invalid JSON in manifest file.');
+            return ["result"=>false, "message"=>'Invalid JSON in manifest file.'];
         }
     
         // Validate SemVer format
         if (!$this->isValidSemVer($newVersion)) {
-            throw new \Exception('Invalid Semantic Versioning format.');
+            //throw new \Exception('Invalid Semantic Versioning format.');
+            return ["result"=>false, "message"=>'Invalid Semantic Versioning format.'];
         }
     
         // Compare current version with new version
         $currentVersion = $manifest['sharepilot']['version'];
         if (version_compare($currentVersion, $newVersion, '>=')) {
-            throw new \Exception('New version must be greater than the current version.');
+            //throw new \Exception('New version must be greater than the current version.');
+            return ["result"=>false, "message"=>'New version must be greater than the current version.'];
+            
         }
     
         // Update version in manifest
@@ -228,13 +233,15 @@ class UpdateManager {
         $newManifestContent = json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \Exception('Failed to encode JSON.');
+            //throw new \Exception('Failed to encode JSON.');
+            return ["result"=>false, "message"=>'Failed to encode JSON.'];
         }
     
         // Save the updated manifest file
         file_put_contents($manifestFile, $newManifestContent);
     
-        echo "Version updated successfully to $newVersion.\n";
+        //echo "Version updated successfully to $newVersion.\n";
+        return ["result"=>true, "message"=>'Failed to encode JSON.'];
     }
     
     public function isValidSemVer($version) {
@@ -244,8 +251,5 @@ class UpdateManager {
                      . '(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
     
         return preg_match($semverRegex, $version) === 1;
-    }  
-
-    
-    
+    }          
 }
