@@ -64,6 +64,11 @@ class Controller{
         }
     }
 
+    public function updateVersionOnManifest(){
+        $updateManager = new UpdateManager('/', 'temp');           
+        $message = $updateManager->updateVersionOnManifest("1.0.2-beta");
+    }
+
     public function checkupdate(){
         $currentVersion = 'v1.0.0';        
         $url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
@@ -93,6 +98,8 @@ class Controller{
             echo "You are using the latest version.";
         }
     }
-
+    public function hello(){
+        echo "hello man";
+    }
     
 }

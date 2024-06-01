@@ -23,16 +23,18 @@ class Website {
     // Define an array of public pages
     private $publicPages = ['testservice', 'login', 'home']; // Example public pages
 
-    public function start() {                
+    public function start() {       
         try {    
             $this->loadErrorHandler();
             $this->startSession();
             $this->loadEnvFile();
             $this->setTimeZone();
-          
-            if ($this->isPublicPage() || $this->authenticateUser()["userAuth"]) {
+           
+            if ($this->isPublicPage() || $this->authenticateUser()["userAuth"]) {       
+              
                 $this->routeRequest();
             } else {                
+               
                 $this->loadLogin();
             }
         } catch (Exception $ex) {            

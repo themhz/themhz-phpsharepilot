@@ -196,4 +196,56 @@ class UpdateManager {
             return ["result"=>false, "message"=>$releaseInfo];
         }
     }
+
+    public function updateVersionOnManifest($newVersion) {
+        $manifestFile = 'manifest.json';  // Adjust the file path as necessary
+    
+        // Load the manifest file
+        if (!file_exists($manifestFile)) {
+            throw new \Exception("Manifest file not found. in $manifestFile");           
+        }
+    
+        $manifestContent = file_get_contents($manifestFile);
+        $manifest = json_decode($manifestContent, true);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Invalid JSON in manifest file.');
+        }
+    
+        // Validate SemVer format
+        if (!$this->isValidSemVer($newVersion)) {
+            throw new \Exception('Invalid Semantic Versioning format.');
+        }
+    
+        // Compare current version with new version
+        $currentVersion = $manifest['sharepilot']['version'];
+        if (version_compare($currentVersion, $newVersion, '>=')) {
+            throw new \Exception('New version must be greater than the current version.');
+        }
+    
+        // Update version in manifest
+        $manifest['sharepilot']['version'] = $newVersion;
+        $newManifestContent = json_encode($manifest, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            throw new \Exception('Failed to encode JSON.');
+        }
+    
+        // Save the updated manifest file
+        file_put_contents($manifestFile, $newManifestContent);
+    
+        echo "Version updated successfully to $newVersion.\n";
+    }
+    
+    public function isValidSemVer($version) {
+        $semverRegex = '/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)'
+                     . '(?:-((?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*)'
+                     . '(?:\.(?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*))*))?'
+                     . '(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+    
+        return preg_match($semverRegex, $version) === 1;
+    }  
+
+    
+    
 }
