@@ -28,3 +28,7 @@ Test the Setup: Once everything is up and running, thoroughly test your applicat
 Remember, Docker's main advantage is its ability to package applications and their dependencies into a single container that can run almost anywhere. This makes transferring and deploying applications across different environments much more seamless compared to traditional methods.
 
 https://forums.docker.com/t/setup-local-domain-and-ssl-for-php-apache-container/116015/8
+
+
+delete all local tags using powershell
+git tag -l | ForEach-Object { git tag -d $_ }
