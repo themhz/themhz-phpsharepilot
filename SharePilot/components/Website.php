@@ -25,13 +25,13 @@ class Website {
 
     public function start() {       
         try {    
+           
+
             $this->loadErrorHandler();
             $this->startSession();
             $this->loadEnvFile();
-            $this->setTimeZone();
-           
-            if ($this->isPublicPage() || $this->authenticateUser()["userAuth"]) {       
-              
+            $this->setTimeZone();           
+            if ($this->isPublicPage() || $this->authenticateUser()["userAuth"]) {                     
                 $this->routeRequest();
             } else {                
                

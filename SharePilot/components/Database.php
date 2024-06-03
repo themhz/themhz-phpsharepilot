@@ -19,6 +19,7 @@
 namespace SharePilotV2\Components;
 use \PDO;
 use \DateTime;
+use SharePilotV2\Components\RequestHandler;
 
 class Database
 {
@@ -26,7 +27,14 @@ class Database
     private static $instance;
     private function __construct()
     {
-        $dbhost = $_ENV['DB_HOST'];
+        //$dbhost = $_ENV['DB_HOST'];        
+
+        if(RequestHandler::get("dbhost")){
+            $dbhost = "localhost";
+        }else{
+            $dbhost = $_ENV['DB_HOST'];
+        }            
+        
         $basename = $_ENV['DB_NAME'];
         $user = $_ENV['DB_USER'];
         $password = $_ENV['DB_PASS'];

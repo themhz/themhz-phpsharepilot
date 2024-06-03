@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.0-alpha",
+        "version": "v1.0.3-alpha",
         "files": [
             {
                 "filename": ".htaccess",
@@ -10,110 +10,110 @@
             },
             {
                 "filename": "404.html",
-                "content_hash": "0aedc71f31a71e0d0e6850f0afe50b5eca71213a67ff3c0cdf3ecabb24d301ea",
+                "content_hash": "49652c0dcfafc34010a4ab2c0f78250c07845154eb416adf4fb215bd5df0056a",
                 "path_hash": "128cc35baaf40bac8ae4d2932ca6e009311e8279f03f258e9cc83966f1d5b32e",
                 "directory": "."
             },
             {
                 "filename": "Database.php",
-                "content_hash": "2847b1281ffc0ee22ba84d5d7b6325f8b0910d577799cab5fe87b35a8b50d4bb",
-                "path_hash": "d312f5c16fc2555b30692dda2d2a6b398d87250581f97a9d3b3b9ce3081d61cf",
+                "content_hash": "76e0ed0569054ab35b678fdfe9723dfe29f931f10424c9f33332127d7cd1c7d4",
+                "path_hash": "90bd2b04e64026393d81686d067b2cc43c96ccf45341b5c9412f48f49ad41a3f",
                 "directory": "components"
             },
             {
                 "filename": "DeviceDetector.php",
                 "content_hash": "68ee531950c4e5c93b1452a834ede427c56d2e21b628162448ddf8a8e2ff77f3",
-                "path_hash": "af8ae0e00023a7f182a6cfe63936c6f0a8479792847a8a7ccbd2b6e38b556882",
+                "path_hash": "cb10baffbf5ea34050eeb00fbaadcae7ef01616b00e476f637d2388efdf710fc",
                 "directory": "components"
             },
             {
                 "filename": "DirectoryFilter.php",
                 "content_hash": "a15f031c8e2df31d870ed0dc86efdc7cafb77a60b9e5a1e3073c237caf47c8d2",
-                "path_hash": "735097ee7a1ef3bed5cb9b556abeb5644328e72e2dc6e0006becedfafa441089",
+                "path_hash": "4e7728d1e48c8361c8c382df4cf0130ceffa098d436b3a6f9f42347bf2c919c3",
                 "directory": "components"
             },
             {
                 "filename": "EnvironmentDetails.php",
                 "content_hash": "ea99711a0efba713488a5950a0f447d5ec4aad390f97db9e321a50e2a9dd16a0",
-                "path_hash": "c2f78812a1cb1415430f0d6d1272a5d27bc420c12c8530c2b61270edceeafe54",
+                "path_hash": "5b33a2702d5a0c33365b0313038cab97b4bfd6bab9d8c40ab28d4e508cc501fe",
                 "directory": "components"
             },
             {
                 "filename": "ISocialMediaService.php",
                 "content_hash": "c93e63bba9e5947aafffc1b6114c979ebb952144e87b04740c1dfee9e9671f49",
-                "path_hash": "6601aa763c8249c98f9f36242c10185bfd2599c34e5d9a676e63299a6a45e778",
+                "path_hash": "380427ba17051aa2ffe9b43ad0722079fedb93de872aa753c73dff4a0f449c88",
                 "directory": "components"
             },
             {
                 "filename": "MasterController.php",
-                "content_hash": "3d87a864878139311ef291dde55e2eff3e21210684eaa5fc52a2690343bd026f",
-                "path_hash": "3567ae4290ca4b73834cc023435f7bd1cdbd67270e51fb280a8093477d12e09d",
+                "content_hash": "51d154337c0f57289b6f1d4ffb810c7cf8351b11c4b43b356911d14363e4d110",
+                "path_hash": "dcdc71cb232916dae707ead78be2a1f75f7885331bca67f9a73eb2c9257623d2",
                 "directory": "components"
             },
             {
                 "filename": "Model.php",
-                "content_hash": "7dd344a1bcea6b90e619d29bfff3294536abd8bfc43001dffa371b0146b718d2",
-                "path_hash": "e82bb87ad23b4c313d912502e16b1d143348d600371b7d72b562732fc0fbeb00",
+                "content_hash": "38dda483a0216f20d800d0c79f6287593957b772ec2f3aecaa5f956677190209",
+                "path_hash": "f2603bf8a9e770cc936b40fd8faee781414a3393879e34f10b94a411fbbd7d7d",
                 "directory": "components"
             },
             {
                 "filename": "Pages.php",
                 "content_hash": "a1cf71995dbea0b054d472264ee0c21b805617935677e86373f639e860120d8f",
-                "path_hash": "6ebe9ccd2d0ec1b568444b9c706563aa4cb3eaca88d7263592d809bb5093d598",
+                "path_hash": "2300b51eb0501520e459d3a376e6742de29f78e99e13976dea85fb94f7037eb1",
                 "directory": "components"
             },
             {
                 "filename": "PostingService.php",
                 "content_hash": "381182a4f46d071884bd03d633e6b8d5f275964309c4154ea673ea90df4116dc",
-                "path_hash": "00e9d926a040a5add5b7ab93df2fcd2a3f8229c623fe39832691cd71a98cb0f7",
+                "path_hash": "a37cc745170d218cb39b20f2a5211c8bbbf528294dc803c8d65390b03f3a006f",
                 "directory": "components"
             },
             {
                 "filename": "Query.php",
                 "content_hash": "8ff5cde45c07bc47a80d3d10eb7fe48b24753ab26942fa25983c54cd198fb5f6",
-                "path_hash": "68c1faa2d6b0f9e3b330a37587dcff80caa967ccd4237e7d4eff41b7b5c63d79",
+                "path_hash": "ae0bf3a63468685f5afd7119a4027e7af1c9bdabdd82df85e3aea0c0bb75064f",
                 "directory": "components"
             },
             {
                 "filename": "RequestHandler.php",
                 "content_hash": "10f41649f501e6593b3fed323aa81f5a6849b38144b96c80dd8ae6b3b9fd35c3",
-                "path_hash": "fa9de41138be15a8edcea19de2723069ae9edfb54525a3e6c2168a8a75154719",
+                "path_hash": "6940e8a21fce20688fc2365993f731f5be3eb0eaacb718e735627c1008b76f8b",
                 "directory": "components"
             },
             {
                 "filename": "ResponseHandler.php",
                 "content_hash": "3356e9d930bdf9ad8c97d57a09c221bc262888dd80038278a87e51e7240bbff4",
-                "path_hash": "cb53db3a2b5de8d3f23000d03c19c94246ce003420024c0c52fbad54f718545b",
+                "path_hash": "0241582170c1154f98b5cdab48263bce7c6c9dfc232dc0329ca18dee0da3db9d",
                 "directory": "components"
             },
             {
                 "filename": "TimeZone.php",
                 "content_hash": "ed78fb49e32d98bb7a45964c1e021aa9e5f622ed823e39917a2aee07fa953da5",
-                "path_hash": "c2f8650a724c17fb08af5c899a77395fe657789bc6bde79bee4a39f30c89ad09",
+                "path_hash": "07e218a8aee4570332fef821ad7293708ac5a2dab3f718bda6d29a5acb09c53c",
                 "directory": "components"
             },
             {
                 "filename": "UpdateManager.php",
-                "content_hash": "3a27430b348d2c423a0454b69c0810fec151eb45a8b5c315d2fc0a0ea9675e8c",
-                "path_hash": "227f7523fa67fbfef0b4f15b467df1a600cdda274e0f066e3260b981ef5eedc9",
+                "content_hash": "36586d8b051ccb31b700adfa4354fd18ec9f4c2c752eb80d5a7821078a75993e",
+                "path_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f",
                 "directory": "components"
             },
             {
                 "filename": "UserAuth.php",
                 "content_hash": "bd3dfe768669050ed1d6a513d3d56b8d5507cb96df9b662961cfa759e32daee2",
-                "path_hash": "52ab551c036dd8e7c2090b1c2eeedbb90613e3d28dcdca819211572e2466c0e9",
+                "path_hash": "1fb323f8f62f219f393fc7ddf5bde5d9b495d9fe97ed17e7420bfb6ae0851775",
                 "directory": "components"
             },
             {
                 "filename": "UserAuthController.php",
                 "content_hash": "fa49b0400dcb8ff65bed0f940713f01c4111ab02a375b654d0bf3c1fa107e8bd",
-                "path_hash": "a4626df7a3f8db1f0ac6c312b0691114495d26797ad4abf3318093c0597c3982",
+                "path_hash": "2af81b9e1dde2811b26b3d4cb3742a3384a33ab8ce4eb017026393a9e9cdc9bb",
                 "directory": "components"
             },
             {
                 "filename": "Website.php",
-                "content_hash": "c148c679ee434cdd1673b13136d6f5d34fdc6e2f15ab8f77e8829587b6148f0c",
-                "path_hash": "98c4588195866d3d492966b3b671dfe5cd65e0e9ead4c55118063f51472ea379",
+                "content_hash": "547c09ffbca8d887190fc3050bed1c1294005b79f085ff9f319282b26f37f8ee",
+                "path_hash": "a2f6b4473cb13838374c55b69116a9f1b69e7f7d1f72a6f444504988f82606bb",
                 "directory": "components"
             },
             {
@@ -143,25 +143,25 @@
             {
                 "filename": "Facebook.php",
                 "content_hash": "e6e9b99a19e1c39c6955c87861f5a08bb21844197f153844ddcde5ec00d8d5d9",
-                "path_hash": "7ab6e7e1c3d251498d460cb9d318722114d4320749f67ad39e9ef81acecbce9a",
+                "path_hash": "86906fc9bb8a3c1ea2e398ddf19b1f595afdc0686cd7e7f1686aaed6b2ace176",
                 "directory": "implementations"
             },
             {
                 "filename": "LinkedIn.php",
                 "content_hash": "e1ac1a131e7543a02a1c88cd8191d9c86ec7fdba2d1e9803531e825791e7c916",
-                "path_hash": "dc643936149ea94f8fd0319f2ada89e1d4b1f321baad00ecde563e5d1a86749f",
+                "path_hash": "2802d23cc0533a9c61e186aa46c167a2beb33bc8985996b1a7f4531a0156e08b",
                 "directory": "implementations"
             },
             {
                 "filename": "Reddit.php",
                 "content_hash": "c11fb72123a1c512f58c0adecfe37e7547a8d2a3c0e86ef8b27be6b29368ccb6",
-                "path_hash": "d2bd00846ea948b718402e5b8421a429dcb02b8b4bbdb6a4298ad0a51eb5a092",
+                "path_hash": "ec1fc5cfeefaf804a72f63882725a58db40d302468dad93ff12d41063690562e",
                 "directory": "implementations"
             },
             {
                 "filename": "Twitter.php",
                 "content_hash": "fdcbd4514d9aada69a617e737b00a0aaf71bb2a81ba49d3dfa3c34be4f5f9094",
-                "path_hash": "66dccee382bc9a510fe9c15d545913e7db50071418a915ab65e5686422d478f4",
+                "path_hash": "cf5852ac18639cf72af0923b2ba7e33e4e7ad345fd8bbbdfe4ad46812ef34d26",
                 "directory": "implementations"
             },
             {
@@ -173,410 +173,410 @@
             {
                 "filename": "db_docker.sql",
                 "content_hash": "d97851013394f5346c715d02435a002e94a8183369f2fd05c867cc6c1f93657e",
-                "path_hash": "924b30dc0e71bc8a53c179b7a18dec7f78e7e9dc2173c68b566e2f2c040a625b",
+                "path_hash": "d14adf4925b2bf14aee639aa9220417fd316aa79580cdd573dd2ae3aa632fcb5",
                 "directory": "install"
             },
             {
                 "filename": "db_php.sql",
                 "content_hash": "607a789a8e14775171cc9d2d2940dfbef58bd012e6932af8fb4b7e48bfce2fd4",
-                "path_hash": "e4ca9bd21333ce09c0d73ef619c542860c2822bd2f3a09ba29e3a741fc3b7ccd",
+                "path_hash": "476b3b6df72ffcf5f4842be0f11497e617faa0f796bfef1370c50335facf9061",
                 "directory": "install"
             },
             {
                 "filename": "index.php",
                 "content_hash": "7452feafc1c621a1f10c8c25c6ef105ffa9c398440fc9b893e89c62656843256",
-                "path_hash": "e3e61d33e0b42b68fbb3ab35c6f3d22e683f04cf4e273979785127acab333d85",
+                "path_hash": "fcd7fa7985124da1a1517d5fa9e821b35cb0d2414b90487d4559483c7cb600da",
                 "directory": "install"
             },
             {
                 "filename": "install_complete.php",
                 "content_hash": "445efa219f44a323165c5b641cd45d45084fb503f7f79664345a47a69eb1acf7",
-                "path_hash": "b3d8f519cfd8f9add6b38f1611a6349007ab0971576cf96001bf23b5bca26c53",
+                "path_hash": "1de8249c835d98f28554a1a38c72c9ff3b68a29fdab37788fd790d37da7e8298",
                 "directory": "install"
             },
             {
                 "filename": "functions.php",
                 "content_hash": "c6786b97378cf1ed9624626d60992d380fc0cc67421da79e1cb19aeeae7d3693",
-                "path_hash": "9800424bcc208de6c9fc66ddbafacad1a8dbee7e5c408309c0d922ee1e816fba",
+                "path_hash": "b19f38cf7b55c6f460e0363682f7a57a3ae8afeb96d52b97188ba81327159dba",
                 "directory": "libs"
             },
             {
                 "filename": "Channels.php",
                 "content_hash": "49696aa26a2bc0403c7012b340216a92f9f39fa0f6f779f9735ee788cfe3454f",
-                "path_hash": "0abccc503f6b40326a801f09fd30b3a083eeee81cd39a0a706d2ebf477b670bb",
+                "path_hash": "4a097d6afffa9deb331c3f8b0d8cf5db65bf3d0dbf533d94a4d72de34081ecc2",
                 "directory": "models"
             },
             {
                 "filename": "Channel_social_keys.php",
                 "content_hash": "78bccd1b6d1d81d7aac8d67dc2a43a242e6a1dea9fdfcc85e394eb5b61a53950",
-                "path_hash": "35a8a8d4342298cd96227f1fa242ba0db322c7f225f6a937758c1398641059f2",
+                "path_hash": "9441950d57499dee886c4ffba0e8f39f1d93e0b2cc94fb32eb3db899347b9959",
                 "directory": "models"
             },
             {
                 "filename": "Device_types.php",
                 "content_hash": "79d141b055321c30c2945cf34fbc5ba9aea49004a4a3209ad63fc4b4d45fe590",
-                "path_hash": "43825f0fd2d9bba11f0722648827c2677f6bea830b54bb2c97c7f91143bf58e0",
+                "path_hash": "5b5a890975cce8457d5bf7c280d72394d9755e219394faa41b151bd0892c3781",
                 "directory": "models"
             },
             {
                 "filename": "Lists.php",
                 "content_hash": "9f9db4a70cc309e4f66b46cc129bd371037a0296fd9da40e00b18c09ff5d2efa",
-                "path_hash": "9fb7a339c8b8f43793f2afad44c15118104a416e24b10eed88842eb63d1f5ff3",
+                "path_hash": "90b26f87680915f318a84a3b4c26e7fe63e0abd495fbb90faf632d7aa71a2e75",
                 "directory": "models"
             },
             {
                 "filename": "Scheduled_posts.php",
                 "content_hash": "f6e4e730e90ae4f764f5288fd8235c10a54d2eeb694b535095c9a9550c54fe13",
-                "path_hash": "665da51ad1b11627d43d7ec3347111183c6bdbd705002a616e0aa3335354073f",
+                "path_hash": "50e2f35006029e65c86a5243d8833be0aff7f2913b5eec60f2897223b11565ee",
                 "directory": "models"
             },
             {
                 "filename": "Services.php",
                 "content_hash": "fff0c1c2b26c3157b070810ffedfbcdcfbe34108ac68f0bb9534cc4aa1d1bd6c",
-                "path_hash": "75cb9ef2d1e83fd1dc1158b80224bc87c48d1aeb98e6082f7d4e6c27abf766f2",
+                "path_hash": "0928e8939a77aa44b85b2c6f3769cf2ea641c592a16af6f9456e744eb2946a39",
                 "directory": "models"
             },
             {
                 "filename": "Service_categories.php",
                 "content_hash": "276225c49fe062577d15feed6247ba021a8ff6732db525faea1f0edf0326f319",
-                "path_hash": "c0801fa89721e1672079893dfbdcd22635a69c8a8ed988e75cdb3e45a46f33f1",
+                "path_hash": "ae6a297bddf4c46d6029ae3f647ddd8939c780872b990ab0bccd9c20a45e4a85",
                 "directory": "models"
             },
             {
                 "filename": "Settings.php",
                 "content_hash": "8a07e8a58e1a4f5dd14daa6d290b49d1d081ea6b2b064b9ea5f46c3419f279cf",
-                "path_hash": "0f2f259bc703245b4f8963942e6187592ecb43ba43e1c308e7d5cf616078dc78",
+                "path_hash": "2eb13d673d9b086713f2c808a1c13b39f0c96a36c35fa6094f5902a1742bbb17",
                 "directory": "models"
             },
             {
                 "filename": "Status.php",
                 "content_hash": "6d2b96f7dc18d6339b4e51b20f7bc1b03e1585bf1d8b146b4313f7a9decf420b",
-                "path_hash": "f50d525142e9ea4431105d458d5ae891fda22a9ac4f617e4859a34728dfcfd39",
+                "path_hash": "f7e6d7e3ec2ac5d233b2248be111c4671e8ea6cf99c0562b0fca1398508f0d4d",
                 "directory": "models"
             },
             {
                 "filename": "Subscribers.php",
                 "content_hash": "2a9ad5889d72ad0aa4253045b78ab19dd07ae9fefa21ca990679ef0bdfce0d04",
-                "path_hash": "6c1cbc6db656963b63c584b4b4e83324995f8a54919c93a65df94f8186c97eed",
+                "path_hash": "91d31ff3ab6c38d61e068fd30eaf39e78d434ba2d2ba681805d78fa945649da2",
                 "directory": "models"
             },
             {
                 "filename": "subscriptions.php",
                 "content_hash": "ce29e1dde4c7f5b0a2200a4254debb4a7d36bc443ec2c8fa6004f4c0826a5f25",
-                "path_hash": "3d543c0115770875f31d28946b91ccc14d873c6cffc504b20464ee1879580d2b",
+                "path_hash": "7544068384fe1f8078b5df2492f1a38b032f28364f7127d1e2775b8d6ae95185",
                 "directory": "models"
             },
             {
                 "filename": "Subscription_tokens.php",
                 "content_hash": "f0b4735d1118c6b4d32f895e2e1a1d0b114ccd9abbd18c3a961dd3144a844638",
-                "path_hash": "e576096cf8b12fe325ba29d1141becb0cc3c35b37db2d4d84abbb4794ee1bc27",
+                "path_hash": "2f025f110f62fa94224eab520b5767debdd71ea969d65348860177ee1c1c35e3",
                 "directory": "models"
             },
             {
                 "filename": "Subscription_types.php",
                 "content_hash": "1bbd4630776e1789664ccc3b4c81af4c11f708a5e89548b3d640f5a3c287caf3",
-                "path_hash": "5c34101347d3f054274eb7dd3eeb71c3dafce3c9f05998c3dcaeea6a50be3637",
+                "path_hash": "9ddab607ca8970397ba1ba6de48909daa817eb653398685f4d62d7ee7e096b2b",
                 "directory": "models"
             },
             {
                 "filename": "Topics.php",
                 "content_hash": "6b697d50a05140aae02ffe6a2ac8aad5275537e4bc594f3d248442b353c1d725",
-                "path_hash": "21f09c7a1886d579fc9de2e47532c7e25d5b2a78902ed70d67b0f1acd2438dc2",
+                "path_hash": "301bbe20eb23b188df3a6da1ed5585d1595ebdd208861790f0c6f90043950446",
                 "directory": "models"
             },
             {
                 "filename": "Urls.php",
                 "content_hash": "e12a1ae2248c0fa1fdbdfe2758c207df54aad928b65e7145e0a2bc68c030ef09",
-                "path_hash": "420eee65c456466ff25dbdce5c65d160e0ee7d001f0259a369561c562419a0a8",
+                "path_hash": "6e2e93b455aa4a10e1cb46164d436a6b5bf4448247e019560553d5e30319e3f5",
                 "directory": "models"
             },
             {
                 "filename": "Users.php",
                 "content_hash": "89bacaca12d96b3b127bcde41eb1a93d326490f1174bff5d7b03de9f0a37fa9e",
-                "path_hash": "1fc54c5d623d02ad97b9a3f7dfa58563bca59f7ef89447e656ab635d3b2d3438",
+                "path_hash": "285d91e03228cf301ea49d32eb73baa313c2fbf3a1ca820671f01498e27536d8",
                 "directory": "models"
             },
             {
                 "filename": "channels.php",
                 "content_hash": "09c4bb6fb8b2de59e86f738a1bc0203761f6fb21810592d8d56275e3ef8a20a8",
-                "path_hash": "0de2a05ff306911dd2977202a3b7055369b2e2b29c5bd584f80290d30dd46119",
-                "directory": "pages/channels"
+                "path_hash": "3e3eedde0fa5ebd751dd940e4f8650571b6bf61001d43b9805dba0a7052e260a",
+                "directory": "pages\/channels"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "4d6224c5dbfc4d0b89d1a082a7951c7092c046565dbb09c03a7b8333c875dd5d",
-                "path_hash": "81a8d331889669c7b0d59fbdb8c3070fa0647b4b6e2e5df7feac441f382d22c5",
-                "directory": "pages/channels"
+                "path_hash": "3fb2c982ddb3e0c093dc04dd130fbb39ed1dd561acac103aae8f782f2a0c8f96",
+                "directory": "pages\/channels"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "1efeb9db736b2d3c98e9b5defa9492097f31a3214c22d6d5dbc3e0646525bbe9",
-                "path_hash": "01a2f6259855891e1febf1eb4751f2a5dc2daf6f6063fee51ea0594d6f2d8359",
-                "directory": "pages/cron"
+                "path_hash": "0c913469795f2c0a276ad617321f89f3d03ab033f8ec72b0764c087028401692",
+                "directory": "pages\/cron"
             },
             {
                 "filename": "cron.php",
                 "content_hash": "581c33799f162928d4a7ee011b2857d1462cac790b9bcf7a846acc6267c29d37",
-                "path_hash": "c9fec52002c047d18cf286669d13f7cae2c91b5ac1d0cac0264ca3f45a1961e3",
-                "directory": "pages/cron"
+                "path_hash": "9dcf150a0e4cafd71415a377b7ef61982b10d87bc7e1b1af0b7554180e27b35c",
+                "directory": "pages\/cron"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "be2a36349651b99e7a26b81bad08dadfa6caafe4e340d81d81482951ebacf5c0",
-                "path_hash": "1c6ff7da23febaf8764d9a8b6c3db2375f6fa4c7353c1ddce0a7dd02d2929030",
-                "directory": "pages/default"
+                "path_hash": "681f5f8f03131fdf86b7eab2afbd901ade450c1694341e532aedcb04e99164c3",
+                "directory": "pages\/default"
             },
             {
                 "filename": "default.php",
                 "content_hash": "7b826c3154cf3dbc0a5cd52c0578ff125b1d0c0ef0f66383d0e54ce0511fe555",
-                "path_hash": "4d769fe99c19e7dab643ccada15609dfbcd94cde59b5d715a2070d39710ad170",
-                "directory": "pages/default"
+                "path_hash": "64af4167e0f3e26ef6082b38704c8d5fdd041618b61868596dfb961b2f4cf70c",
+                "directory": "pages\/default"
             },
             {
                 "filename": "favicon.ico",
                 "content_hash": "8b1060f193768c55bc48dede8ba8da9be6c93f8e6dcae946e36f1a8956b7269b",
-                "path_hash": "fa9533863efe9af34da8fc3af70e886067566d5ce465265185b1d491933f0b2b",
-                "directory": "pages/home/assets"
+                "path_hash": "fc86539f81c9b793a7a1e7b5430d53c935ebf6c3af7cdcb1c2b00e0c3ec40149",
+                "directory": "pages\/home\/assets"
             },
             {
                 "filename": "app-store-badge.svg",
                 "content_hash": "25178aeef6eb6b83b96f5f2d004eda3bffbb37122de64afbaef7107b384a4132",
-                "path_hash": "aa84ee9484019d2dd99d92c7a8ba764b449994e617f1a05febc9ee7d2c2a71da",
-                "directory": "pages/home/assets/img"
+                "path_hash": "e69fe54d9f1548c66517f73d26077d4bed2bb1b25cf1473bf4ba56dc441d7264",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "demo-screen.mp4",
                 "content_hash": "6e89fab1146aff1513d0cfb4ceae4b825deaf751d2912bafa84b53a83f04c8c6",
-                "path_hash": "1f9597610e29592a54a1fa659083365e16fd988ac1a1c46be91b80a71023a97c",
-                "directory": "pages/home/assets/img"
+                "path_hash": "112adea8460b1d0e168078d6adfef6a087b30d2ed461ee4a71effeaeee466f7e",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "google-play-badge.svg",
                 "content_hash": "6cc6cde7963919d62c30cabceb7fafb83dc7c5a95cf8a3924cf1b9c8619ce43e",
-                "path_hash": "93959cdb3bc1583324f68016ce7c2337c624e44997597e9c4156e5543fd8dd55",
-                "directory": "pages/home/assets/img"
+                "path_hash": "777c4522b32f10c00dd92c34a5257312997207ddf56c1eaee95b27e5add84cda",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "img1.png",
                 "content_hash": "896b3bedeca49f7f589e0e74ecd1017b0af711c74cbac6bc20c3cc0831519d78",
-                "path_hash": "9d4dec68c256e636f0611b464190f8b666cb264fb535c40bf3e300c80e6208bd",
-                "directory": "pages/home/assets/img"
+                "path_hash": "e90e64c293fe452ab399e1cb19d84657674ceab8de1b8a9e7e37b88607f936b4",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "img1.webp",
                 "content_hash": "46ba857e1d7fba2b55a9e0332278f4cb6e33e168c04b8a3afbc3cc930c61e6c8",
-                "path_hash": "d2e9ade742606067c24943aaafda7a41071c9fdfc782930d8fc1cc5f16dec15e",
-                "directory": "pages/home/assets/img"
+                "path_hash": "bdc727a6dd7d76addf1376a76352097e2a681a71bfba1c9f3cd3081c7d3ea92d",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "portrait_black.png",
                 "content_hash": "9e70f493e833cfa6fb2d53603b2d5d0cec2743fced164b9cb5581035a2867c2d",
-                "path_hash": "ca2862471d67e606b498c53e6a29c1d949ba18073d4061d9e0c89f483ef1534c",
-                "directory": "pages/home/assets/img"
+                "path_hash": "33934a46320ae4ebf664a06e28d0bbc3b475adeb56fbfec462ec4d115367b3df",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "preview.jpg",
                 "content_hash": "f5508eae298f1eb5d40e77c910d7aee8af9511c8f8ac972627572ef1ef09ac1e",
-                "path_hash": "2f08cd6f665e14c44baab28a113b1e3e0e16046d2f2b43f21436d41d60d3cde1",
-                "directory": "pages/home/assets/img"
+                "path_hash": "f8207256c2bbae9434d01e400c066a06797a87a6f68e39a5a257735eff724857",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "Screenshot 2024-03-21 160632.png",
                 "content_hash": "66894ed75139233789ec05fa68aa502b2cba91cbd51ff2e0ff2b1f0f736a8470",
-                "path_hash": "a8742290806de4c706656e1412cc5edd7cd1bdd0b72a761bd5e561a4f7bf36f1",
-                "directory": "pages/home/assets/img"
+                "path_hash": "49b8018920e5a22722d9a399dc4ac91d726f21b21d1c8bbdae39bbd34fad3770",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "tnw-logo.svg",
                 "content_hash": "6890b9f2341199fe53433ca81f2825cd923f609bc411411df78ae2ad7afc0bea",
-                "path_hash": "bfce2a5e07d565c1a80b03f1a849203d00d97fdf9cfa8a4fa8e263084b99eaca",
-                "directory": "pages/home/assets/img"
+                "path_hash": "46dd20778fcbdae093bed3cb1b8a9384e0e4d4483cf450fa6ffb14c9e53bce79",
+                "directory": "pages\/home\/assets\/img"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "be2a36349651b99e7a26b81bad08dadfa6caafe4e340d81d81482951ebacf5c0",
-                "path_hash": "e202f48d51eb2639393d321eacf0318944286af08bfc7e29a7eda4c963779591",
-                "directory": "pages/home"
+                "path_hash": "9bfd59b6ed5603bd4455d7dec17cee4c3a5297514434cba328d16ac46ba041c6",
+                "directory": "pages\/home"
             },
             {
                 "filename": "styles.css",
                 "content_hash": "0423cc4f71319d589ab109c600f385491daa84d1f263bebd1820a249666476c4",
-                "path_hash": "c770f5bb3a286352d7d6d288c0ba43ba4f4c1e22e255ef3bdd03cb4118510b56",
-                "directory": "pages/home/css"
+                "path_hash": "525356c1289a34deed3d52ac1cb08726b0dc8ae48844cb6b42c3360b77a03241",
+                "directory": "pages\/home\/css"
             },
             {
                 "filename": "home.php",
                 "content_hash": "dd0eba1205765f4a8381e5f245fbbf6886e90c093848d9ea3540a41e0fe92352",
-                "path_hash": "cae95a64ef4bbc7e76af3dfc44e39b7ce78496fe93a089531ed459dffabb9f5f",
-                "directory": "pages/home"
+                "path_hash": "584e46800d6349eebef778cddc8cf4080ea217fd7e3838508a610334a9e4639d",
+                "directory": "pages\/home"
             },
             {
                 "filename": "scripts.js",
                 "content_hash": "1cc14483387109e284ba1d7a6841f50f352a8d71fa4fbb37fa26408e5496e3dd",
-                "path_hash": "b97528eb3de54acb0fb20b243ba8a18970cdca3217dd4162e3fd1180d75112fa",
-                "directory": "pages/home/js"
+                "path_hash": "e2d653716bdd697a41ddaad83d51d95d2dacb942acff2f6cbf27ffb88ac3e0a0",
+                "directory": "pages\/home\/js"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "3b285f83d5cd56073e74fdcdfafab947a25f18258611b1f7d6dd2ed1daf21451",
-                "path_hash": "4f8be5b610449b31fb013b0b82fe2ffd5d1fcf14f803bebdbfada78d003b7971",
-                "directory": "pages/links"
+                "path_hash": "e30aca9f3f9d7e12957bd035c4151f03ffd3fbbe8bb1c44db4339b11c045bc14",
+                "directory": "pages\/links"
             },
             {
                 "filename": "links.php",
                 "content_hash": "532f67199cad4b9fe73fedd9e62b7503d5a24e73b55e23b9d1b3315f4db554bb",
-                "path_hash": "4fd7c45a99ebcd97293563e6bed889551f23106fd6ddd477f624b498cfed912b",
-                "directory": "pages/links"
+                "path_hash": "d4f370ac8007b039b60b7ba9106a96af01dd9809cde8bc3467ea6aa8732c1f36",
+                "directory": "pages\/links"
             },
             {
                 "filename": "addurlmodal.php",
                 "content_hash": "45663634e51c5725766383fad4b5ab2b6ce991458c982d55584a12795a89288c",
-                "path_hash": "2bbef04b94c7cdedbe0b61333940cf863320cd4d4fd5c04f79f03562cf77dd5e",
-                "directory": "pages/links/modals"
+                "path_hash": "a8db6bd95f06d3648f5589b77f261e06c4d3753362890556e9ef1040ea62d334",
+                "directory": "pages\/links\/modals"
             },
             {
                 "filename": "checkurlmodal.php",
                 "content_hash": "b5c6e8310928c2900979a15c447bc67ebb22361f6a8993f2d6a26ffc22824cd0",
-                "path_hash": "11709dc996fdea5dafc4e94e3d4ea5977b02f44f088d43fafdbd3b3074ff2acf",
-                "directory": "pages/links/modals"
+                "path_hash": "43eae6f3f9bc3d69cf1e16311e3d1fd2df1aaa36602c4fcc3f177309d93a9fa4",
+                "directory": "pages\/links\/modals"
             },
             {
                 "filename": "editurlmodal.php",
                 "content_hash": "c5ca575da14f8cd69bd0b44308db519a811b32725eb36f2413ab63924256a2e5",
-                "path_hash": "79e274b4e74cedf5f7bb4f9913fab0a11dc4e31b710662fd617cbe6e4f3d0117",
-                "directory": "pages/links/modals"
+                "path_hash": "1e7132d133764cbd95d93d2081589c8f0c02b4fd2c0dd902e8f0b77125b735ac",
+                "directory": "pages\/links\/modals"
             },
             {
                 "filename": "newlistmodal.php",
                 "content_hash": "bd08eed2bf4454429f7599b441d1341ea4d797b9e5172b5219c6441381ccfb5d",
-                "path_hash": "a9fb05f5ea35b4763a39640e56f8a1b31673f8d88171cbd9f1523fa3ce93edf0",
-                "directory": "pages/links/modals"
+                "path_hash": "c5c18cc6d3cb15d2447df597daa9e17935d56f1e99d27f07de350b8f026f74aa",
+                "directory": "pages\/links\/modals"
             },
             {
                 "filename": "urls.php",
                 "content_hash": "9c8bdc4d00896458b0510b6a1adacc589924d1d13bfdaf979b922fe3f8159a40",
-                "path_hash": "a933dab826717abde23831e0e1dd2f2ddfd4a86a383f693efa2462c7ca5f279a",
-                "directory": "pages/links"
+                "path_hash": "83977158935cc371598fa98c6586227d20e53a63d75022a08ae4a64d1c8444e3",
+                "directory": "pages\/links"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "9c8c5a706362bc3a435bb7c7105862ed343da5e4a86374d60873a1ea4403831f",
-                "path_hash": "302ab56a6e4ee12f2b3fb9c3b6effcce6fc210f71bb9527f7331422aac9ef2f2",
-                "directory": "pages/lists"
+                "path_hash": "1992fd60dc1a037c57ed3995ffa67b843080ad77b1a9f953766836a54463aae7",
+                "directory": "pages\/lists"
             },
             {
                 "filename": "lists.php",
                 "content_hash": "d302c98ddca2cb90b6fb3abb7b69587ba1f49673a23c36e73b8ae14396f6b4f9",
-                "path_hash": "a4c5ba199b9773938ccf378aebf731bd282a904d1aca3d196d62b3172da2e426",
-                "directory": "pages/lists"
+                "path_hash": "bf290f6b07c4d994b4f70849eba79828e7adf17f3a09b6ce8b1ae3a91db9bb19",
+                "directory": "pages\/lists"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "3480e7b7ccdb8d77a46241b6a8fb29511db95e0f4da7d131d9dd833b599be35e",
-                "path_hash": "3c6d1470414701ac1c22f2a4ea88293e53728ae57861ce3758d77a9b5dd191c3",
-                "directory": "pages/login"
+                "path_hash": "dd24a347de1efe31813b145e80a499b1a97ca7660bbe106765b998c72fd72693",
+                "directory": "pages\/login"
             },
             {
                 "filename": "login.php",
                 "content_hash": "0bd9d2d46423f35b677e7666696d459253f6fef7ba6968d1aff61d33f2d83556",
-                "path_hash": "019a24e3e0a3a8ed2702726a9a6d1bd67542e6f5fc00c552bc398d790d981330",
-                "directory": "pages/login"
+                "path_hash": "e87305ebe49bc102a8221378a4f9e6c6fe1cb13e1adbbc75da5385244e389ef9",
+                "directory": "pages\/login"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "c8c02766435c5f690eb2bff51ef72c444436d2cf7edb21f80a92bae34b10114e",
-                "path_hash": "bad52cf910681fca7036248f4cb3ab099e4648d4beed6b9e73bab43d09cd913e",
-                "directory": "pages/pushnotifications"
+                "path_hash": "cab0dd6703d47dbd18a33fdf04d032243707fb8740b76f0a715b06f287016e04",
+                "directory": "pages\/pushnotifications"
             },
             {
                 "filename": "pushnotifications.php",
                 "content_hash": "93208fbad6f1be9342427d8bba54de536a8702d11b183edb55a59b61b163f511",
-                "path_hash": "1dec4114ae1750a30fde9ba2e08eab351d4c549191bb85ada887f5bd926d6c2e",
-                "directory": "pages/pushnotifications"
+                "path_hash": "0db165b24c91f4dd760bd9a0e7171846162e43f22d70f83e2880e58605c9a77b",
+                "directory": "pages\/pushnotifications"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "64c107d5885f5c4ab69eca68bfd74a34ff6dcc7e20774728e596346e1ff4d9c8",
-                "path_hash": "e101e4a8b572ad6f8276c84f3543b41849375cc92141de3cda6781d794811272",
-                "directory": "pages/schedule"
+                "path_hash": "5a2f57d68c20767cc89787911123eaabc513f5fc114412f3c8d40357da2382ed",
+                "directory": "pages\/schedule"
             },
             {
                 "filename": "schedule.php",
                 "content_hash": "193fbedb6b1bdb6cd464bc611cb9822078ccadb8bd29980d76dc80a2048a6d08",
-                "path_hash": "9bc732b975c8efb55cd36208a84733e4c25970c807933c6e336d272d98fc3019",
-                "directory": "pages/schedule"
+                "path_hash": "cb84a265022556adbdf03807cc87af046ea2745ba8761e306f5bf972fc3cc08e",
+                "directory": "pages\/schedule"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "5106d8f9d3c272d6339c5eaca978b5453f9c80917a43323d3a9a2ba0ce2d76b8",
-                "path_hash": "21cef9e20a366f5f274ebfb0da09ab601940777f3b37d92872eb457f503ca5e4",
-                "directory": "pages/services"
+                "path_hash": "fd8557b8da742f807bbffd0dd4739a8073bce77424423fbe5716d825e46a2364",
+                "directory": "pages\/services"
             },
             {
                 "filename": "services.php",
                 "content_hash": "29b247af5420b74520f65b5c869f99c3b2c79b82b902952da5b4fdad2d2255e7",
-                "path_hash": "6ad5b8a5b78071c189190a95341c65aee71a13114cd83439d505845e64880c38",
-                "directory": "pages/services"
+                "path_hash": "447f7eacf55c5a83547279b26574f36cd486fc0e2643d81c5a054456874ba0e1",
+                "directory": "pages\/services"
             },
             {
                 "filename": "controller.php",
                 "content_hash": "a46dcd38342e54388dfaabab622f792cc5d253fbb8dafda11d076de9eb6cbea5",
-                "path_hash": "72a8c6eaec25315f498b3fe180db6c72119b1176d7df2e4b2f9e4084df7934cd",
-                "directory": "pages/settings"
+                "path_hash": "4da0ef0902512007eb545cc822e509bc9ed52b3f9bfac71dae0554dd3c6d598a",
+                "directory": "pages\/settings"
             },
             {
                 "filename": "settings.php",
                 "content_hash": "c8ce2b586911c770b400759fad27c39a3a27ab6f0723edf49d6ad86627df5215",
-                "path_hash": "ac5d841b48ccc508e7dae056868a5a012b37d8c24d14791419fab0d7378ad609",
-                "directory": "pages/settings"
+                "path_hash": "6891b60ee51c828142de8d0894c41ce88c0fb408226a36820c014aac0db7e49b",
+                "directory": "pages\/settings"
             },
             {
                 "filename": "timezone.php",
                 "content_hash": "5b7c8c21f9919f0e8b59dc68fb3e51943498ee5ce9c725d36dd864255900532f",
-                "path_hash": "79309bec6354785668c008459f35c8ee1ae724fd822258d6c3941635259fb88a",
-                "directory": "pages/settings"
+                "path_hash": "9cce1ebe7e1cae220073df9d9405834f97d367b456dba8b50a532e0668a569c4",
+                "directory": "pages\/settings"
             },
             {
                 "filename": "users.php",
                 "content_hash": "e4fb898ea12b495a17d65aeb53229bd44020b151be4212cf1540f8d17e71aab0",
-                "path_hash": "2a3c9f8dd402e305d9010ed39dc558eff8b1c20d2358c3ce43e82329989e3dfa",
-                "directory": "pages/settings"
+                "path_hash": "55004f05bb728c8ef640b0e82b68921b6517f1d4970a3ae85732f8e6a8b9a89e",
+                "directory": "pages\/settings"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "6c2e8de357af426096215136232e35ec235a20ec4e7507b768def0817f7a7260",
-                "path_hash": "904bd8db9e79706c566576b01783885dda415f6a4fa4f6815da790fdd331413d",
-                "directory": "pages/testservice"
+                "path_hash": "325276bb63e4f83bdfcff13ad8162757c0f2c7d73591ddf77b57c482b21d79dc",
+                "directory": "pages\/testservice"
             },
             {
                 "filename": "testservice.php",
                 "content_hash": "faaa98f8eb3596212ea873c541c499cd8bdbd0b437dfed69ec5fd337845aab8f",
-                "path_hash": "c061051b3b8036613a951e95733069778121d36ac994e8c0063d011f0d2bc09b",
-                "directory": "pages/testservice"
+                "path_hash": "ad2e7561bd423582743932b62f443cbc4b932acdf739a028d7214002c41018a8",
+                "directory": "pages\/testservice"
             },
             {
                 "filename": "Controller.php",
-                "content_hash": "79bf470e15f818368aee369e79394f035166dec7ec44eb9484909129b58cc46f",
-                "path_hash": "8ebcec3e0664f8d981258c43b969becd3437da696e33c9b09d07da046aebec0a",
-                "directory": "pages/updates"
+                "content_hash": "253a47c46e1f787829899c146c3120f7e9a06b423c36403aaebd108959066a8a",
+                "path_hash": "b9ba22076b57705ec4e19832a0bf533dd660a5586ac46e9aca7341ab76211fc8",
+                "directory": "pages\/updates"
             },
             {
                 "filename": "updates.php",
                 "content_hash": "4f507d703d47070b16c37b32f83db1bcd4781594cd448aa34780893816f683c1",
-                "path_hash": "d3da046156d61822c6b668655a7c81580a103c5ca2dd4e9abcdf906b6528818b",
-                "directory": "pages/updates"
+                "path_hash": "abb177b56666b8ff4a441600e27aa9a2f1fd018a5da157302e71a4869651c15a",
+                "directory": "pages\/updates"
             },
             {
                 "filename": "Controller.php",
                 "content_hash": "ed28fa619874bff3f2f8feea657959befb3ea217b9d915bed94f052c43f93050",
-                "path_hash": "2fc87bca2a2a3b04aa946fbd105d46f014c0bfca408b34631c782a1ad13fac90",
-                "directory": "pages/youtube"
+                "path_hash": "872985ce8973ad0a545792d8e68bdf5c42d310732b3a0fdd5b7697c585d08729",
+                "directory": "pages\/youtube"
             },
             {
                 "filename": "youtube.php",
                 "content_hash": "9a1d75300d55cd0eb82a77bd6bbdef9b64d3f5b3ad1a98df0265ace0f7a1d8e3",
-                "path_hash": "cad11e05914fa4a92fec2332862d6fc1b11322d7f93bc41c7d0690c1cb86828a",
-                "directory": "pages/youtube"
+                "path_hash": "c55add6792edb6a71fec9dfc00e1876a3e1a8ff366e0d7d300dd9e551de4f608",
+                "directory": "pages\/youtube"
             },
             {
                 "filename": "pvKey.json",
@@ -593,44 +593,44 @@
             {
                 "filename": "login.css",
                 "content_hash": "62154420a5d48ff89670109745a7008c5747d5a0a92c4826dd4d7d2575492e81",
-                "path_hash": "9b2ed23d3e744e920ea8d4fda42befb04b2fad249bdf58efc0855e5719d0c37e",
-                "directory": "template/css"
+                "path_hash": "90dc5a12b657f089305104c7ea5e31015c3483b8f7450fae6920afbf78e80994",
+                "directory": "template\/css"
             },
             {
                 "filename": "style.css",
                 "content_hash": "9e2aa40ef5e9e7ff72ec65c9e1ea3d9f3886f77bcbfba7a3c7a487ae607484b4",
-                "path_hash": "a00089325feb9502ba3bd0b5c8690beb5da020468831bc8e47b6fe0ef7983765",
-                "directory": "template/css"
+                "path_hash": "1de7b283ef9fa493b39f4d9868d0d354908bc36d8b604fb42292d035ad58ea47",
+                "directory": "template\/css"
             },
             {
                 "filename": "logo-no-background-mini.png",
                 "content_hash": "dadba232b8811abc649ad388a4fff01e2f4f18f2c1ddd436c0e8092a097eb366",
-                "path_hash": "8098d2ba59d242ef63077071b2f7c25b0ed1a49a0dab01122f5f2d46d8833030",
-                "directory": "template/images"
+                "path_hash": "6db53c9320ebf78e13bb734020a324119b3446baaf6780636bda8e60447cb417",
+                "directory": "template\/images"
             },
             {
                 "filename": "processing.gif",
                 "content_hash": "5934401cff14cc144306119b65018145490a9569796180d201bea3629f82b144",
-                "path_hash": "238df36e148cd8583ad30fdf38b24be9921bfb2d3251e738a99bcaacad50ad39",
-                "directory": "template/images"
+                "path_hash": "0123863714266962b6d7810ab24d63aceda282b8b02297e99af239ffcec0f0d9",
+                "directory": "template\/images"
             },
             {
                 "filename": "index.php",
                 "content_hash": "b0719e45ab34b50f435c5049991412fef75df386ce6c353408983f90e42ca54c",
-                "path_hash": "04c0e72294c44f0f8af1003b6ac9da55ecb5896d240cb4dfae0b7edc9bf64f18",
+                "path_hash": "1b8eab5596bf702b093ff36be47112925212333b637e25e44644cbab841d6ba0",
                 "directory": "template"
             },
             {
                 "filename": "calendar.js",
                 "content_hash": "55ebfa65707ae8b5d2bfe0332950c56a8d4a88f49626f3904f0c1b572cc22441",
-                "path_hash": "735be5808066558005b311c5e02ec123cee481df19bf15514ce956c9fe63f4f8",
-                "directory": "template/js"
+                "path_hash": "dbe9d4dbbed4bfe5587d1932df9c2f31c3446b6d9f011b217d15a0d54112155b",
+                "directory": "template\/js"
             },
             {
                 "filename": "main.js",
                 "content_hash": "c7f5072772b57c25ef2d38ca2fe8037f585bd2d6f0123ba66ff49a4472e0335a",
-                "path_hash": "874b2c71ad24c61fbdaee0eb9d45fcd2a22c5e58894dbd5487394054bbb0c7b5",
-                "directory": "template/js"
+                "path_hash": "cd2e4d7a79bf404e3d51cb6fcd8bde4b88d75f34e529fab1bd05649e6e455abc",
+                "directory": "template\/js"
             }
         ]
     }

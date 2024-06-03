@@ -54,7 +54,7 @@ class Controller{
     public function generatechecksum(){        
         try {
             $updateManager = new UpdateManager('/', 'temp');           
-            $message = $updateManager->generateManifest("v1.0.2");
+            $message = $updateManager->generateManifest("v1.0.3-alpha");
             //echo "Checksum: " . $checksum;
             ResponseHandler::respond(["result"=>true, "message"=>$message]);
         } catch (Exception $e) {
@@ -89,9 +89,9 @@ class Controller{
 
         $releaseInfo = json_decode($response, true);
 
-        //print_r($releaseInfo);
+        print_r($releaseInfo);
         //return $releaseInfo;
-
+die();
         if ($releaseInfo && $releaseInfo['tag_name'] != $currentVersion) {
             //echo "A new version is available: " . $releaseInfo['tag_name'];
             ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
