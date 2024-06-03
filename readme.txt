@@ -32,4 +32,4 @@ https://forums.docker.com/t/setup-local-domain-and-ssl-for-php-apache-container/
 
 delete all local tags using powershell
 git tag -l | ForEach-Object { git tag -d $_ }
-asdasdsa
+asdasdsaasdsadsa
