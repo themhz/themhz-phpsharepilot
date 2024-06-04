@@ -94,7 +94,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "be44d8f35d86e69054c1d102e6a527246830578de5aeeb9d9c4bda5d3afb72ec",
+                "file_content_hash": "b623260b3ab1f18201c69a916a530a0ea33710d7d831afaba2874e70428778fc",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -556,13 +556,13 @@
             },
             {
                 "file": "Controller.php",
-                "file_content_hash": "1dcfa113c58884b3e86a4fd37a94d11f9b1e3e574202bbec871a959cd96d4e54",
+                "file_content_hash": "f9996260185c5ffaf2fcbdba6c05273425a3f0ff0adcdc4631dd80ef695a80a8",
                 "directory_path": "pages\/updates",
                 "directory_hash": "b9ba22076b57705ec4e19832a0bf533dd660a5586ac46e9aca7341ab76211fc8"
             },
             {
                 "file": "updates.php",
-                "file_content_hash": "4f507d703d47070b16c37b32f83db1bcd4781594cd448aa34780893816f683c1",
+                "file_content_hash": "267d55f7e28f9100e5236833c1280ba38de928771889b9fd21bb561122abf379",
                 "directory_path": "pages\/updates",
                 "directory_hash": "abb177b56666b8ff4a441600e27aa9a2f1fd018a5da157302e71a4869651c15a"
             },
