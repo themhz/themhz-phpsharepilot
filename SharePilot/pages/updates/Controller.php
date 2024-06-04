@@ -74,31 +74,9 @@ class Controller{
     public function checkupdate(){
         $currentVersion = 'v1.0.0';        
         $url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_USERAGENT, 'PHP Update Checker');
-
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        // if (!$response) {
-        //     return false;
-        // }
-
-        $releaseInfo = json_decode($response, true);
-
-        print_r($releaseInfo);
-        //return $releaseInfo;
-die();
-        if ($releaseInfo && $releaseInfo['tag_name'] != $currentVersion) {
-            //echo "A new version is available: " . $releaseInfo['tag_name'];
-            ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
-            echo "\nPlease update at: " . $releaseInfo['html_url'];
-        } else {
-            echo "You are using the latest version.";
-        }
+        $updateManager = new UpdateManager('/', 'temp');     
+        $result = $updateManager->checkupdate($currentVersion, $url);
+        print_r($result);
     }
     public function hello(){
         echo "hello man";
