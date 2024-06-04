@@ -111,8 +111,11 @@ class UpdateManager {
     }
 
 
-    public function checkupdate($currentVersion, $url){
-        //$currentVersion = 'v1.0.0';
+
+    public function checkupdate(){
+        $url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
+        $currentVersion = $this->getcurrentversion();
+        
         //$repo = 'themhz/themhz-phpsharepilot';  // Your GitHub repository
         //$url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
 
@@ -123,19 +126,25 @@ class UpdateManager {
 
         $response = curl_exec($ch);
         curl_close($ch);
-        $releaseInfo = json_decode($response, true);        
-        print_r($releaseInfo);
-        die();
+        $releaseInfo = json_decode($response, true);
 
-        if ($releaseInfo && $releaseInfo['tag_name'] != $currentVersion) {
-            //echo "A new version is available: " . $releaseInfo['tag_name'];
-            //ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
-            //echo "\nPlease update at: " . $releaseInfo['html_url'];
-            return ["result"=>true, "message"=>$releaseInfo['tag_name']];
-        } else {
-            //echo "You are using the latest version.";
-            return ["result"=>false, "message"=>$releaseInfo];
+        if (version_compare($releaseInfo['tag_name'],$currentVersion , '>')) {
+            //echo "New version available please update from $currentVersion to ".$releaseInfo['tag_name'];
+            return ["result"=>true, "message"=>"New version available please update from $currentVersion to ".$releaseInfo['tag_name'], "version"=>$releaseInfo['tag_name']];
+        }else{
+
+            return ["result"=>false, "message"=>"no update available"];
         }
+
+        // if ($releaseInfo['tag_name'] != $currentVersion) {
+        //     //echo "A new version is available: " . $releaseInfo['tag_name'];
+        //     //ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
+        //     //echo "\nPlease update at: " . $releaseInfo['html_url'];
+        //     return ["result"=>true, "message"=>$releaseInfo['tag_name']];
+        // } else {
+        //     //echo "You are using the latest version.";
+        //     return ["result"=>false, "message"=>$releaseInfo];
+        // }
     }
 
     public function updateVersionOnManifest($newVersion) {
@@ -183,6 +192,27 @@ class UpdateManager {
     
         //echo "Version updated successfully to $newVersion.\n";
         return ["result"=>true, "message"=>'Failed to encode JSON.'];
+    }
+
+
+    public function getcurrentversion() {
+        $manifestFile = 'manifest.json';  // Adjust the file path as necessary
+    
+        // Load the manifest file
+        if (!file_exists($manifestFile)) {            
+            return ["result"=>false, "message"=>"Manifest file not found. in $manifestFile"];
+        }
+    
+        $manifestContent = file_get_contents($manifestFile);
+        $manifest = json_decode($manifestContent, true);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {            
+            return ["result"=>false, "message"=>'Invalid JSON in manifest file.'];
+        }            
+    
+        // Compare current version with new version
+        $currentVersion = $manifest['sharepilot']['version'];
+        return $currentVersion;
     }
         
 }

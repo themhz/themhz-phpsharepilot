@@ -20,7 +20,8 @@
             
         </div>
         <div class="w3-container">
-            <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button>                  
+            <button onclick="CheckUpdate()" class="w3-button w3-teal w3-large">Check Update</button>
+            <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button>            
         </div>               
     </div>    
 </div>
@@ -33,9 +34,26 @@
     }, false);
     
 
+    function CheckUpdate() {
+        fetch('updates?method=checkupdate&format=json', {
+            method: "POST"
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.log('There was a problem with the fetch operation:', error);
+        });
+    }
 
     function Update() {
-        fetch('updates?method=generatechecksum&format=json', {
+        fetch('updates?method=update&format=json', {
             method: "POST"
         })
         .then(response => {
