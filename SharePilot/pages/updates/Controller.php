@@ -41,10 +41,11 @@ class Controller{
             $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/'.$result["version"];
         
             try {
-                $result = $updateManager->downloadAndUnzipRelease($url);
+                $result = $updateManager->downloadAndUnzipRelease($url);         
+                               
                 if ($result["success"]) {
-                    //$updateManager->updateProjectFromManifest();
-                    
+                    $updateManager->updateProjectFromManifest();
+                    //asasdasd
                     ResponseHandler::respond(["result"=>true, 
                     "message"=>"was downloaded and unziped",
                     "download_duration"=>$result["download_duration"], 

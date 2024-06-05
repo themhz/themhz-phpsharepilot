@@ -22,6 +22,10 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" &&
 # Verify Composer installation
 RUN composer --version
 
+# Install Xdebug
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
 # Set the working directory
 WORKDIR /var/www/html
 
@@ -36,6 +40,17 @@ COPY SharePilot /var/www/html/
 
 # Install the Composer autoloader (optional, depending on your setup)
 RUN composer dump-autoload --optimize
+
+# Copy Xdebug configuration
+COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+
+# Sample xdebug.ini content
+# [Xdebug]
+# zend_extension=xdebug.so
+# xdebug.mode=debug
+# xdebug.start_with_request=yes
+# xdebug.client_host=host.docker.internal
+# xdebug.client_port=9003
 
 COPY mycert.crt /etc/ssl/certs/mycert.crt
 COPY mycert.key /etc/ssl/private/mycert.key

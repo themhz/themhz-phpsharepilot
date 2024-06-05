@@ -12,6 +12,69 @@ class UpdateManager {
         $this->tempDir = $tempDir;
     }
 
+    // public function downloadAndUnzipRelease($url) {
+    //     $startTime = microtime(true);  // Start timer
+    
+    //     $zipFile = $this->tempDir . '/release.zip';  // Path to save the downloaded zip file
+    
+    //     // Initialize curl
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);  // Direct output to file instead of memory
+    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    //     curl_setopt($ch, CURLOPT_TIMEOUT, 300); // Increase timeout for large files
+    //     curl_setopt($ch, CURLOPT_USERAGENT, 'sharepilot (https://sharepilot.gr)');
+    
+    //     // Open file handle
+    //     $fp = fopen($zipFile, 'w+');
+    //     if (!$fp) {
+    //         throw new Exception("Unable to open file: $zipFile");
+    //     }
+    //     curl_setopt($ch, CURLOPT_FILE, $fp);
+    
+    //     // Execute download
+    //     curl_exec($ch);
+    //     if (curl_errno($ch)) {
+    //         fclose($fp); // Close the file handle
+    //         unlink($zipFile); // Delete partial file
+    //         throw new \Exception('Curl error: ' . curl_error($ch));
+    //     }
+    //     fclose($fp);
+    //     curl_close($ch);
+    
+    //     // Check if download was successful
+    //     if (!filesize($zipFile)) {
+    //         throw new \Exception("Failed to download file.");
+    //     }
+    
+    //     $downloadTime = microtime(true);  // End timer for download
+    //     $downloadDuration = $downloadTime - $startTime;
+    
+    //     // Extract using 7z
+    //     ini_set('memory_limit', '4048M');
+    //     set_time_limit(300); // Ensure the script has enough time to execute
+    
+    //     //$command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
+    //     $command = "7z x -y -mmt=on '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction with multi-threading enabled
+    //     exec($command, $output, $returnVar);
+    //     if ($returnVar !== 0) {
+    //         throw new \Exception("Failed to unzip file: " . implode("\n", $output));
+    //     }
+    
+    //     unlink($zipFile); // Optionally delete the zip file after extracting
+    
+    //     $endTime = microtime(true);  // End timer for unzip
+    //     $unzipDuration = $endTime - $downloadTime;
+    //     $totalDuration = $endTime - $startTime;
+    
+    //     return [
+    //         'download_duration' => round($downloadDuration, 2),
+    //         'unzip_duration' => round($unzipDuration, 2),
+    //         'total_duration' => round($totalDuration, 2),
+    //         'success' => true
+    //     ];
+    // }
+    
     public function downloadAndUnzipRelease($url) {
         $startTime = microtime(true);  // Start timer
     
@@ -28,7 +91,7 @@ class UpdateManager {
         // Open file handle
         $fp = fopen($zipFile, 'w+');
         if (!$fp) {
-            throw new Exception("Unable to open file: $zipFile");
+            throw new \Exception("Unable to open file: $zipFile");
         }
         curl_setopt($ch, CURLOPT_FILE, $fp);
     
@@ -50,15 +113,40 @@ class UpdateManager {
         $downloadTime = microtime(true);  // End timer for download
         $downloadDuration = $downloadTime - $startTime;
     
-        // Extract using 7z
-        ini_set('memory_limit', '4048M');
-        set_time_limit(300); // Ensure the script has enough time to execute
+        // Extract using ZipArchive
+        $zip = new \ZipArchive();
+        if ($zip->open($zipFile) === true) {
+            $zip->extractTo($this->tempDir); // Extract to the $this->tempDir directory
+            $zip->close();
     
-        //$command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
-        $command = "7z x -y -mmt=on '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction with multi-threading enabled
-        exec($command, $output, $returnVar);
-        if ($returnVar !== 0) {
-            throw new \Exception("Failed to unzip file: " . implode("\n", $output));
+            // Find the dynamically-named top-level directory
+            $directories = glob($this->tempDir . '/*', GLOB_ONLYDIR); // Get all directories in the $this->tempDir directory
+            if (count($directories) === 1) {
+                $topLevelDirectory = $directories[0]; // The dynamically-named top-level directory
+            } else {
+                throw new \Exception("Failed to find the dynamically-named top-level directory.");
+            }
+    
+            // Move the files and directories to the $this->tempDir directory
+            $files = new \RecursiveIteratorIterator(
+                new \RecursiveDirectoryIterator($topLevelDirectory, \RecursiveDirectoryIterator::SKIP_DOTS),
+                \RecursiveIteratorIterator::SELF_FIRST
+            );
+    
+            foreach ($files as $fileInfo) {
+                $targetPath = $this->tempDir . DIRECTORY_SEPARATOR . $files->getSubPathName();
+                if ($fileInfo->isDir()) {
+                    @mkdir($targetPath); // Create directory if it doesn't exist
+                } else {
+                    copy($fileInfo->getPathname(), $targetPath);
+                    unlink($fileInfo->getPathname()); // Remove the original file
+                }
+            }
+    
+            // Remove the top-level directory and its contents
+            $this->deleteDir($topLevelDirectory);
+        } else {
+            throw new \Exception("Failed to unzip file.");
         }
     
         unlink($zipFile); // Optionally delete the zip file after extracting
@@ -75,11 +163,45 @@ class UpdateManager {
         ];
     }
     
-        
+    private function deleteDir($dirPath) {
+        if (!is_dir($dirPath)) {
+            throw new \InvalidArgumentException("$dirPath must be a directory");
+        }
+        if (substr($dirPath, -1) != DIRECTORY_SEPARATOR) {
+            $dirPath .= DIRECTORY_SEPARATOR;
+        }
+        $files = glob($dirPath . '{,.}[!.,!..]*', GLOB_MARK | GLOB_BRACE); // Including hidden files and directories
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                $this->deleteDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dirPath);
+    }
+    
+    
+    private function copyDir($src, $dst) {
+        $dir = opendir($src);
+        @mkdir($dst);
+        while (false !== ($file = readdir($dir))) {
+            if (($file != '.') && ($file != '..')) {
+                if (is_dir($src . '/' . $file)) {
+                    $this->copyDir($src . '/' . $file, $dst . '/' . $file);
+                } else {
+                    copy($src . '/' . $file, $dst . '/' . $file);
+                }
+            }
+        }
+        closedir($dir);
+    }
+    
+    
     public function updateProjectFromManifest() {
-        $newManifestPath = $this->tempDir . '/manifest.json';
-        $currentManifestPath = $this->projectDir . '/manifest.json';
-
+        $newManifestPath = $this->tempDir . '/SharePilot/manifest.json';
+        $currentManifestPath = $this->projectDir . '/SharePilot/manifest.json';
+      
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
 
@@ -87,6 +209,9 @@ class UpdateManager {
         foreach ($newManifest as $file => $info) {
             $newFilePath = $this->tempDir . '/' . $info['directory'] . '/' . $file;
             $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+
+            echo "$newFilePath will replace $projectFilePath";
+            die();
 
             // Check if file needs to be updated or is new
             if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
