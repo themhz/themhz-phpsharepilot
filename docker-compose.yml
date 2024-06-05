@@ -6,6 +6,7 @@ services:
     ports:
       - "80:80"
       - "443:443"
+      - "9003:9003"  # Xdebug port
     volumes:
       - ./mycert.crt:/etc/ssl/certs/mycert.crt
       - ./mycert.key:/etc/ssl/private/mycert.key
