@@ -68,6 +68,7 @@ class Controller{
     public function update(){        
         $updateManager = new UpdateManager('/', 'temp');        
         $result = $updateManager->update();
+        ResponseHandler::respond($result);
     }
 
 

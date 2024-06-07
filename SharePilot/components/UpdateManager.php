@@ -286,6 +286,9 @@ class UpdateManager {
                 }
             }                 
         }
+
+        return ["result"=>true, "message"=>'finished'];
+        
         //     // Check if file needs to be updated or is new
         //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
         //         // Ensure the directory exists
