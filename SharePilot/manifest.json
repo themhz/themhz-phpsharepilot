@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.1-alpha",
+        "version": "1.0.3-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -94,7 +94,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "b623260b3ab1f18201c69a916a530a0ea33710d7d831afaba2874e70428778fc",
+                "file_content_hash": "269fe1fdefd9f4e0f4c118ca845f6042ea017ba50b16f4bc65955ab650a5d3bc",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -166,33 +166,9 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "f8eb12503994a880ae3f1ef2e24692b98e4914e20ef9356e161a9d90f05de334",
+                "file_content_hash": "a03e3a224e074f28d87c9785fc5018b52f28349f66e4aeec562bf51e4724881e",
                 "directory_path": ".",
                 "directory_hash": "7413d6453f901e939bbd840c8f0d1c7b20c2ca0e7f71741e4e07c6cf036f16c0"
-            },
-            {
-                "file": "db_docker.sql",
-                "file_content_hash": "d97851013394f5346c715d02435a002e94a8183369f2fd05c867cc6c1f93657e",
-                "directory_path": "install",
-                "directory_hash": "d14adf4925b2bf14aee639aa9220417fd316aa79580cdd573dd2ae3aa632fcb5"
-            },
-            {
-                "file": "db_php.sql",
-                "file_content_hash": "607a789a8e14775171cc9d2d2940dfbef58bd012e6932af8fb4b7e48bfce2fd4",
-                "directory_path": "install",
-                "directory_hash": "476b3b6df72ffcf5f4842be0f11497e617faa0f796bfef1370c50335facf9061"
-            },
-            {
-                "file": "index.php",
-                "file_content_hash": "7452feafc1c621a1f10c8c25c6ef105ffa9c398440fc9b893e89c62656843256",
-                "directory_path": "install",
-                "directory_hash": "fcd7fa7985124da1a1517d5fa9e821b35cb0d2414b90487d4559483c7cb600da"
-            },
-            {
-                "file": "install_complete.php",
-                "file_content_hash": "445efa219f44a323165c5b641cd45d45084fb503f7f79664345a47a69eb1acf7",
-                "directory_path": "install",
-                "directory_hash": "1de8249c835d98f28554a1a38c72c9ff3b68a29fdab37788fd790d37da7e8298"
             },
             {
                 "file": "functions.php",
@@ -556,13 +532,13 @@
             },
             {
                 "file": "Controller.php",
-                "file_content_hash": "f9996260185c5ffaf2fcbdba6c05273425a3f0ff0adcdc4631dd80ef695a80a8",
+                "file_content_hash": "b7ae981e4ec1262a2cde00ddf844780b7d400f7807385d87ef9bcf5729dd8d74",
                 "directory_path": "pages\/updates",
                 "directory_hash": "b9ba22076b57705ec4e19832a0bf533dd660a5586ac46e9aca7341ab76211fc8"
             },
             {
                 "file": "updates.php",
-                "file_content_hash": "267d55f7e28f9100e5236833c1280ba38de928771889b9fd21bb561122abf379",
+                "file_content_hash": "7309c8cdfdab4a09d3b70d9573ace8bf065d2c9287957181ec14f5ea7bbf9b3f",
                 "directory_path": "pages\/updates",
                 "directory_hash": "abb177b56666b8ff4a441600e27aa9a2f1fd018a5da157302e71a4869651c15a"
             },
@@ -583,6 +559,648 @@
                 "file_content_hash": "41a352bf67bfcffb8b8f2c074d6a8ac6f9e361fc6eb7a550c702d585fa485b88",
                 "directory_path": ".",
                 "directory_hash": "487eb7aae63600e1a2987720860c548f7aa5867dad74d1f9b164f86fa3dbb194"
+            },
+            {
+                "file": "404.html",
+                "file_content_hash": "49652c0dcfafc34010a4ab2c0f78250c07845154eb416adf4fb215bd5df0056a",
+                "directory_path": "SharePilot",
+                "directory_hash": "5f3c1a53ffdbd54c764a9c7a73cf4a9c31e39b7df58ea4d0a0cddf2d5a59fe85"
+            },
+            {
+                "file": "Database.php",
+                "file_content_hash": "2f521ceccd5ebec565f469bb98da5b54eedc58001baec382f595adedd64c1c31",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "8165f268aa5026cd4dafcc673272f9c0f6a6851049356decbb30d9e7fe85038e"
+            },
+            {
+                "file": "DeviceDetector.php",
+                "file_content_hash": "39968fca254b0bd2d3889e01cfbd0153e11b160fdebe96e7863d6ba6a72c3f4b",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "2b4124e433ef620325ca98eb31d75ebdf2d02541d71cbdc1686880814ed8a353"
+            },
+            {
+                "file": "DirectoryFilter.php",
+                "file_content_hash": "a3ca0ba96a665100daaf1eb2bff1dd3b321a5de7737f83e2f1496b32527443bb",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "1fbb05b0cbff7588d1b07847fcbfdef586e7a7fcc9f79ee1d08571bb0282e2bb"
+            },
+            {
+                "file": "EnvironmentDetails.php",
+                "file_content_hash": "db04a177414d42dd5bcb7a30b51564d8a51b73952b54d13920172a3aa7912a0d",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "f64986024837288c3565426a7a0523b6e98ca5a044fd13bda3111f154313ac8b"
+            },
+            {
+                "file": "ISocialMediaService.php",
+                "file_content_hash": "6c78f84eb4090ff2f986d149b5524fea5e0a5662797a2666f4cc75604fd41742",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "6a8800d61f092d1c70a9da9d2618fb0f1c5d1598b22cd7f86b495a3629dbdb26"
+            },
+            {
+                "file": "MasterController.php",
+                "file_content_hash": "56a791576a19cebc00fe3baa3f34e94bc0841ecddda4d79f783155bd289bf821",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "f58489fa3e0379e4aa2f31903568cc6388e28327d34217aa50c853e0a52dd939"
+            },
+            {
+                "file": "Model.php",
+                "file_content_hash": "8f0d2d756aacfe6647d7c03c673287d145cd013274b4e81de6bc7deab13ef930",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "cd14ab0b8b54e0b49315f509967882e6e2eb1d17df36761f60f1b794a22de9ea"
+            },
+            {
+                "file": "Pages.php",
+                "file_content_hash": "d86ce2111f9cf74e719e319b324c7fb2c7cd3a27e78c857bdf860beb02d01a64",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "d1926f993ceb99ae3ca284fd18c2dba3da9c4507b8c74e605db036e8b7a78fdf"
+            },
+            {
+                "file": "PostingService.php",
+                "file_content_hash": "ae9e0e7e2e990705c5cebd5b78380d37b44c80bd30c27e32ab094b6038ef42e2",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "c29341c2f459d05747c334fa6b1b1c617e7e53689c417a9b99cc4e8c030ff08e"
+            },
+            {
+                "file": "Query.php",
+                "file_content_hash": "aa40e737fd894e0ccb5c53f2ad76d88d6d6c809aceed2c199fae0d476bd61107",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "5320dc792d7882acf333a7c0df0e6b5963d07d9dc1aba69d0a663bd5a08aa403"
+            },
+            {
+                "file": "RequestHandler.php",
+                "file_content_hash": "6a89c9ba0c7fd1f489ae6753702af18c24b3bca1b359909550c127ec8fdd5889",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "bf87a3d70bea10e279d0181364f06c16ae789a517fad355445ecd052d00f7e43"
+            },
+            {
+                "file": "ResponseHandler.php",
+                "file_content_hash": "ee72e5a525f6ab0baa7548afdf20f6cc44dc6f77b237cbac08b37c15d77d3698",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "7c77b01e889e9e7cb312d4c240d00d0035aa85ad5a92c5330148efb89b845704"
+            },
+            {
+                "file": "TimeZone.php",
+                "file_content_hash": "5571ff868ca58bc29ebc4f5383a21b024419b8dd6ae7828cda850d440cbac65c",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "659dab16e24a99cdb1125c71f79210b3b1d875ad9331d83effcef0341edeb36f"
+            },
+            {
+                "file": "UpdateManager.php",
+                "file_content_hash": "ec345afd4e420c84e41340ba57fded68ed2630d2eddf3f69e78627736ceea734",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "c39fb92d160c155fab5b30106f1f4cc29bb5a059bf495480a656443df4d5248c"
+            },
+            {
+                "file": "UserAuth.php",
+                "file_content_hash": "d0fdf4af0917252b7c131c7faa911f1bd945bf508de16a3125b363484f91e68e",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "70cabe8f6b6c95276bca0c3ee000e30a1f7a491365481605e5d284424cd61d52"
+            },
+            {
+                "file": "UserAuthController.php",
+                "file_content_hash": "8ef4efd6e8f751e03913e573ae50abb3ec76dd662b87185331cec8021a374f5a",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "8b8677668dbcba482c80281c55f516a730a168582f12f1af36c03e5cb472f598"
+            },
+            {
+                "file": "Website.php",
+                "file_content_hash": "2bffcc03cf61244276a1368455a41d11b6eab715940458c99247ed247a9821ee",
+                "directory_path": "SharePilot\/components",
+                "directory_hash": "51d8ecc23d787bff4a5db8c158db532888df18347c954c9618ee2ca830b2ec56"
+            },
+            {
+                "file": "composer.json",
+                "file_content_hash": "9cc8d8d2e5349726415d6da1a1c5190e53385fde8fa15390535e5c8b6aa39f9e",
+                "directory_path": "SharePilot",
+                "directory_hash": "60becba08845d1bf219a4b7e5e40f84276a509ec12b690706cd78bd678595927"
+            },
+            {
+                "file": "composer.lock",
+                "file_content_hash": "e9d0a3c9a836f0eb2f58d246856e3b18f5193bda64974bbb71adc4262c9348f5",
+                "directory_path": "SharePilot",
+                "directory_hash": "e99b4451aad68988c01da58990dd3dbca9d066b419cf36da2e8b43a793e04f4a"
+            },
+            {
+                "file": "cookies.txt",
+                "file_content_hash": "46b05971e8b9b8f73c819f6c2ba54a5720be27e2f635488c0158b4a628468553",
+                "directory_path": "SharePilot",
+                "directory_hash": "b34211422fa53aa76fadfa4876d0049e7165438cfc27fb1b096bd6eaccdcef5a"
+            },
+            {
+                "file": "favicon.ico",
+                "file_content_hash": "594f3bd98ce3c516e8fdcdbceecc06d5738d9401a24e159a0be3a4eac8fe66b9",
+                "directory_path": "SharePilot",
+                "directory_hash": "0149cbf032c50be173cb17c1d55c35d3be73169c24566945059f81f06404bd70"
+            },
+            {
+                "file": "Facebook.php",
+                "file_content_hash": "29beae2feabc06c8c6e32effcb8d6f5f9d3624f0730b402a14424a2ba9a431a9",
+                "directory_path": "SharePilot\/implementations",
+                "directory_hash": "0f74248b1c0b8110c97de7c6c5eb17081a143f918507cc0dd94146dc5f00b2bf"
+            },
+            {
+                "file": "LinkedIn.php",
+                "file_content_hash": "018dd207680825af9d7d841c47c58093870c347fe99128a70d3185fb3fa00a34",
+                "directory_path": "SharePilot\/implementations",
+                "directory_hash": "e9e4b38868cc85685f3aca45e4c34a76bf2cc8bd42d12c5be6be96108b0f529f"
+            },
+            {
+                "file": "Reddit.php",
+                "file_content_hash": "a0491339dca1169595e6b292391deb190b8ee9de3c70cb596fb097036abcfd74",
+                "directory_path": "SharePilot\/implementations",
+                "directory_hash": "4ce6254ae0839e12b81ee298504b8f9725d9effe09b87c75a4492cbe7b0050b0"
+            },
+            {
+                "file": "Twitter.php",
+                "file_content_hash": "af3ff5fb76a17effbb9d44130fc22d56d12e7507a3d03d310706e04cb7275c1f",
+                "directory_path": "SharePilot\/implementations",
+                "directory_hash": "b2d79a0af9fd22553bedd13c40f5579e618b8c7cc9adcc80b08b67c6a19b9802"
+            },
+            {
+                "file": "index.php",
+                "file_content_hash": "7a91f34794c51225eccb86fb75dff48dbd6aba29e18b0f5e7d1e9b2b36e3e18d",
+                "directory_path": "SharePilot",
+                "directory_hash": "a9055002c34549a4903262990f8b25ee4b8513863e7fb31dd9300c550c80c21e"
+            },
+            {
+                "file": "db_docker.sql",
+                "file_content_hash": "91ec0f20f012b27202954e813defa862ddf1989a7449df1d4f547cfcd4d36430",
+                "directory_path": "SharePilot\/install",
+                "directory_hash": "544c6316d13c0f7afde49ee7c7b33490a9a95ee079196f1db1789efa16cf7c29"
+            },
+            {
+                "file": "db_php.sql",
+                "file_content_hash": "239e218dd14b62237324530ace24b15e4825e2e72628243f4e13de87684ce2c6",
+                "directory_path": "SharePilot\/install",
+                "directory_hash": "7673f8d576f602cbf8cf6da61df330edd97d87faf063355b0d00a5f3693482ea"
+            },
+            {
+                "file": "index.php",
+                "file_content_hash": "8f53feedf7872a65844b9825bad5ae4f16022a9af029a6b7a9b903fe6aa6173d",
+                "directory_path": "SharePilot\/install",
+                "directory_hash": "4f88682fd0394f4abd7de81b19ebb8c28102a91539f703890bcdfb398802eb47"
+            },
+            {
+                "file": "install_complete.php",
+                "file_content_hash": "cbb39daec756338429a600df3f042a1be4721dba0ed667ff3c90d96d2b14914f",
+                "directory_path": "SharePilot\/install",
+                "directory_hash": "66e395a04d1aca04f2778059748ee8dc049676eb53fe2294cdfb0971f42dd48b"
+            },
+            {
+                "file": "functions.php",
+                "file_content_hash": "382d7daa6f1d28c4f39fe23c8d4b2136906e4e763c8f9ec46dcd916aeaeba47d",
+                "directory_path": "SharePilot\/libs",
+                "directory_hash": "201393ac11452cc26fc841c20d9197bc0d4964dfb773b02022c79e9dcf9a42df"
+            },
+            {
+                "file": "logfile.log",
+                "file_content_hash": "39bf5dc37e284089e351ebc0cfd019df93b60fa1fac61d6776dc57d81ca29287",
+                "directory_path": "SharePilot",
+                "directory_hash": "2d4b74392d9b5aa756d551d440e9f77bcdbfbcf843501106147d49795385374d"
+            },
+            {
+                "file": "Channels.php",
+                "file_content_hash": "6f4275292428341e65ff92f7e8537eeca07bc22dcfa15ded415d2d80cd5947bc",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "76b7204b4fe9dc25a582ae5e46b376b49fa38d1832467483cc0d6666de2eeeda"
+            },
+            {
+                "file": "Channel_social_keys.php",
+                "file_content_hash": "a6f53d8fd89e5ec338e06c32b831f20673bd9ae716b2789f1367606417a39fe0",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "dce6ce49918a9e48e932bed6359670bcd927ade94b8fc85f31139513dbb01c9f"
+            },
+            {
+                "file": "Device_types.php",
+                "file_content_hash": "bb7d4e9ae5e9bd783169ea875ef961fd7eb5ee07fed494a1535f49bbbff30889",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "ee697fdeee043489605bca5575699a7d80fbfe2a73fa09661fa5fab62dd05e1d"
+            },
+            {
+                "file": "Lists.php",
+                "file_content_hash": "fb8de0955ab069dc0546f113cec8d83a1c8e3bcdb1fb6eda71837ad3ffee28c0",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "5ab61a28760506094f8247c69c7b92f04274ce177d064e7b7f89ee4798c07081"
+            },
+            {
+                "file": "Scheduled_posts.php",
+                "file_content_hash": "4cb5cfb4c0b13ea6d73418e867c978608f80c8545358062815696496628a5d8e",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "7f756aa56853537c0bf1dcd7544b7a480ceabf76b7952d61a311849330b60f78"
+            },
+            {
+                "file": "Services.php",
+                "file_content_hash": "e7e87b7515de64631e39456b286b9f6e4ced38a5617434aaf96b7b90e5a3010f",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "3eb321b53d81ba52143b395c7a710425058652b16f4f46c55eedd78336523664"
+            },
+            {
+                "file": "Service_categories.php",
+                "file_content_hash": "4570cd243bf4cdeceaa13074ac66066b7f5b83f453303f79bbbb31b573597633",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "b050f3df583de80970faefc8242c3a6ea0cc4e28c3d23d3733ac2b417c8f79c8"
+            },
+            {
+                "file": "Settings.php",
+                "file_content_hash": "dc936b24e1818339e5906dc0ee44134168e60f93a579c77ef90e5b5700ccfbd0",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "de09e18ebd2aec37ec8f761cf6311293e39a5f7c390687c0068add50c3c1be1a"
+            },
+            {
+                "file": "Status.php",
+                "file_content_hash": "8536016f501656b2a0e2d8f0a4db5be0e1637b83e87358ee7e121839d300623c",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "fa87f3eeace7336fafdfa913d0cfc348bbfd944ed3d453977f54f9e87c209409"
+            },
+            {
+                "file": "Subscribers.php",
+                "file_content_hash": "c0b8986591d396765814317a0ed15ed867c2e00fc47f5fdd02c2e8e82c5d4357",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "b7d7b2e12989001ad08d74806a09ee1524cc7d0b9e5cfc5e3e4efa44fb0a47f6"
+            },
+            {
+                "file": "subscriptions.php",
+                "file_content_hash": "66c95ee42ab3b646df6137cfaf8ceeb975e1f12cfcb1082c5a05419ca92b4bdd",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "591fcba87d8f78448a21497886037ced64b102013699749957eb5020d8a9a68e"
+            },
+            {
+                "file": "Subscription_tokens.php",
+                "file_content_hash": "44d31739a9165f41c10825a761c0ead3c80762a46dd8beb724204bad95568f5a",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "fa9b5f15e360bb6c3bcc6fb2df7aa71007caab059c400654bfb80c71aa9bddc4"
+            },
+            {
+                "file": "Subscription_types.php",
+                "file_content_hash": "79d08242d839b2dba9cae0586b3719ab53d30217524d16445fdbac9f96439a00",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "46885c67c390389b4a82cebfbb1261537b07828d9638663239f719b39b689898"
+            },
+            {
+                "file": "Topics.php",
+                "file_content_hash": "5bb4b9fcae931c58ef44aaafe5efdccef9bbd17e51de5c12b86a9daa6a0420b9",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "41b16021407f7e1600a6304daf510970fa31a233f6c0a84835d6b798bd159036"
+            },
+            {
+                "file": "Urls.php",
+                "file_content_hash": "c7eeca538492c40f2715cb66131951001d9667927b1eb064a843b60f20ab6c83",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "00078ff8b34191df2d5fae7f89a895beee2d1ca5d1761e1e52ddbc1c2d5e1443"
+            },
+            {
+                "file": "Users.php",
+                "file_content_hash": "b7e272c3a56608c6c674de45cc7a7139ad4ed7d7ebc3caca9ae7acd2f7fa78a5",
+                "directory_path": "SharePilot\/models",
+                "directory_hash": "c28636751f1b4da7d06e0c1b3a57aa0d918fa123c57f09acf2b7312e70306f49"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "directory_path": "SharePilot\/newpage",
+                "directory_hash": "b7a91f3d0e5bf5d4eb2606e1da59b747d3683429ff6cc67fff909f630dd6ab7f"
+            },
+            {
+                "file": "newpage.php",
+                "file_content_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "directory_path": "SharePilot\/newpage",
+                "directory_hash": "763db4f02c9f50020c33c6b64738c1d00b2751f87f47c1dd166f63be9b201ac1"
+            },
+            {
+                "file": "channels.php",
+                "file_content_hash": "1c6567b559293019e034788a40557a5e4d64ff21dd028a88ca2a0b228101442b",
+                "directory_path": "SharePilot\/pages\/channels",
+                "directory_hash": "7d222f75e2fc3a60e54e21f7d9993a10c1e659ee5fd650f6505591a8f807f274"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "ac829a893639c7f403aaaecc4a3c0628dc8b5de0778da18593a12d7d4eec5764",
+                "directory_path": "SharePilot\/pages\/channels",
+                "directory_hash": "8e26286972ba6205796f186f0e86f7ad1dac4354e08a47061373a3beb5dd95c2"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "6e33c2734882dc784ec9005d5f90e17238dad9c843fc57b9a850105af0a452b6",
+                "directory_path": "SharePilot\/pages\/cron",
+                "directory_hash": "f90373fb3c5ff08e7a20cb3fff464f45cdb813350b1e63e13c1d6e8822ddb1f8"
+            },
+            {
+                "file": "cron.php",
+                "file_content_hash": "b94b1a64dde34ebd41d81c296743b9e144ec4bd5746e8d23b4949939e931a311",
+                "directory_path": "SharePilot\/pages\/cron",
+                "directory_hash": "64a5d83946c455fd952c9de556ebfc3914ea00fd77df674f3395e89a88212a72"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "cd0a9ecc08fc2f4fc308482b10f817a424644a048f33c8d7362cd23343acffd8",
+                "directory_path": "SharePilot\/pages\/default",
+                "directory_hash": "80060b7aae45b18b0075c124052c6affc72f57c8203e2a8af8db0955f382c552"
+            },
+            {
+                "file": "default.php",
+                "file_content_hash": "967484be9d3a0685df9c8de96964fc397092a22f8d180762227f3d9b6dd85a01",
+                "directory_path": "SharePilot\/pages\/default",
+                "directory_hash": "53c23626705deeb59c55205a271039aec9109605ab1ff58238a16db8599c5a5b"
+            },
+            {
+                "file": "favicon.ico",
+                "file_content_hash": "8b1060f193768c55bc48dede8ba8da9be6c93f8e6dcae946e36f1a8956b7269b",
+                "directory_path": "SharePilot\/pages\/home\/assets",
+                "directory_hash": "d896b69c464243814268e12f48544ddff175c09b8f51ff45518646c83ef31286"
+            },
+            {
+                "file": "app-store-badge.svg",
+                "file_content_hash": "4cfabcfdbec9a5cd903190f150028743f38c3533b53ea21c6e4dd35a52a80383",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "ce4c3e773daa9ce16c23ce61f1bf38c5671a023ed330c4abb00c9d037a411039"
+            },
+            {
+                "file": "demo-screen.mp4",
+                "file_content_hash": "6e89fab1146aff1513d0cfb4ceae4b825deaf751d2912bafa84b53a83f04c8c6",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "c4890cd0c38b991cf4d30d98591db7bfaddb879810db8a5995a3927b20eb4ef8"
+            },
+            {
+                "file": "google-play-badge.svg",
+                "file_content_hash": "53407f55fb2ab5b0790b84927f142aaa6e76247ac52122dd528f9a0551db7619",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "69579e8e32b1d26aa1bd85de74650c044db787a81763f4e449765d0538afb80c"
+            },
+            {
+                "file": "img1.png",
+                "file_content_hash": "896b3bedeca49f7f589e0e74ecd1017b0af711c74cbac6bc20c3cc0831519d78",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "41a8bb7338bd435e9eaa758e47470dfb54c89d15d14defe4ccd2421b5e61a7e6"
+            },
+            {
+                "file": "img1.webp",
+                "file_content_hash": "46ba857e1d7fba2b55a9e0332278f4cb6e33e168c04b8a3afbc3cc930c61e6c8",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "e8a6d362f0c32985c3e8d5ce29ef544061734cdd97e2021ea03f887baed1978d"
+            },
+            {
+                "file": "portrait_black.png",
+                "file_content_hash": "9e70f493e833cfa6fb2d53603b2d5d0cec2743fced164b9cb5581035a2867c2d",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "45243d37c2c0a597e554d47b11bb04d694752f95f97120694db4827609821232"
+            },
+            {
+                "file": "preview.jpg",
+                "file_content_hash": "f5508eae298f1eb5d40e77c910d7aee8af9511c8f8ac972627572ef1ef09ac1e",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "5f541eed395f858170d14c42a7cbfc9e9144fe4dcefb67249b00169c78be83ff"
+            },
+            {
+                "file": "Screenshot 2024-03-21 160632.png",
+                "file_content_hash": "66894ed75139233789ec05fa68aa502b2cba91cbd51ff2e0ff2b1f0f736a8470",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "08e75b1eac3779868b47035d3cfdc09d8bf9e2dea3573f8fae00faf8fdc29810"
+            },
+            {
+                "file": "tnw-logo.svg",
+                "file_content_hash": "6890b9f2341199fe53433ca81f2825cd923f609bc411411df78ae2ad7afc0bea",
+                "directory_path": "SharePilot\/pages\/home\/assets\/img",
+                "directory_hash": "aa37906f05cda4fe5dd5ece459af8fa1fee8089405d4535fb3ae1f2f8ef4db8e"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "cd0a9ecc08fc2f4fc308482b10f817a424644a048f33c8d7362cd23343acffd8",
+                "directory_path": "SharePilot\/pages\/home",
+                "directory_hash": "674658fe56ca462cafaa97e90c50e7b7e9f0a186dddf95eff15591eb8b9e7e54"
+            },
+            {
+                "file": "styles.css",
+                "file_content_hash": "efe9e06b37d37f217e698336c6df613be04325656573a9104ac7b36175c2842e",
+                "directory_path": "SharePilot\/pages\/home\/css",
+                "directory_hash": "ef6745e03c9479154ef1afbc5fbd09e4c6e9b74d806fc4f3325c10fbcc9bb752"
+            },
+            {
+                "file": "home.php",
+                "file_content_hash": "0f4367de531b5f9ee6b315131958e685e3a8b863156d4fbcfc6febecb18b7f1f",
+                "directory_path": "SharePilot\/pages\/home",
+                "directory_hash": "87d9ece7059d0b393ae312f99d714a27050155c0a78ed0c5ec96813a1277af58"
+            },
+            {
+                "file": "scripts.js",
+                "file_content_hash": "1f7274567214c21f0dba2d5ef4f85ef4e44ab0378741679bbd7bfd5aa906e367",
+                "directory_path": "SharePilot\/pages\/home\/js",
+                "directory_hash": "ee48d7f4385064eb3fc0f1b452708d2326f46fb19d44eb59201ef096a8def0e9"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "70224a8feb5667aaa341b8a9b60bf205fa7164c86f75cb2f0ea7f6e441a8a32a",
+                "directory_path": "SharePilot\/pages\/links",
+                "directory_hash": "dd242d910579326af79f757e882da3dc35a887791879c8b4fdc2bd549ed6c044"
+            },
+            {
+                "file": "links.php",
+                "file_content_hash": "717f03aae7f8108ce224081c94efc1853cbc0f33351f173a15464eb88c69299a",
+                "directory_path": "SharePilot\/pages\/links",
+                "directory_hash": "0e4706cfc24f3f25d5a5c3526dfa44341899861c76e8944ad4af813ec0b2e515"
+            },
+            {
+                "file": "addurlmodal.php",
+                "file_content_hash": "7d53952d83e28ec2be3bfb6a8be63527609bd8f5f0eb2761881fcbeabce7d59f",
+                "directory_path": "SharePilot\/pages\/links\/modals",
+                "directory_hash": "97c4526838be4e93c3aab59e86be32c330c4823edcb09fc87efdd6b6c55a5651"
+            },
+            {
+                "file": "checkurlmodal.php",
+                "file_content_hash": "2908a64d6b66fe6c3f4b2bc538043030b0ec5837ed66a319c4aa93da0f5ba493",
+                "directory_path": "SharePilot\/pages\/links\/modals",
+                "directory_hash": "8e046a7350864c0f33c5f438477de581a4526e3c3b8b41f0d4e9d64ce7adda45"
+            },
+            {
+                "file": "editurlmodal.php",
+                "file_content_hash": "a3537a882fa147fbe041b70cad92c6364d00993e83536409bf52c3e12c3b52f5",
+                "directory_path": "SharePilot\/pages\/links\/modals",
+                "directory_hash": "d6f189b394bd8e65b7ba519582cd0c2e5f088839a8fdcbfd79563a3356b158a3"
+            },
+            {
+                "file": "newlistmodal.php",
+                "file_content_hash": "49c9a92d663ce77e7440ce456b5e7600e9f03896c80fe1c7a11ef9959975186f",
+                "directory_path": "SharePilot\/pages\/links\/modals",
+                "directory_hash": "afd6260ad27bedca7a79e391bbcf0342db824c7eabdc883b3e8abb367107ee77"
+            },
+            {
+                "file": "urls.php",
+                "file_content_hash": "f2c05212318a849365073433b3d03ae183aacdbc42fe2a83f1ee16911b0b8b0e",
+                "directory_path": "SharePilot\/pages\/links",
+                "directory_hash": "e0e69639abc5f2797fef5e5c53c539f1c4b149c5b54e31a263c2c9c5fa18d324"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "28b1a4e6021c50fa9576414aec80e26d7e72bb024824e3083a96f333835cbe5f",
+                "directory_path": "SharePilot\/pages\/lists",
+                "directory_hash": "4029e248b1ef75d6fe65c26c96a5c8b307ca8e0f5f41bccaa43186efb9ca2624"
+            },
+            {
+                "file": "lists.php",
+                "file_content_hash": "86e0c4ea698f18ed01e0bda94e643a0669d035ba66030586ee854dec6adc060b",
+                "directory_path": "SharePilot\/pages\/lists",
+                "directory_hash": "3075b77f19f4e95f589d0a3487defca5b453abb95711e351e458ea6009ca6a8f"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "86d2dd63c0902725d467a5db97843c35ae6234da9ffa10f9fd3b88fa505eadd1",
+                "directory_path": "SharePilot\/pages\/login",
+                "directory_hash": "0745c43b56f3d30b8309d1dc96a382f70071289286ad73c89b907a76ce6fe295"
+            },
+            {
+                "file": "login.php",
+                "file_content_hash": "64663ee69e52acd9006d07972201bd6e42cc58ddaee4aedd012c7eb9000b4433",
+                "directory_path": "SharePilot\/pages\/login",
+                "directory_hash": "96bf7fe7f4b1e570074dbb1ced173e9dc1f1841b18f192f603613257c1f689e1"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "1d9720cd2d2eab8fdbf25726cbfdc326d0764aeb1f14ca45c37198fb4e89a4c9",
+                "directory_path": "SharePilot\/pages\/pushnotifications",
+                "directory_hash": "5a4469b555bd142af025ad4cbd5493b998a8459de0f11bdfafcbeb6670ba7018"
+            },
+            {
+                "file": "pushnotifications.php",
+                "file_content_hash": "81a579fab42a3979805220156b818c9ab8dc7871603ac7468a5b520306556f35",
+                "directory_path": "SharePilot\/pages\/pushnotifications",
+                "directory_hash": "0135c533a5212c2bca5a5c97f4a47e206457436bba163ceda0ca2eb8dc3b37de"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "7c6a31424e54141a4fcc951ca3af0d41aeaf84034a86f871f2f4cd4ce8552f7f",
+                "directory_path": "SharePilot\/pages\/schedule",
+                "directory_hash": "e6ebde6a089f69defd92b8ee4b4326d30edd9d6d662ad4d68dfeccef908f7012"
+            },
+            {
+                "file": "schedule.php",
+                "file_content_hash": "2979befddb672c4dbed685b5fe56a783c99c8b80c3c8770c0b06a754c45a85a1",
+                "directory_path": "SharePilot\/pages\/schedule",
+                "directory_hash": "964f19b9cffce7095856f581125c355fa2721039562d35f5aff8aaaf248bc29b"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "c5abdb07ce2c3ac56fd602ee8a5d609fc76ca0e8819acee8acc4afcf0498243a",
+                "directory_path": "SharePilot\/pages\/services",
+                "directory_hash": "557c5d00c8704d544e288df87ba1cfe93e3b72c9be9c2faba83699810b365223"
+            },
+            {
+                "file": "services.php",
+                "file_content_hash": "a1efffe41857d61415af39c8f777f7fd3b8ad32416cee4fa1339b950a26c6eec",
+                "directory_path": "SharePilot\/pages\/services",
+                "directory_hash": "8420ea3d9b1bcfa466224b960190a2833e2756b4407500c8bc6a4413085114ea"
+            },
+            {
+                "file": "controller.php",
+                "file_content_hash": "acbe648b8634774e0e1305fac186c83d0495220a5ff6b3a411161ee9d3435ff3",
+                "directory_path": "SharePilot\/pages\/settings",
+                "directory_hash": "e5228bef0275cb1f7e350b299b79b01313bbe9fe6fb22779465100efb0e436fd"
+            },
+            {
+                "file": "settings.php",
+                "file_content_hash": "53267884d59c93031ab58fee1bd7a28d9a79b30799945984f0a30927f3c4af11",
+                "directory_path": "SharePilot\/pages\/settings",
+                "directory_hash": "b53d13bf8930179e2bf5fc4938123ed8b1c085148af29f701818634ae33a8358"
+            },
+            {
+                "file": "timezone.php",
+                "file_content_hash": "dbb0065ebbf2e93f557db06a29c1ba55ecf66f9d1c20e28e37278fcdd14a9d60",
+                "directory_path": "SharePilot\/pages\/settings",
+                "directory_hash": "3dd27c02030ff02be2ccf784250ae65b0178ad46d37d9fd4a24482137d88ea6f"
+            },
+            {
+                "file": "users.php",
+                "file_content_hash": "347aed59a724fe61864ba93fd8a7ebf2467e081c160cad084191e544e1ea6dd7",
+                "directory_path": "SharePilot\/pages\/settings",
+                "directory_hash": "92be9d7e089a0b1e71ce46ed5b37f45febd4e2a7d69e3948c869ee762ba025cd"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "adfdca6c11496cbb8bda703a91492f4ee7d249d0539b5431483344e0c2fce1a8",
+                "directory_path": "SharePilot\/pages\/testservice",
+                "directory_hash": "8f893ad83d92b9ec4fc5bcf99aad05e2cac581b1d4d22e1485080fb25584908d"
+            },
+            {
+                "file": "testservice.php",
+                "file_content_hash": "5548ba66c3d94cbdb1894a5018570fab1fbdb13b30a2e408e7537723f40bea17",
+                "directory_path": "SharePilot\/pages\/testservice",
+                "directory_hash": "14e5ab98fa7d6ed5cbbb9a1d8ecf1514396f97f4aeec1db6d4ae57682b6a3c01"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "775ae1b64c67cee06a2e284e94b82a7fca9e78199a9e3c5429c1a045a19142fa",
+                "directory_path": "SharePilot\/pages\/updates",
+                "directory_hash": "53dda93bab1288ab151cbdb5a9843de86b1e962d8c8ffb3606679fd31b038e63"
+            },
+            {
+                "file": "updates.php",
+                "file_content_hash": "bbfe6305823b562d5cdbb62ed5571e79db0fbc08b61ddf377992a6a7686e9303",
+                "directory_path": "SharePilot\/pages\/updates",
+                "directory_hash": "6c2095972aa5102a0fe96546fc406af45d7dd38a5d07f8d46d55698eb4fa096e"
+            },
+            {
+                "file": "Controller.php",
+                "file_content_hash": "683f1dabac4f21bb694813bbcf0583e3c08a3e56da1fbca0bdb776a5e722a0ef",
+                "directory_path": "SharePilot\/pages\/youtube",
+                "directory_hash": "7f4989d4dcfc1f37ed2d2aa6a6c0b0810216dfb2c2e7efa3e5083ba6eec8a03c"
+            },
+            {
+                "file": "youtube.php",
+                "file_content_hash": "31b2b5b7c5cc10d07ce733dde5f7b047b3dfce6f1c35888d27ff33572522f8ba",
+                "directory_path": "SharePilot\/pages\/youtube",
+                "directory_hash": "b798a908416e830f6bf433e8f751449ebdce64b12d0c8348f4f0dddd0c974b14"
+            },
+            {
+                "file": "pvKey.json",
+                "file_content_hash": "a1ce47df39842b33a901e9b618bc850b2847929b4e45dcae7a98e1b98c3e474c",
+                "directory_path": "SharePilot",
+                "directory_hash": "1b1cac1831b9093d1d8e64b71027c1c77e9d06a9e0f035371616d8e1721611f3"
+            },
+            {
+                "file": "sw.js",
+                "file_content_hash": "ade4ab2330ce21ddd89bdb7f8868d929d482815eb2bb47f92dad1ce6c3014e62",
+                "directory_path": "SharePilot",
+                "directory_hash": "a23c657dc39711761834c7d3450d1c68764b0f71223a1ea986c244d483f19020"
+            },
+            {
+                "file": "login.css",
+                "file_content_hash": "b09258ffa7c067a7769a568a136ba7568e760d36bd665e4f5d4fe1d5e9baf1f7",
+                "directory_path": "SharePilot\/template\/css",
+                "directory_hash": "3dc38151ea2284fe569d6e2c230197abf5a75600e9b7773242b345a29358f049"
+            },
+            {
+                "file": "style.css",
+                "file_content_hash": "1a656b93d7b88e744703af317b7b5d05600f28daa3a03e5d5cb60ecada2a4094",
+                "directory_path": "SharePilot\/template\/css",
+                "directory_hash": "879aa47229c9f63ae40f1e6082d09844e0bc03e168eb491105ec0ce8469cf166"
+            },
+            {
+                "file": "logo-no-background-mini.png",
+                "file_content_hash": "dadba232b8811abc649ad388a4fff01e2f4f18f2c1ddd436c0e8092a097eb366",
+                "directory_path": "SharePilot\/template\/images",
+                "directory_hash": "085a23c6e61d69e029ae402eed17226569f51bbb32afc33650cae622a68031b9"
+            },
+            {
+                "file": "processing.gif",
+                "file_content_hash": "5934401cff14cc144306119b65018145490a9569796180d201bea3629f82b144",
+                "directory_path": "SharePilot\/template\/images",
+                "directory_hash": "28de0044fa0bb5442c77df7a58a6e41162e728c238d60ab88eb461973f06bb17"
+            },
+            {
+                "file": "index.php",
+                "file_content_hash": "4bd61615a2af366f9fad399db6f4b5809fa49f2c98cace7615dc1cfa70d6ce47",
+                "directory_path": "SharePilot\/template",
+                "directory_hash": "8e27d8d2a5f6506dd16f8733599bb3a50718d1549fd5eae06bcfa2cc06de25a9"
+            },
+            {
+                "file": "calendar.js",
+                "file_content_hash": "2a2bed1cc346f8b44331ea3b8cc5477759ddeada9d801229d4f0c198b503ea62",
+                "directory_path": "SharePilot\/template\/js",
+                "directory_hash": "1dee12f57c1a00a8bd329e538f46a7a1c63d1a7950eac13dfda8bfb6db4d27a2"
+            },
+            {
+                "file": "main.js",
+                "file_content_hash": "c7f5072772b57c25ef2d38ca2fe8037f585bd2d6f0123ba66ff49a4472e0335a",
+                "directory_path": "SharePilot\/template\/js",
+                "directory_hash": "50a9456c9865a6ee8132f9f184cdd5de639db8b1c347649a97d7b9444b593237"
             },
             {
                 "file": "sw.js",
