@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.3-alpha",
+        "version": "1.0.4-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -169,6 +169,30 @@
                 "file_content_hash": "a03e3a224e074f28d87c9785fc5018b52f28349f66e4aeec562bf51e4724881e",
                 "directory_path": ".",
                 "directory_hash": "7413d6453f901e939bbd840c8f0d1c7b20c2ca0e7f71741e4e07c6cf036f16c0"
+            },
+            {
+                "file": "db_docker.sql",
+                "file_content_hash": "d97851013394f5346c715d02435a002e94a8183369f2fd05c867cc6c1f93657e",
+                "directory_path": "install",
+                "directory_hash": "d14adf4925b2bf14aee639aa9220417fd316aa79580cdd573dd2ae3aa632fcb5"
+            },
+            {
+                "file": "db_php.sql",
+                "file_content_hash": "607a789a8e14775171cc9d2d2940dfbef58bd012e6932af8fb4b7e48bfce2fd4",
+                "directory_path": "install",
+                "directory_hash": "476b3b6df72ffcf5f4842be0f11497e617faa0f796bfef1370c50335facf9061"
+            },
+            {
+                "file": "index.php",
+                "file_content_hash": "7452feafc1c621a1f10c8c25c6ef105ffa9c398440fc9b893e89c62656843256",
+                "directory_path": "install",
+                "directory_hash": "fcd7fa7985124da1a1517d5fa9e821b35cb0d2414b90487d4559483c7cb600da"
+            },
+            {
+                "file": "install_complete.php",
+                "file_content_hash": "445efa219f44a323165c5b641cd45d45084fb503f7f79664345a47a69eb1acf7",
+                "directory_path": "install",
+                "directory_hash": "1de8249c835d98f28554a1a38c72c9ff3b68a29fdab37788fd790d37da7e8298"
             },
             {
                 "file": "functions.php",
