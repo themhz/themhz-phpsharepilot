@@ -266,24 +266,26 @@ class UpdateManager {
 
     public function update() {        
         
-        $newManifestPath = $this->tempDir . '/SharePilot/manifest.json';
+        $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR .'SharePilot'.DIRECTORY_SEPARATOR;
+        $newManifestPath = $tempDirProjectFilesPath.'manifest.json';
         $currentManifestPath = 'manifest.json';
       
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
-
-        //print_r($newManifest);
-
         
         // Update and add new files
-         foreach ($newManifest as $file => $info) {
-            print_r($file);
-        //     $newFilePath = $this->tempDir . '/' . $info['directory'] . '/' . $file;
-        //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
-
-        //     echo "$newFilePath will replace $projectFilePath";
-        //     die();
-
+        foreach ($newManifest["sharepilot"]["files"] as $newfile) {
+            $currentFile = $this->findFileInJson($newfile);
+            if($currentFile!=null){
+                if($currentFile["file_content_hash"]!=$newfile["file_content_hash"]){
+                    if($newfile["directory_path"]=="."){               
+                        echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n";                                  
+                    }else{                
+                        echo $tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"]." will replace :". $currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"]. "\n";                
+                    }
+                }
+            }                 
+        }
         //     // Check if file needs to be updated or is new
         //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
         //         // Ensure the directory exists
@@ -292,7 +294,7 @@ class UpdateManager {
         //         }
         //         copy($newFilePath, $projectFilePath);
         //     }
-         }
+        //}
 
         // // Remove old files
         // foreach ($currentManifest as $file => $info) {
@@ -302,9 +304,20 @@ class UpdateManager {
         //     }
         // }
 
-        // //echo "Update completed successfully.";
-        // return;
+      
 
+    }
+
+    public function findFileInJson($newfile){
+        $currentManifestPath = 'manifest.json';
+        $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
+        foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
+           if($currentFile["file"]== $newfile["file"] && $currentFile["directory_path"] == $newfile["directory_path"]){
+                return $currentFile;
+           }
+        }
+
+        return null;
     }
         
 }

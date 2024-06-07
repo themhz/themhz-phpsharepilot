@@ -1,9 +1,7 @@
 <?php
 
- require_once __DIR__ . '/vendor/autoload.php';
- use SharePilotV2\Components\Website;
+    require_once __DIR__ . '/vendor/autoload.php';
+    use SharePilotV2\Components\Website;
+    $website = new Website();
+    $website->start();
 
- $website = new Website();
- $website->start();
-
- //lalalal
