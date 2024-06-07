@@ -33,7 +33,8 @@ class Controller{
         ResponseHandler::respond($result);
     }
    
-    public function update(){     
+
+    public function downloadupdate(){     
         $updateManager = new UpdateManager('/', 'temp');        
         $result = $updateManager->checkupdate();
 
@@ -44,7 +45,7 @@ class Controller{
                 $result = $updateManager->downloadAndUnzipRelease($url);         
                                
                 if ($result["success"]) {
-                    $updateManager->updateProjectFromManifest();
+                    //$updateManager->updateProjectFromManifest();
                     //asasdasd
                     ResponseHandler::respond(["result"=>true, 
                     "message"=>"was downloaded and unziped",
@@ -62,28 +63,13 @@ class Controller{
             ResponseHandler::respond($result);
         }
         
-
     }
 
-    // public function generatechecksum(){        
-    //     try {
-    //         $updateManager = new UpdateManager('/', 'temp');           
-    //         $message = $updateManager->generateManifest("v1.0.3-alpha");
-    //         //echo "Checksum: " . $checksum;
-    //         ResponseHandler::respond(["result"=>true, "message"=>$message]);
-    //     } catch (Exception $e) {
-    //         // Here you might log the error and display a user-friendly message
-    //         //error_log($e->getMessage()); // Log the error to the server's error log or your custom log
-    //         ResponseHandler::respond(["result"=>false, "message"=>$e->getMessage()]);            
-    //     }
-    // }
+    public function update(){        
+        $updateManager = new UpdateManager('/', 'temp');        
+        $result = $updateManager->update();
+    }
 
-    // public function updateVersionOnManifest(){
-    //     $updateManager = new UpdateManager('/', 'temp');           
-    //     $message = $updateManager->updateVersionOnManifest("1.0.2-beta");
-
-    //     ResponseHandler::respond($message); 
-    // }
 
    
 

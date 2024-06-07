@@ -3,6 +3,7 @@ namespace SharePilotV2\Components;
 use SharePilotV2\Components\EnvironmentDetails;
 use SharePilotV2\Components\DirectoryFilter;
 
+
 class UpdateManager {    
     private $tempDir;
     private $projectDir;
@@ -12,72 +13,11 @@ class UpdateManager {
         $this->tempDir = $tempDir;
     }
 
-    // public function downloadAndUnzipRelease($url) {
-    //     $startTime = microtime(true);  // Start timer
-    
-    //     $zipFile = $this->tempDir . '/release.zip';  // Path to save the downloaded zip file
-    
-    //     // Initialize curl
-    //     $ch = curl_init();
-    //     curl_setopt($ch, CURLOPT_URL, $url);
-    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);  // Direct output to file instead of memory
-    //     curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-    //     curl_setopt($ch, CURLOPT_TIMEOUT, 300); // Increase timeout for large files
-    //     curl_setopt($ch, CURLOPT_USERAGENT, 'sharepilot (https://sharepilot.gr)');
-    
-    //     // Open file handle
-    //     $fp = fopen($zipFile, 'w+');
-    //     if (!$fp) {
-    //         throw new Exception("Unable to open file: $zipFile");
-    //     }
-    //     curl_setopt($ch, CURLOPT_FILE, $fp);
-    
-    //     // Execute download
-    //     curl_exec($ch);
-    //     if (curl_errno($ch)) {
-    //         fclose($fp); // Close the file handle
-    //         unlink($zipFile); // Delete partial file
-    //         throw new \Exception('Curl error: ' . curl_error($ch));
-    //     }
-    //     fclose($fp);
-    //     curl_close($ch);
-    
-    //     // Check if download was successful
-    //     if (!filesize($zipFile)) {
-    //         throw new \Exception("Failed to download file.");
-    //     }
-    
-    //     $downloadTime = microtime(true);  // End timer for download
-    //     $downloadDuration = $downloadTime - $startTime;
-    
-    //     // Extract using 7z
-    //     ini_set('memory_limit', '4048M');
-    //     set_time_limit(300); // Ensure the script has enough time to execute
-    
-    //     //$command = "7z x -y '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction
-    //     $command = "7z x -y -mmt=on '$zipFile' -o'{$this->tempDir}'"; // Using 7z for extraction with multi-threading enabled
-    //     exec($command, $output, $returnVar);
-    //     if ($returnVar !== 0) {
-    //         throw new \Exception("Failed to unzip file: " . implode("\n", $output));
-    //     }
-    
-    //     unlink($zipFile); // Optionally delete the zip file after extracting
-    
-    //     $endTime = microtime(true);  // End timer for unzip
-    //     $unzipDuration = $endTime - $downloadTime;
-    //     $totalDuration = $endTime - $startTime;
-    
-    //     return [
-    //         'download_duration' => round($downloadDuration, 2),
-    //         'unzip_duration' => round($unzipDuration, 2),
-    //         'total_duration' => round($totalDuration, 2),
-    //         'success' => true
-    //     ];
-    // }
-    
+        
     public function downloadAndUnzipRelease($url) {
         $startTime = microtime(true);  // Start timer
-    
+        $this->emptyDirectory($this->tempDir);
+      
         $zipFile = $this->tempDir . '/release.zip';  // Path to save the downloaded zip file
     
         // Initialize curl
@@ -113,6 +53,7 @@ class UpdateManager {
         $downloadTime = microtime(true);  // End timer for download
         $downloadDuration = $downloadTime - $startTime;
     
+       
         // Extract using ZipArchive
         $zip = new \ZipArchive();
         if ($zip->open($zipFile) === true) {
@@ -180,7 +121,31 @@ class UpdateManager {
         }
         rmdir($dirPath);
     }
-    
+
+    public function emptyDirectory($dir) {
+
+     
+        if (!file_exists($dir) || !is_dir($dir)) {
+            return false;
+        }
+
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') {
+                continue;
+            }
+            
+            $itemPath = $dir . DIRECTORY_SEPARATOR . $item;
+           
+            if (is_dir($itemPath)) {
+                $this->emptyDirectory($itemPath); // Recursively empty subdirectories
+                rmdir($itemPath); // Remove the now-empty subdirectory
+            } else {               
+                unlink($itemPath); // Delete file
+            }
+        }
+
+        return true;
+    }
     
     private function copyDir($src, $dst) {
         $dir = opendir($src);
@@ -195,47 +160,8 @@ class UpdateManager {
             }
         }
         closedir($dir);
-    }
-    
-    
-    public function updateProjectFromManifest() {
-        $newManifestPath = $this->tempDir . '/SharePilot/manifest.json';
-        $currentManifestPath = $this->projectDir . '/SharePilot/manifest.json';
-      
-        $newManifest = json_decode(file_get_contents($newManifestPath), true);
-        $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
-
-        // Update and add new files
-        foreach ($newManifest as $file => $info) {
-            $newFilePath = $this->tempDir . '/' . $info['directory'] . '/' . $file;
-            $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
-
-            echo "$newFilePath will replace $projectFilePath";
-            die();
-
-            // Check if file needs to be updated or is new
-            if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
-                // Ensure the directory exists
-                if (!is_dir(dirname($projectFilePath))) {
-                    mkdir(dirname($projectFilePath), 0777, true);
-                }
-                copy($newFilePath, $projectFilePath);
-            }
-        }
-
-        // Remove old files
-        foreach ($currentManifest as $file => $info) {
-            $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
-            if (!isset($newManifest[$file])) {
-                unlink($projectFilePath);
-            }
-        }
-
-        //echo "Update completed successfully.";
-        return;
-    }
-
-
+    }    
+        
 
     public function checkupdate(){
         $url = "https://api.github.com/repos/themhz/themhz-phpsharepilot/releases/latest";
@@ -259,17 +185,7 @@ class UpdateManager {
         }else{
 
             return ["result"=>false, "message"=>"no update available"];
-        }
-
-        // if ($releaseInfo['tag_name'] != $currentVersion) {
-        //     //echo "A new version is available: " . $releaseInfo['tag_name'];
-        //     //ResponseHandler::respond(["result"=>true, "message"=>$releaseInfo['tag_name']]);
-        //     //echo "\nPlease update at: " . $releaseInfo['html_url'];
-        //     return ["result"=>true, "message"=>$releaseInfo['tag_name']];
-        // } else {
-        //     //echo "You are using the latest version.";
-        //     return ["result"=>false, "message"=>$releaseInfo];
-        // }
+        }   
     }
 
     public function updateVersionOnManifest($newVersion) {
@@ -319,7 +235,6 @@ class UpdateManager {
         return ["result"=>true, "message"=>'Failed to encode JSON.'];
     }
 
-
     public function getcurrentversion() {
         $manifestFile = 'manifest.json';  // Adjust the file path as necessary
     
@@ -338,6 +253,58 @@ class UpdateManager {
         // Compare current version with new version
         $currentVersion = $manifest['sharepilot']['version'];
         return $currentVersion;
+    }
+
+    public function isValidSemVer($version) {
+        $semverRegex = '/^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)'
+                     . '(?:-((?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*)'
+                     . '(?:\.(?:0|[1-9]\d*|[a-zA-Z-][0-9a-zA-Z-]*))*))?'
+                     . '(?:\+([0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$/';
+    
+        return preg_match($semverRegex, $version) === 1;
+    }        
+
+    public function update() {        
+        
+        $newManifestPath = $this->tempDir . '/SharePilot/manifest.json';
+        $currentManifestPath = 'manifest.json';
+      
+        $newManifest = json_decode(file_get_contents($newManifestPath), true);
+        $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
+
+        //print_r($newManifest);
+
+        
+        // Update and add new files
+         foreach ($newManifest as $file => $info) {
+            print_r($file);
+        //     $newFilePath = $this->tempDir . '/' . $info['directory'] . '/' . $file;
+        //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+
+        //     echo "$newFilePath will replace $projectFilePath";
+        //     die();
+
+        //     // Check if file needs to be updated or is new
+        //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
+        //         // Ensure the directory exists
+        //         if (!is_dir(dirname($projectFilePath))) {
+        //             mkdir(dirname($projectFilePath), 0777, true);
+        //         }
+        //         copy($newFilePath, $projectFilePath);
+        //     }
+         }
+
+        // // Remove old files
+        // foreach ($currentManifest as $file => $info) {
+        //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+        //     if (!isset($newManifest[$file])) {
+        //         unlink($projectFilePath);
+        //     }
+        // }
+
+        // //echo "Update completed successfully.";
+        // return;
+
     }
         
 }
