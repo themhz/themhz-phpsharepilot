@@ -268,10 +268,14 @@ class UpdateManager {
         $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR . 'SharePilot' . DIRECTORY_SEPARATOR;
         $newManifestPath = $tempDirProjectFilesPath . 'manifest.json';
         $currentManifestPath = 'manifest.json';
-    
+        $logFilePath = 'update.log';
+
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
         
+        // Open the log file in append mode
+        $logFile = fopen($logFilePath, 'a');
+
         // Update and add new files
         foreach ($newManifest["sharepilot"]["files"] as $newfile) {
             $currentFile = $this->findFileInJson($newfile);
@@ -286,10 +290,14 @@ class UpdateManager {
     
                 if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
                     echo $newFilePath . " will replace: " . $currentFilePath . "\n";
-                    //copy($newFilePath, $currentFilePath);
+                    $logMessage = $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    fwrite($logFile, $logMessage);
+                    copy($newFilePath, $currentFilePath);
                 } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
                     echo $newFilePath . " will move to: " . $currentFilePath . "\n";
-                    //rename($currentFilePath, $newFilePath);
+                    $logMessage = $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    fwrite($logFile, $logMessage);
+                    rename($currentFilePath, $newFilePath);
                 }
             } else {
                 // Adding a new file
@@ -301,7 +309,9 @@ class UpdateManager {
                     $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
                 
                 echo $newFilePath . " is a new file.\n";
-                //copy($newFilePath, $destinationPath);
+                $logMessage = $newFilePath . " is a new file.\n";
+                fwrite($logFile, $logMessage);
+                copy($newFilePath, $destinationPath);
             }
         }
     
@@ -320,10 +330,14 @@ class UpdateManager {
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
                     
                 echo "Deleting file: " . $currentFilePath . "\n";
-                //unlink($currentFilePath);
+                fwrite($logFile, $logMessage);
+                unlink($currentFilePath);
             }
         }
     
+        // Close the log file
+        fclose($logFile);
+
         return ["result" => true, "message" => 'finished'];
     }
     
@@ -337,7 +351,6 @@ class UpdateManager {
         }
         return null;
     }
-    
 
     // public function update() {        
         
@@ -354,14 +367,21 @@ class UpdateManager {
     //         if($currentFile!=null){
     //             if($currentFile["file_content_hash"]!=$newfile["file_content_hash"]){
     //                 if($newfile["directory_path"]=="."){               
-    //                     echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n";                                  
+    //                     echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n"; 
+                        
+    //                     //echo file_get_contents($tempDirProjectFilesPath.$newfile["file"])."\n";
+    //                     //echo file_get_contents($currentFile["file"])."\n";
     //                 }else{                
     //                     echo $tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"]." will replace :". $currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"]. "\n";                
+    //                     //echo file_get_contents($tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"])."\n";
+    //                     echo file_get_contents($currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"])."\n";
     //                 }
     //             }
     //         }                 
     //     }
 
+        
+        
     //     return ["result"=>true, "message"=>'finished'];
         
     //     //     // Check if file needs to be updated or is new
