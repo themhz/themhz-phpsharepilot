@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.9-alpha",
+        "version": "1.0.10-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -87,6 +87,12 @@
                 "directory_hash": "0241582170c1154f98b5cdab48263bce7c6c9dfc232dc0329ca18dee0da3db9d"
             },
             {
+                "file": "somefile.txt",
+                "file_content_hash": "921e47483b43bdbcc116fd19463e8a2d303367777edad3602b5958434c070704",
+                "directory_path": "components",
+                "directory_hash": "8cb52298aaf58ccd2bfc01eb297fa2d6ece2872c2d6fbdb4142591318ea30c82"
+            },
+            {
                 "file": "TimeZone.php",
                 "file_content_hash": "ed78fb49e32d98bb7a45964c1e021aa9e5f622ed823e39917a2aee07fa953da5",
                 "directory_path": "components",
@@ -94,7 +100,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "8046e5a241a2368364824979822a16cd0473d3ecf2b177b85d2716bdc8aefecd",
+                "file_content_hash": "9881d49d71a94f854e09308def85874a6c3d29e0c812b8788be4f17cfc8e3ea7",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -579,18 +585,6 @@
                 "directory_hash": "c55add6792edb6a71fec9dfc00e1876a3e1a8ff366e0d7d300dd9e551de4f608"
             },
             {
-                "file": "pvKey.json",
-                "file_content_hash": "41a352bf67bfcffb8b8f2c074d6a8ac6f9e361fc6eb7a550c702d585fa485b88",
-                "directory_path": ".",
-                "directory_hash": "487eb7aae63600e1a2987720860c548f7aa5867dad74d1f9b164f86fa3dbb194"
-            },
-            {
-                "file": "sw.js",
-                "file_content_hash": "8e3047c38ab84ed14d2bb1d27282e797cc6be042c162b4b53871f35921ef061c",
-                "directory_path": ".",
-                "directory_hash": "4bf19ba58dc8ea29d3977699ebcb1aaf2bc12441939754be7038e7fd13141ce0"
-            },
-            {
                 "file": "login.css",
                 "file_content_hash": "62154420a5d48ff89670109745a7008c5747d5a0a92c4826dd4d7d2575492e81",
                 "directory_path": "template\/css",
@@ -631,6 +625,12 @@
                 "file_content_hash": "c7f5072772b57c25ef2d38ca2fe8037f585bd2d6f0123ba66ff49a4472e0335a",
                 "directory_path": "template\/js",
                 "directory_hash": "cd2e4d7a79bf404e3d51cb6fcd8bde4b88d75f34e529fab1bd05649e6e455abc"
+            },
+            {
+                "file": "sw.js",
+                "file_content_hash": "8e3047c38ab84ed14d2bb1d27282e797cc6be042c162b4b53871f35921ef061c",
+                "directory_path": "template",
+                "directory_hash": "eda65d5315209dacfc73b30f4e1add10ceafffdd555b5cb3e29ef46628f3dcc6"
             }
         ]
     }

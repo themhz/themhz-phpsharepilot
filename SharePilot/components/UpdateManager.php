@@ -265,62 +265,137 @@ class UpdateManager {
     }        
 
     public function update() {        
-        
-        $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR .'SharePilot'.DIRECTORY_SEPARATOR;
-        $newManifestPath = $tempDirProjectFilesPath.'manifest.json';
+        $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR . 'SharePilot' . DIRECTORY_SEPARATOR;
+        $newManifestPath = $tempDirProjectFilesPath . 'manifest.json';
         $currentManifestPath = 'manifest.json';
-      
+    
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
         
         // Update and add new files
         foreach ($newManifest["sharepilot"]["files"] as $newfile) {
             $currentFile = $this->findFileInJson($newfile);
-            if($currentFile!=null){
-                if($currentFile["file_content_hash"]!=$newfile["file_content_hash"]){
-                    if($newfile["directory_path"]=="."){               
-                        echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n";                                  
-                    }else{                
-                        echo $tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"]." will replace :". $currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"]. "\n";                
-                    }
+            if ($currentFile != null) {
+                $newFilePath = ($newfile["directory_path"] == ".") ? 
+                    $tempDirProjectFilesPath . $newfile["file"] : 
+                    $tempDirProjectFilesPath . $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
+                    
+                $currentFilePath = ($currentFile["directory_path"] == ".") ? 
+                    $currentFile["file"] : 
+                    $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
+    
+                if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
+                    echo $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    //copy($newFilePath, $currentFilePath);
+                } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
+                    echo $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    //rename($currentFilePath, $newFilePath);
                 }
-            }                 
+            } else {
+                // Adding a new file
+                $newFilePath = ($newfile["directory_path"] == ".") ? 
+                    $tempDirProjectFilesPath . $newfile["file"] : 
+                    $tempDirProjectFilesPath . $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
+                $destinationPath = ($newfile["directory_path"] == ".") ? 
+                    $newfile["file"] : 
+                    $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
+                
+                echo $newFilePath . " is a new file.\n";
+                //copy($newFilePath, $destinationPath);
+            }
         }
-
-        return ["result"=>true, "message"=>'finished'];
-        
-        //     // Check if file needs to be updated or is new
-        //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
-        //         // Ensure the directory exists
-        //         if (!is_dir(dirname($projectFilePath))) {
-        //             mkdir(dirname($projectFilePath), 0777, true);
-        //         }
-        //         copy($newFilePath, $projectFilePath);
-        //     }
-        //}
-
-        // // Remove old files
-        // foreach ($currentManifest as $file => $info) {
-        //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
-        //     if (!isset($newManifest[$file])) {
-        //         unlink($projectFilePath);
-        //     }
-        // }
-
-      
-
+    
+        // Check for deleted files
+        foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
+            $fileExists = false;
+            foreach ($newManifest["sharepilot"]["files"] as $newfile) {
+                if ($newfile["file"] == $currentFile["file"] && $newfile["directory_path"] == $currentFile["directory_path"]) {
+                    $fileExists = true;
+                    break;
+                }
+            }
+            if (!$fileExists) {
+                $currentFilePath = ($currentFile["directory_path"] == ".") ? 
+                    $currentFile["file"] : 
+                    $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
+                    
+                echo "Deleting file: " . $currentFilePath . "\n";
+                //unlink($currentFilePath);
+            }
+        }
+    
+        return ["result" => true, "message" => 'finished'];
     }
-
-    public function findFileInJson($newfile){
+    
+    public function findFileInJson($newfile) {
         $currentManifestPath = 'manifest.json';
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
         foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
-           if($currentFile["file"]== $newfile["file"] && $currentFile["directory_path"] == $newfile["directory_path"]){
+            if ($currentFile["file"] == $newfile["file"] && $currentFile["directory_path"] == $newfile["directory_path"]) {
                 return $currentFile;
-           }
+            }
         }
-
         return null;
     }
+    
+
+    // public function update() {        
+        
+    //     $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR .'SharePilot'.DIRECTORY_SEPARATOR;
+    //     $newManifestPath = $tempDirProjectFilesPath.'manifest.json';
+    //     $currentManifestPath = 'manifest.json';
+      
+    //     $newManifest = json_decode(file_get_contents($newManifestPath), true);
+    //     $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
+        
+    //     // Update and add new files
+    //     foreach ($newManifest["sharepilot"]["files"] as $newfile) {
+    //         $currentFile = $this->findFileInJson($newfile);
+    //         if($currentFile!=null){
+    //             if($currentFile["file_content_hash"]!=$newfile["file_content_hash"]){
+    //                 if($newfile["directory_path"]=="."){               
+    //                     echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n";                                  
+    //                 }else{                
+    //                     echo $tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"]." will replace :". $currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"]. "\n";                
+    //                 }
+    //             }
+    //         }                 
+    //     }
+
+    //     return ["result"=>true, "message"=>'finished'];
+        
+    //     //     // Check if file needs to be updated or is new
+    //     //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
+    //     //         // Ensure the directory exists
+    //     //         if (!is_dir(dirname($projectFilePath))) {
+    //     //             mkdir(dirname($projectFilePath), 0777, true);
+    //     //         }
+    //     //         copy($newFilePath, $projectFilePath);
+    //     //     }
+    //     //}
+
+    //     // // Remove old files
+    //     // foreach ($currentManifest as $file => $info) {
+    //     //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
+    //     //     if (!isset($newManifest[$file])) {
+    //     //         unlink($projectFilePath);
+    //     //     }
+    //     // }
+
+      
+
+    // }
+
+    // public function findFileInJson($newfile){
+    //     $currentManifestPath = 'manifest.json';
+    //     $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
+    //     foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
+    //        if($currentFile["file"]== $newfile["file"] && $currentFile["directory_path"] == $newfile["directory_path"]){
+    //             return $currentFile;
+    //        }
+    //     }
+
+    //     return null;
+    // }
         
 }
