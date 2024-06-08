@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.8-alpha",
+        "version": "1.0.9-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -10,13 +10,13 @@
             },
             {
                 "file": "404.html",
-                "file_content_hash": "49652c0dcfafc34010a4ab2c0f78250c07845154eb416adf4fb215bd5df0056a",
+                "file_content_hash": "669bfe5731eb5fa908f1718fab432996388cea8c7201a330ea550a1022efe940",
                 "directory_path": ".",
                 "directory_hash": "128cc35baaf40bac8ae4d2932ca6e009311e8279f03f258e9cc83966f1d5b32e"
             },
             {
                 "file": "Database.php",
-                "file_content_hash": "76e0ed0569054ab35b678fdfe9723dfe29f931f10424c9f33332127d7cd1c7d4",
+                "file_content_hash": "a494963b9413f21fea9d0e0380168cfdefc7b55acd233d69c1abfef3ead02977",
                 "directory_path": "components",
                 "directory_hash": "90bd2b04e64026393d81686d067b2cc43c96ccf45341b5c9412f48f49ad41a3f"
             },
@@ -166,7 +166,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "453d923fb0ca6dbfce6ae03035394584c79c640fd5d44f2272f71c65cb7bcb1e",
+                "file_content_hash": "532f69be1a164ad74c9136a034460fbc223c8a6c13e521e7caa21d89b40cf1b8",
                 "directory_path": ".",
                 "directory_hash": "7413d6453f901e939bbd840c8f0d1c7b20c2ca0e7f71741e4e07c6cf036f16c0"
             },
