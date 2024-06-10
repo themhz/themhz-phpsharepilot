@@ -1,10 +1,10 @@
 {
     "sharepilot": {
-        "version": "1.0.18-alpha",
+        "version": "1.0.19-alpha",
         "files": [
             {
                 "file": ".htaccess",
-                "file_content_hash": "5a648919f346ef653e075bbeb117567447900f9cdae5b37e7ac5ceb8d67661a4",
+                "file_content_hash": "bf6ff0820c0eda7d46be751b352a1b4da4af4dd6ab1f228d036e75c04a0686f0",
                 "directory_path": ".",
                 "directory_hash": "270939b4fba4be968ab78e23dc0207eb893744491980a25c99a27c809a82ddab"
             },
@@ -16,7 +16,7 @@
             },
             {
                 "file": "Database.php",
-                "file_content_hash": "0d79595bdc4749db3238305d44a98a3d450bc954c7ad7a76f78d64a97d628025",
+                "file_content_hash": "a494963b9413f21fea9d0e0380168cfdefc7b55acd233d69c1abfef3ead02977",
                 "directory_path": "components",
                 "directory_hash": "90bd2b04e64026393d81686d067b2cc43c96ccf45341b5c9412f48f49ad41a3f"
             },
@@ -172,7 +172,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "532f69be1a164ad74c9136a034460fbc223c8a6c13e521e7caa21d89b40cf1b8",
+                "file_content_hash": "978d201af1436459aa1389d596a3977012ee9afd8b007f688d485ded733cbede",
                 "directory_path": ".",
                 "directory_hash": "7413d6453f901e939bbd840c8f0d1c7b20c2ca0e7f71741e4e07c6cf036f16c0"
             },
