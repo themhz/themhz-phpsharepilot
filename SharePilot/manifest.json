@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.28-alpha",
+        "version": "1.0.29-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -562,7 +562,7 @@
             },
             {
                 "file": "updates.php",
-                "file_content_hash": "205778af422c61baa4d2f1817dc644cd6251c1fd122583972660133a981cc2a9",
+                "file_content_hash": "02bec436d22fcca68d4bd6669ab5bb7868afb39276a22c8ccf6a286ab70671e0",
                 "directory_path": "pages\/updates",
                 "directory_hash": "abb177b56666b8ff4a441600e27aa9a2f1fd018a5da157302e71a4869651c15a"
             },

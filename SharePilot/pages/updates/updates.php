@@ -28,10 +28,7 @@
 </div>
 <script>
     document.addEventListener('readystatechange', function(evt) {        
-        // if(evt.target.readyState == "complete")
-        // {           
-        //     getKeys();            
-        // }
+        
     }, false);
     
     function DownloadUpdate() {
@@ -41,7 +38,7 @@
         .then(response => response.json())
         .then(data => {            
             if (data.result === false) {
-                console.log(data.message); // This will log "no update available"
+                console.log(data.message); 
             }else{
                 Update();
             }
