@@ -402,7 +402,7 @@ class UpdateManager {
         fclose($logFile);
 
 
-        //$this->generateManifest($newManifest["sharepilot"]["version"]);
+        $this->generateManifest($newManifest["sharepilot"]["version"]);
 
         return ["result" => true, "message" => 'finished'];
     }
