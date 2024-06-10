@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.20-alpha",
+        "version": "1.0.21-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -628,7 +628,7 @@
             },
             {
                 "file": "sw.js",
-                "file_content_hash": "8e3047c38ab84ed14d2bb1d27282e797cc6be042c162b4b53871f35921ef061c",
+                "file_content_hash": "ade4ab2330ce21ddd89bdb7f8868d929d482815eb2bb47f92dad1ce6c3014e62",
                 "directory_path": "template",
                 "directory_hash": "eda65d5315209dacfc73b30f4e1add10ceafffdd555b5cb3e29ef46628f3dcc6"
             }
