@@ -103,6 +103,67 @@ class UpdateManager {
             'success' => true
         ];
     }
+
+    private function generateManifest($softwareVersion) {
+        $directory = $_SERVER['DOCUMENT_ROOT'];
+              
+      
+        // Define a local class inside the function to filter the directories        
+        $excludeDirs = ['vendor', 'newpage', 'temp'];  // Add directories to exclude
+        $excludedFiles = ['logfile.log', '.env', '.git'];
+        // Create a Recursive Directory Iterator
+    
+       
+        $directoryIterator = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
+         
+        // Use the defined filter to exclude directories
+        $filterIterator = new \DirectoryFilter($directoryIterator, $excludeDirs, $excludedFiles);
+        // Flatten the iterator
+        $files = new \RecursiveIteratorIterator($filterIterator, \RecursiveIteratorIterator::SELF_FIRST);
+    
+        $fileDetails = [];    
+       
+        foreach ($files as $file) {
+            // Only include files in the manifest
+            if ($file->isFile()) {
+                $filePath = $file->getRealPath();
+                $relativePath = substr($filePath, strlen($directory) + 1);
+    
+                // Extract filename and directory
+                $filename = basename($filePath);
+                $directoryPath = dirname($relativePath);
+    
+                // Generate SHA-256 checksum for the file content
+                $contentChecksum = hash_file('sha256', $filePath);
+    
+                // Generate SHA-256 checksum for the file path
+                $pathChecksum = hash('sha256', $relativePath);
+    
+                // Add file info to the file details array
+                $fileDetails[] = [
+                    'file' => $filename,
+                    'file_content_hash' => $contentChecksum,                
+                    'directory_path' => str_replace('\\', '/', $directoryPath),  // Normalize directory path
+                    'directory_hash' => $pathChecksum,
+                ];
+            }
+        }
+    
+        // Define the software version
+        //$softwareVersion = '1.0.0';  // Replace with your actual version
+    
+        // Create the manifest with version and files
+        $manifest = [
+            'sharepilot' => [
+                'version' => $softwareVersion,
+                'files' => $fileDetails
+            ]
+        ];
+    
+        // Save the manifest as a JSON file in the directory
+        file_put_contents($directory . '/manifest.json', json_encode($manifest, JSON_PRETTY_PRINT));
+        return "Manifest generated successfully.";
+    }
     
     private function deleteDir($dirPath) {
         if (!is_dir($dirPath)) {
@@ -273,6 +334,8 @@ class UpdateManager {
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
         
+        /*print_r($newManifest["sharepilot"]["version"]);
+        die();*/
         // Open the log file in append mode
         $logFile = fopen($logFilePath, 'a');
 
@@ -338,6 +401,9 @@ class UpdateManager {
         // Close the log file
         fclose($logFile);
 
+
+        //$this->generateManifest($newManifest["sharepilot"]["version"]);
+
         return ["result" => true, "message" => 'finished'];
     }
     
@@ -351,71 +417,4 @@ class UpdateManager {
         }
         return null;
     }
-
-    // public function update() {        
-        
-    //     $tempDirProjectFilesPath = $this->tempDir . DIRECTORY_SEPARATOR .'SharePilot'.DIRECTORY_SEPARATOR;
-    //     $newManifestPath = $tempDirProjectFilesPath.'manifest.json';
-    //     $currentManifestPath = 'manifest.json';
-      
-    //     $newManifest = json_decode(file_get_contents($newManifestPath), true);
-    //     $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
-        
-    //     // Update and add new files
-    //     foreach ($newManifest["sharepilot"]["files"] as $newfile) {
-    //         $currentFile = $this->findFileInJson($newfile);
-    //         if($currentFile!=null){
-    //             if($currentFile["file_content_hash"]!=$newfile["file_content_hash"]){
-    //                 if($newfile["directory_path"]=="."){               
-    //                     echo $tempDirProjectFilesPath.$newfile["file"]." will replace :". $currentFile["file"]. "\n"; 
-                        
-    //                     //echo file_get_contents($tempDirProjectFilesPath.$newfile["file"])."\n";
-    //                     //echo file_get_contents($currentFile["file"])."\n";
-    //                 }else{                
-    //                     echo $tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"]." will replace :". $currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"]. "\n";                
-    //                     //echo file_get_contents($tempDirProjectFilesPath.$newfile["directory_path"].DIRECTORY_SEPARATOR.$newfile["file"])."\n";
-    //                     echo file_get_contents($currentFile["directory_path"].DIRECTORY_SEPARATOR.$currentFile["file"])."\n";
-    //                 }
-    //             }
-    //         }                 
-    //     }
-
-        
-        
-    //     return ["result"=>true, "message"=>'finished'];
-        
-    //     //     // Check if file needs to be updated or is new
-    //     //     if (!isset($currentManifest[$file]) || $currentManifest[$file]['content_hash'] !== $info['content_hash']) {
-    //     //         // Ensure the directory exists
-    //     //         if (!is_dir(dirname($projectFilePath))) {
-    //     //             mkdir(dirname($projectFilePath), 0777, true);
-    //     //         }
-    //     //         copy($newFilePath, $projectFilePath);
-    //     //     }
-    //     //}
-
-    //     // // Remove old files
-    //     // foreach ($currentManifest as $file => $info) {
-    //     //     $projectFilePath = $this->projectDir . '/' . $info['directory'] . '/' . $file;
-    //     //     if (!isset($newManifest[$file])) {
-    //     //         unlink($projectFilePath);
-    //     //     }
-    //     // }
-
-      
-
-    // }
-
-    // public function findFileInJson($newfile){
-    //     $currentManifestPath = 'manifest.json';
-    //     $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
-    //     foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
-    //        if($currentFile["file"]== $newfile["file"] && $currentFile["directory_path"] == $newfile["directory_path"]){
-    //             return $currentFile;
-    //        }
-    //     }
-
-    //     return null;
-    // }
-        
 }
