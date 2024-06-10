@@ -117,7 +117,7 @@ class UpdateManager {
         $directoryIterator = new \RecursiveDirectoryIterator($directory, \RecursiveDirectoryIterator::SKIP_DOTS);
          
         // Use the defined filter to exclude directories
-        $filterIterator = new \DirectoryFilter($directoryIterator, $excludeDirs, $excludedFiles);
+        $filterIterator = new DirectoryFilter($directoryIterator, $excludeDirs, $excludedFiles);
         // Flatten the iterator
         $files = new \RecursiveIteratorIterator($filterIterator, \RecursiveIteratorIterator::SELF_FIRST);
     
