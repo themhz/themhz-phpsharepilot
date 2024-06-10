@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.26-alpha",
+        "version": "1.0.27-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -85,12 +85,6 @@
                 "file_content_hash": "3356e9d930bdf9ad8c97d57a09c221bc262888dd80038278a87e51e7240bbff4",
                 "directory_path": "components",
                 "directory_hash": "0241582170c1154f98b5cdab48263bce7c6c9dfc232dc0329ca18dee0da3db9d"
-            },
-            {
-                "file": "somefile.txt",
-                "file_content_hash": "921e47483b43bdbcc116fd19463e8a2d303367777edad3602b5958434c070704",
-                "directory_path": "components",
-                "directory_hash": "8cb52298aaf58ccd2bfc01eb297fa2d6ece2872c2d6fbdb4142591318ea30c82"
             },
             {
                 "file": "TimeZone.php",
@@ -585,6 +579,12 @@
                 "directory_hash": "c55add6792edb6a71fec9dfc00e1876a3e1a8ff366e0d7d300dd9e551de4f608"
             },
             {
+                "file": "sw.js",
+                "file_content_hash": "ade4ab2330ce21ddd89bdb7f8868d929d482815eb2bb47f92dad1ce6c3014e62",
+                "directory_path": ".",
+                "directory_hash": "4bf19ba58dc8ea29d3977699ebcb1aaf2bc12441939754be7038e7fd13141ce0"
+            },
+            {
                 "file": "login.css",
                 "file_content_hash": "62154420a5d48ff89670109745a7008c5747d5a0a92c4826dd4d7d2575492e81",
                 "directory_path": "template\/css",
@@ -625,12 +625,6 @@
                 "file_content_hash": "c7f5072772b57c25ef2d38ca2fe8037f585bd2d6f0123ba66ff49a4472e0335a",
                 "directory_path": "template\/js",
                 "directory_hash": "cd2e4d7a79bf404e3d51cb6fcd8bde4b88d75f34e529fab1bd05649e6e455abc"
-            },
-            {
-                "file": "sw.js",
-                "file_content_hash": "ade4ab2330ce21ddd89bdb7f8868d929d482815eb2bb47f92dad1ce6c3014e62",
-                "directory_path": "template",
-                "directory_hash": "eda65d5315209dacfc73b30f4e1add10ceafffdd555b5cb3e29ef46628f3dcc6"
             }
         ]
     }
