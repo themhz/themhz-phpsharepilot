@@ -38,20 +38,19 @@
         fetch('updates?method=downloadupdate&format=json', {
             method: "POST"
         })
-        .then(response => {
-            if (!response.result) {
-                throw new Error('Network response was not ok: ' + response.statusText);
+        .then(response => response.json())
+        .then(data => {            
+            if (data.result === false) {
+                console.log(data.message); // This will log "no update available"
+            }else{
+                Update();
             }
-            return response.json();
-        })
-        .then(data => {
-            alert(data.message);
-            console.log(data);
-        })
+        })       
         .catch(error => {
             console.log('There was a problem with the fetch operation:', error);
         });
     }
+
 
 
     function CheckUpdate() {
@@ -77,12 +76,7 @@
         fetch('updates?method=update&format=json', {
             method: "POST"
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok: ' + response.statusText);
-            }
-            return response.json();
-        })
+        .then(response => response.json())        
         .then(data => {
             console.log(data);
         })
