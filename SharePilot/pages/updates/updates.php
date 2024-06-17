@@ -25,7 +25,7 @@
         </div>          
         <div class="w3-container">
             <button onclick="CheckUpdate()" class="w3-button w3-teal w3-large">Check Update</button>
-            <button onclick="DownloadAndUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
+            <button onclick="DownloadAndUpdate()" class="w3-button w3-teal w3-large">Download and update</button>
             <!-- <button onclick="DownloadUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
             <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button> -->
         </div>               
