@@ -20,10 +20,15 @@
             
         </div>
         <div class="w3-container">
+            <span id="updatemessage" style="display:none;color:green"></span>
+            <br>
+        </div>          
+        <div class="w3-container">
             <button onclick="CheckUpdate()" class="w3-button w3-teal w3-large">Check Update</button>
             <button onclick="DownloadUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
             <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button>
         </div>               
+        
     </div>    
 </div>
 <script>
@@ -62,6 +67,8 @@
         })
         .then(data => {
             console.log(data);
+            document.querySelector("#updatemessage").innerHTML = data.message;
+            document.querySelector("#updatemessage").style.display = "block";
         })
         .catch(error => {
             console.log('There was a problem with the fetch operation:', error);
@@ -76,6 +83,8 @@
         .then(response => response.json())        
         .then(data => {
             console.log(data);
+            document.querySelector("#updatemessage").innerHTML = data.message;
+            document.querySelector("#updatemessage").style.display = "block";
         })
         .catch(error => {
             console.log('There was a problem with the fetch operation:', error);
