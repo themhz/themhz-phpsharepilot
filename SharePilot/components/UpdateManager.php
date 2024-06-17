@@ -330,15 +330,13 @@ class UpdateManager {
         $newManifestPath = $tempDirProjectFilesPath . 'manifest.json';
         $currentManifestPath = 'manifest.json';
         $logFilePath = 'update.log';
-
+    
         $newManifest = json_decode(file_get_contents($newManifestPath), true);
         $currentManifest = json_decode(file_get_contents($currentManifestPath), true);
-        
-        /*print_r($newManifest["sharepilot"]["version"]);
-        die();*/
+    
         // Open the log file in append mode
         $logFile = fopen($logFilePath, 'a');
-
+    
         // Update and add new files
         foreach ($newManifest["sharepilot"]["files"] as $newfile) {
             $currentFile = $this->findFileInJson($newfile);
@@ -352,12 +350,12 @@ class UpdateManager {
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
     
                 if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
-                    //echo $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    echo $newFilePath . " will replace: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will replace: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     copy($newFilePath, $currentFilePath);
                 } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
-                    //echo $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    echo $newFilePath . " will move to: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will move to: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     rename($currentFilePath, $newFilePath);
@@ -370,8 +368,14 @@ class UpdateManager {
                 $destinationPath = ($newfile["directory_path"] == ".") ? 
                     $newfile["file"] : 
                     $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
+    
+                // Ensure the directory exists
+                $destinationDir = dirname($destinationPath);
+                if (!is_dir($destinationDir)) {
+                    mkdir($destinationDir, 0777, true);
+                }
                 
-                //echo $newFilePath . " is a new file.\n";
+                echo $newFilePath . " is a new file.\n";
                 $logMessage = $newFilePath . " is a new file.\n";
                 fwrite($logFile, $logMessage);
                 copy($newFilePath, $destinationPath);
@@ -392,18 +396,17 @@ class UpdateManager {
                     $currentFile["file"] : 
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
                     
-                //echo "Deleting file: " . $currentFilePath . "\n";
-                fwrite($logFile, $logMessage);
+                echo "Deleting file: " . $currentFilePath . "\n";
+                fwrite($logFile, "Deleting file: " . $currentFilePath . "\n");
                 unlink($currentFilePath);
             }
         }
     
         // Close the log file
         fclose($logFile);
-
-
+    
         $this->generateManifest($newManifest["sharepilot"]["version"]);
-
+    
         return ["result" => true, "message" => 'finished'];
     }
     
