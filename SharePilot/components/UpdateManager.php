@@ -352,12 +352,12 @@ class UpdateManager {
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
     
                 if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
-                    echo $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will replace: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will replace: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     copy($newFilePath, $currentFilePath);
                 } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
-                    echo $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will move to: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will move to: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     rename($currentFilePath, $newFilePath);
@@ -371,7 +371,7 @@ class UpdateManager {
                     $newfile["file"] : 
                     $newfile["directory_path"] . DIRECTORY_SEPARATOR . $newfile["file"];
                 
-                echo $newFilePath . " is a new file.\n";
+                //echo $newFilePath . " is a new file.\n";
                 $logMessage = $newFilePath . " is a new file.\n";
                 fwrite($logFile, $logMessage);
                 copy($newFilePath, $destinationPath);
@@ -392,7 +392,7 @@ class UpdateManager {
                     $currentFile["file"] : 
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
                     
-                echo "Deleting file: " . $currentFilePath . "\n";
+                //echo "Deleting file: " . $currentFilePath . "\n";
                 fwrite($logFile, $logMessage);
                 unlink($currentFilePath);
             }

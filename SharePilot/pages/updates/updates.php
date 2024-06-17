@@ -15,7 +15,7 @@
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
-            <h1 class="w3-text-teal">OK</h1>
+            <h1 class="w3-text-teal">Update </h1>
             <button id="sortButton" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
             
         </div>
@@ -42,34 +42,16 @@
             method: "POST"
         })
         .then(response => response.json())
-        .then(data => {            
-            if (data.result === false) {
-                console.log(data.message); 
-            }else{
-                Update();
-            }
-        })       
+        .then(data => {
+            console.log(data);
+            document.querySelector("#updatemessage").innerHTML = data.message;
+            document.querySelector("#updatemessage").style.display = "block";
+        })
         .catch(error => {
             console.log('There was a problem with the fetch operation:', error);
         });
     }
 
-    function DownloadUpdate() {
-        fetch('updates?method=downloadupdate&format=json', {
-            method: "POST"
-        })
-        .then(response => response.json())
-        .then(data => {            
-            if (data.result === false) {
-                console.log(data.message); 
-            }else{
-                Update();
-            }
-        })       
-        .catch(error => {
-            console.log('There was a problem with the fetch operation:', error);
-        });
-    }
 
 
 

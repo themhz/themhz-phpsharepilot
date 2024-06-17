@@ -84,11 +84,12 @@ class Controller{
                                
                 if ($result["success"]) {
                     $result = $updateManager->update();
-                    ResponseHandler::respond(["result"=>true, 
-                    "message"=>"was downloaded and unziped",
-                    "download_duration"=>$result["download_duration"], 
-                    "unzip_duration"=>$result["unzip_duration"], 
-                    "total_duration"=>$result["total_duration"]]);
+                    // ResponseHandler::respond(["result"=>true, 
+                    // "message"=>"was downloaded and unziped",
+                    // "download_duration"=>$result["download_duration"], 
+                    // "unzip_duration"=>$result["unzip_duration"], 
+                    // "total_duration"=>$result["total_duration"]]);
+                    ResponseHandler::respond($result);
                 }else{
                     ResponseHandler::respond(["result"=>false, "message"=>"there was a problem downloading the release"]);   
                 }
