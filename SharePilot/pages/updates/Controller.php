@@ -72,6 +72,35 @@ class Controller{
     }
 
 
+    public function downloadandupdate(){
+        $updateManager = new UpdateManager('/', 'temp');        
+        $result = $updateManager->checkupdate();
+
+        if($result["result"] == true){
+            $url = 'https://api.github.com/repos/themhz/themhz-phpsharepilot/zipball/'.$result["version"];
+        
+            try {
+                $result = $updateManager->downloadAndUnzipRelease($url);                         
+                               
+                if ($result["success"]) {
+                    $result = $updateManager->update();
+                    ResponseHandler::respond(["result"=>true, 
+                    "message"=>"was downloaded and unziped",
+                    "download_duration"=>$result["download_duration"], 
+                    "unzip_duration"=>$result["unzip_duration"], 
+                    "total_duration"=>$result["total_duration"]]);
+                }else{
+                    ResponseHandler::respond(["result"=>false, "message"=>"there was a problem downloading the release"]);   
+                }
+            } catch (Exception $e) {
+                //echo "An error occurred: " . $e->getMessage();
+                ResponseHandler::respond(["result"=>true, "message"=>"An error occurred: " . $e->getMessage()]);
+            }
+        }else{
+            ResponseHandler::respond($result);
+        }
+    }
+
    
 
    
