@@ -29,19 +29,14 @@
             <div class="w3-panel w3-pale-green w3-leftbar">
                 <p><strong>Q: Where is the tutorial?</strong></p>
                 <p>You can read the tutorial on the tutorial page https://sharepilot.gr/tutorial.</p>
-            </div>
-            <div class="w3-panel w3-pale-yellow w3-leftbar">
-                <p><strong>Q: Who can I contact for further assistance?</strong></p>
-                <p>You can contact me on my phone +306987556486.</p>
-            </div>
+            </div>            
         </div>
 
         <div class="w3-panel w3-light-grey w3-padding-16">
             <h2>Contact Us</h2>
             <p>If you need further assistance, please feel free to reach out to us through the following channels:</p>
             <ul class="w3-ul w3-border">
-                <li>Email: themhz@gmail.com</li>
-                <li>Phone: +306987556486</li>
+                <li>Email: themhz@gmail.com</li>                
                 <li>Url: <a href="https://CodeCraft.gr"  target="_blank" >CodeCraft.gr</a></li>
                 <li>
                     <a href="https://www.facebook.com" target="_blank" class="w3-button w3-blue w3-margin-right">
