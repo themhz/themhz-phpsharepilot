@@ -350,12 +350,12 @@ class UpdateManager {
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
     
                 if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
-                    echo $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will replace: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will replace: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     copy($newFilePath, $currentFilePath);
                 } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
-                    echo $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will move to: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will move to: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     rename($currentFilePath, $newFilePath);
@@ -375,7 +375,7 @@ class UpdateManager {
                     mkdir($destinationDir, 0755, true);
                 }
                 
-                echo $newFilePath . " is a new file.\n";
+                //echo $newFilePath . " is a new file.\n";
                 $logMessage = $newFilePath . " is a new file.\n";
                 fwrite($logFile, $logMessage);
                 copy($newFilePath, $destinationPath);
@@ -396,7 +396,7 @@ class UpdateManager {
                     $currentFile["file"] : 
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
                     
-                echo "Deleting file: " . $currentFilePath . "\n";
+                //echo "Deleting file: " . $currentFilePath . "\n";
                 fwrite($logFile, "Deleting file: " . $currentFilePath . "\n");
                 unlink($currentFilePath);
     
@@ -418,7 +418,7 @@ class UpdateManager {
             $files = array_diff(scandir($dir), array('.', '..'));
             if (empty($files)) {
                 rmdir($dir);
-                echo "Deleting directory: " . $dir . "\n";
+                //echo "Deleting directory: " . $dir . "\n";
                 fwrite($logFile, "Deleting directory: " . $dir . "\n");
                 $this->removeDeletedDirectory(dirname($dir), $logFile); // Recursively remove parent directories if empty
             }
