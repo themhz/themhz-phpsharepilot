@@ -372,17 +372,17 @@ class UpdateManager {
                 // Ensure the directory exists
                 $destinationDir = dirname($destinationPath);
                 if (!is_dir($destinationDir)) {
-                    mkdir($destinationDir, 0777, true);
+                    mkdir($destinationDir, 0755, true);
                 }
                 
-                echo $newFilePath . " is a new file.\n";
+                //echo $newFilePath . " is a new file.\n";
                 $logMessage = $newFilePath . " is a new file.\n";
                 fwrite($logFile, $logMessage);
                 copy($newFilePath, $destinationPath);
             }
         }
     
-        // Check for deleted files
+        // Check for deleted files and directories
         foreach ($currentManifest["sharepilot"]["files"] as $currentFile) {
             $fileExists = false;
             foreach ($newManifest["sharepilot"]["files"] as $newfile) {
@@ -396,9 +396,12 @@ class UpdateManager {
                     $currentFile["file"] : 
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
                     
-                echo "Deleting file: " . $currentFilePath . "\n";
+                //echo "Deleting file: " . $currentFilePath . "\n";
                 fwrite($logFile, "Deleting file: " . $currentFilePath . "\n");
                 unlink($currentFilePath);
+    
+                // Check if the directory is now empty and delete it if so
+                $this->removeDeletedDirectory(dirname($currentFilePath));
             }
         }
     
@@ -409,6 +412,19 @@ class UpdateManager {
     
         return ["result" => true, "message" => 'finished'];
     }
+    
+    private function removeDeletedDirectory($dir) {
+        if (is_dir($dir)) {
+            $files = array_diff(scandir($dir), array('.', '..'));
+            if (empty($files)) {
+                rmdir($dir);
+                echo "Deleting directory: " . $dir . "\n";
+                fwrite($logFile, "Deleting directory: " . $dir . "\n");
+                $this->removeDeletedDirectory(dirname($dir)); // Recursively remove parent directories if empty
+            }
+        }
+    }
+    
     
     public function findFileInJson($newfile) {
         $currentManifestPath = 'manifest.json';
