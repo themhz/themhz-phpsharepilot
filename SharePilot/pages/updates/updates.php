@@ -25,8 +25,9 @@
         </div>          
         <div class="w3-container">
             <button onclick="CheckUpdate()" class="w3-button w3-teal w3-large">Check Update</button>
-            <button onclick="DownloadUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
-            <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button>
+            <button onclick="DownloadAndUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
+            <!-- <button onclick="DownloadUpdate()" class="w3-button w3-teal w3-large">Download Update</button>
+            <button onclick="Update()" class="w3-button w3-teal w3-large">Update</button> -->
         </div>               
         
     </div>    
@@ -36,6 +37,23 @@
         
     }, false);
     
+    function DownloadAndUpdate(){
+        fetch('updates?method=downloadandupdate&format=json', {
+            method: "POST"
+        })
+        .then(response => response.json())
+        .then(data => {            
+            if (data.result === false) {
+                console.log(data.message); 
+            }else{
+                Update();
+            }
+        })       
+        .catch(error => {
+            console.log('There was a problem with the fetch operation:', error);
+        });
+    }
+
     function DownloadUpdate() {
         fetch('updates?method=downloadupdate&format=json', {
             method: "POST"
