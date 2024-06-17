@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.42-alpha",
+        "version": "1.0.43-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -94,7 +94,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "b8903a84e3c9d8e1bc71cf21c7deea3d2abebe7d1e981224121ecee52057ae72",
+                "file_content_hash": "f702074a61306ad2f158948c49da2d798c7d9aff21dba98c012170192165a3c6",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -555,12 +555,6 @@
                 "directory_hash": "55004f05bb728c8ef640b0e82b68921b6517f1d4970a3ae85732f8e6a8b9a89e"
             },
             {
-                "file": "testpage.cs",
-                "file_content_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-                "directory_path": "pages\/testpage",
-                "directory_hash": "663f740eec816c857c80d21d6a5ce7ecc71ec743b41de64fbb388b96329157a9"
-            },
-            {
                 "file": "Controller.php",
                 "file_content_hash": "6c2e8de357af426096215136232e35ec235a20ec4e7507b768def0817f7a7260",
                 "directory_path": "pages\/testservice",
@@ -628,7 +622,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "c3cd2fb37e53547c34e7c52f103c4034c7265932315e1399d2d13f69be22f45c",
+                "file_content_hash": "dec9bf47c16702f1c9fecefc939ec39b748a8e28967c832e127f445fee66c2fe",
                 "directory_path": "template",
                 "directory_hash": "1b8eab5596bf702b093ff36be47112925212333b637e25e44644cbab841d6ba0"
             },

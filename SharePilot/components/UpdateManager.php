@@ -350,12 +350,12 @@ class UpdateManager {
                     $currentFile["directory_path"] . DIRECTORY_SEPARATOR . $currentFile["file"];
     
                 if ($currentFile["file_content_hash"] != $newfile["file_content_hash"]) {
-                    echo $newFilePath . " will replace: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will replace: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will replace: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     copy($newFilePath, $currentFilePath);
                 } elseif ($currentFile["directory_path"] != $newfile["directory_path"]) {
-                    echo $newFilePath . " will move to: " . $currentFilePath . "\n";
+                    //echo $newFilePath . " will move to: " . $currentFilePath . "\n";
                     $logMessage = $newFilePath . " will move to: " . $currentFilePath . "\n";
                     fwrite($logFile, $logMessage);
                     rename($currentFilePath, $newFilePath);
