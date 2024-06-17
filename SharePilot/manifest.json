@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.39-alpha",
+        "version": "1.0.40-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -553,12 +553,6 @@
                 "file_content_hash": "e4fb898ea12b495a17d65aeb53229bd44020b151be4212cf1540f8d17e71aab0",
                 "directory_path": "pages\/settings",
                 "directory_hash": "55004f05bb728c8ef640b0e82b68921b6517f1d4970a3ae85732f8e6a8b9a89e"
-            },
-            {
-                "file": "Controller.php",
-                "file_content_hash": "16790c779e4cd88cadbc61dcb3e1d0bef95a0a6e56e6b3a2597fa7706396a09d",
-                "directory_path": "pages\/testpage",
-                "directory_hash": "3a005eea31cee63e36d0885e9bab61ec2042c2c041d5888dba470a7489c7518b"
             },
             {
                 "file": "Controller.php",
