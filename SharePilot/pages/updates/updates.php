@@ -37,20 +37,36 @@
         
     }, false);
     
-    function DownloadAndUpdate(){
+    function DownloadAndUpdate() {
         fetch('updates?method=downloadandupdate&format=json', {
             method: "POST"
         })
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            document.querySelector("#updatemessage").innerHTML = data.message;
-            document.querySelector("#updatemessage").style.display = "block";
+            const updateMessage = document.querySelector("#updatemessage");
+            updateMessage.innerHTML = data.message;
+
+            // Create a button element
+            const refreshButton = document.createElement("button");
+            refreshButton.innerHTML = "Refresh Page";
+
+            // Add an event listener to refresh the page
+            refreshButton.addEventListener("click", function() {
+                location.reload();
+            });
+
+            // Append the button to the update message element
+            updateMessage.appendChild(refreshButton);
+
+            // Display the update message
+            updateMessage.style.display = "block";
         })
         .catch(error => {
             console.log('There was a problem with the fetch operation:', error);
         });
     }
+
 
 
 
