@@ -63,6 +63,7 @@ if (isset($_SESSION["user"])){ ?>
     <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>    
     <a class="w3-bar-item w3-button w3-hover-teal" href="updates">Updates</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="help">Help</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="testpage">testpage</a>
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>

@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.36-alpha",
+        "version": "1.0.37-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -94,7 +94,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "c0e1b5b11e916a4153f385db65bf10cf9e0f02ffc35b36085501f2f178eb3797",
+                "file_content_hash": "54ea4f5120f431d5cfaff40134a6174a7251e2b88f5b43857d026199ed188051",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -556,6 +556,18 @@
             },
             {
                 "file": "Controller.php",
+                "file_content_hash": "16790c779e4cd88cadbc61dcb3e1d0bef95a0a6e56e6b3a2597fa7706396a09d",
+                "directory_path": "pages\/testpage",
+                "directory_hash": "3a005eea31cee63e36d0885e9bab61ec2042c2c041d5888dba470a7489c7518b"
+            },
+            {
+                "file": "testpage.php",
+                "file_content_hash": "dfe637145aa26871549c9526b0e06a5ba98b1f919f63bd647f03ccbad7924755",
+                "directory_path": "pages\/testpage",
+                "directory_hash": "e37b62dece69c7df0624fd4f763323e9a1b43d5ce1a827d2cdeae6da99390437"
+            },
+            {
+                "file": "Controller.php",
                 "file_content_hash": "6c2e8de357af426096215136232e35ec235a20ec4e7507b768def0817f7a7260",
                 "directory_path": "pages\/testservice",
                 "directory_hash": "325276bb63e4f83bdfcff13ad8162757c0f2c7d73591ddf77b57c482b21d79dc"
@@ -622,7 +634,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "518993c5dd32bd81f3d0203211ac1ebb6a0fa0a684ab9846126b104de720cab9",
+                "file_content_hash": "c3cd2fb37e53547c34e7c52f103c4034c7265932315e1399d2d13f69be22f45c",
                 "directory_path": "template",
                 "directory_hash": "1b8eab5596bf702b093ff36be47112925212333b637e25e44644cbab841d6ba0"
             },
