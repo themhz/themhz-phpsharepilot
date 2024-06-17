@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.35-alpha",
+        "version": "1.0.36-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -333,6 +333,18 @@
                 "directory_hash": "64af4167e0f3e26ef6082b38704c8d5fdd041618b61868596dfb961b2f4cf70c"
             },
             {
+                "file": "Controller.php",
+                "file_content_hash": "afff905064c321e00c098805f9f0cba8254124f78cc84b8ab0f0cc0e660f5fdf",
+                "directory_path": "pages\/help",
+                "directory_hash": "da679203e86e7f4897c1e4d6175734d4c25743cdd0740b27dd8ac06c6ac5a16c"
+            },
+            {
+                "file": "help.php",
+                "file_content_hash": "785c30ae90267276316ba9ec1e080a023e0a8964178c313c0e5a4af7537ef786",
+                "directory_path": "pages\/help",
+                "directory_hash": "c73c26b5355fbd82a7933863b4cd760b462caf6d3e7e525ef981e220e9c1e971"
+            },
+            {
                 "file": "favicon.ico",
                 "file_content_hash": "8b1060f193768c55bc48dede8ba8da9be6c93f8e6dcae946e36f1a8956b7269b",
                 "directory_path": "pages\/home\/assets",
@@ -610,7 +622,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "b0719e45ab34b50f435c5049991412fef75df386ce6c353408983f90e42ca54c",
+                "file_content_hash": "518993c5dd32bd81f3d0203211ac1ebb6a0fa0a684ab9846126b104de720cab9",
                 "directory_path": "template",
                 "directory_hash": "1b8eab5596bf702b093ff36be47112925212333b637e25e44644cbab841d6ba0"
             },

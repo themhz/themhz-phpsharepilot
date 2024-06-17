@@ -7,13 +7,22 @@ namespace SharePilotV2\Components;
 <title>SharePilot</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 <link rel="stylesheet" href="template/css/login.css">
 <link rel="stylesheet" href="template/css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
 <script src="template/js/main.js?v=<?php echo time(); ?>"></script>
 
 </head>
@@ -23,19 +32,21 @@ namespace SharePilotV2\Components;
 if (isset($_SESSION["user"])){ ?>
 <!-- Navbar -->
 <div class="w3-top">
-  <div class="w3-bar w3-theme w3-top w3-left-align w3-large ">
-        <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
-
-        <a href="login?method=logout&format=json" class="w3-bar-item w3-button w3-right w3-hover-white custom-margin-top-45">Exit</a>
-        <span class="w3-bar-item w3-right w3-padding custom-margin-top-45">
-            <span id="clockMain"></span>&nbsp;&nbsp;&nbsp;
-            Welcome
-            <?php
-                 echo $_SESSION["user"]["name"]. " " . $_SESSION["user"]["lastname"];
-                ?>
-        </span>
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large" style="display: flex; justify-content: flex-end;">
+    <a class="w3-bar-item w3-button w3-right w3-hide-large w3-hover-white w3-large w3-theme-l1" href="javascript:void(0)" onclick="w3_open()"><i class="fa fa-bars"></i></a>
+    
+    <a class="w3-bar-item w3-button w3-hover-white custom-margin-top-45" href="help">Help</a>
+    <span class="w3-bar-item w3-padding custom-margin-top-45">
+        <span id="clockMain"></span>&nbsp;&nbsp;&nbsp;
+        Welcome
+        <?php
+             echo $_SESSION["user"]["name"]. " " . $_SESSION["user"]["lastname"];
+        ?>
+    </span>
+    <a class="w3-bar-item w3-button w3-hover-white custom-margin-top-45" href="login?method=logout&format=json">Exit</a>
   </div>
 </div>
+
 <!-- Sidebar -->
 <nav class="w3-sidebar w3-bar-block w3-collapse w3-large w3-theme-l5 w3-animate-left" id="mySidebar">
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-teal w3-hide-large" title="Close Menu">
@@ -51,6 +62,7 @@ if (isset($_SESSION["user"])){ ?>
     <a class="w3-bar-item w3-button w3-hover-teal" href="pushnotifications">Push Notifications</a>
     <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>    
     <a class="w3-bar-item w3-button w3-hover-teal" href="updates">Updates</a>
+    <a class="w3-bar-item w3-button w3-hover-teal" href="help">Help</a>
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
 <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
