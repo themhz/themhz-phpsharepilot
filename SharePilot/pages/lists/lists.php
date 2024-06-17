@@ -4,7 +4,7 @@
         <h1>Lists</h1>
     </div>
     <div class="w3-container">
-        <p>Create a new List.</p>
+        <p>Create a new List has been changed.</p>
         <div class="w3-bar w3-teal">
             <button class="w3-button" onclick="openNewListPopup()">New List</button>
             <div class="w3-dropdown-hover w3-teal">
