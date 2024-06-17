@@ -15,7 +15,7 @@
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
-            <h1 class="w3-text-teal">Update </h1>
+            <h1 class="w3-text-teal">Update has been added</h1>
             <button id="sortButton" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
             
         </div>

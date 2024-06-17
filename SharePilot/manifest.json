@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.32-alpha",
+        "version": "1.0.33-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -94,7 +94,7 @@
             },
             {
                 "file": "UpdateManager.php",
-                "file_content_hash": "b6e9d7fa8a5dd9c2231bf5a10309d127535fec3e5e6a63cb8f3aba72281d20d9",
+                "file_content_hash": "c0e1b5b11e916a4153f385db65bf10cf9e0f02ffc35b36085501f2f178eb3797",
                 "directory_path": "components",
                 "directory_hash": "1bad3f62eca1b22f9c6b661e5bfc1ef3048eef9d4df172129abf713577f0758f"
             },
@@ -556,13 +556,13 @@
             },
             {
                 "file": "Controller.php",
-                "file_content_hash": "1d9bf2aa6582a5c280bfaac5c33658e5d64ce0760d730b0a7adf81f3807ea1ad",
+                "file_content_hash": "453f15bc8aa0df2a853acccd91832d061b7266a1baf581db2153fc2f9a1a7a58",
                 "directory_path": "pages\/updates",
                 "directory_hash": "b9ba22076b57705ec4e19832a0bf533dd660a5586ac46e9aca7341ab76211fc8"
             },
             {
                 "file": "updates.php",
-                "file_content_hash": "30f5e87aac5a88626833fa52f283f13bd30ed64189bdbd439569287c8d54644f",
+                "file_content_hash": "700d00ac900173fa96052b0f8ea595ef12c3ba268e045692acd43a435825fab4",
                 "directory_path": "pages\/updates",
                 "directory_hash": "abb177b56666b8ff4a441600e27aa9a2f1fd018a5da157302e71a4869651c15a"
             },
