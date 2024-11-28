@@ -1,32 +1,23 @@
 <!--Lists-->
 <div class="w3-row custom-padding-45">
     <div class="w3-container w3-teal">
-        <h1>Services</h1>
+        <h1>Channels</h1>
     </div>
     <div class="w3-container">
-        <p>Create a new service.</p>
+        <p>Create a new Channel.</p>
         <div class="w3-bar w3-teal">
-            <button class="w3-button" onclick="document.getElementById('newserviceModal').style.display='block'">New service</button>
-            <button class="w3-button" onclick="document.getElementById('newserviceCategoryModal').style.display='block'">New service category</button>
-            <div class="w3-dropdown-hover w3-teal">
-                <div class="w3-container w3-teal">
-                    <select class="w3-select w3-teal w3-dropdown-hover" name="serviceCateogiresTopBar" id="serviceCateogiresTopBar" onchange="filterServices()">
-                        <option value="2" >ALL</option>
-                        <option value="1" >New service category</option>
-                    </select>
-                </div>
-            </div>
+            <button class="w3-button" onclick="document.getElementById('newChannelModal').style.display='block'">New Channel</button>            
         </div>
     </div>
 </div>
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
-            <h1 class="w3-text-teal">Service</h1>
+            <h1 class="w3-text-teal">Channels</h1>
             <button id="sortButton" onclick="sortList()" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
         </div>
         <div class="w3-container">
-            <ul class="w3-ul w3-card-4" id="servicelist">
+            <ul class="w3-ul w3-card-4" id="channellist">
                 <!-- List items will be appended here -->
             </ul>
         </div>
@@ -34,15 +25,22 @@
 </div>
 <!--Lists-->
 <!--row click popup-->
-<div id="serviceModal" class="w3-modal">
+<div id="rowClickModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('serviceModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
-            <h2>Service</h2>
+            <span onclick="document.getElementById('rowClickModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
+            <h2>Channel</h2>
         </header>
         <div class="w3-container">
-            <p>Service Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>                        
-            <input type="text" id="txtserviceId" name="txtserviceId" value="" style="display: none">
+            <p>Channel Name: <input id="txtChannelName" class="w3-input w3-border w3-margin-top" type="text"></p>
+            <input type="text" id="txtChannelId" name="txtChannelId" value="" style="display: none">
+        </div>
+        <div class="w3-container">
+            <div class="w3-bar">
+                <span class="w3-bar-item">Social:</span>
+                <select class="w3-select w3-bar-item w3-margin-bottom w3-dropdown-hover" type="text" id="selectedSocialId" name="selectedSocialId" value="" onchange="onChangeSelectedSocial()"></select>
+                <input class="w3-bar-item w3-button w3-white w3-border w3-round" type="button" value="Add Key" onclick="addKey()">
+            </div>
         </div>
         <div class="w3-container" id="keylist">
         </div>
@@ -51,64 +49,73 @@
         </footer>
     </div>
 </div>
-
-<!--new service window-->
-<div id="newserviceModal" class="w3-modal">
-    <div class="w3-modal-content">
-        <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('newserviceModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h2>New service</h2>
-        </header>
-        <div class="w3-container w3-margin">
-            <p>Service Name: <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value=""></p>            
-            <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>            
-        </div>
-        <footer class="w3-container w3-teal w3-padding">            
-            <button class="w3-button w3-green" id="create-service">Create</button>
-        </footer>
-    </div>
-</div>
-<!--new service window-->
-
-<!--new service category window-->
-<div id="newserviceCategoryModal" class="w3-modal">
-    <div class="w3-modal-content">
-        <header class="w3-container w3-teal">
-            <span onclick="document.getElementById('newserviceCategoryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h2>Service Category Modal</h2>
-        </header>
-        <div class="w3-container w3-margin">
-            <p>Service Categoy Name: <input type="text" id="serviceCategoryName" name="serviceCategoryName" class="w3-input w3-border" value=""></p>                                
-        </div>
-        <footer class="w3-container w3-teal w3-padding">            
-            <button class="w3-button w3-green" id="create-service-category" onclick="createServiceCategory()">Create</button>
-        </footer>
-    </div>
-</div>
-<!--new service category window-->
-
-
 <!--popup-->
 
+<!--new Channel window-->
+<div id="newChannelModal" class="w3-modal">
+    <div class="w3-modal-content">
+        <header class="w3-container w3-teal">
+            <span onclick="document.getElementById('newChannelModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h2>New Channel</h2>
+        </header>
+        <div class="w3-container w3-margin">
+            <label for="channelName">Channel Name:</label>
+            <input type="text" id="channelName" name="channelName" class="w3-input w3-border" value="">
+            <p id="error-message" style="color: red; display: none;">Please enter a channel name!</p>
+        </div>
+        <footer class="w3-container w3-teal w3-padding">            
+            <button class="w3-button w3-green" id="create-channel">Create Channel</button>            
+        </footer>
+    </div>
+</div>
+<!--new channel window-->
 <script>
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
-            loadservices();            
+            loadChannels();
+            loadSocials();
         }
     }, false);
-
-    function loadservices(){
-        fetch('services?format=json', {
+    function loadChannels(){
+        fetch('channels/list?format=json', {
             method: 'get',
             })
             .then(response => response.json())
             .then(data => {
                 createlist(data);
-                loadServiceCategories();
             })
     }
-
+    function loadSocials(){     
+        fetch('channels/getsocials?format=json', {
+            method: 'get',
+        })
+            .then(response => response.json())
+            .then(data => {                
+                createSosials(data);
+            })
+    }
+    function createSosials(data){        
+        for(var i=0;i<data.length;i++){
+            document.getElementById("selectedSocialId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
+        }
+    }
+    function onChangeSelectedSocial(){
+        fetch('channels/loadkeys?format=json',{
+            method: 'post',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                channelId:document.getElementById("txtChannelId").value,
+                socialId:document.getElementById("selectedSocialId").value,
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            loadkeys(data);
+        });
+    }
     function loadkeys(data){
         let keylist = document.getElementById("keylist");
         keylist.innerHTML ="";
@@ -133,46 +140,50 @@
             li.className = "w3-bar w3-hover-teal";
             li.style.cursor = "pointer";
             li.id = item.id;
-            li.innerHTML = `<span onclick="deleteservice(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
+            li.innerHTML = `<span onclick="deleteChannel(${item.id})" class="w3-bar-item w3-button w3-white w3-xlarge w3-right">×</span>
                             <div class="w3-bar-item" id=${item.id}>
                                 <span class="w3-large">${item.name}</span><br>
                                 <span>${item.regdate}</span><br>
-                                <button onclick="deleteservice(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
+                                <button onclick="deleteChannel(${item.id})" class="w3-button w3-red w3-margin-top">Delete</button>
                             </div>
                                     `;
             li.addEventListener('click', function() {
-                editsocialKeys(item)
+                editChannelKeys(item)
             });
             ul.appendChild(li);
         });
     }
-    function editsocialKeys(item){
-        document.getElementById('txtserviceName').value = item.name;
-        document.getElementById('txtserviceId').value = item.id;
-        document.getElementById('serviceModal').style.display = 'block';
+    function editChannelKeys(item){
+        document.getElementById('txtChannelName').value = item.name;
+        document.getElementById('txtChannelId').value = item.id;
+        document.getElementById('rowClickModal').style.display = 'block';
+        onChangeSelectedSocial();
     }
     function update() {
-        fetch('services?format=json', {
+        fetch('channels?format=json', {
             method: 'put',
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                    id:document.getElementById("txtserviceId").value,
-                    name: document.getElementById("txtserviceName").value,
+                    id:document.getElementById("txtChannelId").value,
+                    name: document.getElementById("txtChannelName").value,
+                    social_id:document.getElementById("selectedSocialId").value,
+                    keylist : getKeyListFromPopUp()
                 })
             })
             .then(response => response.json())
             .then(data => {
-                loadservices();
+                loadChannels();
+                //createlist(data);
             })
 
-        document.getElementById('serviceModal').style.display = 'none';
+        document.getElementById('rowClickModal').style.display = 'none';
     }
-    function deleteservice(id){
+    function deleteChannel(id){
         event.stopPropagation();
-        if(confirm("are you sure you want to delete this service?")){
-            fetch('services/delete?format=json', {
+        if(confirm("are you sure you want to delete this channel?")){
+            fetch('channels/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -189,8 +200,8 @@
                         alert("problem with deletion");
                     }
                     // Hide modal after successful operation
-                    document.getElementById('newserviceModal').style.display='none';
-                    loadservices();
+                    document.getElementById('newChannelModal').style.display='none';
+                    loadChannels();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -205,7 +216,7 @@
     let isAscending = true;
     function sortList() {
         var list, i, switching, b, shouldSwitch;
-        list = document.getElementById("servicelist");
+        list = document.getElementById("channellist");
         switching = true;
         while (switching) {
             switching = false;
@@ -239,20 +250,20 @@
             sortButton.innerHTML = '<i class="fas fa-sort-down"></i> Sort';
         }
     }
-    document.getElementById('create-service').addEventListener('click', function(){
-        document.getElementById('serviceName').value = document.getElementById('serviceName').value.trim();       
-        var serviceName = document.getElementById('serviceName').value;
-        if(serviceName === ""){
+    document.getElementById('create-channel').addEventListener('click', function(){
+        document.getElementById('channelName').value = document.getElementById('channelName').value.trim();
+        var channelName = document.getElementById('channelName').value;
+        if(channelName === ""){
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('services/addservice?format=json', {
+            fetch('channels/addchannel?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    serviceName: serviceName
+                    channelName: channelName
                 })
             })
                 .then(response => response.json())
@@ -260,8 +271,8 @@
                     //console.log(data);
                     alert(data.message);
                     // Hide modal after successful operation
-                    document.getElementById('newserviceModal').style.display='none';
-                    loadservices();
+                    document.getElementById('newChannelModal').style.display='none';
+                    loadChannels();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -304,71 +315,12 @@
         return data;
     }
 
-    function filterServices(){
-        let serviceCategory_id = document.getElementById("serviceCateogiresTopBar").value;
-        if(serviceCategory_id==1){
-            showCategoryPopup();
-        }else{
-
-        }
-        //alert(channel_id);
-        //showCategoryPopup();
-        //var categoryName = document.querySelector("#").value;        
-    }
-
-    function createServiceCategory(){      
-        let name = document.getElementById("serviceCategoryName").value;        
-
-        fetch('services/createservicecategory?format=json', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ name: name})
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.result == true){
-                alert(`List "${name}" added`);
-                loadServiceCategories();
-            }else{
-                alert(`List "${name}" was not added`);
-            }
-            document.getElementById('newserviceCategoryModal').style.display = 'none';
-        });
-    }
-
-    function loadServiceCategories(){
-        let name = document.getElementById("serviceCategoryName").value;        
-
-        fetch('services/selectservicecategory?format=json', {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }            
-        })
-        .then(response => response.json())
-        .then(data => {
-            
-            console.log(data);
-        });
-    }
-
-    function showCategoryPopup(){
-        document.getElementById('newserviceCategoryModal').style.display = 'block';
-    }
-
-
     document.addEventListener("keydown", function(event) {
         // Check if the pressed key is the Escape key (keyCode 27)
         if (event.keyCode === 27) {
-            // Close the popup by setting its display property to "none"
-            document.getElementById('serviceModal').style.display = 'none';            
-            document.getElementById('newserviceModal').style.display = 'none';
-            document.getElementById('newserviceCategoryModal').style.display = 'none';
+            // Close the popup by setting its display property to "none"            
+            document.getElementById('newChannelModal').style.display = 'none';
+            document.getElementById('rowClickModal').style.display = 'none';
         }
     });
-
-
-    
 </script>

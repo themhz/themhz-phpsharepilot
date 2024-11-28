@@ -9,7 +9,22 @@ use SharePilotV2\Models\Channel_social_keys;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
  class Controller{
-    public function get()
+
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/channels.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
+    }
+
+    public function list()
     {
         $c = new Channels();
         $data = $c->select()->execute();

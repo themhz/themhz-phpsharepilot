@@ -76,8 +76,8 @@ if (isset($_SESSION["user"])){ ?>
     <div class="w3-main">
     <?php }?>
     <?php
-    if (file_exists($page)) {
-        include $page;
+    if (file_exists($content)) {
+        include $content;
     }
     ?>
     <!-- END MAIN -->

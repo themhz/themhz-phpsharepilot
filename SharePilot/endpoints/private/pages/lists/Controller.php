@@ -10,7 +10,22 @@ use SharePilotV2\Models\Lists;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
  class Controller{
-    public function get()
+
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/lists.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
+    }
+
+    public function list()
     {
         $id = RequestHandler::get("id");
         $channel_id = RequestHandler::get("channel_id");
@@ -69,7 +84,7 @@ use SharePilotV2\Components\RequestHandler;
          $l->channel_id = $channel_id;
          $l->name = $name;
          $result = $l->insert();
-         ResponseHandler::respond(["result"=>$result]);
+         ResponseHandler::respond(["result"=>true, "id"=>$result]);
      }
 
 

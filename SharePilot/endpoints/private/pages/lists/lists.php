@@ -66,7 +66,7 @@
     }, false);
 
     function loadLists(channel_id=null){
-        let url ='lists?format=json';
+        let url ='lists/list?format=json';
         if(channel_id!=null){
             url+= "&channel_id="+channel_id;
         }
@@ -109,7 +109,7 @@
             });
     }
     function selectListItem(item){
-        fetch(`lists?format=json&id=${item.id}`, {
+        fetch(`lists/list?format=json&id=${item.id}`, {
             method: 'get',
         })
             .then(response => response.json())

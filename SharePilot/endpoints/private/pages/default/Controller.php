@@ -6,7 +6,20 @@ use SharePilotV2\Models\Scheduled_posts;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
 class Controller{
-    public function get(){
+    
+
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/default.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
     }
     public function getvideo()
     {
@@ -30,12 +43,12 @@ class Controller{
         print_r($result);
         //$sp->
     }
-    public function autoscheduleposts(){
-        $u = new urls();
-        $start_datetime = RequestHandler::get("start_datetime");
-        $hourInterval = RequestHandler::get("hourInterval");
-        ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval));
-    }
+    // public function autoscheduleposts(){
+    //     $u = new Urls();
+    //     $start_datetime = RequestHandler::get("start_datetime");
+    //     $hourInterval = RequestHandler::get("hourInterval");
+    //     ResponseHandler::respond($u->autoscheduleposts($start_datetime, $hourInterval));
+    // }
     public function fetchurl() {
         if(isset($_POST["url"])){
             $url = $_POST["url"];
