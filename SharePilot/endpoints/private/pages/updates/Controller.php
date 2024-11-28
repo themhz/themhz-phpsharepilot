@@ -19,8 +19,18 @@ class Controller{
         
     }
 
-    public function get(){
-       
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/updates.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
     }
 
     public function post(){

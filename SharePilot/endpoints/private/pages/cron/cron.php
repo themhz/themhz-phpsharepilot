@@ -63,7 +63,7 @@
 
         function executeCron(){
             fetch('cron?format=json', {
-                method: "POST",
+                method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -80,7 +80,7 @@
 
         function checkCronTab(){
             fetch('cron/checkcrontab?format=json', {
-                method: "POST",
+                method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -110,7 +110,7 @@
 
         function createCronToken(){
             fetch('cron/createcrontoken?format=json', {
-                method: "POST",
+                method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },
@@ -127,8 +127,8 @@
         }
 
         function getToken(){
-            fetch('cron?format=json', {
-                method: "GET",
+            fetch('cron/list?format=json', {
+                method: "get",
                 headers: {
                     "Content-Type": "application/json"
                 }                

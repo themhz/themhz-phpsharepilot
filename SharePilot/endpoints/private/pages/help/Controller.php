@@ -10,7 +10,18 @@ use SharePilotV2\Components\EnvironmentDetails;
 use SharePilotV2\Components\UpdateManager;
 
 class Controller{
-    public function get(){
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/help.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
     }
 
     public function getversion(){

@@ -37,7 +37,7 @@
             <p>If you need further assistance, please feel free to reach out to us through the following channels:</p>
             <ul class="w3-ul w3-border">
                 <li>Email: themhz@gmail.com</li>                
-                <li>Url: <a href="https://CodeCraft.gr"  target="_blank" >CodeCraft.gr</a></li>
+                <li>Url: <a href="https://CodeCraft.gr"  target="_blank" >codecraft.gr</a></li>
                 <li>
                     <a href="https://www.facebook.com" target="_blank" class="w3-button w3-blue w3-margin-right">
                         <i class="fab fa-facebook"></i> Facebook
@@ -63,7 +63,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        fetch('help?method=getversion&format=json', {
+        fetch('help/getversion?format=json', {
             method: "POST"
         })
         .then(response => {

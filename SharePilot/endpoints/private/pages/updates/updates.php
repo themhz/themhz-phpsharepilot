@@ -58,7 +58,7 @@
 
     function DownloadAndUpdate() {
     showLoadingModal();
-    fetch('updates?method=downloadandupdate&format=json', {
+    fetch('updates/downloadandupdate?format=json', {
         method: "POST"
     })
     .then(response => response.json())
@@ -91,7 +91,7 @@
 
 function CheckUpdate() {
     showLoadingModal();
-    fetch('updates?method=checkupdate&format=json', {
+    fetch('updates/checkupdate?format=json', {
         method: "POST"
     })
     .then(response => {
@@ -114,7 +114,7 @@ function CheckUpdate() {
 
 function Update() {
     showLoadingModal();
-    fetch('updates?method=update&format=json', {
+    fetch('updates/update?format=json', {
         method: "POST"
     })
     .then(response => response.json())        

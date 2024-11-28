@@ -59,10 +59,10 @@ use SharePilotV2\Components\RequestHandler;
 
          ResponseHandler::respond(["status"=>"success"]);
      }
-     public function getsocials(){
-        $s = new Socials();
-         ResponseHandler::respond($s->select()->execute());
-     }
+    //  public function getsocials(){
+    //     $s = new Socials();
+    //      ResponseHandler::respond($s->select()->execute());
+    //  }
      public function loadkeys(){
          $channelId = RequestHandler::get("channelId");
          $socialId = RequestHandler::get("socialId");

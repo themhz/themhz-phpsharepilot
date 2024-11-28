@@ -106,7 +106,7 @@
             url += '&channelid=' + encodeURIComponent(channelId);
         }
         fetch(url, {
-            method: "GET",
+            method: "get",
             headers: {
                 "Content-Type": "application/json"
             }
@@ -157,7 +157,7 @@
             const scheduled_id = id;
 
             fetch('schedule/delete?format=json', {
-                method: "POST",
+                method: "post",
                 headers: {
                     "Content-Type": "application/json"
                 },

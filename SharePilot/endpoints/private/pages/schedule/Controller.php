@@ -6,7 +6,18 @@ use SharePilotV2\Models\Scheduled_posts;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
  class Controller{
-    public function get(){
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/schedule.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
     }
      public function delete(){
          $u = new Scheduled_posts();

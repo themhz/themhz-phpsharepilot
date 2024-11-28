@@ -13,6 +13,20 @@ use Google\Auth\HttpHandler\HttpHandlerFactory;
  class Controller{
 
 
+   
+   public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+      //echo "Welcome to the Default Action!";
+      // Specify the content file
+      $content = dirname(__FILE__) . '/pushnotifications.php';
+
+      // Include the master template
+      if ($templatePath) {
+          include $templatePath;
+      } else {
+          echo "Master template not found!";
+      }
+  }
    public function getKeys(){
       echo "ok";
    }

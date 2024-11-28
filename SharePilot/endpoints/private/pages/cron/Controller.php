@@ -11,7 +11,22 @@ use SharePilotV2\Components\PostingService;
 use SharePilotV2\Implementations\Facebook;
 
 class Controller{
-    public function Get(){
+
+    public function get($id = null, $method = 'GET', $templatePath = null) {
+        
+        //echo "Welcome to the Default Action!";
+        // Specify the content file
+        $content = dirname(__FILE__) . '/cron.php';
+
+        // Include the master template
+        if ($templatePath) {
+            include $templatePath;
+        } else {
+            echo "Master template not found!";
+        }
+    }
+
+    public function list(){
         $settings = new Settings();        
         $result = $settings->select()->execute()[0];
         ResponseHandler::respond(["token"=>$result["crontoken"]]);            
