@@ -5,11 +5,12 @@ namespace SharePilotV2\Components;
 class Router {
     private $routes = [];
     private $securedRoutes = [];
-    private $defaultHomePage = "default";    
-    private $defaultMethod = "";
+    private $defaultHomePage;    
+    private $defaultMethod;
 
     public function __construct() {
         $this->defaultHomePage = $_ENV['DEFAULT_PAGE'];
+        $this->defaultMethod = $_ENV['DEFAULT_METHOD'];
     }
 
     public function addRoute($path, $controllerPath = null, $secure = false) {
@@ -55,9 +56,9 @@ class Router {
             $controllerPath = $publicPathController;
             $templatePath = dirname(__DIR__) . "/endpoints/public/template/index.php";
             $isSecured = false;
-            
             //Else check if a simple page exists. Notice that the controller is not present
-        }elseif (file_exists($publicPathPage)) {                    
+
+        }elseif (file_exists($publicPathPage)) {
             //$templatePath = dirname(__DIR__) . "/endpoints/public/template/index.php";
             $templatePath = $publicPathPage;
             $isSecured = false;
@@ -66,7 +67,7 @@ class Router {
         }elseif (file_exists($privatePathController)) {
             $controllerPath = $privatePathController;
             $templatePath = dirname(__DIR__) . "/endpoints/private/template/index.php";
-            $isSecured = true;            
+            $isSecured = true;
         }else {
             // If no controller exists, return 404
             http_response_code(404);

@@ -19,11 +19,11 @@ namespace SharePilotV2\Components;
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 
-<link rel="stylesheet" href="template/css/login.css">
-<link rel="stylesheet" href="template/css/style.css">
+<link rel="stylesheet" href="endpoints/private/template/css/login.css">
+<link rel="stylesheet" href="endpoints/private/template/css/style.css">
 
 
-<script src="template/js/main.js?v=<?php echo time(); ?>"></script>
+<script src="endpoints/private/template/js/main.js?v=<?php echo time(); ?>"></script>
 
 </head>
 <body>

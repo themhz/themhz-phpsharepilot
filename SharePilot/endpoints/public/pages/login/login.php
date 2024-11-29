@@ -11,10 +11,10 @@ namespace SharePilotV2\Components;
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="template/css/login.css">
-<link rel="stylesheet" href="template/css/style.css">
+<link rel="stylesheet" href="endpoints/public/template/css/login.css">
+<link rel="stylesheet" href="endpoints/public/template/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<script src="template/js/main.js?v=<?php echo time(); ?>"></script>
+<script src="endpoints/public/template/template/js/main.js?v=<?php echo time(); ?>"></script>
 </head>
 <body>
     <!-- Overlay effect when opening sidebar on small screens -->
