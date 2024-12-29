@@ -75,7 +75,7 @@ class UpdateManager {
             );
     
             foreach ($files as $fileInfo) {
-                $targetPath = $this->tempDir . DIRECTORY_SEPARATOR . $files->getSubPathName();
+                $targetPath = $this->tempDir . DIRECTORY_SEPARATOR . $fileInfo->getSubPathName();
                 if ($fileInfo->isDir()) {
                     @mkdir($targetPath); // Create directory if it doesn't exist
                 } else {
