@@ -47,7 +47,7 @@ class Router {
         $privatePathController = dirname(__DIR__) . "/endpoints/private/pages/$page/Controller.php";        
 
         $controllerPath = null;
-
+        
         // Check if the public controller exists
         if (file_exists($publicPathController)) {
             $controllerPath = $publicPathController;
