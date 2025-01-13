@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.52-alpha",
+        "version": "1.0.53-alpha",
         "files": [
             {
                 "file": ".htaccess",
