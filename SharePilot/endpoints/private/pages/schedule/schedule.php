@@ -94,6 +94,7 @@
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
+            //alert(1)
             loadList();
             loadChannels();
             loadAvoidStartHoursAndEndHours();
@@ -393,4 +394,4 @@ document.addEventListener("keydown", function(event) {
         }
     });
 </script>
-<script src="template/js/calendar.js?v="<?php echo time(); ?>"></script>
+<script src="endpoints/private/template/js/calendar.js?v="<?php echo time(); ?>"></script>

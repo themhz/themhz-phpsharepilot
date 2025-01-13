@@ -74,7 +74,7 @@ class Facebook implements ISocialMediaService{
             }
             return $result;
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
             return array("result"=>$result, "message"=>"Error connecting to database: " . $e->getMessage());
         }        

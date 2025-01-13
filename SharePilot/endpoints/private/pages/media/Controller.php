@@ -14,7 +14,7 @@ use SharePilotV2\Components\RequestHandler;
         
         //echo "Welcome to the Default Action!";
         // Specify the content file
-        $content = dirname(__FILE__) . '/services.php';
+        $content = dirname(__FILE__) . '/media.php';
 
         // Include the master template
         if ($templatePath) {

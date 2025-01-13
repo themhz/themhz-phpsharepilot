@@ -1,18 +1,18 @@
 <!--Lists-->
 <div class="w3-row custom-padding-45">
     <div class="w3-container w3-teal">
-        <h1>Services</h1>
+        <h1>Media</h1>
     </div>
     <div class="w3-container">
-        <p>Create a new service.</p>
+        <p>Create a new Media.</p>
         <div class="w3-bar w3-teal">
-            <button class="w3-button" onclick="document.getElementById('newserviceModal').style.display='block'">New service</button>
-            <button class="w3-button" onclick="document.getElementById('newserviceCategoryModal').style.display='block'">New service category</button>
+            <button class="w3-button" onclick="document.getElementById('newserviceModal').style.display='block'">New Media</button>
+            <button class="w3-button" onclick="document.getElementById('newserviceCategoryModal').style.display='block'">New Media category</button>
             <div class="w3-dropdown-hover w3-teal">
                 <div class="w3-container w3-teal">
                     <select class="w3-select w3-teal w3-dropdown-hover" name="serviceCateogiresTopBar" id="serviceCateogiresTopBar" onchange="filterServices()">
                         <option value="2" >ALL</option>
-                        <option value="1" >New service category</option>
+                        <option value="1" >New Media category</option>
                     </select>
                 </div>
             </div>
@@ -22,7 +22,7 @@
 <div class="w3-row">
     <div class="w3-twothird" style="padding: 0;">
         <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 24px;">
-            <h1 class="w3-text-teal">Service</h1>
+            <h1 class="w3-text-teal">Media</h1>
             <button id="sortButton" onclick="sortList()" class="w3-button w3-teal w3-large"><i class="fas fa-sort"></i> Sort</button>
         </div>
         <div class="w3-container">
@@ -38,10 +38,10 @@
     <div class="w3-modal-content w3-animate-zoom w3-card-4">
         <header class="w3-container w3-teal">
             <span onclick="document.getElementById('serviceModal').style.display='none'" class="w3-button w3-display-topright w3-large">&times;</span>
-            <h2>Service</h2>
+            <h2>Media</h2>
         </header>
         <div class="w3-container">
-            <p>Service Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>                        
+            <p>Media Name: <input id="txtserviceName" class="w3-input w3-border w3-margin-top" type="text"></p>                        
             <input type="text" id="txtserviceId" name="txtserviceId" value="" style="display: none">
         </div>
         <div class="w3-container" id="keylist">
@@ -57,11 +57,11 @@
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
             <span onclick="document.getElementById('newserviceModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h2>New service</h2>
+            <h2>New Media</h2>
         </header>
         <div class="w3-container w3-margin">
-            <p>Service Name: <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value=""></p>            
-            <p id="error-message" style="color: red; display: none;">Please enter a service name!</p>            
+            <p>Media Name: <input type="text" id="serviceName" name="serviceName" class="w3-input w3-border" value=""></p>            
+            <p id="error-message" style="color: red; display: none;">Please enter a media name!</p>            
         </div>
         <footer class="w3-container w3-teal w3-padding">            
             <button class="w3-button w3-green" id="create-service">Create</button>
@@ -75,10 +75,10 @@
     <div class="w3-modal-content">
         <header class="w3-container w3-teal">
             <span onclick="document.getElementById('newserviceCategoryModal').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h2>Service Category Modal</h2>
+            <h2>Media Category Modal</h2>
         </header>
         <div class="w3-container w3-margin">
-            <p>Service Categoy Name: <input type="text" id="serviceCategoryName" name="serviceCategoryName" class="w3-input w3-border" value=""></p>                                
+            <p>Media Categoy Name: <input type="text" id="serviceCategoryName" name="serviceCategoryName" class="w3-input w3-border" value=""></p>                                
         </div>
         <footer class="w3-container w3-teal w3-padding">            
             <button class="w3-button w3-green" id="create-service-category" onclick="createServiceCategory()">Create</button>
@@ -94,12 +94,12 @@
     document.addEventListener('readystatechange', function(evt) {
         if(evt.target.readyState == "complete")
         {
-            loadservices();            
+            loadmedia();            
         }
     }, false);
 
-    function loadservices(){
-        fetch('services/list?format=json', {
+    function loadmedia(){
+        fetch('media/list?format=json', {
             method: 'get',
             })
             .then(response => response.json())
@@ -152,7 +152,7 @@
         document.getElementById('serviceModal').style.display = 'block';
     }
     function update() {
-        fetch('services?format=json', {
+        fetch('media?format=json', {
             method: 'put',
             headers: {
                 "Content-Type": "application/json"
@@ -164,7 +164,7 @@
             })
             .then(response => response.json())
             .then(data => {
-                loadservices();
+                loadmedia();
             })
 
         document.getElementById('serviceModal').style.display = 'none';
@@ -172,7 +172,7 @@
     function deleteservice(id){
         event.stopPropagation();
         if(confirm("are you sure you want to delete this service?")){
-            fetch('services/delete?format=json', {
+            fetch('media/delete?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -190,7 +190,7 @@
                     }
                     // Hide modal after successful operation
                     document.getElementById('newserviceModal').style.display='none';
-                    loadservices();
+                    loadmedia();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -246,7 +246,7 @@
             document.getElementById('error-message').style.display = 'block';
         } else {
             document.getElementById('error-message').style.display = 'none';
-            fetch('services/addservice?format=json', {
+            fetch('media/addservice?format=json', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -261,7 +261,7 @@
                     alert(data.message);
                     // Hide modal after successful operation
                     document.getElementById('newserviceModal').style.display='none';
-                    loadservices();
+                    loadmedia();
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -319,7 +319,7 @@
     function createServiceCategory(){      
         let name = document.getElementById("serviceCategoryName").value;        
 
-        fetch('services/createservicecategory?format=json', {
+        fetch('media/createservicecategory?format=json', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -341,7 +341,7 @@
     function loadServiceCategories(){
         let name = document.getElementById("serviceCategoryName").value;        
 
-        fetch('services/selectservicecategory?format=json', {
+        fetch('media/selectservicecategory?format=json', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

@@ -87,7 +87,7 @@
             })
     }
     function loadSocials(){     
-        fetch('channels/getsocials?format=json', {
+        fetch('channels/loadchannels?format=json', {
             method: 'get',
         })
             .then(response => response.json())

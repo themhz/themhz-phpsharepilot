@@ -1,6 +1,6 @@
 {
     "sharepilot": {
-        "version": "1.0.51-alpha",
+        "version": "1.0.52-alpha",
         "files": [
             {
                 "file": ".htaccess",
@@ -136,7 +136,7 @@
             },
             {
                 "file": "channels.php",
-                "file_content_hash": "1658edb9dd30c42f13dc5dbeb185005932d392bf2a7ddfc7ca2860dd28879a2a",
+                "file_content_hash": "943f591ab82b0a44335e58219afc9c681de92714b21d9ef18c6bbaf4355414f2",
                 "directory_path": "endpoints\/private\/pages\/channels",
                 "directory_hash": "5491ec477e4823abe7637ee795f3acc60a06e88421dab8ae4d95ba630de92453"
             },
@@ -322,6 +322,18 @@
             },
             {
                 "file": "Controller.php",
+                "file_content_hash": "23b89014b36fde2efbcd868f2b7a11ecf6201f228a4bdca6e987c7740c5c553a",
+                "directory_path": "endpoints\/private\/pages\/media",
+                "directory_hash": "40da460543727cf1fee4121616ca39e37436c63f8f3b080db1718bfefed1140f"
+            },
+            {
+                "file": "media.php",
+                "file_content_hash": "ceccb54dadb39a4120fc527c3ed86310f2477dec4a5f40a11b84716ef0bf2290",
+                "directory_path": "endpoints\/private\/pages\/media",
+                "directory_hash": "78760b394e8647069ec5ffc1ae2deca97b3e30af304560db73478e0ce58b088e"
+            },
+            {
+                "file": "Controller.php",
                 "file_content_hash": "67a18710c055598ceb5ae7b266a2b0697d92ba8da0f28294cd2d111ca96cf898",
                 "directory_path": "endpoints\/private\/pages\/pushnotifications",
                 "directory_hash": "b5315dcc3359928e86f47b2b5cbe819c2d5293f64f6d48efe1e8f82575ab11fc"
@@ -340,21 +352,9 @@
             },
             {
                 "file": "schedule.php",
-                "file_content_hash": "88d906f811300f45e214df172cf5bb6891c3b0d32ef29ef2c14fb9602bd58e71",
+                "file_content_hash": "60380c5b648c935b92b1df6affd74c298b24f5cb259f726268eeb3741c142a4e",
                 "directory_path": "endpoints\/private\/pages\/schedule",
                 "directory_hash": "2582574e9241ad93578686ebf6e5a4f2d271e9652269a6e8ed496308fea53449"
-            },
-            {
-                "file": "Controller.php",
-                "file_content_hash": "b9c211b077f06213bc43d354927b9adbf9a9c7fe41f047e8a12be99d0d5b810b",
-                "directory_path": "endpoints\/private\/pages\/services",
-                "directory_hash": "395f3b33e3094e5de3814943ccd4222b8439cc49def21173455313f25c77e789"
-            },
-            {
-                "file": "services.php",
-                "file_content_hash": "a5893a3e7e779b65fd3341d51fac3c210406f8545f2ddf4a6b7405029d8d7d1d",
-                "directory_path": "endpoints\/private\/pages\/services",
-                "directory_hash": "f45ff2d0b5e54dbc2e92bda303327ecc37c34a9879521bbd3ab685f66924d8ec"
             },
             {
                 "file": "controller.php",
@@ -442,7 +442,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "a6aa7931c04a9de353f111c5becccf47cf9b231d4abf2ebe18bd577d43320b9e",
+                "file_content_hash": "d207b4330e7330e6097c559576ecec00a60bd419ccc10c9bd4250be525782d2d",
                 "directory_path": "endpoints\/private\/template",
                 "directory_hash": "050140d39b21d334928b4cbfffc5b16855978ea7ef203995356c9e78bd5fc282"
             },
@@ -508,7 +508,7 @@
             },
             {
                 "file": "index.php",
-                "file_content_hash": "27572249bb40bccb84be135e038ac82ab14d5408686f11361308100df998bd53",
+                "file_content_hash": "fbf947e703c5ea7ad389fd7dee3104a91712c52f10823964975b76a50ae084ea",
                 "directory_path": "endpoints\/public\/template",
                 "directory_hash": "de5e9b5a58aa42bd7d727828ce8bea11f9674426d6997c554e3f199cf9a6584c"
             },
@@ -532,7 +532,7 @@
             },
             {
                 "file": "Facebook.php",
-                "file_content_hash": "e6e9b99a19e1c39c6955c87861f5a08bb21844197f153844ddcde5ec00d8d5d9",
+                "file_content_hash": "7a305aa0cc867676f5a5593a3ff5953b3f47bef811ed0a1570a2414456bcf4a8",
                 "directory_path": "implementations",
                 "directory_hash": "86906fc9bb8a3c1ea2e398ddf19b1f595afdc0686cd7e7f1686aaed6b2ace176"
             },
