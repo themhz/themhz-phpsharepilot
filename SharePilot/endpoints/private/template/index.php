@@ -52,17 +52,38 @@ if (isset($_SESSION["user"])){ ?>
   <a href="javascript:void(0)" onclick="w3_close()" class="w3-right w3-xlarge w3-padding-large w3-hover-teal w3-hide-large" title="Close Menu">
     <i class="fa fa-remove"></i>
   </a>
-  <h4 class="w3-bar-item"><b>Menu</b></h4>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="media">Media</a>    
-    <a class="w3-bar-item w3-button w3-hover-teal" href="channels">Channels</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="lists">Lists</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="links">Links</a>            
-    <a class="w3-bar-item w3-button w3-hover-teal" href="schedule">Scheduled Posts</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="cron">Cron</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="pushnotifications">Push Notifications</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="settings">Settings</a>    
-    <a class="w3-bar-item w3-button w3-hover-teal" href="updates">Updates</a>
-    <a class="w3-bar-item w3-button w3-hover-teal" href="help">Help</a>
+  <!-- <h4 class="w3-bar-item"><b>Menu</b></h4> -->
+  <a class="w3-bar-item w3-button w3-hover-teal" href="channels">
+  <i class="fas fa-tv"></i> Channels
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="media">
+  <i class="fas fa-bullhorn"></i> Media
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="lists">
+  <i class="fas fa-list"></i> Lists
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="links">
+  <i class="fas fa-link"></i> Links
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="schedule">
+  <i class="fas fa-calendar-alt"></i> Scheduled Posts
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="cron">
+  <i class="fas fa-clock"></i> Cron
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="pushnotifications">
+  <i class="fas fa-bell"></i> Push Notifications
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="settings">
+  <i class="fas fa-cogs"></i> Settings
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="updates">
+  <i class="fas fa-sync-alt"></i> Updates
+</a>
+<a class="w3-bar-item w3-button w3-hover-teal" href="help">
+  <i class="fas fa-question-circle"></i> Help
+</a>
+
 
 </nav>
 <!-- Overlay effect when opening sidebar on small screens -->
