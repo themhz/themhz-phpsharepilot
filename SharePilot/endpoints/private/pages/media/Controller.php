@@ -2,9 +2,9 @@
 use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
-use SharePilotV2\Models\Services;
+use SharePilotV2\Models\Media;
 use SharePilotV2\Models\Scheduled_posts;
-use SharePilotV2\Models\Service_categories;
+use SharePilotV2\Models\Media_categories;
 use SharePilotV2\Models\Channel_social_keys;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
@@ -26,19 +26,19 @@ use SharePilotV2\Components\RequestHandler;
 
     public function list()
     {
-        $c = new Services();
+        $c = new Media();
         $data = $c->select()->execute();
         ResponseHandler::respond($data);
     }
      public function delete()
      {
-         $c = new Services();
+         $c = new Media();
          $result = $c->delete()->where("id","=",RequestHandler::get("id"))->execute();
          ResponseHandler::respond(["result"=>$result]);
      }
      public function put(){
          $service_id = RequestHandler::get("id");
-         $services = new Services();
+         $services = new Media();
          $services->name = RequestHandler::get("name");
          $services->update()->where("id","=",$service_id)->execute();
 
@@ -62,7 +62,7 @@ use SharePilotV2\Components\RequestHandler;
 
         //ppostrint_r(RequestHandler::get("socialName")."adsda");
         //die();
-         $service = new Services();
+         $service = new Media();
          $service->name = RequestHandler::get("serviceName");
          $service->regdate = date("Y-m-d H:i");
          $service->active = 1;
@@ -86,14 +86,14 @@ use SharePilotV2\Components\RequestHandler;
 
 
      public function createServiceCategory(){
-        $sc = new Service_categories();
+        $sc = new Media_categories();
         $sc->name = RequestHandler::get("name");     
         $sc->insert();  
         ResponseHandler::respond(["result"=>true, "message"=>"Service category has been successfully inserted"]); 
      }
 
      public function selectservicecategory(){
-        $sc = new Service_categories();
+        $sc = new Media_categories();
 
         $data = $sc->select()->execute()[0];
         ResponseHandler::respond($data);

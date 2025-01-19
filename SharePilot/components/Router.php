@@ -24,15 +24,26 @@ class Router {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $method = $_SERVER['REQUEST_METHOD'];
     
+        
         // Extract parameters
         $params = $this->extractParams($requestUri);
         
     
         $page = $params['page'] ?? $this->defaultHomePage;
-        $action = $params['method'] ?? $this->defaultMethod;
+
+        if(!empty($params["method"])){
+            $action = $params["method"];
+        }elseif(!empty($method)){
+            $action = $method;
+        }else{
+            $action = $this->defaultHomePage;
+        }
+        //$action = $params["method"] ?? $this->defaultMethod;
         $id = $params['id'] ?? null;
                 
-        
+        //echo $method;
+        //print_r($action);
+        //die();
         $this->handlePage($page, $action, $id, $method);
     }
         
@@ -80,7 +91,8 @@ class Router {
         if ($isSecured && !$this->isAuthenticated()) {
             http_response_code(403);
             //echo "403 Forbidden: Authentication required.";
-            include_once dirname(__DIR__) . "/endpoints/public/pages/403/index.php";
+            //include_once dirname(__DIR__) . "/endpoints/public/pages/403/index.php";
+            include_once dirname(__DIR__) . "/endpoints/public/pages/login/login.php";
             return;
         }
     
@@ -90,6 +102,8 @@ class Router {
             
 
     private function invokeController($controllerPath, $action, $id, $method, $templatePath) {
+        // echo $action;
+        // die();
         if($controllerPath==null){
 
             include_once $templatePath;

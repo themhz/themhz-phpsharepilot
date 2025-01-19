@@ -37,8 +37,8 @@
         </div>
         <div class="w3-container">
             <div class="w3-bar">
-                <span class="w3-bar-item">Social:</span>
-                <select class="w3-select w3-bar-item w3-margin-bottom w3-dropdown-hover" type="text" id="selectedSocialId" name="selectedSocialId" value="" onchange="onChangeSelectedSocial()"></select>
+                <span class="w3-bar-item">Media:</span>
+                <select class="w3-select w3-bar-item w3-margin-bottom w3-dropdown-hover" type="text" id="selectedMediaId" name="selectedMediaId" value="" onchange="onChangeSelectedMedia()"></select>
                 <input class="w3-bar-item w3-button w3-white w3-border w3-round" type="button" value="Add Key" onclick="addKey()">
             </div>
         </div>
@@ -74,7 +74,7 @@
         if(evt.target.readyState == "complete")
         {
             loadChannels();
-            loadSocials();
+            loadMedia();
         }
     }, false);
     function loadChannels(){
@@ -86,21 +86,21 @@
                 createlist(data);
             })
     }
-    function loadSocials(){     
-        fetch('media?format=json', {
+    function loadMedia(){     
+        fetch('media/list?format=json', {
             method: 'get',
         })
             .then(response => response.json())
             .then(data => {                
-                createSosials(data);
+                createMedia(data);
             })
     }
-    function createSosials(data){        
+    function createMedia(data){        
         for(var i=0;i<data.length;i++){
-            document.getElementById("selectedSocialId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
+            document.getElementById("selectedMediaId").innerHTML +="<option value="+data[i].id+">"+ data[i].name+"</option>";
         }
     }
-    function onChangeSelectedSocial(){
+    function onChangeSelectedMedia(){
         fetch('channels/loadkeys?format=json',{
             method: 'post',
             headers: {
@@ -108,7 +108,7 @@
             },
             body: JSON.stringify({
                 channelId:document.getElementById("txtChannelId").value,
-                socialId:document.getElementById("selectedSocialId").value,
+                mediaId:document.getElementById("selectedMediaId").value,
             })
         })
         .then(response => response.json())
@@ -157,7 +157,7 @@
         document.getElementById('txtChannelName').value = item.name;
         document.getElementById('txtChannelId').value = item.id;
         document.getElementById('rowClickModal').style.display = 'block';
-        onChangeSelectedSocial();
+        onChangeSelectedMedia();
     }
     function update() {
         fetch('channels?format=json', {
@@ -168,7 +168,7 @@
             body: JSON.stringify({
                     id:document.getElementById("txtChannelId").value,
                     name: document.getElementById("txtChannelName").value,
-                    social_id:document.getElementById("selectedSocialId").value,
+                    media_id:document.getElementById("selectedMediaId").value,
                     keylist : getKeyListFromPopUp()
                 })
             })

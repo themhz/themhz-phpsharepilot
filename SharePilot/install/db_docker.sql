@@ -16,16 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `channel_service_keys`
+-- Table structure for table `channel_media_keys`
 --
 
-DROP TABLE IF EXISTS `channel_service_keys`;
+DROP TABLE IF EXISTS `channel_media_keys`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `channel_service_keys` (
+CREATE TABLE `channel_media_keys` (
   `id` int NOT NULL AUTO_INCREMENT,
   `channel_id` int DEFAULT NULL,
-  `service_id` int DEFAULT NULL,
+  `media_id` int DEFAULT NULL,
   `name` varchar(45) DEFAULT NULL,
   `value` varchar(500) DEFAULT NULL,
   `regdate` datetime DEFAULT NULL,
@@ -103,42 +103,42 @@ insert into `settings` (timezone, email) values('UTC', 'default@default.gr');
 
 
 --
--- Table structure for table `services_categories`
+-- Table structure for table `media_categories`
 --
 
-DROP TABLE IF EXISTS `service_categories`;
+DROP TABLE IF EXISTS `media_categories`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `service_categories` (
+CREATE TABLE `media_categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL, 
   `regdate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3;
-insert into service_categories (name, regdate) values('All', now());
-insert into service_categories (name, regdate) values('Add new service category', now());
+insert into media_categories (name, regdate) values('All', now());
+insert into media_categories (name, regdate) values('Add new media category', now());
 
 --
--- Table structure for table `services`
+-- Table structure for table `media`
 --
 
-DROP TABLE IF EXISTS `services`;
+DROP TABLE IF EXISTS `media`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `services` (
+CREATE TABLE `media` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `regdate` datetime DEFAULT NULL,
   `active` tinyint DEFAULT NULL,
-  `service_category_id` int DEFAULT NULL,
+  `media_category_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`service_category_id`) REFERENCES `service_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
+  FOREIGN KEY (`media_category_id`) REFERENCES `media_categories` (`id`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
-insert into services (name, regdate, active) values('facebook', now(), 1);
-insert into services (name, regdate, active) values('twitter', now(), 1);
-insert into services (name, regdate, active) values('instagram', now(), 1);
-insert into services (name, regdate, active) values('linkedin', now(), 1);
+insert into media (name, regdate, active) values('facebook', now(), 1);
+insert into media (name, regdate, active) values('twitter', now(), 1);
+insert into media (name, regdate, active) values('instagram', now(), 1);
+insert into media (name, regdate, active) values('linkedin', now(), 1);
 
 --
 -- Table structure for table `sources`

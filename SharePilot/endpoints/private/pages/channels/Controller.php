@@ -2,10 +2,10 @@
 use SharePilotV2\Libs\YoutubeService;
 use SharePilotV2\config;
 use SharePilotV2\Models\Urls;
-use SharePilotV2\Models\Socials;
+use SharePilotV2\Models\Medias;
 use SharePilotV2\Models\Scheduled_posts;
 use SharePilotV2\Models\Channels;
-use SharePilotV2\Models\Channel_social_keys;
+use SharePilotV2\Models\Channel_media_keys;
 use SharePilotV2\Components\ResponseHandler;
 use SharePilotV2\Components\RequestHandler;
  class Controller{
@@ -36,18 +36,19 @@ use SharePilotV2\Components\RequestHandler;
          $result = $c->delete()->where("id","=",RequestHandler::get("id"))->execute();
          ResponseHandler::respond(["result"=>$result]);
      }
-     public function put(){
+     public function put($id = null, $method = 'PUT', $templatePath = null){
+        
 
          $keylist = RequestHandler::get("keylist");
-         $keys = new Channel_social_keys();
-         $social_id = RequestHandler::get("social_id");
+         $keys = new Channel_media_keys();
+         $media_id = RequestHandler::get("media_id");
          $channel_id = RequestHandler::get("id");
-         $keys->delete()->where("channel_id","=",$channel_id)->where("social_id","=", $social_id)->execute();
+         $keys->delete()->where("channel_id","=",$channel_id)->where("media_id","=", $media_id)->execute();
 
 
          foreach ($keylist as $key){
              $keys->channel_id = $channel_id;
-             $keys->social_id = $social_id;
+             $keys->media_id = $media_id;
              $keys->name =$key["name"];
              $keys->value =$key["value"];
              $keys->insert();
@@ -59,18 +60,18 @@ use SharePilotV2\Components\RequestHandler;
 
          ResponseHandler::respond(["status"=>"success"]);
      }
-    //  public function getsocials(){
-    //     $s = new Socials();
+    //  public function getmedias(){
+    //     $s = new Medias();
     //      ResponseHandler::respond($s->select()->execute());
     //  }
      public function loadkeys(){
          $channelId = RequestHandler::get("channelId");
-         $socialId = RequestHandler::get("socialId");
-         $csk = new Channel_social_keys();
-         //ResponseHandler::respond($csk->select(["channel_id ="=>$channelId, " and social_id ="=>$socialId]));
+         $mediaId = RequestHandler::get("mediaId");
+         $csk = new Channel_media_keys();
+         //ResponseHandler::respond($csk->select(["channel_id ="=>$channelId, " and media_id ="=>$mediaId]));
          ResponseHandler::respond($csk->select()
              ->where("channel_id", "=", $channelId)
-             ->where("social_id", "=", $socialId)->execute());
+             ->where("media_id", "=", $mediaId)->execute());
      }
 
      public function addchannel(){

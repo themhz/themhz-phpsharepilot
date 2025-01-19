@@ -3,11 +3,11 @@
 namespace SharePilotV2\Models;
 use SharePilotV2\Components\Model;
 
-class Services extends Model
+class Media_categories extends Model
 {
     public function GetTable()
     {
-        return "services";
+        return "media_categories";
     }
 }
 
